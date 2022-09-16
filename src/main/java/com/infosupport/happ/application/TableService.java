@@ -1,5 +1,6 @@
 package com.infosupport.happ.application;
 
+
 import com.infosupport.happ.application.dto.TableData;
 import com.infosupport.happ.data.TableRepository;
 import com.infosupport.happ.domain.Table;
