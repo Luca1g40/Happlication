@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,14 +14,14 @@ public class Table {
     @Id
     @GeneratedValue
     private Long id;
-    private int amountOfPeople;
-    private int tableNumber;
-    private LocalDateTime elapsedTimeSinceOrder;
-    private LocalDateTime timeLeftToOrder;
     @OneToMany
     private List<Order> orders;
+    private LocalTime elapsedTimeSinceOrder;
+    private LocalTime timeLeftToOrder;
+    private int amountOfPeople;
+    private int tableNumber;
 
-    public Table(int amountOfPeople, int tableNumber, LocalDateTime elapsedTimeSinceOrder, LocalDateTime timeLeftToOrder, ArrayList<Order> orders) {
+    public Table(int amountOfPeople, int tableNumber, LocalTime elapsedTimeSinceOrder, LocalTime timeLeftToOrder, ArrayList<Order> orders) {
         this.amountOfPeople = amountOfPeople;
         this.tableNumber = tableNumber;
         this.elapsedTimeSinceOrder = elapsedTimeSinceOrder;
@@ -30,5 +30,24 @@ public class Table {
     }
 
     public Table() {
+    }
+    public int getAmountOfPeople() {
+        return amountOfPeople;
+    }
+
+    public int getTableNumber() {
+        return tableNumber;
+    }
+
+    public LocalTime getElapsedTimeSinceOrder() {
+        return elapsedTimeSinceOrder;
+    }
+
+    public LocalTime getTimeLeftToOrder() {
+        return timeLeftToOrder;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
     }
 }
