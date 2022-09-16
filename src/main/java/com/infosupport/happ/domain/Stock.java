@@ -1,11 +1,25 @@
 package com.infosupport.happ.domain;
 
-import java.util.ArrayList;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.util.List;
 
+@Entity
 public class Stock {
 
-    private ArrayList<Product> products;
+    @Id
+    @GeneratedValue
+    private Long id;
 
+    @OneToMany
+    private List<Product> products;
 
+    public Stock(List<Product> products) {
+        this.products = products;
+    }
 
+    public Stock() {
+    }
 }
