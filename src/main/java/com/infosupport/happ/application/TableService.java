@@ -19,16 +19,17 @@ public class TableService {
     }
 
     public TableData createTable(int amountOfPeople, int tableNr){
-        Table table = tableRepository.save(new Table(amountOfPeople,tableNr,LocalTime.of(0,0,0),LocalTime.of(2,0,0),new ArrayList<>()));
+        Table table = tableRepository.save(new Table(new ArrayList<>(), new ArrayList<>(), LocalTime.of(0,0,0),
+                LocalTime.of(2,0,0), amountOfPeople, tableNr));
         return createTableData(table);
     }
 
-    public TableData getTable(Long id){
-        Optional<Table> table  = tableRepository.findById(id);
-        return createTableData(table.get());
+    public Table getTable(Long id){
+        return this.tableRepository.findById(id)
+                .orElseThrow(); //TODO: Exception toevoegen
     }
 
-    private TableData createTableData(Table table){
+    public TableData createTableData(Table table){
         return new TableData(table.getAmountOfPeople(),
                 table.getTableNumber(),
                 table.getElapsedTimeSinceOrder(),

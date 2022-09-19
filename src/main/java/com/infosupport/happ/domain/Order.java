@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
+@Entity(name = "customer_order")
 public class Order {
     @Id
     @GeneratedValue

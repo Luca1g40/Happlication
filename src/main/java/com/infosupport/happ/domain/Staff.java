@@ -19,14 +19,16 @@ public class Staff {
     private List<Operation> operations;
     @OneToMany
     private List<Order> orders;
+    @OneToMany
+    private List<Area> area;
 
     public Staff() {
     }
-
-    public Staff(int password, String name, ArrayList<Operation> operations, ArrayList<Order> orders) {
+    public Staff(int password, String name, List<Operation> operations, List<Order> orders, List<Area> area) {
         this.password = password;
         this.name = name;
         this.operations = operations;
         this.orders = orders;
+        this.area = area;
     }
 }
