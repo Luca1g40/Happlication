@@ -22,4 +22,9 @@ public class Stock {
 
     public Stock() {
     }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
 }
