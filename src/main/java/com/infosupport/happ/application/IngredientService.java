@@ -5,6 +5,9 @@ import com.infosupport.happ.data.IngredientRepository;
 import com.infosupport.happ.domain.Ingredient;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class IngredientService {
     private final IngredientRepository ingredientRepository;
@@ -13,23 +16,32 @@ public class IngredientService {
         this.ingredientRepository = ingredientRepository;
     }
 
+    public List<IngredientData> findAll(){
+        List<IngredientData> ingredientDataList=new ArrayList<>();
+        for (Ingredient ingredient:ingredientRepository.findAll() ) {
+            ingredientDataList.add(new IngredientData(ingredient.getId(),ingredient.getName(),ingredient.getAmount()));
+
+        }
+        return ingredientDataList ;
+    }
+
     public IngredientData getIngredientById(Long id){
         Ingredient ingredient= ingredientRepository.getById(id);
-        return new IngredientData(ingredient.getNaam(),ingredient.getAmount());
+        return new IngredientData(ingredient.getName(),ingredient.getAmount());
     }
 
     public IngredientData increaseIngredientAmount(Long id,int amount){
         Ingredient ingredient = ingredientRepository.getById(id);
         ingredient.increaseAmount(amount);
         ingredientRepository.save(ingredient);
-        return new IngredientData(ingredient.getNaam(),ingredient.getAmount());
+        return new IngredientData(ingredient.getName(),ingredient.getAmount());
     }
 
     public IngredientData decreaseIngredientAmount(Long id, int amount){
         Ingredient ingredient = ingredientRepository.getById(id);
         ingredient.decreaseAmount(amount);
         ingredientRepository.save(ingredient);
-        return new IngredientData(ingredient.getNaam(),ingredient.getAmount());
+        return new IngredientData(ingredient.getName(),ingredient.getAmount());
     }
 
     public IngredientData createIngredient(String name,int amount){
@@ -46,7 +58,7 @@ public class IngredientService {
         ingredient.updateIngredient(name,amount);
 
         ingredientRepository.save(ingredient);
-        return new IngredientData(ingredient.getNaam(),ingredient.getAmount());
+        return new IngredientData(id,ingredient.getName(),ingredient.getAmount());
     }
 
 

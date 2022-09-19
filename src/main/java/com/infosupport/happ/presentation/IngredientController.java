@@ -13,7 +13,7 @@ public class IngredientController {
         this.ingredientService = ingredientService;
     }
 
-    @PostMapping("/ingredient/{id}")
+    @PostMapping("/ingredient")
     public IngredientData createIngredient(@RequestBody IngredientData ingredientData){
         return ingredientService.createIngredient(ingredientData.name, ingredientData.amount);
     }

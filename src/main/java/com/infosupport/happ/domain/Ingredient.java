@@ -1,17 +1,28 @@
 package com.infosupport.happ.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Ingredient {
+    @Id
+    @GeneratedValue
     private Long id;
-    private String naam;
+    private String name;
     private int amount;
 
-    public Ingredient(String naam, int amount) {
-        this.naam = naam;
+    public Ingredient(String name, int amount) {
+        this.name = name;
         this.amount = amount;
     }
 
-    public String getNaam() {
-        return naam;
+    public Ingredient() {
+
+    }
+
+    public String getName() {
+        return name;
     }
 
     public int getAmount() {
@@ -27,8 +38,8 @@ public class Ingredient {
         this.amount = this.amount-amount;
     }
 
-    public void setNaam(String naam) {
-        this.naam = naam;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setAmount(int amount) {
@@ -36,7 +47,11 @@ public class Ingredient {
     }
 
     public void updateIngredient(String name,int amount){
-        this.setNaam(name);
+        this.setName(name);
         this.setAmount(amount);
+    }
+
+    public Long getId() {
+        return id;
     }
 }
