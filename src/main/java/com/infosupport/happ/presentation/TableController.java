@@ -6,7 +6,7 @@ import com.infosupport.happ.presentation.dto.TableDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 @RequestMapping("/happ")
 public class TableController {
     private TableService tableService;

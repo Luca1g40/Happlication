@@ -8,7 +8,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
+@Entity(name = "tafel")
 public class Table {
 
     @Id
