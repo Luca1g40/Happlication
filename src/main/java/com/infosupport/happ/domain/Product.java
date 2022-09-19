@@ -20,6 +20,30 @@ public class Product {
         this.price = price;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public ProductCategory getProductCategory() {
+        return productCategory;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
     public Product() {
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setProductCategory(ProductCategory productCategory) {
+        this.productCategory = productCategory;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 }

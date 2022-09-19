@@ -16,17 +16,20 @@ public class Table {
     private Long id;
     @OneToMany
     private List<Order> orders;
+    @OneToMany
+    private List<Area> area;
     private LocalTime elapsedTimeSinceOrder;
     private LocalTime timeLeftToOrder;
     private int amountOfPeople;
     private int tableNumber;
 
-    public Table(int amountOfPeople, int tableNumber, LocalTime elapsedTimeSinceOrder, LocalTime timeLeftToOrder, ArrayList<Order> orders) {
-        this.amountOfPeople = amountOfPeople;
-        this.tableNumber = tableNumber;
+    public Table(List<Order> orders, List<Area> area, LocalTime elapsedTimeSinceOrder, LocalTime timeLeftToOrder, int amountOfPeople, int tableNumber) {
+        this.orders = orders;
+        this.area = area;
         this.elapsedTimeSinceOrder = elapsedTimeSinceOrder;
         this.timeLeftToOrder = timeLeftToOrder;
-        this.orders = orders;
+        this.amountOfPeople = amountOfPeople;
+        this.tableNumber = tableNumber;
     }
 
     public Table() {
