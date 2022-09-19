@@ -2,22 +2,22 @@ package com.infosupport.happ.presentation;
 
 import com.infosupport.happ.application.TableService;
 import com.infosupport.happ.application.dto.TableData;
-import com.infosupport.happ.presentation.dto.TableDTO;
+import com.infosupport.happ.presentation.dto.TableRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
-@RequestMapping("/happ")
+@RestController
+@RequestMapping("happ")
 public class TableController {
-    private TableService tableService;
+    private final TableService tableService;
 
     public TableController(TableService tableService) {
         this.tableService = tableService;
     }
 
     @PostMapping("/table")
-    public TableData createTable(@RequestBody TableDTO tableDTO) {
-        return tableService.createTable(tableDTO.amountOfPeople, tableDTO.tableNr);
+    public TableData createTable(@RequestBody TableRequest tableRequest) {
+        return tableService.createTable(tableRequest.amountOfPeople, tableRequest.tableNr);
     }
 
     @GetMapping("/table/{id}")
