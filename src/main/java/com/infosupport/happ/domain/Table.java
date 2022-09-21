@@ -1,10 +1,9 @@
 package com.infosupport.happ.domain;
 
-import com.infosupport.happ.domain.exceptions.AtributeMustBeBiggerThanZero;
+import com.infosupport.happ.domain.exceptions.AttributeMustBeBiggerThanZero;
 
 import javax.persistence.*;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "tafel")
@@ -15,27 +14,28 @@ public class Table {
     private Long id;
     @OneToMany
     private List<Order> orders;
-    @OneToMany
-    private List<Area> area;
     private LocalTime elapsedTimeSinceOrder;
     private LocalTime timeLeftToOrder;
     private int amountOfPeople;
     private int tableNumber;
+    private TableStatus tableStatus;
 
-    public Table(List<Order> orders, List<Area> area, LocalTime elapsedTimeSinceOrder, LocalTime timeLeftToOrder, int amountOfPeople, int tableNumber) {
-        if (tableNumber<0){
-            throw new AtributeMustBeBiggerThanZero("table","table number");
+    public Table(List<Order> orders, LocalTime elapsedTimeSinceOrder, LocalTime timeLeftToOrder, int amountOfPeople, int tableNumber, TableStatus tableStatus) {
+        if (tableNumber < 0) {
+            throw new AttributeMustBeBiggerThanZero(getClass().getSimpleName(), "table number");
         }
         this.orders = orders;
-        this.area = area;
         this.elapsedTimeSinceOrder = elapsedTimeSinceOrder;
         this.timeLeftToOrder = timeLeftToOrder;
         this.amountOfPeople = amountOfPeople;
         this.tableNumber = tableNumber;
+        this.tableStatus = tableStatus;
+
     }
 
     public Table() {
     }
+
     public int getAmountOfPeople() {
         return amountOfPeople;
     }
@@ -55,4 +55,9 @@ public class Table {
     public List<Order> getOrders() {
         return orders;
     }
+
+    public TableStatus getTableStatus() {
+        return tableStatus;
+    }
+
 }

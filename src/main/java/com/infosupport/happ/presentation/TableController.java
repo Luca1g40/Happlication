@@ -8,19 +8,20 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/happ")
 public class TableController {
-    private TableService tableService;
+    private final TableService tableService;
 
     public TableController(TableService tableService) {
         this.tableService = tableService;
     }
 
     @PostMapping("/table")
-    public TableData createTable(@RequestBody TableRequest tableDTO) {
-        return tableService.createTable(tableDTO.amountOfPeople, tableDTO.tableNr);
+
+    public TableData createTable(@RequestBody TableRequest tableRequest) {
+        return tableService.createTable(tableRequest.amountOfPeople, tableRequest.tableNr, tableRequest.tableStatus);
     }
 
     @GetMapping("/table/{id}")
-    public TableData getTable(@PathVariable Long id){
+    public TableData getTable(@PathVariable Long id) {
         return tableService.createTableData(tableService.getTable(id));
     }
 
