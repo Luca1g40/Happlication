@@ -7,11 +7,12 @@ import com.infosupport.happ.domain.Order;
 import java.util.List;
 
 public class StaffRequest {
-    public Long id;
     public int password;
     public String name;
+
     public List<Operation> operations;
-    public List<Order> claimedOrders;
+    public  List<Order> orders;
     public List<Area> area;
+
 
 }

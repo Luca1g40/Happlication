@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -32,6 +33,30 @@ public class Staff {
         this.operations = operations;
         this.claimedOrders = claimedOrders;
         this.area = area;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public int getPassword() {
+        return password;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public List<Operation> getOperations() {
+        return operations;
+    }
+
+    public List<Order> getOrders() {
+        return claimedOrders;
+    }
+
+    public List<Area> getArea() {
+        return area;
     }
 
     public void addOrder(Order order) {
