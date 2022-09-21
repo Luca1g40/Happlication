@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Optional;
 
 @Service
 public class TableService {
@@ -20,18 +19,18 @@ public class TableService {
         this.tableRepository = tableRepository;
     }
 
-    public TableData createTable(int amountOfPeople, int tableNr, TableStatus tableStatus){
-        Table table = tableRepository.save(new Table(new ArrayList<>(), LocalTime.of(0,0,0),
-                LocalTime.of(2,0,0), amountOfPeople, tableNr,tableStatus));
+    public TableData createTable(int amountOfPeople, int tableNr, TableStatus tableStatus) {
+        Table table = tableRepository.save(new Table(new ArrayList<>(), LocalTime.of(0, 0, 0),
+                LocalTime.of(2, 0, 0), amountOfPeople, tableNr, tableStatus));
         return createTableData(table);
     }
 
-    public Table getTable(Long id){
-       tableExists(id);
-       return tableRepository.getById(id);
+    public Table getTable(Long id) {
+        tableExists(id);
+        return tableRepository.getById(id);
     }
 
-    public TableData createTableData(Table table){
+    public TableData createTableData(Table table) {
         return new TableData(table.getAmountOfPeople(),
                 table.getTableNumber(),
                 table.getElapsedTimeSinceOrder(),
@@ -40,9 +39,10 @@ public class TableService {
                 table.getTableStatus());
     }
 
-    private void tableExists(Long id){
-        if (!tableRepository.existsById(id)){
+    private void tableExists(Long id) {
+        if (!tableRepository.existsById(id)) {
             throw new ItemNotFound("table");
         }
     }
 }
+//TODO Table status is not set

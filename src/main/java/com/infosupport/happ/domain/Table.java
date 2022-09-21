@@ -1,6 +1,5 @@
 package com.infosupport.happ.domain;
 
-import com.infosupport.happ.domain.exceptions.AtributeMustBeBiggerThanZero;
 import com.infosupport.happ.domain.exceptions.AttributeMustBeBiggerThanZero;
 
 import javax.persistence.*;
@@ -22,8 +21,8 @@ public class Table {
     private TableStatus tableStatus;
 
     public Table(List<Order> orders, LocalTime elapsedTimeSinceOrder, LocalTime timeLeftToOrder, int amountOfPeople, int tableNumber, TableStatus tableStatus) {
-        if (tableNumber<0){
-            throw new AttributeMustBeBiggerThanZero(getClass().getSimpleName(),"table number");
+        if (tableNumber < 0) {
+            throw new AttributeMustBeBiggerThanZero(getClass().getSimpleName(), "table number");
         }
         this.orders = orders;
         this.elapsedTimeSinceOrder = elapsedTimeSinceOrder;
@@ -36,6 +35,7 @@ public class Table {
 
     public Table() {
     }
+
     public int getAmountOfPeople() {
         return amountOfPeople;
     }

@@ -1,6 +1,5 @@
 package com.infosupport.happ.application;
 
-import com.infosupport.happ.application.dto.StockData;
 import com.infosupport.happ.data.StaffRepository;
 import com.infosupport.happ.domain.Staff;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
@@ -14,17 +13,16 @@ public class StaffService {
         this.staffRepository = staffRepository;
     }
 
-    public Staff getStaff(Long id){
+    public Staff getStaff(Long id) {
         staffExists(id);
         return staffRepository.getById(id);
     }
 
-    public void staffExists(Long id){
-        if (!staffRepository.existsById(id)){
+    public void staffExists(Long id) {
+        if (!staffRepository.existsById(id)) {
             throw new ItemNotFound("staff");
         }
     }
-
 
 
 }

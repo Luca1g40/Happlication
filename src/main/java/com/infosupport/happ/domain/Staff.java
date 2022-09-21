@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -23,7 +22,8 @@ public class Staff {
     private List<Area> area;
 
 
-    public Staff() {}
+    public Staff() {
+    }
 
 
     public Staff(int password, String name, List<Operation> operations, List<Order> claimedOrders, List<Area> area) {
@@ -34,7 +34,7 @@ public class Staff {
         this.area = area;
     }
 
-    public void addOrder(Order order){
+    public void addOrder(Order order) {
 
         this.claimedOrders.add(order);
 

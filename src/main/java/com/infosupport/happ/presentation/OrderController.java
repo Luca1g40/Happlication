@@ -17,11 +17,11 @@ public class OrderController {
 
     @PostMapping("/order")
     public OrderData createOrder(@RequestBody OrderRequest orderRequest) {
-        return orderService.createOrder(orderRequest.tableId);
+        return orderService.createOrder(orderRequest.tableId, orderRequest.productList);
     }
 
     @GetMapping("/order/{id}")
-    public Order getOrder(@PathVariable Long id){
+    public Order getOrder(@PathVariable Long id) {
         return orderService.getOrder(id);
     }
 }

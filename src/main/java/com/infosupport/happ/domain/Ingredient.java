@@ -6,7 +6,6 @@ import com.infosupport.happ.domain.exceptions.NotEnoughIngredientsException;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.UniqueConstraint;
 
 @Entity
 public class Ingredient {
@@ -34,15 +33,15 @@ public class Ingredient {
         return amount;
     }
 
-    public void increaseAmount(int amount){
-        this.amount=this.amount+amount;
+    public void increaseAmount(int amount) {
+        this.amount = this.amount + amount;
     }
 
-    public void decreaseAmount(int amount){
-        if (this.amount-amount<1){
+    public void decreaseAmount(int amount) {
+        if (this.amount - amount < 1) {
             throw new NotEnoughIngredientsException(this.name);
         }
-        this.amount = this.amount-amount;
+        this.amount = this.amount - amount;
     }
 
     private void setName(String name) {
@@ -53,7 +52,7 @@ public class Ingredient {
         this.amount = amount;
     }
 
-    public void updateIngredient(String name,int amount){
+    public void updateIngredient(String name, int amount) {
         checkIfEnteredAmountIsBiggerThanZero(amount);
         this.setName(name);
         this.setAmount(amount);
@@ -63,7 +62,7 @@ public class Ingredient {
         return id;
     }
 
-    public void checkIfEnteredAmountIsBiggerThanZero(int amount){
-        if (amount<0) throw new AttributeMustBeBiggerThanZero(getClass().getSimpleName(),"amount");
+    public void checkIfEnteredAmountIsBiggerThanZero(int amount) {
+        if (amount < 0) throw new AttributeMustBeBiggerThanZero(getClass().getSimpleName(), "amount");
     }
 }

@@ -31,16 +31,16 @@ public class Stock {
         return Collections.unmodifiableList(ingredients);
     }
 
-    public void addNewIngredientToStock(@NonNull Ingredient ingredient){
+    public void addNewIngredientToStock(@NonNull Ingredient ingredient) {
         ingredients.add(ingredient);
     }
 
-    public void updateStock(@NonNull List<Ingredient> ingredients){
+    public void updateStock(@NonNull List<Ingredient> ingredients) {
         setIngredients(ingredients);
     }
 
-    private void setIngredients(@NonNull List<Ingredient> ingredients){
-        this.ingredients=ingredients;
+    private void setIngredients(@NonNull List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
     }
 
     public Long getId() {

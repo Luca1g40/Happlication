@@ -20,30 +20,30 @@ public class ProductController {
 
     @PostMapping("/product")
     private ProductData createNewProduct(@RequestBody ProductRequest productRequest) {
-        try{
+        try {
             return this.productService.createProduct(
                     productRequest.name,
                     productRequest.productCategory,
                     productRequest.price,
                     productRequest.ingredients);
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @PutMapping("/product/{productid}/prepstatus")
-    private ProductData changePrepStatus(@PathVariable("productid") Long productId){
+    private ProductData changePrepStatus(@PathVariable("productid") Long productId) {
         try {
             return this.productService.switchProductPrepStatus(productId);
-        } catch (ItemNotFound e){
+        } catch (ItemNotFound e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @PutMapping("/product/{productid}")
-    private ProductData updateProduct(@PathVariable ("productid")Long productId, @RequestBody ProductRequest productRequest) {
+    private ProductData updateProduct(@PathVariable("productid") Long productId, @RequestBody ProductRequest productRequest) {
         try {
             return this.productService.updateProduct(
                     productRequest.name,
@@ -52,20 +52,20 @@ public class ProductController {
                     productId,
                     productRequest.ingredients
             );
-        } catch (ItemNotFound e){
+        } catch (ItemNotFound e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @DeleteMapping("/product/{productid}")
-    private void deleteProduct(@PathVariable("productid")Long productId ) {
+    private void deleteProduct(@PathVariable("productid") Long productId) {
         try {
             this.productService.deleteProduct(productId);
-        } catch (ItemNotFound e){
+        } catch (ItemNotFound e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
