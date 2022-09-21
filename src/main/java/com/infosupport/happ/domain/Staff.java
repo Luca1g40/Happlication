@@ -31,4 +31,28 @@ public class Staff {
         this.orders = orders;
         this.area = area;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public int getPassword() {
+        return password;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public List<Operation> getOperations() {
+        return operations;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public List<Area> getArea() {
+        return area;
+    }
 }
