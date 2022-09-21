@@ -1,1 +1,1 @@
---server.port=$PORT heroku ps:scale web=1
+--server.port=$PORT $ heroku ps:scale web=1
