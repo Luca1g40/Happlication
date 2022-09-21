@@ -1,5 +1,7 @@
 package com.infosupport.happ.domain;
 
+import org.springframework.lang.NonNull;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -11,6 +13,7 @@ public class Order {
     @GeneratedValue
     private Long id;
     @ManyToOne
+    @NonNull
     private Table table;
     private LocalDateTime timeOfOrder;
     private PreperationStatus preperationStatus;
@@ -20,7 +23,7 @@ public class Order {
     public Order() {
     }
 
-    public Order(Table table, LocalDateTime timeOfOrder, PreperationStatus preperationStatus, ArrayList<Product> products) {
+    public Order(@NonNull Table table, LocalDateTime timeOfOrder, PreperationStatus preperationStatus, ArrayList<Product> products) {
         this.table = table;
         this.timeOfOrder = timeOfOrder;
         this.preperationStatus = preperationStatus;

@@ -1,11 +1,12 @@
 package com.infosupport.happ.domain;
 
-import com.infosupport.happ.domain.exceptions.AtributeMustBeBiggerThanZero;
+import com.infosupport.happ.domain.exceptions.AttributeMustBeBiggerThanZero;
 import com.infosupport.happ.domain.exceptions.NotEnoughIngredientsException;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.UniqueConstraint;
 
 @Entity
 public class Ingredient {
@@ -16,6 +17,7 @@ public class Ingredient {
     private int amount;
 
     public Ingredient(String name, int amount) {
+        checkIfEnteredAmountIsBiggerThanZero(amount);
         this.name = name;
         this.amount = amount;
     }
@@ -62,6 +64,6 @@ public class Ingredient {
     }
 
     public void checkIfEnteredAmountIsBiggerThanZero(int amount){
-        if (amount<0) throw new AtributeMustBeBiggerThanZero("Ingredient","amount");
+        if (amount<0) throw new AttributeMustBeBiggerThanZero(getClass().getSimpleName(),"amount");
     }
 }
