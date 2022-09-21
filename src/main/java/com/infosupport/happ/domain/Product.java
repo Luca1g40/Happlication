@@ -16,14 +16,18 @@ public class Product {
 
     @OneToMany
     private List<Ingredient> ingredients;
+
     private ProductCategory productCategory;
     private double price;
+
+    private boolean isReady;
 
     public Product(String name, List<Ingredient> ingredients, ProductCategory productCategory, double price) {
         this.name = name;
         this.ingredients = ingredients;
         this.productCategory = productCategory;
         this.price = price;
+        this.isReady = false;
     }
 
     public String getName() {
@@ -41,6 +45,10 @@ public class Product {
     public Product() {
     }
 
+    public void switchReadyStatus() {
+        this.isReady = !this.isReady;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -55,5 +63,9 @@ public class Product {
 
     public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
+    }
+
+    public boolean isReady() {
+        return isReady;
     }
 }

@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import static com.infosupport.happ.domain.PreperationStatus.*;
 
 @Entity(name = "customer_order")
 public class Order {
@@ -20,10 +21,10 @@ public class Order {
     public Order() {
     }
 
-    public Order(Table table, LocalDateTime timeOfOrder, PreperationStatus preperationStatus, ArrayList<Product> products) {
+    public Order(Table table, LocalDateTime timeOfOrder, ArrayList<Product> products) {
         this.table = table;
         this.timeOfOrder = timeOfOrder;
-        this.preperationStatus = preperationStatus;
+        this.preperationStatus = UNCLAIMED;
         this.products = products;
     }
     public Long getId() {return id;}
@@ -42,5 +43,26 @@ public class Order {
 
     public List<Product> getProducts() {
         return products;
+    }
+
+    public boolean checkIfAllProductsAreDone(){
+        for(Product product : products){
+            if (!product.isReady()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void claimOrder(){
+        if(this.preperationStatus == UNCLAIMED){
+            this.preperationStatus = CLAIMED;
+        }
+    }
+
+    public void setPreperationStatusToDone() {
+        if (checkIfAllProductsAreDone()){
+            this.preperationStatus = DONE;
+        }
     }
 }

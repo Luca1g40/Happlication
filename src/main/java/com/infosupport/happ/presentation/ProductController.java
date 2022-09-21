@@ -31,6 +31,17 @@ public class ProductController {
         }
     }
 
+    @PutMapping("/product/{productid}/prepstatus")
+    private ProductData changePrepStatus(@PathVariable("productid") Long productId){
+        try {
+            return this.productService.switchProductPrepStatus(productId);
+        } catch (ItemNotFound e){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+        } catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PutMapping("/product/{productid}")
     private ProductData updateProduct(@PathVariable ("productid")Long productId, @RequestBody ProductRequest productRequest) {
         try {

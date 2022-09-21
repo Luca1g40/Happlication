@@ -9,15 +9,15 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/happ")
 public class OrderController {
-    private OrderService orderService;
+    private final OrderService orderService;
 
     public OrderController(OrderService orderService) {
         this.orderService = orderService;
     }
 
     @PostMapping("/order")
-    public OrderData createOrder(@RequestBody OrderRequest orderDTO) {
-        return orderService.createOrder(orderDTO.tableId, orderDTO.status);
+    public OrderData createOrder(@RequestBody OrderRequest orderRequest) {
+        return orderService.createOrder(orderRequest.tableId);
     }
 
     @GetMapping("/order/{id}")

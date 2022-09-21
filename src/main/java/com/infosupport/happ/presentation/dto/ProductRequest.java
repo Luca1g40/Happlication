@@ -6,7 +6,6 @@ import com.infosupport.happ.domain.ProductCategory;
 import java.util.List;
 
 public class ProductRequest {
-    public Long productId;
     public String name;
     public ProductCategory productCategory;
     public double price;
