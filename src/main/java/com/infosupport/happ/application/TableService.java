@@ -31,7 +31,7 @@ public class TableService {
        }else return tableRepository.getById(id);
     }
 
-    private TableData createTableData(Table table){
+    public TableData createTableData(Table table){
         return new TableData(table.getAmountOfPeople(),
                 table.getTableNumber(),
                 table.getElapsedTimeSinceOrder(),
