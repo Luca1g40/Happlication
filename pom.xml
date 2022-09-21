@@ -61,6 +61,24 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>org.pitest</groupId>
+				<artifactId>pitest-maven</artifactId>
+				<version>1.7.3</version>
+				<dependencies>
+
+					<dependency>
+						<groupId>org.pitest</groupId>
+						<artifactId>pitest-junit5-plugin</artifactId>
+						<version>0.12</version>
+					</dependency>
+				</dependencies>
+				<configuration>
+					<jvmArgs>
+						<jvmArg>-Dspring.profiles.active=ci</jvmArg>
+					</jvmArgs>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
