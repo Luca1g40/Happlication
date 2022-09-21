@@ -1,5 +1,7 @@
 package com.infosupport.happ.domain;
 
+import org.springframework.lang.NonNull;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -15,9 +17,10 @@ public class Stock {
     private Long id;
 
     @OneToMany
+    @NonNull
     private List<Ingredient> ingredients;
 
-    public Stock(List<Ingredient> ingredients) {
+    public Stock(@NonNull List<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
 
@@ -28,15 +31,15 @@ public class Stock {
         return Collections.unmodifiableList(ingredients);
     }
 
-    public void addNewIngredientToStock(Ingredient ingredient){
+    public void addNewIngredientToStock(@NonNull Ingredient ingredient){
         ingredients.add(ingredient);
     }
 
-    public void updateStock(List<Ingredient> ingredients){
+    public void updateStock(@NonNull List<Ingredient> ingredients){
         setIngredients(ingredients);
     }
 
-    private void setIngredients(List<Ingredient> ingredients){
+    private void setIngredients(@NonNull List<Ingredient> ingredients){
         this.ingredients=ingredients;
     }
 

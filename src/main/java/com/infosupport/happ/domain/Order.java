@@ -1,5 +1,7 @@
 package com.infosupport.happ.domain;
 
+import org.springframework.lang.NonNull;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;

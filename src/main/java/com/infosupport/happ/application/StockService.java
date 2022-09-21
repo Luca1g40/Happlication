@@ -4,6 +4,7 @@ import com.infosupport.happ.application.dto.StockData;
 import com.infosupport.happ.data.StockRepository;
 import com.infosupport.happ.domain.Ingredient;
 import com.infosupport.happ.domain.Stock;
+import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ public class StockService {
     }
 
     public StockData addNewIngredientToStock(Long id,String name, int amount){
+        stockExists(id);
         Stock stock=stockRepository.getById(id);
         stock.addNewIngredientToStock(new Ingredient(name,amount));
         stockRepository.save(stock);
@@ -30,6 +32,7 @@ public class StockService {
     }
 
     public StockData updateStock(Long id, List<Ingredient> ingredients){
+        stockExists(id);
         Stock stock = stockRepository.getById(id);
         stock.updateStock(ingredients);
         stockRepository.save(stock);
@@ -37,10 +40,18 @@ public class StockService {
     }
 
     public void deleteStock(Long id){
+        stockExists(id);
         stockRepository.delete(stockRepository.getById(id));
     }
 
     public StockData getStock(Long id){
+        stockExists(id);
         return new StockData(id,stockRepository.getById(id).getIngredients());
+    }
+
+    private void stockExists(Long id){
+        if (!stockRepository.existsById(id)){
+            throw new ItemNotFound("stock");
+        }
     }
 }

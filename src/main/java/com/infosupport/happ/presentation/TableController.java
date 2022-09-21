@@ -15,6 +15,7 @@ public class TableController {
     }
 
     @PostMapping("/table")
+
     public TableData createTable(@RequestBody TableRequest tableRequest) {
         return tableService.createTable(tableRequest.amountOfPeople, tableRequest.tableNr);
     }
