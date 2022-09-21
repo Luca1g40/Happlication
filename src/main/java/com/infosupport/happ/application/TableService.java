@@ -4,6 +4,7 @@ package com.infosupport.happ.application;
 import com.infosupport.happ.application.dto.TableData;
 import com.infosupport.happ.data.TableRepository;
 import com.infosupport.happ.domain.Table;
+import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalTime;
@@ -25,8 +26,9 @@ public class TableService {
     }
 
     public Table getTable(Long id){
-        return this.tableRepository.findById(id)
-                .orElseThrow(); //TODO: Exception toevoegen
+       if (!tableExists(id)){
+           throw new ItemNotFound("table");
+       }else return tableRepository.getById(id);
     }
 
     public TableData createTableData(Table table){
@@ -35,5 +37,9 @@ public class TableService {
                 table.getElapsedTimeSinceOrder(),
                 table.getTimeLeftToOrder(),
                 table.getOrders());
+    }
+
+    private boolean tableExists(Long id){
+        return tableRepository.existsById(id);
     }
 }

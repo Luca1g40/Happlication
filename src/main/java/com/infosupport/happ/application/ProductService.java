@@ -5,6 +5,8 @@ import com.infosupport.happ.data.ProductRepository;
 import com.infosupport.happ.domain.Ingredient;
 import com.infosupport.happ.domain.Product;
 import com.infosupport.happ.domain.ProductCategory;
+import com.infosupport.happ.domain.exceptions.ItemNotFound;
+import com.infosupport.happ.domain.exceptions.ProductNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,7 +30,8 @@ public class ProductService {
 
 
     public ProductData updateProduct(String name, ProductCategory productCategory, double price, Long id, List<Ingredient> ingredients){
-        Product product = this.getProduct(id);
+        productExists(id);
+        Product product = getProduct(id);
 
         product.setName(name);
         product.setProductCategory(productCategory);
@@ -41,12 +44,14 @@ public class ProductService {
     }
 
     public void deleteProduct(Long id) {
+        productExists(id);
         productRepository.deleteById(id);
     }
 
-    private  Product getProduct(Long id){
-        return this.productRepository.findById(id).
-                orElseThrow(); //TODO: add exception
+    private Product getProduct(Long id){
+        productExists(id);
+        return this.productRepository.getById(id);
+
     }
 
     private ProductData createProductData(Product product){
@@ -55,4 +60,11 @@ public class ProductService {
                 product.getProductCategory(),
                 product.getPrice());
     }
+
+    private void productExists(Long id) {
+        if(!productRepository.existsById(id)){
+            throw new ItemNotFound("product");
+        }
+    }
+
 }

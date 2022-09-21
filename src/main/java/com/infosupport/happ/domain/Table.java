@@ -1,5 +1,7 @@
 package com.infosupport.happ.domain;
 
+import com.infosupport.happ.domain.exceptions.AtributeMustBeBiggerThanZero;
+
 import javax.persistence.*;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -21,6 +23,9 @@ public class Table {
     private int tableNumber;
 
     public Table(List<Order> orders, List<Area> area, LocalTime elapsedTimeSinceOrder, LocalTime timeLeftToOrder, int amountOfPeople, int tableNumber) {
+        if (tableNumber<0){
+            throw new AtributeMustBeBiggerThanZero("table","table number");
+        }
         this.orders = orders;
         this.area = area;
         this.elapsedTimeSinceOrder = elapsedTimeSinceOrder;
