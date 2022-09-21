@@ -36,7 +36,7 @@ public class Stock {
         setIngredients(ingredients);
     }
 
-    public void setIngredients(List<Ingredient> ingredients){
+    private void setIngredients(List<Ingredient> ingredients){
         this.ingredients=ingredients;
     }
 
