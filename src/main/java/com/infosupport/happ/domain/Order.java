@@ -26,4 +26,21 @@ public class Order {
         this.preperationStatus = preperationStatus;
         this.products = products;
     }
+    public Long getId() {return id;}
+
+    public int getTableNr() {
+        return table.getTableNumber();
+    }
+
+    public LocalDateTime getTimeOfOrder() {
+        return timeOfOrder;
+    }
+
+    public PreperationStatus getPreperationStatus() {
+        return preperationStatus;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
 }
