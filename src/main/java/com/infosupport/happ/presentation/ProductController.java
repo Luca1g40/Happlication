@@ -21,7 +21,8 @@ public class ProductController {
         return this.productService.createProduct(
                 productRequest.name,
                 productRequest.productCategory,
-                productRequest.price);
+                productRequest.price,
+                productRequest.ingredients);
     }
 
     @PutMapping("/product/{productid}")
@@ -30,7 +31,8 @@ public class ProductController {
                 productRequest.name,
                 productRequest.productCategory,
                 productRequest.price,
-                productId
+                productId,
+                productRequest.ingredients
         );
     }
 

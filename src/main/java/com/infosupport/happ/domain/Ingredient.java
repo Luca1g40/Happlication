@@ -1,17 +1,31 @@
 package com.infosupport.happ.domain;
 
+import com.infosupport.happ.domain.exceptions.AtributeMustBeBiggerThanZero;
+import com.infosupport.happ.domain.exceptions.NotEnoughIngredientsException;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Ingredient {
+    @Id
+    @GeneratedValue
     private Long id;
-    private String naam;
+    private String name;
     private int amount;
 
-    public Ingredient(String naam, int amount) {
-        this.naam = naam;
+    public Ingredient(String name, int amount) {
+        this.name = name;
         this.amount = amount;
     }
 
-    public String getNaam() {
-        return naam;
+    public Ingredient() {
+
+    }
+
+    public String getName() {
+        return name;
     }
 
     public int getAmount() {
@@ -22,21 +36,32 @@ public class Ingredient {
         this.amount=this.amount+amount;
     }
 
-    //Exception maken zodat het niet negative mag worden
     public void decreaseAmount(int amount){
+        if (this.amount-amount<1){
+            throw new NotEnoughIngredientsException(this.name);
+        }
         this.amount = this.amount-amount;
     }
 
-    public void setNaam(String naam) {
-        this.naam = naam;
+    private void setName(String name) {
+        this.name = name;
     }
 
-    public void setAmount(int amount) {
+    private void setAmount(int amount) {
         this.amount = amount;
     }
 
     public void updateIngredient(String name,int amount){
-        this.setNaam(name);
+        checkIfEnteredAmountIsBiggerThanZero(amount);
+        this.setName(name);
         this.setAmount(amount);
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void checkIfEnteredAmountIsBiggerThanZero(int amount){
+        if (amount<0) throw new AtributeMustBeBiggerThanZero("Ingredient","amount");
     }
 }
