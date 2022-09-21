@@ -1,5 +1,7 @@
 package com.infosupport.happ.domain;
 
+import com.infosupport.happ.domain.exceptions.AtributeMustBeBiggerThanZero;
+
 import javax.persistence.*;
 import java.time.LocalTime;
 import java.util.ArrayList;
