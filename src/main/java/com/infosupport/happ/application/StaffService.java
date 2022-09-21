@@ -28,8 +28,11 @@ public class StaffService {
     }
 
     public StaffData createStaff(int password, String name){
-        Staff staff=new Staff(password,name,new ArrayList<>(),new ArrayList<>(),new ArrayList<>());
+        System.out.println("voor cereate");
+        Staff staff = new Staff(password,name,new ArrayList<>(),new ArrayList<>(),new ArrayList<>());
+        System.out.println("na create");
         staffRepository.save(staff);
+        System.out.println("??????");
         return createStaffData(staff);
     }
 
@@ -40,7 +43,7 @@ public class StaffService {
                 staff.getPassword(),
                 staff.getName(),
                 staff.getOperations(),
-                staff.getOrders(),
+                staff.getClaimedOrders(),
                 staff.getArea());
     }
 

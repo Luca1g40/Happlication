@@ -9,7 +9,7 @@ import java.util.List;
 public class StaffRequest {
     public int password;
     public String name;
-
+    public Long id;
     public List<Operation> operations;
     public  List<Order> orders;
     public List<Area> area;

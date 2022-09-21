@@ -51,10 +51,6 @@ public class Staff {
         return operations;
     }
 
-    public List<Order> getOrders() {
-        return claimedOrders;
-    }
-
     public List<Area> getArea() {
         return area;
     }
@@ -65,4 +61,7 @@ public class Staff {
 
     }
 
+    public List<Order> getClaimedOrders() {
+        return claimedOrders;
+    }
 }
