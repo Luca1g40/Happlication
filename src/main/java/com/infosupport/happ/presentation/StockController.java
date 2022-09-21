@@ -1,6 +1,7 @@
 package com.infosupport.happ.presentation;
 
 import com.infosupport.happ.application.StockService;
+import com.infosupport.happ.application.dto.IngredientData;
 import com.infosupport.happ.application.dto.StockData;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,5 +34,8 @@ public class StockController {
         stockService.deleteStock(id);
     }
 
-
+    @PostMapping("/stock/{id}/stock")
+    public StockData addIngredientToStock(@PathVariable Long id, @RequestBody IngredientData ingredientData){
+        return stockService.addNewIngredientToStock(id,ingredientData.name,ingredientData.amount);
+    }
 }
