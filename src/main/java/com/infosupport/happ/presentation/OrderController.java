@@ -19,8 +19,8 @@ public class OrderController {
     }
 
     @PostMapping("/order")
-    public OrderData createOrder(@RequestBody OrderRequest orderDTO) {
-        return orderService.createOrder(orderDTO.tableId, orderDTO.status);
+    public OrderData createOrder(@RequestBody OrderRequest orderRequest) {
+        return orderService.createOrder(orderRequest.tableId, orderRequest.productList);
     }
 
     @GetMapping("/order/{id}")
