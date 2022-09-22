@@ -22,4 +22,16 @@ public class Operation {
         this.type = type;
         this.details = details;
     }
+
+    public LocalDateTime getTimeOfOperation() {
+        return timeOfOperation;
+    }
+
+    public OperationType getType() {
+        return type;
+    }
+
+    public String getDetails() {
+        return details;
+    }
 }
