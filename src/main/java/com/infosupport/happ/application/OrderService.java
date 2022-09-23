@@ -26,8 +26,8 @@ public class OrderService {
         this.staffService = staffService;
     }
 
-    public OrderData createOrder(Long id, List<Product> productList) {
-        Table table = this.tableService.getTable(id); //TODO: Exception geen bestaand id toevoegen
+    public OrderData createOrder(Long tableId, List<Product> productList) {
+        Table table = this.tableService.getTable(tableId); //TODO: Exception geen bestaand tableId toevoegen
         Order order = new Order(table, LocalDateTime.now(), productList);
 
         this.orderRepository.save(order);
