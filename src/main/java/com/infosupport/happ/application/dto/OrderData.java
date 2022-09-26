@@ -12,7 +12,7 @@ public class OrderData {
     public final PreperationStatus preperationStatus;
     public final List<Product> products;
 
-    public OrderData(int tableNr, LocalDateTime timeOfOrder, PreperationStatus preperationStatus, List<Product> products, Long id) {
+    public OrderData(int tableNr, LocalDateTime timeOfOrder, PreperationStatus preperationStatus, List<Product> products) {
         this.tableNr = tableNr;
         this.timeOfOrder = timeOfOrder;
         this.preperationStatus = preperationStatus;
