@@ -7,7 +7,6 @@ import com.infosupport.happ.domain.Product;
 import com.infosupport.happ.domain.Staff;
 import com.infosupport.happ.domain.Table;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
-import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -20,15 +19,15 @@ public class OrderService {
     private final TableService tableService;
     private final StaffService staffService;
 
-    public OrderService(OrderRepository orderRespository, TableService tableService, StaffService staffService) {
-        this.orderRepository = orderRespository;
+    public OrderService(OrderRepository orderRepository, TableService tableService, StaffService staffService) {
+        this.orderRepository = orderRepository;
         this.tableService = tableService;
 
         this.staffService = staffService;
     }
 
     public OrderData createOrder(Long id, List<Product> productList) {
-        Table table = this.tableService.getTable(id); //TODO: Exception geen bestaand id toevoegen
+        Table table = this.tableService.getTable(id);
         Order order = new Order(table, LocalDateTime.now(), productList);
 
         this.orderRepository.save(order);
@@ -49,17 +48,9 @@ public class OrderService {
     }
 
 
-    public OrderData getOrder(Long id){
-        if (!orderExists(id)){
-            throw new ItemNotFound("order");
-        }else {
-            Order order = orderRespository.getById(id);
-            return new OrderData(order.getTableNr(), order.getTimeOfOrder(), order.getPreperationStatus(), order.getProducts());
-        }
-    }
-
-    public void deleteOrder(Long id) {
-        orderRespository.deleteById(id);
+    public Order getOrder(Long id) {
+        orderExists(id);
+        return this.orderRepository.getById(id);
     }
 
     private void orderExists(Long id) {
@@ -68,12 +59,14 @@ public class OrderService {
         }
     }
 
+    public void deleteOrder(Long id) {
+        orderRepository.deleteById(id);
+    }
 
-    private OrderData createOrderData(Order order) {
+    public OrderData createOrderData(Order order) {
         return new OrderData(order.getTableNr(),
                 order.getTimeOfOrder(),
                 order.getPreperationStatus(),
-                order.getProducts(),
-                order.getId());
+                order.getProducts());
     }
 }

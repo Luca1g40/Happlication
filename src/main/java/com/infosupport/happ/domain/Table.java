@@ -3,8 +3,6 @@ package com.infosupport.happ.domain;
 import com.infosupport.happ.domain.exceptions.AttributeMustBeBiggerThanZero;
 
 import javax.persistence.*;
-import com.infosupport.happ.domain.exceptions.AtributeMustBeBiggerThanZero;
-import com.infosupport.happ.domain.exceptions.ItemNotFound;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

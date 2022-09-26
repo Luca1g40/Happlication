@@ -20,13 +20,17 @@ public class OrderController {
 
     @PostMapping("/order")
     public OrderData createOrder(@RequestBody OrderRequest orderRequest) {
-        return orderService.createOrder(orderRequest.tableId, orderRequest.productList);
+        try{
+            return orderService.createOrder(orderRequest.tableId, orderRequest.productList);
+        }catch (ItemNotFound exception){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, exception.getMessage());
+        }
     }
 
     @GetMapping("/order/{id}")
     public OrderData getOrder(@PathVariable Long id){
         try {
-            return orderService.getOrder(id);
+            return orderService.createOrderData(orderService.getOrder(id));
         }catch (ItemNotFound exception){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, exception.getMessage());
         }
