@@ -15,34 +15,32 @@ import java.util.List;
 
 @Service
 public class OrderService {
-    private final OrderRepository orderRepository;
-    private final TableService tableService;
-    private final StaffService staffService;
 
-    public OrderService(OrderRepository orderRespository, TableService tableService, StaffService staffService) {
-        this.orderRepository = orderRespository;
-        this.tableService = tableService;
+    private OrderAssistant orderAssistant;
 
-        this.staffService = staffService;
+
+    public OrderService(OrderRepository orderRepository, OrderAssistant orderAssistant) {
+        this.orderAssistant = orderAssistant;
     }
 
     public OrderData createOrder(Long id, List<Product> productList) {
-        Table table = this.tableService.getTable(id); //TODO: Exception geen bestaand id toevoegen
+        Table table = this.orderAssistant.getTable(id);
         Order order = new Order(table, LocalDateTime.now(), productList);
 
-        this.orderRepository.save(order);
+        this.orderAssistant.save(order);
 
+        orderAssistant.moveProductsFromShoppingCartToOrders(id,order);
         return createOrderData(order);
     }
 
     public OrderData claimOrder(Long staffId, Long orderId) {
-        Staff staff = staffService.getStaff(staffId);
+        Staff staff = orderAssistant.getStaff(staffId);
         Order order = this.getOrder(orderId);
 
         staff.addOrder(order);
         order.claimOrder();
 
-        orderRepository.save(order);
+        orderAssistant.save(order);
 
         return this.createOrderData(order);
     }
@@ -50,11 +48,11 @@ public class OrderService {
 
     public Order getOrder(Long id) {
         orderExists(id);
-        return this.orderRepository.getById(id);
+        return this.orderAssistant.getById(id);
     }
 
     private void orderExists(Long id) {
-        if (!orderRepository.existsById(id)) {
+        if (!orderAssistant.orderExistsById(id)) {
             throw new ItemNotFound("order");
         }
     }
