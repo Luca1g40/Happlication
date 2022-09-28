@@ -20,13 +20,13 @@ public class OrderService {
     private final OrderAssistant orderAssistant;
     private final OrderRepository orderRepository;
 
-
     public OrderService(OrderRepository orderRepository, OrderAssistant orderAssistant) {
         this.orderAssistant = orderAssistant;
         this.orderRepository = orderRepository;
     }
 
     public OrderData createOrder(Long id, List<Product> productList) {
+
         Table table = this.orderAssistant.getTable(id);
         Order order = new Order(table, LocalDateTime.now(), productList);
 
@@ -59,12 +59,14 @@ public class OrderService {
         }
     }
 
+    public void deleteOrder(Long id) {
+        orderRepository.deleteById(id);
+    }
 
-    private OrderData createOrderData(Order order) {
+    public OrderData createOrderData(Order order) {
         return new OrderData(order.getTableNr(),
                 order.getTimeOfOrder(),
                 order.getPreperationStatus(),
-                order.getProducts(),
-                order.getId());
+                order.getProducts());
     }
 }
