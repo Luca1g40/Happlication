@@ -17,30 +17,37 @@ import java.util.List;
 public class OrderService {
 
     private OrderAssistant orderAssistant;
+    private final OrderRepository orderRepository;
+    private final TableService tableService;
+    private final StaffService staffService;
 
 
-    public OrderService(OrderRepository orderRepository, OrderAssistant orderAssistant) {
-        this.orderAssistant = orderAssistant;
+    public OrderService(OrderRepository orderRepository, TableService tableService, StaffService staffService) {
+        this.orderRepository = orderRepository;
+        this.tableService = tableService;
+        this.staffService = staffService;
     }
 
-    public OrderData createOrder(Long id, List<Product> productList) {
-        Table table = this.orderAssistant.getTable(id);
-        Order order = new Order(table, LocalDateTime.now(), productList);
+    public OrderData createOrder(Long id) {
+        Table table = this.tableService.getTable(id);
 
-        this.orderAssistant.save(order);
+        Order order = new Order(table, LocalDateTime.now(), table.getShoppingCart().getProducts());
+        this.orderRepository.save(order);
 
-        orderAssistant.moveProductsFromShoppingCartToOrders(id,order);
+        table.placeOrder(order);
+        this.tableService.save(table);
+
         return createOrderData(order);
     }
 
     public OrderData claimOrder(Long staffId, Long orderId) {
-        Staff staff = orderAssistant.getStaff(staffId);
-        Order order = this.getOrder(orderId);
+        Staff staff = this.staffService.getStaff(staffId);
+        Order order = this.orderRepository.getById(orderId);
 
         staff.addOrder(order);
         order.claimOrder();
 
-        orderAssistant.save(order);
+        orderRepository.save(order);
 
         return this.createOrderData(order);
     }
@@ -48,15 +55,15 @@ public class OrderService {
 
     public Order getOrder(Long id) {
         orderExists(id);
-        return this.orderAssistant.getById(id);
+        return this.orderRepository.getById(id);
     }
 
+
     private void orderExists(Long id) {
-        if (!orderAssistant.orderExistsById(id)) {
+        if (!orderRepository.existsById(id)) {
             throw new ItemNotFound("order");
         }
     }
-
 
     private OrderData createOrderData(Order order) {
         return new OrderData(order.getTableNr(),

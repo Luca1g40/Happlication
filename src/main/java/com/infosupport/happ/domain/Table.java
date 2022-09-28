@@ -64,8 +64,12 @@ public class Table {
         return tableStatus;
     }
 
-    public void addToShoppingCart(Order order){
+    private void addToOrders(Order order){
         orders.add(order);
+    }
+
+    public void addToShoppingCart(Product product){
+        this.shoppingCart.addToShoppingCart(product);
     }
 
     public void deleteFromShoppingCart(Product product){
@@ -83,11 +87,9 @@ public class Table {
     public ShoppingCart getShoppingCart() {
         return shoppingCart;
     }
-    public void moveProductsFromShoppingCartToOrders(Order order){
-        for (Product product: shoppingCart.getProducts()) {
-             order.addToProducts(product);
-        }
+
+    public void placeOrder(Order order){
+        addToOrders(order);
         shoppingCart.clearShoppingCart();
-        this.orders.add(order);
     }
 }

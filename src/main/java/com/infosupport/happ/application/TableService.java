@@ -1,12 +1,15 @@
 package com.infosupport.happ.application;
 
 
+import com.infosupport.happ.application.dto.OrderData;
 import com.infosupport.happ.application.dto.TableData;
 import com.infosupport.happ.data.TableRepository;
 import com.infosupport.happ.domain.*;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,9 +17,11 @@ import java.util.List;
 @Service
 public class TableService {
     private final TableRepository tableRepository;
+    private final ProductService productService;
 
-    public TableService(TableRepository tableRepository) {
+    public TableService(TableRepository tableRepository, ProductService productService) {
         this.tableRepository = tableRepository;
+        this.productService = productService;
     }
 
     public TableData createTable(int amountOfPeople, int tableNr, TableStatus tableStatus) {
@@ -30,6 +35,9 @@ public class TableService {
         return tableRepository.getById(id);
     }
 
+    public Table save(Table table){
+        return tableRepository.save(table);
+    }
     public TableData createTableData(Table table) {
         return new TableData(table.getAmountOfPeople(),
                 table.getTableNumber(),
@@ -40,21 +48,21 @@ public class TableService {
                 table.getShoppingCart());
     }
 
-    public TableData addToShoppingCart(Long tableId, Order order){
+    public TableData addToShoppingCart(Long tableId, Long productId){
         tableExists(tableId);
         Table table= tableRepository.getById(tableId);
-        table.addToShoppingCart(order);
+        table.addToShoppingCart(productService.getProduct(productId));
         tableRepository.save(table);
         return createTableData(table);
     }
 
-    public TableData removeFromShoppingCart(Long tableId,Product product){
-        tableExists(tableId);
-        Table table=tableRepository.getById(tableId);
-        table.deleteFromShoppingCart(product);
-        tableRepository.save(table);
-        return createTableData(table);
-    }
+//    public TableData removeFromShoppingCart(Long tableId,Product product){
+//        tableExists(tableId);
+//        Table table=tableRepository.getById(tableId);
+//        table.deleteFromShoppingCart(product);
+//        tableRepository.save(table);
+//        return createTableData(table);
+//    }
 
     public TableData editShoppingCart(Long tableId, List<Product> products){
         tableExists(tableId);
@@ -70,15 +78,6 @@ public class TableService {
             throw new ItemNotFound("table");
         }
     }
-
-    public TableData moveProductsFromShoppingCartToOrders(Long id,Order order){
-        tableExists(id);
-        Table table = tableRepository.getById(id);
-        table.moveProductsFromShoppingCartToOrders(order);
-        tableRepository.save(table);
-        return createTableData(table);
-    }
-
 
 }
 //TODO Table status is not set

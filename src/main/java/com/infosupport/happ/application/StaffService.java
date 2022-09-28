@@ -21,6 +21,8 @@ public class StaffService {
         return staffRepository.getById(id);
     }
 
+
+
     public void staffExists(Long id) {
         if (!staffRepository.existsById(id)) {
             throw new ItemNotFound("staff");

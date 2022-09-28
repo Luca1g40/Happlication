@@ -1,15 +1,15 @@
 package com.infosupport.happ.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
 public class ShoppingCart {
 
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @OneToMany
     private List<Product> products;
 
     public ShoppingCart(List<Product> products) {
@@ -20,6 +20,10 @@ public class ShoppingCart {
 
     }
 
+    public void addToShoppingCart(Product product){
+        products.add(product);
+    }
+
     public void editShoppingCart(List<Product> products){
         this.products = products;
     }
@@ -28,11 +32,8 @@ public class ShoppingCart {
         products.remove(product);
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
-    @Id
+
     public Long getId() {
         return id;
     }
