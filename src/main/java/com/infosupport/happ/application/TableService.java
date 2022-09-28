@@ -30,15 +30,6 @@ public class TableService {
         return tableRepository.getById(id);
     }
 
-    public TableData createTableData(Table table) {
-        return new TableData(table.getAmountOfPeople(),
-                table.getTableNumber(),
-                table.getElapsedTimeSinceOrder(),
-                table.getTimeLeftToOrder(),
-                table.getOrders(),
-                table.getTableStatus(),
-                table.getShoppingCart());
-    }
 
     public TableData addToShoppingCart(Long tableId, Order order){
         tableExists(tableId);
@@ -71,12 +62,14 @@ public class TableService {
         }
     }
 
-    public TableData moveProductsFromShoppingCartToOrders(Long id,Order order){
-        tableExists(id);
-        Table table = tableRepository.getById(id);
-        table.moveProductsFromShoppingCartToOrders(order);
-        tableRepository.save(table);
-        return createTableData(table);
+    public TableData createTableData(Table table) {
+        return new TableData(table.getAmountOfPeople(),
+                table.getTableNumber(),
+                table.getElapsedTimeSinceOrder(),
+                table.getTimeLeftToOrder(),
+                table.getOrders(),
+                table.getTableStatus(),
+                table.getShoppingCart());
     }
 
 

@@ -2,23 +2,23 @@ package com.infosupport.happ.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import java.util.List;
 
 @Entity
 public class ShoppingCart {
 
-
+    @Id
     private Long id;
-
+    @OneToMany
     private List<Product> products;
 
     public ShoppingCart(List<Product> products) {
         this.products = products;
     }
 
-    public ShoppingCart() {
-
-    }
+    public ShoppingCart() {}
 
     public void editShoppingCart(List<Product> products){
         this.products = products;
@@ -32,7 +32,7 @@ public class ShoppingCart {
         this.id = id;
     }
 
-    @Id
+
     public Long getId() {
         return id;
     }

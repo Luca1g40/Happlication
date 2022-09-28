@@ -1,6 +1,7 @@
 package com.infosupport.happ.application;
 
 import com.infosupport.happ.application.dto.OrderData;
+import com.infosupport.happ.data.OrderAssistant;
 import com.infosupport.happ.data.OrderRepository;
 import com.infosupport.happ.domain.Order;
 import com.infosupport.happ.domain.Product;
@@ -53,7 +54,7 @@ public class OrderService {
     }
 
     private void orderExists(Long id) {
-        if (!orderRepository.existsById(id)) {
+        if (!orderAssistant.existsById(id)) {
             throw new ItemNotFound("order");
         }
     }
