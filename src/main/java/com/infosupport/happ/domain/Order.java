@@ -2,6 +2,7 @@ package com.infosupport.happ.domain;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.infosupport.happ.domain.PreperationStatus.*;
@@ -71,5 +72,25 @@ public class Order {
 
     public void addToProducts(Product product) {
         products.add(product);
+    }
+
+    public List<Product> getBarOrders() {
+        List<Product> barOrders = new ArrayList<>();
+        for (Product product : products) {
+            if (product.getProductCategory() == ProductCategory.DRINKS) {
+                barOrders.add(product);
+            }
+        }
+        return barOrders;
+    }
+
+    public List<Product> getFoodOrders() {
+        List<Product> kitchenOrders = new ArrayList<>();
+        for (Product product : products) {
+            if (product.getProductCategory() != ProductCategory.DRINKS) {
+                kitchenOrders.add(product);
+            }
+        }
+        return kitchenOrders;
     }
 }

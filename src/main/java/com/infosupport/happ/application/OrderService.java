@@ -47,10 +47,9 @@ public class OrderService {
         return this.createOrderData(order);
     }
 
-
     public Order getOrder(Long id) {
         orderExists(id);
-        return this.orderAssistant.getOrderById(id);
+        return this.orderRepository.getById(id);
     }
 
     private void orderExists(Long id) {
@@ -67,6 +66,7 @@ public class OrderService {
         return new OrderData(order.getTableNr(),
                 order.getTimeOfOrder(),
                 order.getPreperationStatus(),
-                order.getProducts());
+                order.getBarOrders(),
+                order.getFoodOrders());
     }
 }
