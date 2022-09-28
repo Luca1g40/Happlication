@@ -1,6 +1,8 @@
 package com.infosupport.happ.domain;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.util.List;
 
 @Entity
@@ -17,22 +19,19 @@ public class ShoppingCart {
     }
 
     public ShoppingCart() {
+    }
 
+    public void editShoppingCart(List<Product> products) {
+        this.products = products;
+    }
+
+    public void removeFromShoppingCart(Product product) {
+        products.remove(product);
     }
 
     public void addToShoppingCart(Product product){
         products.add(product);
     }
-
-    public void editShoppingCart(List<Product> products){
-        this.products = products;
-    }
-
-    public void removeFromShoppingCart(Product product){
-        products.remove(product);
-    }
-
-
 
     public Long getId() {
         return id;

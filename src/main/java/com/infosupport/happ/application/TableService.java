@@ -34,19 +34,10 @@ public class TableService {
         tableExists(id);
         return tableRepository.getById(id);
     }
-
     public Table save(Table table){
         return tableRepository.save(table);
     }
-    public TableData createTableData(Table table) {
-        return new TableData(table.getAmountOfPeople(),
-                table.getTableNumber(),
-                table.getElapsedTimeSinceOrder(),
-                table.getTimeLeftToOrder(),
-                table.getOrders(),
-                table.getTableStatus(),
-                table.getShoppingCart());
-    }
+
 
     public TableData addToShoppingCart(Long tableId, Long productId){
         tableExists(tableId);
@@ -56,17 +47,17 @@ public class TableService {
         return createTableData(table);
     }
 
-//    public TableData removeFromShoppingCart(Long tableId,Product product){
-//        tableExists(tableId);
-//        Table table=tableRepository.getById(tableId);
-//        table.deleteFromShoppingCart(product);
-//        tableRepository.save(table);
-//        return createTableData(table);
-//    }
+    public TableData removeFromShoppingCart(Long tableId,Product product){
+        tableExists(tableId);
+        Table table=tableRepository.getById(tableId);
+        table.deleteFromShoppingCart(product);
+        tableRepository.save(table);
+        return createTableData(table);
+    }
 
     public TableData editShoppingCart(Long tableId, List<Product> products){
         tableExists(tableId);
-        Table table=tableRepository.getById(tableId);
+        Table table = tableRepository.getById(tableId);
         table.editShoppingCart(products);
         tableRepository.save(table);
         return createTableData(table);
@@ -78,6 +69,17 @@ public class TableService {
             throw new ItemNotFound("table");
         }
     }
+
+    public TableData createTableData(Table table) {
+        return new TableData(table.getAmountOfPeople(),
+                table.getTableNumber(),
+                table.getElapsedTimeSinceOrder(),
+                table.getTimeLeftToOrder(),
+                table.getOrders(),
+                table.getTableStatus(),
+                table.getShoppingCart());
+    }
+
 
 }
 //TODO Table status is not set

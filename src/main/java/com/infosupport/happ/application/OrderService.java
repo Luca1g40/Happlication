@@ -1,4 +1,5 @@
 package com.infosupport.happ.application;
+import com.infosupport.happ.data.OrderAssistant;
 
 import com.infosupport.happ.application.dto.OrderData;
 import com.infosupport.happ.data.OrderRepository;
@@ -21,19 +22,23 @@ public class OrderService {
     private final TableService tableService;
     private final StaffService staffService;
 
+    private final OrderAssistant orderAssistant;
+    private final OrderRepository orderRepository;
 
     public OrderService(OrderRepository orderRepository, TableService tableService, StaffService staffService) {
         this.orderRepository = orderRepository;
         this.tableService = tableService;
         this.staffService = staffService;
+
     }
 
     public OrderData createOrder(Long id) {
-        Table table = this.tableService.getTable(id);
 
+        Table table = this.orderAssistant.getTable(id);
         Order order = new Order(table, LocalDateTime.now(), table.getShoppingCart().getProducts());
-        this.orderRepository.save(order);
 
+        this.orderRepository.save(order);
+        this.orderRepository.save(order);
         table.placeOrder(order);
         this.tableService.save(table);
 
@@ -41,8 +46,8 @@ public class OrderService {
     }
 
     public OrderData claimOrder(Long staffId, Long orderId) {
-        Staff staff = this.staffService.getStaff(staffId);
-        Order order = this.orderRepository.getById(orderId);
+        Staff staff = orderAssistant.getStaff(staffId);
+        Order order = this.getOrder(orderId);
 
         staff.addOrder(order);
         order.claimOrder();
@@ -55,17 +60,22 @@ public class OrderService {
 
     public Order getOrder(Long id) {
         orderExists(id);
-        return this.orderRepository.getById(id);
+        return this.orderAssistant.getOrderById(id);
     }
 
 
     private void orderExists(Long id) {
-        if (!orderRepository.existsById(id)) {
+        if (!orderAssistant.existsById(id)) {
             throw new ItemNotFound("order");
         }
     }
 
     private OrderData createOrderData(Order order) {
+    public void deleteOrder(Long id) {
+        orderRepository.deleteById(id);
+    }
+
+    public OrderData createOrderData(Order order) {
         return new OrderData(order.getTableNr(),
                 order.getTimeOfOrder(),
                 order.getPreperationStatus(),

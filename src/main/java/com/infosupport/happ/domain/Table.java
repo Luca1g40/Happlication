@@ -63,24 +63,25 @@ public class Table {
     public TableStatus getTableStatus() {
         return tableStatus;
     }
-
     private void addToOrders(Order order){
         orders.add(order);
     }
 
+    public void addToShoppingCart(Order order){
+        orders.add(order);
+    }
+
+    public void deleteFromShoppingCart(Product product) {
+        shoppingCart.removeFromShoppingCart(product);
+    }
     public void addToShoppingCart(Product product){
         this.shoppingCart.addToShoppingCart(product);
     }
-
-    public void deleteFromShoppingCart(Product product){
-        shoppingCart.removeFromShoppingCart(product);
-    }
-
     public Long getId() {
         return id;
     }
 
-    public void editShoppingCart(List<Product> products){
+    public void editShoppingCart(List<Product> products) {
         shoppingCart.editShoppingCart(products);
     }
 

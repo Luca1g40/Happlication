@@ -10,7 +10,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/happ")
-public class ProductController {
+public final class ProductController {
 
     private final ProductService productService;
 

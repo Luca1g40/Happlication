@@ -2,7 +2,7 @@ package com.infosupport.happ.application;
 
 import com.infosupport.happ.application.dto.StaffData;
 import com.infosupport.happ.data.StaffRepository;
-import com.infosupport.happ.domain.*;
+import com.infosupport.happ.domain.Staff;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import org.springframework.stereotype.Service;
 
@@ -29,9 +29,9 @@ public class StaffService {
         }
     }
 
-    public StaffData createStaff(int password, String name){
+    public StaffData createStaff(int password, String name) {
         System.out.println("voor cereate");
-        Staff staff = new Staff(password,name,new ArrayList<>(),new ArrayList<>(),new ArrayList<>());
+        Staff staff = new Staff(password, name, new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         System.out.println("na create");
         staffRepository.save(staff);
         System.out.println("??????");
@@ -39,7 +39,7 @@ public class StaffService {
     }
 
 
-    public StaffData createStaffData(Staff staff){
+    public StaffData createStaffData(Staff staff) {
         return new StaffData(
                 staff.getId(),
                 staff.getPassword(),

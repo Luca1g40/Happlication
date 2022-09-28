@@ -29,7 +29,7 @@ public class StaffController {
     }
 
     @PostMapping("/staff")
-    public StaffData createStaff(@RequestBody StaffRequest staffRequest){
+    public StaffData createStaff(@RequestBody StaffRequest staffRequest) {
         return this.staffService.createStaff(
                 staffRequest.password,
                 staffRequest.name);
