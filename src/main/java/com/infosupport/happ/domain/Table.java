@@ -3,13 +3,7 @@ package com.infosupport.happ.domain;
 import com.infosupport.happ.domain.exceptions.AttributeMustBeBiggerThanZero;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "tafel")
@@ -68,11 +62,11 @@ public class Table {
         return tableStatus;
     }
 
-    public void addToShoppingCart(Order order){
+    public void addToShoppingCart(Order order) {
         orders.add(order);
     }
 
-    public void deleteFromShoppingCart(Product product){
+    public void deleteFromShoppingCart(Product product) {
         shoppingCart.removeFromShoppingCart(product);
     }
 
@@ -80,16 +74,17 @@ public class Table {
         return id;
     }
 
-    public void editShoppingCart(List<Product> products){
+    public void editShoppingCart(List<Product> products) {
         shoppingCart.editShoppingCart(products);
     }
 
     public ShoppingCart getShoppingCart() {
         return shoppingCart;
     }
-    public void moveProductsFromShoppingCartToOrders(Order order){
-        for (Product product: shoppingCart.getProducts()) {
-             order.addToProducts(product);
+
+    public void moveProductsFromShoppingCartToOrders(Order order) {
+        for (Product product : shoppingCart.getProducts()) {
+            order.addToProducts(product);
         }
         shoppingCart.clearShoppingCart();
         this.orders.add(order);

@@ -11,7 +11,7 @@ public class StaffRequest {
     public String name;
     public Long id;
     public List<Operation> operations;
-    public  List<Order> orders;
+    public List<Order> orders;
     public List<Area> area;
 
 

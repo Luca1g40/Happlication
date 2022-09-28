@@ -2,7 +2,6 @@ package com.infosupport.happ.domain;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -17,19 +16,22 @@ public class OrderTest {
     Order order;
     Product product;
     Table table;
+
     @BeforeEach
-    void beforeEach(){
+    void beforeEach() {
         this.table = new Table();
         this.product = new Product();
-        List<Product> products = new ArrayList<Product>() {{
-            add(product);}
+        List<Product> products = new ArrayList<Product>() {
+            {
+                add(product);
+            }
         };
         this.order = new Order(this.table, LocalDateTime.now(), products);
     }
 
     @Test
     @DisplayName("Order can be claimed by staff member")
-    void staffClaimsOrder(){
+    void staffClaimsOrder() {
 
         assertEquals(UNCLAIMED, order.getPreperationStatus());
         order.claimOrder();
@@ -39,7 +41,7 @@ public class OrderTest {
 
     @Test
     @DisplayName("Order knows if products are done or not")
-    void productOfOrderIsDone(){
+    void productOfOrderIsDone() {
 
         assertFalse(order.checkIfAllProductsAreDone());
         product.switchReadyStatus();
@@ -48,7 +50,7 @@ public class OrderTest {
 
     @Test
     @DisplayName("Order can't be set to done before all products are ready")
-    void orderIsDone(){
+    void orderIsDone() {
 
         assertNotEquals(DONE, order.getPreperationStatus());
         this.product.switchReadyStatus();

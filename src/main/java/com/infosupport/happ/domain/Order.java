@@ -69,7 +69,7 @@ public class Order {
         }
     }
 
-    public void addToProducts(Product product){
+    public void addToProducts(Product product) {
         products.add(product);
     }
 }
