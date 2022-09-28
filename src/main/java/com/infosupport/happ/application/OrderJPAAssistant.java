@@ -34,7 +34,7 @@ public class OrderJPAAssistant implements OrderAssistant {
 
     @Override
     public boolean existsById(Long id) {
-        return false;
+        return entities.find(Order.class, id) != null;
     }
 
 

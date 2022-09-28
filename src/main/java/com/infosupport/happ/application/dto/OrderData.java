@@ -10,12 +10,14 @@ public class OrderData {
     public final int tableNr;
     public final LocalDateTime timeOfOrder;
     public final PreperationStatus preperationStatus;
-    public final List<Product> products;
+    public final List<Product> drinkProducts;
+    public final List<Product> foodProducts;
 
-    public OrderData(int tableNr, LocalDateTime timeOfOrder, PreperationStatus preperationStatus, List<Product> products) {
+    public OrderData(int tableNr, LocalDateTime timeOfOrder, PreperationStatus preperationStatus, List<Product> drinkProducts, List<Product> foodProducts) {
         this.tableNr = tableNr;
         this.timeOfOrder = timeOfOrder;
         this.preperationStatus = preperationStatus;
-        this.products = products;
+        this.drinkProducts = drinkProducts;
+        this.foodProducts = foodProducts;
     }
 }
