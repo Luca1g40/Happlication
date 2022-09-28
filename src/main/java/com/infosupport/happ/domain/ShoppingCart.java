@@ -3,7 +3,6 @@ package com.infosupport.happ.domain;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import java.util.List;
 
 @Entity
@@ -18,13 +17,14 @@ public class ShoppingCart {
         this.products = products;
     }
 
-    public ShoppingCart() {}
+    public ShoppingCart() {
+    }
 
-    public void editShoppingCart(List<Product> products){
+    public void editShoppingCart(List<Product> products) {
         this.products = products;
     }
 
-    public void removeFromShoppingCart(Product product){
+    public void removeFromShoppingCart(Product product) {
         products.remove(product);
     }
 
@@ -41,7 +41,7 @@ public class ShoppingCart {
         return products;
     }
 
-    public void clearShoppingCart(){
+    public void clearShoppingCart() {
         products.clear();
     }
 }

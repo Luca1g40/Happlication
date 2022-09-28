@@ -11,10 +11,10 @@ import javax.persistence.EntityManager;
 @Component
 public class OrderJPAAssistant implements OrderAssistant {
 
-    private EntityManager entities;
+    private final EntityManager entities;
 
-    public OrderJPAAssistant(EntityManager entities){
-        this.entities=entities;
+    public OrderJPAAssistant(EntityManager entities) {
+        this.entities = entities;
     }
 
     @Override

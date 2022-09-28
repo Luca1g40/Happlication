@@ -17,7 +17,7 @@ public class TableData {
     public final ShoppingCart shoppingCart;
 
 
-    public TableData(int amountOfPeople, int tableNumber, LocalTime elapsedTimeSinceOrder, LocalTime timeLeftToOrder, List<Order> orders, TableStatus tableStatus,ShoppingCart shoppingCart) {
+    public TableData(int amountOfPeople, int tableNumber, LocalTime elapsedTimeSinceOrder, LocalTime timeLeftToOrder, List<Order> orders, TableStatus tableStatus, ShoppingCart shoppingCart) {
         this.amountOfPeople = amountOfPeople;
         this.tableNumber = tableNumber;
         this.elapsedTimeSinceOrder = elapsedTimeSinceOrder;

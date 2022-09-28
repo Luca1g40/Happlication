@@ -31,25 +31,25 @@ public class TableService {
     }
 
 
-    public TableData addToShoppingCart(Long tableId, Order order){
+    public TableData addToShoppingCart(Long tableId, Order order) {
         tableExists(tableId);
-        Table table= tableRepository.getById(tableId);
+        Table table = tableRepository.getById(tableId);
         table.addToShoppingCart(order);
         tableRepository.save(table);
         return createTableData(table);
     }
 
-    public TableData removeFromShoppingCart(Long tableId,Product product){
+    public TableData removeFromShoppingCart(Long tableId, Product product) {
         tableExists(tableId);
-        Table table=tableRepository.getById(tableId);
+        Table table = tableRepository.getById(tableId);
         table.deleteFromShoppingCart(product);
         tableRepository.save(table);
         return createTableData(table);
     }
 
-    public TableData editShoppingCart(Long tableId, List<Product> products){
+    public TableData editShoppingCart(Long tableId, List<Product> products) {
         tableExists(tableId);
-        Table table=tableRepository.getById(tableId);
+        Table table = tableRepository.getById(tableId);
         table.editShoppingCart(products);
         tableRepository.save(table);
         return createTableData(table);
