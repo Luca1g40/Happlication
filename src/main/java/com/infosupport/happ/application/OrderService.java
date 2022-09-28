@@ -15,19 +15,18 @@ import java.util.List;
 
 @Service
 public class OrderService {
+
+    private final OrderAssistant orderAssistant;
     private final OrderRepository orderRepository;
-    private final TableService tableService;
-    private final StaffService staffService;
 
-    public OrderService(OrderRepository orderRespository, TableService tableService, StaffService staffService) {
-        this.orderRepository = orderRespository;
-        this.tableService = tableService;
 
-        this.staffService = staffService;
+    public OrderService(OrderRepository orderRepository, OrderAssistant orderAssistant) {
+        this.orderAssistant = orderAssistant;
+        this.orderRepository = orderRepository;
     }
 
-    public OrderData createOrder(Long tableId, List<Product> productList) {
-        Table table = this.tableService.getTable(tableId); //TODO: Exception geen bestaand tableId toevoegen
+    public OrderData createOrder(Long id, List<Product> productList) {
+        Table table = this.orderAssistant.getTable(id);
         Order order = new Order(table, LocalDateTime.now(), productList);
 
         this.orderRepository.save(order);
@@ -36,7 +35,7 @@ public class OrderService {
     }
 
     public OrderData claimOrder(Long staffId, Long orderId) {
-        Staff staff = staffService.getStaff(staffId);
+        Staff staff = orderAssistant.getStaff(staffId);
         Order order = this.getOrder(orderId);
 
         staff.addOrder(order);
@@ -50,7 +49,7 @@ public class OrderService {
 
     public Order getOrder(Long id) {
         orderExists(id);
-        return this.orderRepository.getById(id);
+        return this.orderAssistant.getOrderById(id);
     }
 
     private void orderExists(Long id) {

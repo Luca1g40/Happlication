@@ -68,4 +68,8 @@ public class Order {
             this.preperationStatus = DONE;
         }
     }
+
+    public void addToProducts(Product product){
+        products.add(product);
+    }
 }
