@@ -2,6 +2,7 @@ package com.infosupport.happ.presentation;
 
 import com.infosupport.happ.application.TableService;
 import com.infosupport.happ.application.dto.TableData;
+import com.infosupport.happ.presentation.dto.ShoppingCartRequest;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import com.infosupport.happ.presentation.dto.TableRequest;
 import org.springframework.http.HttpStatus;
@@ -18,7 +19,6 @@ public class TableController {
     }
 
     @PostMapping("/table")
-
     public TableData createTable(@RequestBody TableRequest tableRequest) {
         return tableService.createTable(tableRequest.amountOfPeople, tableRequest.tableNr, tableRequest.tableStatus);
     }
@@ -31,5 +31,11 @@ public class TableController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, exception.getMessage());
         }
     }
+
+    @PutMapping("/table/{id}shoppingcart")
+    public TableData editShoppingCart(@PathVariable Long id, ShoppingCartRequest shoppingCartRequest){
+        return tableService.editShoppingCart(id,shoppingCartRequest.productList);
+    }
+
 
 }

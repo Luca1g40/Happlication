@@ -1,6 +1,7 @@
 package com.infosupport.happ.application;
 
 import com.infosupport.happ.application.dto.OrderData;
+import com.infosupport.happ.data.OrderAssistant;
 import com.infosupport.happ.data.OrderRepository;
 import com.infosupport.happ.domain.Order;
 import com.infosupport.happ.domain.Product;
@@ -15,19 +16,18 @@ import java.util.List;
 
 @Service
 public class OrderService {
+
+    private final OrderAssistant orderAssistant;
     private final OrderRepository orderRepository;
-    private final TableService tableService;
-    private final StaffService staffService;
 
-    public OrderService(OrderRepository orderRepository, TableService tableService, StaffService staffService) {
+    public OrderService(OrderRepository orderRepository, OrderAssistant orderAssistant) {
+        this.orderAssistant = orderAssistant;
         this.orderRepository = orderRepository;
-        this.tableService = tableService;
-
-        this.staffService = staffService;
     }
 
     public OrderData createOrder(Long id, List<Product> productList) {
-        Table table = this.tableService.getTable(id);
+
+        Table table = this.orderAssistant.getTable(id);
         Order order = new Order(table, LocalDateTime.now(), productList);
 
         this.orderRepository.save(order);
@@ -36,7 +36,7 @@ public class OrderService {
     }
 
     public OrderData claimOrder(Long staffId, Long orderId) {
-        Staff staff = staffService.getStaff(staffId);
+        Staff staff = orderAssistant.getStaff(staffId);
         Order order = this.getOrder(orderId);
 
         staff.addOrder(order);
@@ -50,11 +50,11 @@ public class OrderService {
 
     public Order getOrder(Long id) {
         orderExists(id);
-        return this.orderRepository.getById(id);
+        return this.orderAssistant.getOrderById(id);
     }
 
     private void orderExists(Long id) {
-        if (!orderRepository.existsById(id)) {
+        if (!orderAssistant.existsById(id)) {
             throw new ItemNotFound("order");
         }
     }
