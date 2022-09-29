@@ -1,26 +1,19 @@
-# Naam van de workflow
 name: Java CI
-# workflow zal runnen op elke "push"
 on: [push]
 
-# Taken die de workflow moet uitvoeren
+
 jobs:
   build:
-    # Een runner is een "machine" die de onder genoemde taken zal uitvoeren.
     runs-on: ubuntu-latest
 
     steps:
-#      Een stappen plan voor de uit te voeren taken, een algoritme.
       - uses: actions/checkout@v3
-#         actions/* zijn herbruikbare stukjes code die je kan gebruiken voor de taken die de runner uitvoert.
-#         de checkout@v3 checkt een github workspace uit zodat de workflow hier gebruik van kan maken.
+
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
           java-version: '17'
           distribution: 'adopt'
-#          Hier geef je de runner mee welke java versie gebruikt moet worden voor de workflow. De juiste versie wordt door
-#          actions/setup-java@v3 I.C.M de with tag opgehaald.
+
       - name: Build with Maven
         run: mvn --batch-mode --update-snapshots verify -Dspring.profiles.active=ci pitest:mutationCoverage
-#        En uiteindelijk wordt de daadwerkelijke taak hier uitgevoerd.
