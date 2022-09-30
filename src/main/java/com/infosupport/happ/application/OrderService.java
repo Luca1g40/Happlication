@@ -16,28 +16,21 @@ public class OrderService {
 
     private final OrderAssistant orderAssistant;
     private final OrderRepository orderRepository;
-    private final TableService tableService;
 
-
-    public OrderService(OrderRepository orderRepository, OrderAssistant orderAssistant, TableService tableService) {
-        this.orderRepository = orderRepository;
+    public OrderService(OrderRepository orderRepository, OrderAssistant orderAssistant) {
         this.orderAssistant = orderAssistant;
-        this.tableService = tableService;
-
+        this.orderRepository = orderRepository;
     }
 
-//    public OrderData createOrder(Long id) {
-//
-//        Table table = this.orderAssistant.getTable(id);
-//        Order order = new Order(table, LocalDateTime.now(), table.getShoppingCart().getProducts());
-//
-//        this.orderRepository.save(order);
-//        this.orderRepository.save(order);
-//        table.placeOrder(order);
-//        this.tableService.save(table);
-//
-//        return createOrderData(order);
-//    }
+    public OrderData createOrder(Long id, List<Product> productList) {
+
+        Table table = this.orderAssistant.getTable(id);
+        Order order = new Order(table, LocalDateTime.now(), productList);
+
+        this.orderRepository.save(order);
+
+        return createOrderData(order);
+    }
 
     public OrderData claimOrder(Long staffId, Long orderId) {
         Staff staff = orderAssistant.getStaff(staffId);
@@ -51,10 +44,9 @@ public class OrderService {
         return this.createOrderData(order);
     }
 
-
     public Order getOrder(Long id) {
         orderExists(id);
-        return this.orderAssistant.getOrderById(id);
+        return this.orderRepository.getById(id);
     }
 
 
@@ -72,7 +64,8 @@ public class OrderService {
         return new OrderData(order.getTableNr(),
                 order.getTimeOfOrder(),
                 order.getPreperationStatus(),
-                order.getProducts(),
+                order.getBarOrders(),
+                order.getFoodOrders(),
                 order.getId());
     }
 }

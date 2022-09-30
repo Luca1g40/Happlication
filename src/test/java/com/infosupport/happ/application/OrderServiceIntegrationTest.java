@@ -49,7 +49,6 @@ public class OrderServiceIntegrationTest {
                 add(product);
             }
         };
-
         when(orderAssistant.getTable(anyLong())).thenReturn(table);
         when(orderAssistant.existsById(anyLong())).thenReturn(true);
 

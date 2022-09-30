@@ -21,7 +21,7 @@ public class Table {
     private int amountOfPeople;
     private int tableNumber;
     private TableStatus tableStatus;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private ShoppingCart shoppingCart;
 
     public Table(List<Order> orders, LocalTime elapsedTimeSinceOrder, LocalTime timeLeftToOrder, int amountOfPeople, int tableNumber, TableStatus tableStatus, ShoppingCart shoppingCart) {
