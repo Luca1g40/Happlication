@@ -7,7 +7,7 @@ import java.util.List;
 public class ShoppingCart {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @OneToMany
     private List<Product> products;
@@ -30,7 +30,9 @@ public class ShoppingCart {
     public void setId(Long id) {
         this.id = id;
     }
-
+    public void addToShoppingCart(Product product){
+        products.add(product);
+    }
 
     public Long getId() {
         return id;

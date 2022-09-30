@@ -34,9 +34,6 @@ public class TableService {
         tableExists(id);
         return tableRepository.getById(id);
     }
-    public Table save(Table table){
-        return tableRepository.save(table);
-    }
 
 
     public TableData addToShoppingCart(Long tableId, Long productId){
