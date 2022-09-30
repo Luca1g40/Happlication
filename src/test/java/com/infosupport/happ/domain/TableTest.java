@@ -22,7 +22,7 @@ public class TableTest {
     void beforeEach(){
         order = new Order();
         productList = new ArrayList<>();
-        shoppingCart = new ShoppingCart(productList);
+        shoppingCart = new ShoppingCart();
         product = new Product("champagne",new ArrayList<>(),ProductCategory.DRINKS,56.99);
         product2 = new Product("Broodje frikandel",new ArrayList<>(),ProductCategory.STARTER,25.50);
         table = new Table(new ArrayList<>(), java.time.LocalTime.now(), java.time.LocalTime.now(),5,1, com.infosupport.happ.domain.TableStatus.OCCUPIED,shoppingCart);
@@ -40,10 +40,11 @@ public class TableTest {
     @Test
     @DisplayName("Correct products are placed in the order after placing the order.")
     void correctProductsInOrder(){
-        shoppingCart.addToShoppingCart(product2);
         table.addToShoppingCart(product2);
         table.placeOrder();
-        assertEquals(table.getLastOrder().getProducts(),shoppingCart.getProducts());
+
+        assertEquals(table.getLastOrder().getProducts(), List.of(product2));
+
     }
 
 

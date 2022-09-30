@@ -26,19 +26,19 @@ public class TableService {
 
     public TableData createTable(int amountOfPeople, int tableNr, TableStatus tableStatus) {
         Table table = tableRepository.save(new Table(new ArrayList<>(), LocalTime.of(0, 0, 0),
-                LocalTime.of(2, 0, 0), amountOfPeople, tableNr, tableStatus, new ShoppingCart(new ArrayList<>())));
+                LocalTime.of(2, 0, 0), amountOfPeople, tableNr, tableStatus, new ShoppingCart()));
         return createTableData(table);
     }
 
-    public Table getTable(Long id) {
-        tableExists(id);
-        return tableRepository.getById(id);
+    public Table getTable(Long tableId) {
+        tableExists(tableId);
+        return tableRepository.getById(tableId);
     }
 
 
     public TableData addToShoppingCart(Long tableId, Long productId){
         tableExists(tableId);
-        Table table= tableRepository.getById(tableId);
+        Table table = tableRepository.getById(tableId);
         table.addToShoppingCart(productService.getProduct(productId));
         tableRepository.save(table);
         return createTableData(table);

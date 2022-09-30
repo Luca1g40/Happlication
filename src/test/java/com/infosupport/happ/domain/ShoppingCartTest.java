@@ -14,7 +14,7 @@ public class ShoppingCartTest {
 
     @BeforeEach
     void beforeEach(){
-        shoppingCart = new ShoppingCart(new ArrayList<>());
+        shoppingCart = new ShoppingCart();
        productList = new ArrayList<>();
        product = new Product();
     }

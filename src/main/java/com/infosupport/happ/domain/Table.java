@@ -24,11 +24,12 @@ public class Table {
     @OneToOne(cascade = CascadeType.ALL)
     private ShoppingCart shoppingCart;
 
+    //TODO GOOI ORDERS
     public Table(List<Order> orders, LocalTime elapsedTimeSinceOrder, LocalTime timeLeftToOrder, int amountOfPeople, int tableNumber, TableStatus tableStatus, ShoppingCart shoppingCart) {
         if (tableNumber < 0) {
             throw new AttributeMustBeBiggerThanZero(getClass().getSimpleName(), "table number");
         }
-        this.orders = orders;
+        this.orders = new ArrayList<>();
         this.elapsedTimeSinceOrder = elapsedTimeSinceOrder;
         this.timeLeftToOrder = timeLeftToOrder;
         this.amountOfPeople = amountOfPeople;
@@ -63,6 +64,7 @@ public class Table {
     public TableStatus getTableStatus() {
         return tableStatus;
     }
+
     private void addToOrders(Order order){
         orders.add(order);
     }
@@ -70,6 +72,7 @@ public class Table {
     public void deleteFromShoppingCart(Product product) {
         shoppingCart.removeFromShoppingCart(product);
     }
+
     public void addToShoppingCart(Product product){
         this.shoppingCart.addToShoppingCart(product);
     }
