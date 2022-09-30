@@ -63,6 +63,13 @@ public class TableService {
         return createTableData(table);
     }
 
+    public TableData placeOrder(Long tableId){
+        tableExists(tableId);
+        Table table = tableRepository.getById(tableId);
+        table.placeOrder();
+        tableRepository.save(table);
+        return createTableData(table);
+    }
 
     private void tableExists(Long id) {
         if (!tableRepository.existsById(id)) {

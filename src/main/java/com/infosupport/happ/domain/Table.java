@@ -67,10 +67,6 @@ public class Table {
         orders.add(order);
     }
 
-    public void addToShoppingCart(Order order){
-        orders.add(order);
-    }
-
     public void deleteFromShoppingCart(Product product) {
         shoppingCart.removeFromShoppingCart(product);
     }
@@ -89,8 +85,18 @@ public class Table {
         return shoppingCart;
     }
 
-    public void placeOrder(Order order){
+    public void placeOrder(){
+        Order order = new Order(this, java.time.LocalDateTime.now(),new ArrayList<>());
+        for (Product product:this.shoppingCart.getProducts()) {
+             order.addToProducts(product);
+        }
         addToOrders(order);
         shoppingCart.clearShoppingCart();
     }
+
+    public Order getLastOrder(){
+        return orders.get(orders.size()-1);
+    }
+
+
 }

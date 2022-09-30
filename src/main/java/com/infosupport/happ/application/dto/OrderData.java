@@ -7,15 +7,17 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class OrderData {
+    public final Long id;
     public final int tableNr;
     public final LocalDateTime timeOfOrder;
     public final PreperationStatus preperationStatus;
     public final List<Product> products;
 
-    public OrderData(int tableNr, LocalDateTime timeOfOrder, PreperationStatus preperationStatus, List<Product> products) {
+    public OrderData(int tableNr, LocalDateTime timeOfOrder, PreperationStatus preperationStatus, List<Product> products,Long id) {
         this.tableNr = tableNr;
         this.timeOfOrder = timeOfOrder;
         this.preperationStatus = preperationStatus;
         this.products = products;
+        this.id = id;
     }
 }
