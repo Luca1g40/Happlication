@@ -27,12 +27,15 @@ public class OrderServiceIntegrationTest {
 
     private OrderService orderService;
     private OrderAssistant orderAssistant;
+    private TableService tableService;
 
     @BeforeEach
     void beforeEach() {
         OrderRepository orderRepository = mock(OrderRepository.class);
         this.orderAssistant = mock(OrderAssistant.class);
-        this.orderService = new OrderService(orderRepository, orderAssistant);
+        this.tableService = mock(TableService.class);
+        this.orderService = new OrderService(orderRepository, orderAssistant,tableService);
+
     }
 
     @Test
@@ -49,7 +52,7 @@ public class OrderServiceIntegrationTest {
         when(orderAssistant.getTable(anyLong())).thenReturn(table);
         when(orderAssistant.existsById(anyLong())).thenReturn(true);
 
-        OrderData orderData = orderService.createOrder(1L, products);
+        OrderData orderData = orderService.createOrder(1L);
 
         assertEquals(UNCLAIMED, orderData.preperationStatus);
     }

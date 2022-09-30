@@ -21,7 +21,7 @@ public class OrderTest {
     void beforeEach() {
         this.table = new Table();
         this.product = new Product();
-        List<Product> products = new ArrayList<Product>() {
+        List<Product> products = new ArrayList<>() {
             {
                 add(product);
             }
@@ -32,11 +32,9 @@ public class OrderTest {
     @Test
     @DisplayName("Order can be claimed by staff member")
     void staffClaimsOrder() {
-
         assertEquals(UNCLAIMED, order.getPreperationStatus());
         order.claimOrder();
         assertEquals(CLAIMED, order.getPreperationStatus());
-
     }
 
     @Test
@@ -56,6 +54,11 @@ public class OrderTest {
         this.product.switchReadyStatus();
         order.setPreperationStatusToDone();
         assertEquals(DONE, order.getPreperationStatus());
+    }
+
+    @Test
+    void placeOrder(){
+
     }
 
 }

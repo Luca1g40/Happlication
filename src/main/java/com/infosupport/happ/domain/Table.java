@@ -3,7 +3,9 @@ package com.infosupport.happ.domain;
 import com.infosupport.happ.domain.exceptions.AttributeMustBeBiggerThanZero;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "tafel")
@@ -61,15 +63,16 @@ public class Table {
     public TableStatus getTableStatus() {
         return tableStatus;
     }
-
-    public void addToShoppingCart(Order order) {
+    private void addToOrders(Order order){
         orders.add(order);
     }
 
     public void deleteFromShoppingCart(Product product) {
         shoppingCart.removeFromShoppingCart(product);
     }
-
+    public void addToShoppingCart(Product product){
+        this.shoppingCart.addToShoppingCart(product);
+    }
     public Long getId() {
         return id;
     }
@@ -82,11 +85,18 @@ public class Table {
         return shoppingCart;
     }
 
-    public void moveProductsFromShoppingCartToOrders(Order order) {
-        for (Product product : shoppingCart.getProducts()) {
-            order.addToProducts(product);
+    public void placeOrder(){
+        Order order = new Order(this, java.time.LocalDateTime.now(),new ArrayList<>());
+        for (Product product:this.shoppingCart.getProducts()) {
+             order.addToProducts(product);
         }
+        addToOrders(order);
         shoppingCart.clearShoppingCart();
-        this.orders.add(order);
     }
+
+    public Order getLastOrder(){
+        return orders.get(orders.size()-1);
+    }
+
+
 }
