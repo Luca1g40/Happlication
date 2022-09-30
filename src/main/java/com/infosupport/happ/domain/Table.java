@@ -70,9 +70,11 @@ public class Table {
     public void deleteFromShoppingCart(Product product) {
         shoppingCart.removeFromShoppingCart(product);
     }
+
     public void addToShoppingCart(Product product){
         this.shoppingCart.addToShoppingCart(product);
     }
+
     public Long getId() {
         return id;
     }
