@@ -3,7 +3,9 @@ package com.infosupport.happ.domain;
 import com.infosupport.happ.domain.exceptions.AttributeMustBeBiggerThanZero;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "tafel")
@@ -22,11 +24,12 @@ public class Table {
     @OneToOne(cascade = CascadeType.ALL)
     private ShoppingCart shoppingCart;
 
+    //TODO GOOI ORDERS
     public Table(List<Order> orders, LocalTime elapsedTimeSinceOrder, LocalTime timeLeftToOrder, int amountOfPeople, int tableNumber, TableStatus tableStatus, ShoppingCart shoppingCart) {
         if (tableNumber < 0) {
             throw new AttributeMustBeBiggerThanZero(getClass().getSimpleName(), "table number");
         }
-        this.orders = orders;
+        this.orders = new ArrayList<>();
         this.elapsedTimeSinceOrder = elapsedTimeSinceOrder;
         this.timeLeftToOrder = timeLeftToOrder;
         this.amountOfPeople = amountOfPeople;
@@ -62,7 +65,7 @@ public class Table {
         return tableStatus;
     }
 
-    public void addToShoppingCart(Order order) {
+    private void addToOrders(Order order){
         orders.add(order);
     }
 
@@ -70,6 +73,9 @@ public class Table {
         shoppingCart.removeFromShoppingCart(product);
     }
 
+    public void addToShoppingCart(Product product){
+        this.shoppingCart.addToShoppingCart(product);
+    }
     public Long getId() {
         return id;
     }
@@ -82,11 +88,18 @@ public class Table {
         return shoppingCart;
     }
 
-    public void moveProductsFromShoppingCartToOrders(Order order) {
-        for (Product product : shoppingCart.getProducts()) {
-            order.addToProducts(product);
+    public void placeOrder(){
+        Order order = new Order(this, java.time.LocalDateTime.now(),new ArrayList<>());
+        for (Product product:this.shoppingCart.getProducts()) {
+             order.addToProducts(product);
         }
+        addToOrders(order);
         shoppingCart.clearShoppingCart();
-        this.orders.add(order);
     }
+
+    public Order getLastOrder(){
+        return orders.get(orders.size()-1);
+    }
+
+
 }
