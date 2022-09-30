@@ -22,8 +22,8 @@ public class TableTest {
     void beforeEach(){
         order = new Order();
         productList = new ArrayList<>();
-        shoppingCart = new ShoppingCart(productList);
-        product = new Product("Champagne",new ArrayList<>(),ProductCategory.DRINKS,56.99);
+        shoppingCart = new ShoppingCart();
+        product = new Product("champagne",new ArrayList<>(),ProductCategory.DRINKS,56.99);
         product2 = new Product("Broodje frikandel",new ArrayList<>(),ProductCategory.STARTER,25.50);
         table = new Table(new ArrayList<>(), java.time.LocalTime.now(), java.time.LocalTime.now(),5,1, com.infosupport.happ.domain.TableStatus.OCCUPIED,shoppingCart);
     }
@@ -41,11 +41,10 @@ public class TableTest {
     void correctProductsInOrder(){
         table.addToShoppingCart(product2);
         table.placeOrder();
-        assertEquals(table.getShoppingCart().getProducts(),List.of(product2));
+
+        assertEquals(table.getLastOrder().getProducts(), List.of(product2));
+
     }
-
-
-
 
 
 

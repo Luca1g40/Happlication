@@ -38,22 +38,22 @@ public class OrderServiceIntegrationTest {
 
     }
 
-    @Test
-    @DisplayName("Order can be created")
-    void CreateNewOrder() {
-
-        Table table = new Table(new ArrayList<>(), LocalTime.now(), LocalTime.now(), 4, 3, TableStatus.OCCUPIED, new ShoppingCart());
-        Product product = new Product();
-        List<Product> products = new ArrayList<Product>() {
-            {
-                add(product);
-            }
-        };
-        when(orderAssistant.getTable(anyLong())).thenReturn(table);
-        when(orderAssistant.existsById(anyLong())).thenReturn(true);
-
-        //OrderData orderData = orderService.createOrder(1L);
-
-        //assertEquals(UNCLAIMED, orderData.preperationStatus);
-    }
+//    @Test
+//    @DisplayName("Order can be created")
+//    void CreateNewOrder() {
+//
+//        Table table = new Table(new ArrayList<>(), LocalTime.now(), LocalTime.now(), 4, 3, TableStatus.OCCUPIED, new ShoppingCart());
+//        Product product = new Product();
+//        List<Product> products = new ArrayList<Product>() {
+//            {
+//                add(product);
+//            }
+//        };
+//        when(orderAssistant.getTable(anyLong())).thenReturn(table);
+//        when(orderAssistant.existsById(anyLong())).thenReturn(true);
+//
+//        OrderData orderData = orderService.createOrder(1L);
+//
+//        assertEquals(UNCLAIMED, orderData.preperationStatus);
+//    }
 }

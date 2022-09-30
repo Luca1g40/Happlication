@@ -22,9 +22,9 @@ public class OrderService {
         this.orderRepository = orderRepository;
     }
 
-    public OrderData createOrder(Long id, List<Product> productList) {
+    public OrderData createOrder(Long tableId, List<Product> productList) {
 
-        Table table = this.orderAssistant.getTable(id);
+        Table table = this.orderAssistant.getTable(tableId);
         Order order = new Order(table, LocalDateTime.now(), productList);
 
         this.orderRepository.save(order);
