@@ -26,4 +26,32 @@ public class Area {
 
     public Area() {
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public List<Table> getTables() {
+        return tables;
+    }
+
+    public List<Staff> getStaffList() {
+        return staffList;
+    }
+
+    public void addStaff(Staff staff) {
+        this.staffList.add(staff);
+    }
+
+    public void deleteStaff(Staff staff) {
+        this.staffList.remove(staff);
+    }
+
+    public void editStaffList(List<Staff> staffList) {
+        this.staffList = staffList;
+    }
 }
