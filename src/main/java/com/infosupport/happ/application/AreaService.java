@@ -1,6 +1,7 @@
 package com.infosupport.happ.application;
 
 import com.infosupport.happ.application.dto.AreaData;
+import com.infosupport.happ.application.dto.StaffWithoutAreasData;
 import com.infosupport.happ.data.AreaRepository;
 import com.infosupport.happ.data.StaffRepository;
 import com.infosupport.happ.domain.Area;
@@ -29,6 +30,16 @@ public class AreaService {
     public AreaData createArea(String name){
         Area area = this.areaRepository.save(new Area(name, new ArrayList<>(), new ArrayList<>()));
         return createAreaData(area);
+    }
+
+    public Area getArea(Long id) {
+        areaExists(id);
+        return this.areaRepository.getById(id);
+    }
+
+    public void deleteArea(Long id) {
+        areaExists(id);
+        this.areaRepository.deleteById(id);
     }
 
     public AreaData addStaffToArea(Long staffId, Long areaId){
@@ -67,8 +78,22 @@ public class AreaService {
         return new AreaData(
                 area.getName(),
                 area.getTables(),
-                area.getStaffList()
+                createStaffWithoutArea(area)
         );
+    }
+
+    public List<StaffWithoutAreasData> createStaffWithoutArea(Area area) {
+        List<StaffWithoutAreasData> staffWithoutAreasList = new ArrayList<>();
+        for (Staff staff : area.getStaffList()) {
+            staffWithoutAreasList.add(new StaffWithoutAreasData(
+                    staff.getId(),
+                    staff.getPassword(),
+                    staff.getName(),
+                    staff.getOperations(),
+                    staff.getClaimedOrders()
+            ));
+        }
+        return staffWithoutAreasList;
     }
 
 }

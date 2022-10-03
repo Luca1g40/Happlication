@@ -1,13 +1,16 @@
 package com.infosupport.happ.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Area {
+public class Area implements Serializable {
+
     @Id
     @GeneratedValue
     private Long id;
@@ -15,13 +18,18 @@ public class Area {
     private String name;
     @OneToMany
     private List<Table> tables;
-    @OneToMany
+
+    @ManyToMany
+    @JoinTable(
+            name = "staff_area",
+            joinColumns = @JoinColumn(name = "area_id"),
+            inverseJoinColumns = @JoinColumn(name = "staff_id"))
     private List<Staff> staffList;
 
     public Area(String name, List<Table> tables, List<Staff> staffList) {
         this.name = name;
         this.tables = tables;
-        this.staffList = staffList;
+        this.staffList = new ArrayList<>();
     }
 
     public Area() {
