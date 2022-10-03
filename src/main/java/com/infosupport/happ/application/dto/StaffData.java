@@ -8,12 +8,12 @@ import java.util.List;
 
 public class StaffData {
 
-    private final Long id;
-    private final int password;
-    private final String name;
-    private final List<Operation> operations;
-    private final List<Order> claimedOrders;
-    private final List<Area> area;
+    public final Long id;
+    public final int password;
+    public final String name;
+    public final List<Operation> operations;
+    public final List<Order> claimedOrders;
+    public final List<Area> area;
 
     public StaffData(Long id, int password, String name, List<Operation> operations, List<Order> claimedOrders, List<Area> area) {
         this.id = id;
