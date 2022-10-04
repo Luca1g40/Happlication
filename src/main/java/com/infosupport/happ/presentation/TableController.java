@@ -48,7 +48,10 @@ public class TableController {
         return tableService.placeOrder(id);
     }
 
-
+    @DeleteMapping("/table/{tableid}")
+    private void deleteTable(@PathVariable("tableid") Long tableId) {
+        this.tableService.deleteTable(tableId);
+    }
 
 
 }
