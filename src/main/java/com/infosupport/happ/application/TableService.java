@@ -71,6 +71,10 @@ public class TableService {
         }
     }
 
+    public void deleteTable(Long id) {
+        tableRepository.deleteById(id);
+    }
+
     public TableData createTableData(Table table) {
         return new TableData(table.getAmountOfPeople(),
                 table.getTableNumber(),
