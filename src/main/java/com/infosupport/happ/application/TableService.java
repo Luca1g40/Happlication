@@ -1,15 +1,12 @@
 package com.infosupport.happ.application;
 
 
-import com.infosupport.happ.application.dto.OrderData;
 import com.infosupport.happ.application.dto.TableData;
 import com.infosupport.happ.data.TableRepository;
 import com.infosupport.happ.domain.*;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,12 +41,12 @@ public class TableService {
         return createTableData(table);
     }
 
-    public TableData removeFromShoppingCart(Long tableId,Product product){
+    public void removeFromShoppingCart(Long tableId, Product product){
         tableExists(tableId);
         Table table=tableRepository.getById(tableId);
         table.deleteFromShoppingCart(product);
         tableRepository.save(table);
-        return createTableData(table);
+        createTableData(table);
     }
 
     public TableData editShoppingCart(Long tableId, List<Product> products){
