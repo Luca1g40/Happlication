@@ -56,12 +56,13 @@ public class AreaService {
         Staff staff = staffRepository.getById(staffId);
         Area area = areaRepository.getById(areaId);
         area.deleteStaff(staff);
-        areaRepository.delete(area);
+        areaRepository.save(area);
         return createAreaData(area);
     }
 
-    public AreaData editStaffListInArea(List<Staff> staffList, Long areaId) {
+    public AreaData editStaffListInArea( Long areaId, List<Staff> staffList) {
         areaExists(areaId);
+        System.out.println("areaId" + areaId);
         Area area = areaRepository.getById(areaId);
         area.editStaffList(staffList);
         areaRepository.save(area);
@@ -84,14 +85,16 @@ public class AreaService {
 
     public List<StaffWithoutAreasData> createStaffWithoutArea(Area area) {
         List<StaffWithoutAreasData> staffWithoutAreasList = new ArrayList<>();
-        for (Staff staff : area.getStaffList()) {
-            staffWithoutAreasList.add(new StaffWithoutAreasData(
-                    staff.getId(),
-                    staff.getPassword(),
-                    staff.getName(),
-                    staff.getOperations(),
-                    staff.getClaimedOrders()
-            ));
+        if(area.getStaffList() != null) {
+            for (Staff staff : area.getStaffList()) {
+                staffWithoutAreasList.add(new StaffWithoutAreasData(
+                        staff.getId(),
+                        staff.getPassword(),
+                        staff.getName(),
+                        staff.getOperations(),
+                        staff.getClaimedOrders()
+                ));
+            }
         }
         return staffWithoutAreasList;
     }

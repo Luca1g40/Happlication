@@ -5,6 +5,7 @@ import com.infosupport.happ.application.StaffService;
 import com.infosupport.happ.application.dto.AreaData;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import com.infosupport.happ.presentation.dto.AreaRequest;
+import com.infosupport.happ.presentation.dto.StaffRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -13,11 +14,9 @@ import org.springframework.web.server.ResponseStatusException;
 @RequestMapping("/happ")
 public class AreaController {
     private final AreaService areaService;
-    private final StaffService staffService;
 
-    public AreaController(AreaService areaService, StaffService staffService) {
+    public AreaController(AreaService areaService) {
         this.areaService = areaService;
-        this.staffService = staffService;
     }
 
     @PostMapping("/area")
@@ -35,7 +34,7 @@ public class AreaController {
     }
 
     @PostMapping("/staff/{staffid}/area")
-    public AreaData addingStaffToArea(@PathVariable("staffid") Long staffId, @RequestBody AreaRequest areaRequest){
+    public AreaData adding_staff_to_area(@PathVariable("staffid") Long staffId, @RequestBody AreaRequest areaRequest){
         try {
             return this.areaService.addStaffToArea(staffId, areaRequest.id);
         } catch (ItemNotFound e) {
@@ -44,4 +43,33 @@ public class AreaController {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @DeleteMapping("/staff/{staffid}/area")
+    public AreaData deleting_staff_from_area(@PathVariable("staffid") Long staffId, @RequestBody AreaRequest areaRequest) {
+        try{
+            return this.areaService.deleteStaffFromArea(staffId, areaRequest.id);
+        } catch (ItemNotFound e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @DeleteMapping("/staff/{id}")
+    public void deleteArea(@PathVariable("id") Long id) {
+        try {
+            this.areaService.deleteArea(id);
+        } catch (ItemNotFound itemNotFound) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping("/staff/{areaid}/area")
+    public AreaData edit_staff_in_area(@PathVariable Long areaid, AreaRequest areaRequest) {
+        return areaService.editStaffListInArea(areaid, areaRequest.staffList);
+    }
+
+
 }
