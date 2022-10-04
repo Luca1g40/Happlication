@@ -33,7 +33,7 @@ public class TableService {
     }
 
 
-    public TableData addToShoppingCart(Long tableId, Long productId){
+    public TableData addToShoppingCart(Long tableId, Long productId) {
         tableExists(tableId);
         Table table = tableRepository.getById(tableId);
         table.addToShoppingCart(productService.getProduct(productId));
@@ -41,15 +41,15 @@ public class TableService {
         return createTableData(table);
     }
 
-    public void removeFromShoppingCart(Long tableId, Product product){
+    public void removeFromShoppingCart(Long tableId, Product product) {
         tableExists(tableId);
-        Table table=tableRepository.getById(tableId);
+        Table table = tableRepository.getById(tableId);
         table.deleteFromShoppingCart(product);
         tableRepository.save(table);
         createTableData(table);
     }
 
-    public TableData editShoppingCart(Long tableId, List<Product> products){
+    public TableData editShoppingCart(Long tableId, List<Product> products) {
         tableExists(tableId);
         Table table = tableRepository.getById(tableId);
         table.editShoppingCart(products);
@@ -57,7 +57,7 @@ public class TableService {
         return createTableData(table);
     }
 
-    public TableData placeOrder(Long tableId){
+    public TableData placeOrder(Long tableId) {
         tableExists(tableId);
         Table table = tableRepository.getById(tableId);
         table.placeOrder();
@@ -80,7 +80,5 @@ public class TableService {
                 table.getTableStatus(),
                 table.getShoppingCart());
     }
-
-
 }
-//TODO Table status is not set
+
