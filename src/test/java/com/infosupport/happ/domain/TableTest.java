@@ -21,13 +21,13 @@ public class TableTest {
     ShoppingCart shoppingCart;
 
     @BeforeEach
-    void beforeEach(){
+    void beforeEach() {
         order = new Order();
         productList = new ArrayList<>();
         shoppingCart = new ShoppingCart();
-        product = new Product("champagne",new ArrayList<>(),ProductCategory.DRINKS,56.99);
-        product2 = new Product("Broodje frikandel",new ArrayList<>(),ProductCategory.STARTER,25.50);
-        table = new Table(new ArrayList<>(), java.time.LocalTime.now(), java.time.LocalTime.now(),5,1, com.infosupport.happ.domain.TableStatus.OCCUPIED,shoppingCart);
+        product = new Product("champagne", new ArrayList<>(), ProductCategory.DRINKS, 56.99);
+        product2 = new Product("Broodje frikandel", new ArrayList<>(), ProductCategory.STARTER, 25.50);
+        table = new Table(new ArrayList<>(), java.time.LocalTime.now(), java.time.LocalTime.now(), 5, 1, com.infosupport.happ.domain.TableStatus.OCCUPIED, shoppingCart);
     }
 
     @Test
@@ -35,19 +35,27 @@ public class TableTest {
     void shopppingcartCleared(){
         shoppingCart.addToShoppingCart(product);
         table.placeOrder();
-        assertEquals(0,table.getShoppingCart().getProducts().size());
+        assertEquals(0, table.getShoppingCart().getProducts().size());
     }
-
-
 
     @Test
     @DisplayName("Correct products are placed in the order after placing the order.")
-    void correctProductsInOrder(){
+    void correctProductsInOrder() {
         table.addToShoppingCart(product2);
         table.placeOrder();
         assertEquals(List.of(product2),table.getLastOrder().getProducts());
+        assertEquals(table.getLastOrder().getProducts(), List.of(product2));
     }
 
+
+        @Test
+        @DisplayName("Throws AttributeMustBeBiggerThanZero exception because of negative table number")
+        void negativeTableNumber () {
+            AttributeMustBeBiggerThanZero thrown = Assertions.assertThrows(AttributeMustBeBiggerThanZero.class, () -> {
+                table = new Table(new ArrayList<>(), java.time.LocalTime.now(), java.time.LocalTime.now(), 10, -5, com.infosupport.happ.domain.TableStatus.OCCUPIED, new ShoppingCart());
+            });
+            Assertions.assertEquals(table.getClass().getSimpleName() + " table number cannot be a negative number.", thrown.getMessage());
+        }
     @Test
     @DisplayName("Shoppingcart is correctly editted")
     void shoppingcartEdit(){
@@ -56,16 +64,6 @@ public class TableTest {
         table.editShoppingCart(new ArrayList<>());
         assertEquals(new ArrayList<>(),table.getShoppingCart().getProducts());
     }
-
-    @Test
-    @DisplayName("Throws AttributeMustBeBiggerThanZero exception because of negative table number")
-    void negativeTableNumber(){
-        AttributeMustBeBiggerThanZero thrown = Assertions.assertThrows(AttributeMustBeBiggerThanZero.class, () -> {
-            table = new Table(new ArrayList<>(), java.time.LocalTime.now(), java.time.LocalTime.now(),10,-5, com.infosupport.happ.domain.TableStatus.OCCUPIED,new ShoppingCart());
-        });
-        Assertions.assertEquals(table.getClass().getSimpleName()+" table number cannot be a negative number.", thrown.getMessage());
-    }
-
     @Test
     @DisplayName("Throws AttributeMustBeBiggerThanZero exception because of negative amount of people")
     void negativeAmountOfPeople(){
@@ -75,7 +73,4 @@ public class TableTest {
         Assertions.assertEquals(table.getClass().getSimpleName()+" amount of people cannot be a negative number.", thrown.getMessage());
     }
 
-
-
-
-}
+    }

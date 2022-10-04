@@ -12,7 +12,7 @@ public class StaffRequest {
     public Long id;
     public List<Operation> operations;
     public List<Order> orders;
-    public List<Area> area;
+    public List<Area> areaList;
 
 
 }
