@@ -1,12 +1,9 @@
 package com.infosupport.happ.application;
+import com.infosupport.happ.data.OrderAssistant;
 
 import com.infosupport.happ.application.dto.OrderData;
-import com.infosupport.happ.data.OrderAssistant;
 import com.infosupport.happ.data.OrderRepository;
-import com.infosupport.happ.domain.Order;
-import com.infosupport.happ.domain.Product;
-import com.infosupport.happ.domain.Staff;
-import com.infosupport.happ.domain.Table;
+import com.infosupport.happ.domain.*;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import org.springframework.stereotype.Service;
 
@@ -25,9 +22,9 @@ public class OrderService {
         this.orderRepository = orderRepository;
     }
 
-    public OrderData createOrder(Long id, List<Product> productList) {
+    public OrderData createOrder(Long tableId, List<Product> productList) {
 
-        Table table = this.orderAssistant.getTable(id);
+        Table table = this.orderAssistant.getTable(tableId);
         Order order = new Order(table, LocalDateTime.now(), productList);
 
         this.orderRepository.save(order);
@@ -52,21 +49,23 @@ public class OrderService {
         return this.orderRepository.getById(id);
     }
 
+
     private void orderExists(Long id) {
         if (!orderAssistant.existsById(id)) {
             throw new ItemNotFound("order");
         }
     }
 
+
     public void deleteOrder(Long id) {
         orderRepository.deleteById(id);
     }
-
     public OrderData createOrderData(Order order) {
         return new OrderData(order.getTableNr(),
                 order.getTimeOfOrder(),
                 order.getPreperationStatus(),
                 order.getBarOrders(),
-                order.getFoodOrders());
+                order.getFoodOrders(),
+                order.getId());
     }
 }

@@ -56,7 +56,7 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
-    private Product getProduct(Long id) {
+    public Product getProduct(Long id) {
         productExists(id);
         return this.productRepository.getById(id);
     }
