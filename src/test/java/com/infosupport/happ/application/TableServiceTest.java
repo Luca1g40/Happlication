@@ -24,7 +24,7 @@ import static org.mockito.Mockito.when;
 
 
 @SpringBootTest
-public class TableServiceIntegrationTest {
+public class TableServiceTest {
 
     private TableService tableService;
     private TableRepository tableRepository;
@@ -73,7 +73,6 @@ public class TableServiceIntegrationTest {
         assertEquals(0, tableService.getTable(1L).getShoppingCart().getProducts().size());
         assertEquals(List.of(), tableService.getTable(1L).getShoppingCart().getProducts());
     }
-
     @Test
     @DisplayName("products can be edited in the shopping cart")
     void editProductsInShoppingCart(){
@@ -86,7 +85,6 @@ public class TableServiceIntegrationTest {
         assertNotNull(tableData);
 
     }
-
     @Test
     @DisplayName("Order can be placed")
     void placeOrder(){
@@ -94,13 +92,11 @@ public class TableServiceIntegrationTest {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         LocalDateTime dateTime = LocalDateTime.parse(str, formatter);
 
-
         assertEquals(1, tableService.getTable(1L).getShoppingCart().getProducts().size());
 
         TableData tableData = tableService.placeOrder(1L);
 
         Order order = new Order(this.table, tableService.getTable(1L).getLastOrder().getTimeOfOrder(), List.of(productStarter));
-
 
         assertEquals(0, tableService.getTable(1L).getShoppingCart().getProducts().size());
 
@@ -111,7 +107,6 @@ public class TableServiceIntegrationTest {
         assertEquals(order.getPreperationStatus(), tableService.getTable(1L).getLastOrder().getPreperationStatus());
         assertNotNull(tableData);
     }
-
     @Test
     @DisplayName("Table does not exist")
     void tableUsedDoesNotExist(){
@@ -119,8 +114,6 @@ public class TableServiceIntegrationTest {
         assertThrows(ItemNotFound.class, ()-> tableService.getTable(4L));
 
     }
-
-
     @Test
     @DisplayName("Table does exist")
     void tableUsedExists(){
@@ -128,5 +121,4 @@ public class TableServiceIntegrationTest {
         assertEquals(this.table, tableService.getTable(1L));
 
     }
-
 }

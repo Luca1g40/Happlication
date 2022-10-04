@@ -22,13 +22,11 @@ public class AreaService {
         this.staffRepository = staffRepository;
     }
 
-//    public AreaData createArea(String name, List<Table> tableList, List<Staff> staffList){
-//        Area area = this.areaRepository.save(new Area(name, tableList, staffList));
-//        return createAreaData(area);
-//    }
-
     public AreaData createArea(String name){
-        Area area = this.areaRepository.save(new Area(name, new ArrayList<>(), new ArrayList<>()));
+        Area area = new Area(name);
+
+        this.areaRepository.save(area);
+
         return createAreaData(area);
     }
 
@@ -62,7 +60,6 @@ public class AreaService {
 
     public AreaData editStaffListInArea( Long areaId, List<Staff> staffList) {
         areaExists(areaId);
-        System.out.println("areaId" + areaId);
         Area area = areaRepository.getById(areaId);
         area.editStaffList(staffList);
         areaRepository.save(area);
