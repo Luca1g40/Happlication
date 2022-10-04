@@ -1,13 +1,14 @@
 package com.infosupport.happ.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Staff {
+public class Staff implements Serializable {
 
     @Id
     @GeneratedValue
@@ -18,20 +19,19 @@ public class Staff {
     private List<Operation> operations;
     @OneToMany
     private List<Order> claimedOrders;
-    @OneToMany
-    private List<Area> area;
 
+    @ManyToMany(mappedBy = "staffList")
+    private List<Area> areas;
 
     public Staff() {
     }
 
-
-    public Staff(int password, String name, List<Operation> operations, List<Order> claimedOrders, List<Area> area) {
+    public Staff(int password, String name, List<Operation> operations, List<Order> claimedOrders, List<Area> areas) {
         this.password = password;
         this.name = name;
         this.operations = operations;
         this.claimedOrders = claimedOrders;
-        this.area = area;
+        this.areas = new ArrayList<>();
     }
 
     public Long getId() {
@@ -50,14 +50,19 @@ public class Staff {
         return operations;
     }
 
-    public List<Area> getArea() {
-        return area;
+
+    public List<Area> getAreas() {
+        return areas;
     }
 
     public void addOrder(Order order) {
 
         this.claimedOrders.add(order);
 
+    }
+
+    public void addArea(Area area) {
+        this.areas.add(area);
     }
 
     public List<Order> getClaimedOrders() {
