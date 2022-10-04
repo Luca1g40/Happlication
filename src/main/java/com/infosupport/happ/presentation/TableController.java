@@ -30,22 +30,43 @@ public class TableController {
             return tableService.createTableData(tableService.getTable(id));
         } catch (ItemNotFound exception) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, exception.getMessage());
+        }catch (Exception exception){
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
         }
     }
 
     @PutMapping("/table/{id}/shoppingcart")
     public TableData editShoppingCart(@PathVariable Long id, @RequestBody ShoppingCartRequest shoppingCartRequest){
-        return tableService.editShoppingCart(id,shoppingCartRequest.productList);
+        try{
+            return tableService.editShoppingCart(id,shoppingCartRequest.productList);
+        }catch (ItemNotFound itemNotFound){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, itemNotFound.getMessage());
+        }catch (Exception exception){
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
+
+        }
     }
 
     @PostMapping("/table/{id}/shoppingcart")
     public TableData addToShoppingCart(@PathVariable Long id, @RequestBody ProductRequest productRequest){
-        return tableService.addToShoppingCart(id,productRequest.id);
+        try{
+            return tableService.addToShoppingCart(id,productRequest.id);
+        }catch(ItemNotFound itemNotFound){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, itemNotFound.getMessage());
+        }catch (Exception exception){
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
+        }
     }
 
     @PostMapping("/table/{id}/order")
     public TableData placeOrder(@PathVariable Long id){
-        return tableService.placeOrder(id);
+        try{
+            return tableService.placeOrder(id);
+        }catch (ItemNotFound itemNotFound){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, itemNotFound.getMessage());
+        }catch (Exception exception){
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
+        }
     }
 
 

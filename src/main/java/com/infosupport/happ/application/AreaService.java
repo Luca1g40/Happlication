@@ -78,13 +78,13 @@ public class AreaService {
         return new AreaData(
                 area.getName(),
                 area.getTables(),
-                createStaffWithoutArea(area)
+                createStaffWithoutAreaList(area.getStaffList())
         );
     }
 
-    public List<StaffWithoutAreasData> createStaffWithoutArea(Area area) {
+    public List<StaffWithoutAreasData> createStaffWithoutAreaList(List<Staff> staffList) {
         List<StaffWithoutAreasData> staffWithoutAreasList = new ArrayList<>();
-        for (Staff staff : area.getStaffList()) {
+        for (Staff staff : staffList) {
             staffWithoutAreasList.add(new StaffWithoutAreasData(
                     staff.getId(),
                     staff.getPassword(),
