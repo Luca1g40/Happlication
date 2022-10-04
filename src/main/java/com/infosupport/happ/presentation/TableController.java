@@ -69,7 +69,10 @@ public class TableController {
         }
     }
 
-
+    @DeleteMapping("/table/{tableid}")
+    private void deleteTable(@PathVariable("tableid") Long tableId) {
+        this.tableService.deleteTable(tableId);
+    }
 
 
 }

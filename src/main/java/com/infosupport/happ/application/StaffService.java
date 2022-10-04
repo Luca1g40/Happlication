@@ -26,20 +26,9 @@ public class StaffService {
         return staffRepository.getById(id);
     }
 
-
-
-    public void staffExists(Long id) {
-        if (!staffRepository.existsById(id)) {
-            throw new ItemNotFound("staff");
-        }
-    }
-
     public StaffData createStaff(int password, String name) {
-        System.out.println("voor cereate");
-        Staff staff = new Staff(password, name, new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-        System.out.println("na create");
+        Staff staff = new Staff(password, name);
         staffRepository.save(staff);
-        System.out.println("??????");
         return createStaffData(staff);
     }
 
@@ -61,6 +50,12 @@ public class StaffService {
                 staff.getOperations(),
                 staff.getClaimedOrders(),
                 staff.getAreas());
+    }
+
+    private void staffExists(Long id) {
+        if (!staffRepository.existsById(id)) {
+            throw new ItemNotFound("staff");
+        }
     }
 
 }
