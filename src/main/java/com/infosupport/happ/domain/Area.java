@@ -19,7 +19,7 @@ public class Area implements Serializable {
     @OneToMany
     private List<Table> tables;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "staff_area",
             joinColumns = @JoinColumn(name = "area_id"),

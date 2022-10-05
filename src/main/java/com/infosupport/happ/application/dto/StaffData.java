@@ -13,14 +13,14 @@ public class StaffData {
     public final String name;
     public final List<Operation> operations;
     public final List<Order> claimedOrders;
-    public final List<Area> area;
+    public final List<AreaWithoutStaffData> areaWithoutStaffDataList;
 
-    public StaffData(Long id, int password, String name, List<Operation> operations, List<Order> claimedOrders, List<Area> area) {
+    public StaffData(Long id, int password, String name, List<Operation> operations, List<Order> claimedOrders, List<AreaWithoutStaffData> areaWithoutStaffDataList) {
         this.id = id;
         this.password = password;
         this.name = name;
         this.operations = operations;
         this.claimedOrders = claimedOrders;
-        this.area = area;
+        this.areaWithoutStaffDataList = areaWithoutStaffDataList;
     }
 }

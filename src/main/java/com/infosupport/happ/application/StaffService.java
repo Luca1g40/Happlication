@@ -1,7 +1,9 @@
 package com.infosupport.happ.application;
 
 import com.infosupport.happ.application.dto.AreaData;
+import com.infosupport.happ.application.dto.AreaWithoutStaffData;
 import com.infosupport.happ.application.dto.StaffData;
+import com.infosupport.happ.application.dto.StaffWithoutAreasData;
 import com.infosupport.happ.data.AreaRepository;
 import com.infosupport.happ.data.StaffRepository;
 import com.infosupport.happ.domain.Area;
@@ -10,6 +12,7 @@ import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class StaffService {
@@ -27,7 +30,6 @@ public class StaffService {
     }
 
 
-
     public void staffExists(Long id) {
         if (!staffRepository.existsById(id)) {
             throw new ItemNotFound("staff");
@@ -35,20 +37,39 @@ public class StaffService {
     }
 
     public StaffData createStaff(int password, String name) {
-        System.out.println("voor cereate");
         Staff staff = new Staff(password, name, new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-        System.out.println("na create");
         staffRepository.save(staff);
-        System.out.println("??????");
         return createStaffData(staff);
     }
 
-    //todo controleren of area en staff elkaar kennen?
     public StaffData addAreaToStaff(Long areaId, Long staffId) {
         staffExists(staffId);
         Staff staff = staffRepository.getById(staffId);
         Area area = areaRepository.getById(areaId);
+        System.out.println(area.getName());
+        System.out.println(staff.getName());
+        System.out.println(staff.getAreas());
         staff.addArea(area);
+        System.out.println(staff.getAreas());
+        staffRepository.save(staff);
+        System.out.println("na het opslaan");
+        return createStaffData(staff);
+    }
+
+    public StaffData deleteAreaFromStaff(Long areaId, Long staffId) {
+        staffExists(staffId);
+        Staff staff = staffRepository.getById(staffId);
+        Area area = areaRepository.getById(areaId);
+        staff.deleteArea(area);
+        staffRepository.save(staff);
+        return createStaffData(staff);
+    }
+
+    public StaffData editAreaListInStaff(Long staffId, List<Area> areaList) {
+        staffExists(staffId);
+        Staff staff = staffRepository.getById(staffId);
+        staff.editAreaList(areaList);
+        staffRepository.save(staff);
         return createStaffData(staff);
     }
 
@@ -60,7 +81,44 @@ public class StaffService {
                 staff.getName(),
                 staff.getOperations(),
                 staff.getClaimedOrders(),
-                staff.getAreas());
+                createAreaWithoutStaff(staff)
+        );
+    }
+
+    public List<AreaWithoutStaffData> createAreaWithoutStaff(Staff staff) {
+        List<AreaWithoutStaffData> areaWithoutStaffDataList = new ArrayList<>();
+        if(staff.getAreas() != null) {
+            for (Area area : staff.getAreas()) {
+                areaWithoutStaffDataList.add(new AreaWithoutStaffData(
+                        area.getId(),
+                        area.getName(),
+                        area.getTables()
+                ));
+            }
+        }
+        return areaWithoutStaffDataList;
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

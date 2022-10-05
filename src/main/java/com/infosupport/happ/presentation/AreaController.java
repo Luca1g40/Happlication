@@ -1,11 +1,9 @@
 package com.infosupport.happ.presentation;
 
 import com.infosupport.happ.application.AreaService;
-import com.infosupport.happ.application.StaffService;
 import com.infosupport.happ.application.dto.AreaData;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import com.infosupport.happ.presentation.dto.AreaRequest;
-import com.infosupport.happ.presentation.dto.StaffRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -67,8 +65,8 @@ public class AreaController {
     }
 
     @PutMapping("/staff/{areaid}/area")
-    public AreaData edit_staff_in_area(@PathVariable Long areaid, AreaRequest areaRequest) {
-        return areaService.editStaffListInArea(areaid, areaRequest.staffList);
+    public AreaData editStaffInArea(@PathVariable Long areaid, @RequestBody AreaRequest areaRequest) {
+        return areaService.editStaffListInArea(areaid, areaRequest.staffIdList);
     }
 
 

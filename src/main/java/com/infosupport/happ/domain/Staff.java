@@ -1,6 +1,7 @@
 package com.infosupport.happ.domain;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -20,7 +21,12 @@ public class Staff implements Serializable {
     @OneToMany
     private List<Order> claimedOrders;
 
-    @ManyToMany(mappedBy = "staffList")
+    //mappedBy = "staffList"
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    }, fetch = FetchType.EAGER,
+            mappedBy = "staffList")
     private List<Area> areas;
 
     public Staff() {
@@ -67,5 +73,13 @@ public class Staff implements Serializable {
 
     public List<Order> getClaimedOrders() {
         return claimedOrders;
+    }
+
+    public void deleteArea(Area area) {
+        this.areas.remove(area);
+    }
+
+    public void editAreaList(List<Area> areaList) {
+        this.areas = areaList;
     }
 }

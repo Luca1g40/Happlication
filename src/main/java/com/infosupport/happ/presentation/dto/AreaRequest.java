@@ -9,5 +9,5 @@ public class AreaRequest {
     public Long id;
     public String name;
     public List<Table> tables;
-    public List<Staff> staffList;
+    public List<Long> staffIdList;
 }
