@@ -1,6 +1,7 @@
 package com.infosupport.happ.application;
 
 import com.infosupport.happ.application.dto.StockData;
+import com.infosupport.happ.data.IngredientRepository;
 import com.infosupport.happ.data.StockRepository;
 import com.infosupport.happ.domain.Ingredient;
 import com.infosupport.happ.domain.Stock;
@@ -13,13 +14,15 @@ import java.util.List;
 @Service
 public class StockService {
     private final StockRepository stockRepository;
+    private final IngredientRepository ingredientRepository;
 
-    public StockService(StockRepository stockRepository) {
+    public StockService(StockRepository stockRepository, IngredientRepository ingredientRepository) {
         this.stockRepository = stockRepository;
+        this.ingredientRepository = ingredientRepository;
     }
 
     public StockData createStock() {
-        stockRepository.save(new Stock(new ArrayList<>()));
+        stockRepository.save(new Stock());
         return new StockData(new ArrayList<>());
     }
 
@@ -29,6 +32,20 @@ public class StockService {
         stock.addNewIngredientToStock(new Ingredient(name, amount));
         stockRepository.save(stock);
         return new StockData(stock.getId(), stock.getIngredients());
+    }
+
+    public StockData removeIngredientFromStock(Long stockId, Long ingredientId){
+        stockExists(stockId);
+        Ingredient ingredient = ingredientRepository.getById(ingredientId);
+
+        Stock stock = stockRepository.getById(stockId);
+
+        stock.removeIngredients(ingredient);
+
+        stockRepository.save(stock);
+
+        return new StockData(stock.getId(), stock.getIngredients());
+
     }
 
     public StockData updateStock(Long id, List<Ingredient> ingredients) {
