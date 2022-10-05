@@ -2,10 +2,8 @@ package com.infosupport.happ.presentation;
 
 import com.infosupport.happ.application.OrderService;
 import com.infosupport.happ.application.StaffService;
-import com.infosupport.happ.application.dto.AreaData;
 import com.infosupport.happ.application.dto.OrderData;
 import com.infosupport.happ.application.dto.StaffData;
-import com.infosupport.happ.domain.Staff;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import com.infosupport.happ.presentation.dto.StaffRequest;
 import org.springframework.http.HttpStatus;
@@ -74,7 +72,7 @@ public class StaffController {
 
     @PutMapping("/area/{staffid}/staff")
     public StaffData editAreaInStaff(@PathVariable("staffid") Long staffId, @RequestBody StaffRequest staffRequest) {
-        return this.staffService.editAreaListInStaff(staffId, staffRequest.areaList);
+        return this.staffService.editAreaListInStaff(staffId, staffRequest.areaIdList);
     }
 
 

@@ -46,13 +46,10 @@ public class StaffService {
         staffExists(staffId);
         Staff staff = staffRepository.getById(staffId);
         Area area = areaRepository.getById(areaId);
-        System.out.println(area.getName());
-        System.out.println(staff.getName());
-        System.out.println(staff.getAreas());
         staff.addArea(area);
-        System.out.println(staff.getAreas());
+        area.addStaff(staff); //
+        areaRepository.save(area); //
         staffRepository.save(staff);
-        System.out.println("na het opslaan");
         return createStaffData(staff);
     }
 
@@ -61,12 +58,22 @@ public class StaffService {
         Staff staff = staffRepository.getById(staffId);
         Area area = areaRepository.getById(areaId);
         staff.deleteArea(area);
+        area.deleteStaff(staff); //
+        areaRepository.save(area); //
         staffRepository.save(staff);
         return createStaffData(staff);
     }
 
-    public StaffData editAreaListInStaff(Long staffId, List<Area> areaList) {
+    public StaffData editAreaListInStaff(Long staffId, List<Long> areaIdList) {
         staffExists(staffId);
+        List<Area> areaList = new ArrayList<>();
+        for (Long id : areaIdList) {
+            if (areaRepository.existsById(id)) {
+                areaList.add(areaRepository.getById(id));
+            } else {
+                throw new ItemNotFound(Area.class.getSimpleName());
+            }
+        }
         Staff staff = staffRepository.getById(staffId);
         staff.editAreaList(areaList);
         staffRepository.save(staff);
