@@ -42,7 +42,6 @@ public class TableServiceTest {
         this.productStarter = new Product("kip",  new ArrayList<>(), STARTER, 12.50);
         this.productMain = new Product("vis",  new ArrayList<>(), MAIN_COURSE, 7.50);
 
-
         this.table = new Table(new ArrayList<>(), LocalTime.now(), LocalTime.parse("02:00:00"),
                 4, 3, TableStatus.OCCUPIED, new ShoppingCart());
 
@@ -58,8 +57,14 @@ public class TableServiceTest {
     @Test
     @DisplayName("products can be added to the shopping cart")
     void addProductsToShoppingCart(){
-        assertEquals(1, tableService.getTable(1L).getShoppingCart().getProducts().size());
-        assertEquals(List.of(productStarter), tableService.getTable(1L).getShoppingCart().getProducts());
+        TableData tableData = tableService.addToShoppingCart( 1L, 1L);
+
+        assertEquals(2, tableData.shoppingCart.getProducts().size());
+        assertEquals(List.of(productStarter, productStarter), tableData.shoppingCart.getProducts());
+
+        assertThrows(ItemNotFound.class, ()-> tableService.addToShoppingCart(4L, 1L));
+
+
     }
 
     @Test
@@ -72,6 +77,8 @@ public class TableServiceTest {
 
         assertEquals(0, tableService.getTable(1L).getShoppingCart().getProducts().size());
         assertEquals(List.of(), tableService.getTable(1L).getShoppingCart().getProducts());
+        assertThrows(ItemNotFound.class, ()-> tableService.removeFromShoppingCart(4L, productStarter));
+
     }
     @Test
     @DisplayName("products can be edited in the shopping cart")
@@ -83,15 +90,12 @@ public class TableServiceTest {
 
         assertEquals(List.of(productMain), tableService.getTable(1L).getShoppingCart().getProducts());
         assertNotNull(tableData);
+        assertThrows(ItemNotFound.class, ()-> tableService.editShoppingCart(4L, List.of(productMain)));
 
     }
     @Test
     @DisplayName("Order can be placed")
     void placeOrder(){
-        String str = "2022-01-01 22:22";
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        LocalDateTime dateTime = LocalDateTime.parse(str, formatter);
-
         assertEquals(1, tableService.getTable(1L).getShoppingCart().getProducts().size());
 
         TableData tableData = tableService.placeOrder(1L);
@@ -106,6 +110,7 @@ public class TableServiceTest {
         assertEquals(order.getTimeOfOrder(), tableService.getTable(1L).getLastOrder().getTimeOfOrder());
         assertEquals(order.getPreperationStatus(), tableService.getTable(1L).getLastOrder().getPreperationStatus());
         assertNotNull(tableData);
+        assertThrows(ItemNotFound.class, ()-> tableService.placeOrder(4L));
     }
     @Test
     @DisplayName("Table does not exist")
@@ -114,6 +119,7 @@ public class TableServiceTest {
         assertThrows(ItemNotFound.class, ()-> tableService.getTable(4L));
 
     }
+
     @Test
     @DisplayName("Table does exist")
     void tableUsedExists(){

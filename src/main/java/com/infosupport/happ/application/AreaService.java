@@ -30,9 +30,10 @@ public class AreaService {
         return createAreaData(area);
     }
 
-    public Area getArea(Long id) {
+    public AreaData getArea(Long id) {
         areaExists(id);
-        return this.areaRepository.getById(id);
+        Area area = areaRepository.getById(id);
+        return createAreaData(area);
     }
 
     public void deleteArea(Long id) {

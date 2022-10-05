@@ -33,8 +33,10 @@ public class OrderService {
     }
 
     public OrderData claimOrder(Long staffId, Long orderId) {
+
         Staff staff = orderAssistant.getStaff(staffId);
-        Order order = this.getOrder(orderId);
+
+        Order order = orderAssistant.getOrderById(orderId);
 
         staff.addOrder(order);
         order.claimOrder();
@@ -44,9 +46,10 @@ public class OrderService {
         return this.createOrderData(order);
     }
 
-    public Order getOrder(Long id) {
+    public OrderData getOrder(Long id) {
         orderExists(id);
-        return this.orderRepository.getById(id);
+        Order order = this.orderRepository.getById(id);
+        return createOrderData(order);
     }
 
 
