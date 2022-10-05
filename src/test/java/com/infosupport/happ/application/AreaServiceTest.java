@@ -48,8 +48,16 @@ public class AreaServiceTest {
 
         assertNotNull(areaData);
 
-
         assertEquals( "Nieuw area", areaData.name);
+
+    }
+
+    @Test
+    @DisplayName("Get the correct area")
+    void getArea(){
+
+        AreaData area = areaService.getArea(2L);
+        assertEquals("Nieuwe area", area.name);
 
     }
 
@@ -60,6 +68,7 @@ public class AreaServiceTest {
         AreaData areaData = areaService.addStaffToArea(1L, 2L);
 
         assertEquals(1, areaData.staffWithoutAreasList.size());
+        assertThrows(ItemNotFound.class, ()-> areaService.addStaffToArea(1L, 4L));
 
     }
 
@@ -68,10 +77,12 @@ public class AreaServiceTest {
     void editAreaStaff(){
         Staff otherStaff = new Staff(1, "Other staff");
 
+
         areaService.addStaffToArea(1L, 2L);
         AreaData areaData = areaService.editStaffListInArea(2L, List.of(otherStaff));
 
         assertEquals("Other staff", areaData.staffWithoutAreasList.get(0).name);
+        assertThrows(ItemNotFound.class, ()-> areaService.editStaffListInArea(4L, List.of(otherStaff)));
 
     }
 
@@ -83,6 +94,7 @@ public class AreaServiceTest {
         AreaData areaData = areaService.deleteStaffFromArea(1L, 2L);
 
         assertEquals(0, areaData.staffWithoutAreasList.size());
+        assertThrows(ItemNotFound.class, ()-> areaService.deleteStaffFromArea(1L, 4L));
 
     }
 
@@ -91,7 +103,5 @@ public class AreaServiceTest {
     void areaDoesNotExist(){
         assertThrows(ItemNotFound.class, ()-> areaService.getArea(4L));
     }
-
-
 
 }
