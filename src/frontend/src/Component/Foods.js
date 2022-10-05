@@ -1,19 +1,19 @@
 import React, {useState} from "react";
-import "../Drinks.css"
+import "../Foods.css"
 
 
-export default function Drinks(){
+export default function Foods(){
     return (
         <>
             <progress className="progres"></progress>
 
-            <form className="drankenlijst">
+            <form className="foodslist">
                 <div className="lijst">
 
-                    <h2>cola</h2>
                 </div>
 
             </form>
+
 
         </>
     );
