@@ -19,14 +19,14 @@ public class Area implements Serializable {
     @OneToMany
     private List<Table> tables;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
             name = "staff_area",
             joinColumns = @JoinColumn(name = "area_id"),
             inverseJoinColumns = @JoinColumn(name = "staff_id"))
     private List<Staff> staffList;
 
-    public Area(String name, List<Table> tables, List<Staff> staffList) {
+    public Area(String name, List<Table> tables) {
         this.name = name;
         this.tables = tables;
         this.staffList = new ArrayList<>();

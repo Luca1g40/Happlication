@@ -22,17 +22,13 @@ public class Staff implements Serializable {
     private List<Order> claimedOrders;
 
     //mappedBy = "staffList"
-    @ManyToMany(cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
-    }, fetch = FetchType.EAGER,
-            mappedBy = "staffList")
+    @ManyToMany(mappedBy = "staffList", cascade = CascadeType.PERSIST)
     private List<Area> areas;
 
     public Staff() {
     }
 
-    public Staff(int password, String name, List<Operation> operations, List<Order> claimedOrders, List<Area> areas) {
+    public Staff(int password, String name, List<Operation> operations, List<Order> claimedOrders) {
         this.password = password;
         this.name = name;
         this.operations = operations;
