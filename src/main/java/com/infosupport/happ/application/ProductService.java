@@ -66,7 +66,8 @@ public class ProductService {
                 product.getName(),
                 product.getProductCategory(),
                 product.getPrice(),
-                product.isReady());
+                product.isReady(),
+                product.getIngredients());
     }
 
     private void productExists(Long id) {

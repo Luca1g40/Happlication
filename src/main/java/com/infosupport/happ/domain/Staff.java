@@ -55,11 +55,7 @@ public class Staff implements Serializable {
         return areas;
     }
 
-    public void addOrder(Order order) {
-
-        this.claimedOrders.add(order);
-
-    }
+    public void addOrder(Order order) {this.claimedOrders.add(order);}
 
     public void addArea(Area area) {
         this.areas.add(area);

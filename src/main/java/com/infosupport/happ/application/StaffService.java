@@ -32,7 +32,6 @@ public class StaffService {
         return createStaffData(staff);
     }
 
-    //todo controleren of area en staff elkaar kennen?
     public StaffData addAreaToStaff(Long areaId, Long staffId) {
         staffExists(staffId);
         Staff staff = staffRepository.getById(staffId);

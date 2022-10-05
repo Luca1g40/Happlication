@@ -89,9 +89,7 @@ public class AreaServiceTest {
     @Test
     @DisplayName("Area does not exist")
     void areaDoesNotExist(){
-
         assertThrows(ItemNotFound.class, ()-> areaService.getArea(4L));
-
     }
 
 
