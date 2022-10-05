@@ -2,10 +2,7 @@ package com.infosupport.happ.domain;
 
 import org.springframework.lang.NonNull;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -18,8 +15,7 @@ public class Stock {
     @GeneratedValue
     private Long id;
 
-    @OneToMany
-    @NonNull
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Ingredient> ingredients;
 
     public Stock() {
@@ -46,6 +42,7 @@ public class Stock {
         for (int i = 0; i < ingredients.size(); i++){
             if (Objects.equals(ingredients.get(i).getName(), ingredient.getName())){
                 ingredients.remove(i);
+                break;
             }
         }
     }

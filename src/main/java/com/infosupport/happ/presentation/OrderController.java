@@ -30,7 +30,7 @@ public class OrderController {
     @GetMapping("/order/{id}")
     public OrderData getOrder(@PathVariable Long id) {
         try {
-            return orderService.createOrderData(orderService.getOrder(id));
+            return orderService.getOrder(id);
         } catch (ItemNotFound exception) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, exception.getMessage());
         }
