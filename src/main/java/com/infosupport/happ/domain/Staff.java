@@ -1,6 +1,6 @@
 package com.infosupport.happ.domain;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -59,10 +59,6 @@ public class Staff implements Serializable {
 
         this.claimedOrders.add(order);
 
-    }
-
-    public void addArea(Area area) {
-        this.areas.add(area);
     }
 
     public List<Order> getClaimedOrders() {

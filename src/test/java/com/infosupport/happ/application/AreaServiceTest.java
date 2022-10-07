@@ -77,12 +77,14 @@ public class AreaServiceTest {
     void editAreaStaff(){
         Staff otherStaff = new Staff(1, "Other staff");
 
+        when(staffRepository.getById(1L)).thenReturn(otherStaff);
+
 
         areaService.addStaffToArea(1L, 2L);
-        AreaData areaData = areaService.editStaffListInArea(2L, List.of(otherStaff));
+        AreaData areaData = areaService.editStaffListInArea(2L, List.of(1L));
 
         assertEquals("Other staff", areaData.staffWithoutAreasList.get(0).name);
-        assertThrows(ItemNotFound.class, ()-> areaService.editStaffListInArea(4L, List.of(otherStaff)));
+        assertThrows(ItemNotFound.class, ()-> areaService.editStaffListInArea(4L, List.of(1L)));
 
     }
 

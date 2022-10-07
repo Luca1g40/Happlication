@@ -1,8 +1,5 @@
 package com.infosupport.happ.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -28,6 +25,7 @@ public class Area {
 
     public Area(String name) {
         this.name = name;
+        this.tables = tables = new ArrayList<>();
         this.tables = new ArrayList<>();
         this.staffList = new ArrayList<>();
     }
