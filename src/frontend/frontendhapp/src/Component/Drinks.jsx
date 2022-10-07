@@ -1,20 +1,16 @@
-import React, {useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import "../Drinks.css"
+import {Link} from "react-router-dom";
+import DataFetching from "../DataFetching"
 
 export default function Drinks(){
+
     return (
         <>
-            <progress className="progres"></progress>
-
-            <form className="drankenlijst">
-                <div className="lijst">
-                    <div className="">
-
-                    </div>
-                </div>
-
-            </form>
-
+            <div>
+                <Link to="/"> Terug </Link>
+            </div>
+            <DataFetching/>
         </>
     );
 }
