@@ -1,9 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
+import App from '../src/App';
 import Modal from "./Component/Modal";
-import Home from "./Component/Home";
-import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
 
 
 

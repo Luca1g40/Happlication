@@ -14,35 +14,36 @@ public class IngredientTest {
 
     @BeforeEach
     void beforeEach() {
-        this.ingredient = new Ingredient();
+        ingredient = new Ingredient("Kaas", 2);
     }
 
     @Test
-    @DisplayName("increase and decrease amount")
-    void increaseAndDecrease(){
-        ingredient.increaseAmount(2);
-        assertEquals(2, ingredient.getAmount());
-        ingredient.decreaseAmount(1);
+    @DisplayName("change amount of ingredient")
+    void changeAmount(){
+        ingredient.increaseAmount(1);
+        assertEquals(3, ingredient.getAmount());
+
+        ingredient.decreaseAmount(2);
         assertEquals(1, ingredient.getAmount());
     }
 
     @Test
-    @DisplayName("decreaseAmount when null expect error")
-    void decreaseAmountWhenNull(){
-        assertThrows(NotEnoughIngredientsException.class, () -> this.ingredient.decreaseAmount(1));
+    @DisplayName("NotEnoughIngredientsException is thrown")
+    void decreaseToMinus(){
+        assertThrows(NotEnoughIngredientsException.class, () -> ingredient.decreaseAmount(5));
     }
 
     @Test
-    @DisplayName("Update a ingredient")
+    @DisplayName("Update ingredient")
     void updateIngredient(){
-        ingredient.updateIngredient("tomaat", 5);
-        assertEquals(ingredient.getAmount(), 5);
-        assertEquals(ingredient.getName(), "tomaat");
+        assertEquals(ingredient.getName(), "Kaas");
+        ingredient.updateIngredient("Worst", 4);
+        assertEquals(ingredient.getName(), "Worst");
     }
 
     @Test
-    @DisplayName("Update a ingredient with negative number")
+    @DisplayName("Update ingredient with negative")
     void updateIngredientWithNegative(){
-        assertThrows(AttributeMustBeBiggerThanZero.class, () -> this.ingredient.updateIngredient("tomaat", -5));
+        assertThrows(AttributeMustBeBiggerThanZero.class, () -> ingredient.updateIngredient("Worst", -4));
     }
 }

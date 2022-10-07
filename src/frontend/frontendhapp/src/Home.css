@@ -1,6 +1,9 @@
 .welkom{
     border: 1px solid black;
     text-align: center;
+    width: 500px;
+    left: 35%;
+    position: fixed;
 }
 .button{
     background-color: lightgreen;
@@ -22,10 +25,6 @@
     top: 5%;
     left: 45%;
 }
-
-
-
-
 
 .bg-model {
     width: 100%;

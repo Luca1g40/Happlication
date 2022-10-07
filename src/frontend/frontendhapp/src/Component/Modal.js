@@ -35,7 +35,7 @@ export default function Modal(){
                         en tonijn.</p>
                         <br/>
                         <br/>
-                        <img className="foto" src="../images/foto.JPG" alt=""></img>
+                        <img className="foto" src="../../../src/images/foto.JPG" alt=""></img>
                         <button
                         className='close-modal'
                         onClick={toggleModal}>bestellen</button>
