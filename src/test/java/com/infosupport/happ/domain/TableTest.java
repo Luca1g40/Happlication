@@ -2,6 +2,7 @@ package com.infosupport.happ.domain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import static com.infosupport.happ.domain.TableStatus.*;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ public class TableTest {
         shoppingCart = new ShoppingCart();
         product = new Product("champagne",new ArrayList<>(),ProductCategory.DRINKS,56.99);
         product2 = new Product("Broodje frikandel",new ArrayList<>(),ProductCategory.STARTER,25.50);
-        table = new Table(new ArrayList<>(), java.time.LocalTime.now(), java.time.LocalTime.now(),5,1, com.infosupport.happ.domain.TableStatus.OCCUPIED,shoppingCart);
+        table = new Table(new ArrayList<>(), LocalTime.now(), LocalTime.now(),5,1,OCCUPIED,shoppingCart);
     }
 
     @Test
