@@ -23,7 +23,7 @@ public class AreaService {
     }
 
     public AreaData createArea(String name){
-        Area area = this.areaRepository.save(new Area(name, new ArrayList<>()));
+        Area area = this.areaRepository.save(new Area(name));
         return createAreaData(area);
     }
 

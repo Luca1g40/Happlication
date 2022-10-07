@@ -23,9 +23,9 @@ public class Area implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "staff_id"))
     private List<Staff> staffList;
 
-    public Area(String name, List<Table> tables) {
+    public Area(String name) {
         this.name = name;
-        this.tables = tables;
+        this.tables = tables = new ArrayList<>();
         this.staffList = new ArrayList<>();
     }
 

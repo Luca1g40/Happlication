@@ -26,11 +26,11 @@ public class Staff implements Serializable {
     public Staff() {
     }
 
-    public Staff(int password, String name, List<Operation> operations, List<Order> claimedOrders) {
+    public Staff(int password, String name) {
         this.password = password;
         this.name = name;
-        this.operations = operations;
-        this.claimedOrders = claimedOrders;
+        this.operations = new ArrayList<>();
+        this.claimedOrders = new ArrayList<>();
         this.areas = new ArrayList<>();
     }
 

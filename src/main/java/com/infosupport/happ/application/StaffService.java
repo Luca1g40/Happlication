@@ -31,7 +31,7 @@ public class StaffService {
     }
 
     public StaffData createStaff(int password, String name) {
-        Staff staff = new Staff(password, name, new ArrayList<>(), new ArrayList<>());
+        Staff staff = new Staff(password, name);
         staffRepository.save(staff);
         return createStaffData(staff);
     }
