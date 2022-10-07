@@ -73,6 +73,4 @@ public class IngredientService {
             throw new ItemNotFound("ingredient");
         }
     }
-
-
 }

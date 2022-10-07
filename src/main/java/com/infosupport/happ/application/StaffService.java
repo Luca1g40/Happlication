@@ -67,6 +67,12 @@ public class StaffService {
         return areaWithoutStaffDataList;
     }
 
+    private void staffExists(Long id) {
+        if (!staffRepository.existsById(id)) {
+            throw new ItemNotFound("staff");
+        }
+    }
+
 }
 
 

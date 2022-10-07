@@ -17,8 +17,6 @@
 		<java.version>11</java.version>
 	</properties>
 	<dependencies>
-
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
@@ -46,13 +44,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.pitest</groupId>
-			<artifactId>pitest-maven</artifactId>
-			<version>1.9.5</version>
-		</dependency>
-
-
-		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-jpa</artifactId>
 		</dependency>
@@ -62,7 +53,6 @@
 			<scope>runtime</scope>
 		</dependency>
 
-
 	</dependencies>
 
 	<build>
@@ -71,10 +61,18 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-
 			<plugin>
 				<groupId>org.pitest</groupId>
 				<artifactId>pitest-maven</artifactId>
+				<version>1.7.3</version>
+				<dependencies>
+
+					<dependency>
+						<groupId>org.pitest</groupId>
+						<artifactId>pitest-junit5-plugin</artifactId>
+						<version>0.12</version>
+					</dependency>
+				</dependencies>
 				<configuration>
 					<jvmArgs>
 						<jvmArg>-Dspring.profiles.active=ci</jvmArg>

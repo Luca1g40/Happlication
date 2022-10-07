@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Area implements Serializable {
+public class Area {
 
     @Id
     @GeneratedValue
@@ -26,6 +26,7 @@ public class Area implements Serializable {
     public Area(String name) {
         this.name = name;
         this.tables = tables = new ArrayList<>();
+        this.tables = new ArrayList<>();
         this.staffList = new ArrayList<>();
     }
 

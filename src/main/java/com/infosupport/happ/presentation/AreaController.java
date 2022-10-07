@@ -25,7 +25,7 @@ public class AreaController {
     @GetMapping("/area/{id}")
     public AreaData getArea(@PathVariable Long id){
         try{
-            return this.areaService.createAreaData(areaService.getArea(id));
+            return this.areaService.getArea(id);
         } catch (ItemNotFound e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         }
