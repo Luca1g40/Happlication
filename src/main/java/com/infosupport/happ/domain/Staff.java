@@ -1,7 +1,6 @@
 package com.infosupport.happ.domain;
 
 
-import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -21,8 +20,7 @@ public class Staff implements Serializable {
     @OneToMany
     private List<Order> claimedOrders;
 
-    //mappedBy = "staffList"
-    @ManyToMany(mappedBy = "staffList", cascade = CascadeType.PERSIST)
+    @ManyToMany(mappedBy = "staffList")
     private List<Area> areas;
 
     public Staff() {
@@ -63,19 +61,7 @@ public class Staff implements Serializable {
 
     }
 
-    public void addArea(Area area) {
-        this.areas.add(area);
-    }
-
     public List<Order> getClaimedOrders() {
         return claimedOrders;
-    }
-
-    public void deleteArea(Area area) {
-        this.areas.remove(area);
-    }
-
-    public void editAreaList(List<Area> areaList) {
-        this.areas = areaList;
     }
 }

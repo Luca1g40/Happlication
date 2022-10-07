@@ -1,8 +1,5 @@
 package com.infosupport.happ.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -19,7 +16,7 @@ public class Area implements Serializable {
     @OneToMany
     private List<Table> tables;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany
     @JoinTable(
             name = "staff_area",
             joinColumns = @JoinColumn(name = "area_id"),

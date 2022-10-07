@@ -89,10 +89,7 @@ public class Table {
     }
 
     public void placeOrder(){
-        Order order = new Order(this, java.time.LocalDateTime.now(),new ArrayList<>());
-        for (Product product:this.shoppingCart.getProducts()) {
-             order.addToProducts(product);
-        }
+        Order order = new Order(this, java.time.LocalDateTime.now(), new ArrayList<>(shoppingCart.getProducts()));
         addToOrders(order);
         shoppingCart.clearShoppingCart();
     }

@@ -47,33 +47,14 @@ public class StaffController {
         }
     }
 
-    //todo --> zijn deze api's wel nodig om changes te brengen in area?
-    @PostMapping("/area/{areaid}/staff")
-    public StaffData addingAreaToStaff(@PathVariable("areaid") Long areaId, @RequestBody StaffRequest staffRequest) {
+    @DeleteMapping("/staff/{id}")
+    public void deleteStaff(@PathVariable("id") Long id) {
         try {
-            return this.staffService.addAreaToStaff(areaId, staffRequest.id);
-        }catch (ItemNotFound e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+            this.staffService.deleteStaff(id);
+        } catch (ItemNotFound itemNotFound) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-    @DeleteMapping("/area/{areaid}/staff")
-    public StaffData deleteAreaFromStaff(@PathVariable("areaid")Long areaId, @RequestBody StaffRequest staffRequest) {
-        try{
-            return this.staffService.deleteAreaFromStaff(areaId, staffRequest.id);
-        }catch (ItemNotFound e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
-        } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @PutMapping("/area/{staffid}/staff")
-    public StaffData editAreaInStaff(@PathVariable("staffid") Long staffId, @RequestBody StaffRequest staffRequest) {
-        return this.staffService.editAreaListInStaff(staffId, staffRequest.areaIdList);
-    }
-
-
 }

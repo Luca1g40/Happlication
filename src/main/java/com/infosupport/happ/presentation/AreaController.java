@@ -53,7 +53,7 @@ public class AreaController {
         }
     }
 
-    @DeleteMapping("/staff/{id}")
+    @DeleteMapping("/area/{id}")
     public void deleteArea(@PathVariable("id") Long id) {
         try {
             this.areaService.deleteArea(id);

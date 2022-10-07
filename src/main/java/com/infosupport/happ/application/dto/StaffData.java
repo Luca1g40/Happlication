@@ -1,6 +1,5 @@
 package com.infosupport.happ.application.dto;
 
-import com.infosupport.happ.domain.Area;
 import com.infosupport.happ.domain.Operation;
 import com.infosupport.happ.domain.Order;
 
