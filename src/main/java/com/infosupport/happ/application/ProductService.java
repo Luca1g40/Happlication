@@ -61,7 +61,7 @@ public class ProductService {
         return this.productRepository.getById(id);
     }
 
-    private ProductData createProductData(Product product) {
+    public ProductData createProductData(Product product) {
         return new ProductData(
                 product.getName(),
                 product.getProductCategory(),
@@ -73,6 +73,10 @@ public class ProductService {
         if (!productRepository.existsById(id)) {
             throw new ItemNotFound("product");
         }
+    }
+
+    public List<Product> findAll() {
+        return productRepository.findAll();
     }
 
 }
