@@ -15,49 +15,55 @@
 
 .drankenlijst{
     position: fixed;
-    border: 1px solid black;
     width: 50%;
     height: 68%;
     top: 10%;
-    left: 25%
+    left: 25%;
+
 }
 
 .productList{
-    padding: 10px;
+    list-style-type: none;
+    cursor: pointer;
+    display: inline-block;
+    min-width: 150px;
+    text-align: left;
+    margin-left: 0px;
+
 }
 
-li:before {
-    position: absolute;
-    content: "";
-    left: 4px;
-    top: 50%;
-    margin-top: -10px;
-    border-left: 20px solid #ccc;
-    border-top: 10px solid transparent;
-    border-bottom: 10px solid transparent;
+.productListPrice {
+    display: inline-block;
+    margin-left: 70%;
 }
 
-li:after {
-    position: absolute;
-    content: "";
-    left: 4px;
-    top: 50%;
-    margin-top: -10px;
-    border-left: 5px solid white;
-    border-top: 10px solid transparent;
-    border-bottom: 10px solid transparent;
+.drinkList{
+    text-align: center;
+
 }
 
-li:hover {
-    border-color: #777;
-    box-shadow: 3px 3px 5px #333;
-
-    background: #eeeeee; /* Old browsers */
-    background: -moz-linear-gradient(top, #dddddd 0%, #ffffff 25%, #ffffff 75%, #dddddd 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#dddddd), color-stop(25%,#ffffff), color-stop(75%,#ffffff), color-stop(100%,#dddddd)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top, #dddddd 0%,#ffffff 25%,#ffffff 75%,#dddddd 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top, #dddddd 0%,#ffffff 25%,#ffffff 75%,#dddddd 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top, #dddddd 0%,#ffffff 25%,#ffffff 75%,#dddddd 100%); /* IE10+ */
-    background: linear-gradient(to bottom, #dddddd 0%,#ffffff 25%,#ffffff 75%,#dddddd 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#dddddd',GradientType=0 ); /* IE6-9 */
+.productSpanPrice {
+    width: 50px;
 }
+
+.drinkListDiv {
+    width: 50%;
+    max-width: 800px;
+    margin: auto;
+}
+
+.productSpan {
+    margin-right: auto;
+    margin-left: 0;
+}
+
+.listDiv {
+    font-family: Helvetica;
+    padding: 15px;
+    margin: 2px;
+    border-bottom: 1px solid #e3a768;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+}
+

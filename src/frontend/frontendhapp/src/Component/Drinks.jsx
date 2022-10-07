@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from "react";
 import "../Drinks.css"
 import {Link} from "react-router-dom";
-import DataFetching from "../DataFetching"
+import DrinksDataFetching from "../DrinksDataFetching"
 
 export default function Drinks(){
 
@@ -10,7 +10,7 @@ export default function Drinks(){
             <div>
                 <Link to="/"> Terug </Link>
             </div>
-            <DataFetching/>
+            <DrinksDataFetching/>
         </>
     );
 }
