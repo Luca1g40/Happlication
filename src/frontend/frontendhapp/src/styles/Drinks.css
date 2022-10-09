@@ -1,4 +1,4 @@
-.lijst{
+.lijst {
     font-family: Arial, Helvetica, sans-serif;
 
     display: block;
@@ -6,14 +6,14 @@
     justify-content: center;
     margin-bottom: 50%;
     padding: 100px;
-    width: 	57%;
+    width: 57%;
     height: 50%;
     border-radius: 10px;
 
 
 }
 
-.drankenlijst{
+.drankenlijst {
     position: fixed;
     width: 50%;
     height: 68%;
@@ -22,7 +22,7 @@
 
 }
 
-.productList{
+.productList {
     list-style-type: none;
     cursor: pointer;
     display: inline-block;
@@ -37,7 +37,7 @@
     margin-left: 70%;
 }
 
-.drinkList{
+.drinkList {
     text-align: center;
 
 }
@@ -57,13 +57,39 @@
     margin-left: 0;
 }
 
-.listDiv {
-    font-family: Helvetica;
+.listItem {
+    font-family: Helvetica, serif;
     padding: 15px;
     margin: 2px;
     border-bottom: 1px solid #e3a768;
     cursor: pointer;
     list-style: none;
     display: flex;
+}
+
+.listItemDiv :hover {
+    background-color: rgba(227, 167, 104, 0.19);
+}
+
+.drinksContainer {
+    position: relative;
+    height: 750px;
+    width: 1000px;
+    margin: auto;
+
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+
+.terug {
+    margin-left: 3%;
+    margin-top: 2%;
+}
+
+.drinksToFood {
+    right: 0;
+    position: absolute;
+    margin: auto;
+    margin-right: 3%;
+    margin-top: 2%;
 }
 

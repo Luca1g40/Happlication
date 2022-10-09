@@ -1,16 +1,13 @@
 package com.infosupport.happ.application;
 
 import com.infosupport.happ.application.dto.StockData;
-import com.infosupport.happ.application.dto.TableData;
 import com.infosupport.happ.data.IngredientRepository;
 import com.infosupport.happ.data.StockRepository;
 import com.infosupport.happ.domain.Ingredient;
 import com.infosupport.happ.domain.Stock;
-import com.infosupport.happ.domain.Table;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -41,7 +38,7 @@ public class StockService {
         return createStockData(stock);
     }
 
-    public StockData removeIngredientFromStock(Long stockId, Long ingredientId){
+    public StockData removeIngredientFromStock(Long stockId, Long ingredientId) {
         stockExists(stockId);
 
         Ingredient ingredient = ingredientRepository.getById(ingredientId);
@@ -81,6 +78,7 @@ public class StockService {
             throw new ItemNotFound("stock");
         }
     }
+
     public StockData createStockData(Stock stock) {
         return new StockData(
                 stock.getIngredients()

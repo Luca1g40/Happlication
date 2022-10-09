@@ -3,7 +3,10 @@ package com.infosupport.happ.application;
 
 import com.infosupport.happ.application.dto.TableData;
 import com.infosupport.happ.data.TableRepository;
-import com.infosupport.happ.domain.*;
+import com.infosupport.happ.domain.Product;
+import com.infosupport.happ.domain.ShoppingCart;
+import com.infosupport.happ.domain.Table;
+import com.infosupport.happ.domain.TableStatus;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import org.springframework.stereotype.Service;
 

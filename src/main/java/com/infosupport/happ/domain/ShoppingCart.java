@@ -29,7 +29,7 @@ public class ShoppingCart {
         this.id = id;
     }
 
-    public void addToShoppingCart(Product product){
+    public void addToShoppingCart(Product product) {
         products.add(product);
     }
 

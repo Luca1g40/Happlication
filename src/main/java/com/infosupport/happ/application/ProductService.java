@@ -7,10 +7,11 @@ import com.infosupport.happ.domain.Product;
 import com.infosupport.happ.domain.ProductCategory;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import org.springframework.stereotype.Service;
-import static com.infosupport.happ.domain.ProductCategory.DRINKS;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.infosupport.happ.domain.ProductCategory.DRINKS;
 
 @Service
 public class ProductService {
@@ -83,8 +84,8 @@ public class ProductService {
 
     public List<Product> findAllDrinks() {
         List<Product> drinks = new ArrayList<>();
-        for(Product product :productRepository.findAll()){
-            if (product.getProductCategory() == DRINKS){
+        for (Product product : productRepository.findAll()) {
+            if (product.getProductCategory() == DRINKS) {
                 drinks.add(product);
             }
         }
