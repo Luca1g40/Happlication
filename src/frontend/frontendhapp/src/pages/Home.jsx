@@ -8,7 +8,7 @@ export default function Home() {
                 <p>Welkom bij restaurant Little Osaka. Dé culinaire hotspot in het centrum van Utrecht.
                     Ontdek hier de Aziatische keuken in een sfeervolle ambiance voor lunch en diner.
                     Ons stijlvol ingerichte restaurant heeft twee verdiepingen en biedt plaats aan 200 gasten.
-                    Little Osaka biedt naast 200 zitplaatsen, en er is ook buiten plek op ons terras met uitzicht op de
+                    Little Osaka biedt naast deze 200 zitplaatsen ook buiten plek op ons terras met uitzicht op de
                     grachten van Utrecht.
                     Aziatische beleving in een luxe sfeer aan de oudste grachten van Utrecht.
                     Wij bieden de keuze uit meer dan 120 hoogstaande originele Fusion-, Wok- Sushi- en
