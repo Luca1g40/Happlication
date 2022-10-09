@@ -92,4 +92,13 @@ public class ProductService {
         return drinks;
     }
 
+    public List<Product> findAllFood() {
+        List<Product> foods = new ArrayList<>();
+        for (Product product : productRepository.findAll()) {
+            if (product.getProductCategory() != DRINKS) {
+                foods.add(product);
+            }
+        }
+        return foods;
+    }
 }

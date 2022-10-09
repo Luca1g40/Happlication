@@ -3,12 +3,13 @@ import axios from "axios";
 import Popup from "./Popup";
 
 
-function DrinksDataFetching() {
+
+function FoodsDataFetching() {
     const [buttonPopup, setButtonPopup] = useState(false)
     const [products, setProducts] = useState([])
 
     useEffect(() => {
-        axios.get("http://localhost:8080/happ/product/drinks")
+        axios.get("http://localhost:8080/happ/product/food")
             .then(res => {
                 console.log(res)
                 setProducts(res.data)
@@ -21,7 +22,7 @@ function DrinksDataFetching() {
     return (
         <div className={"listDiv"}>
             <ul className={"list"}>
-                <h1>Fris dranken</h1>
+                <h1>Voorgerechten</h1>
                 {
                     products.map(product =>
                         <div className="listItemDiv">
@@ -40,6 +41,8 @@ function DrinksDataFetching() {
             </ul>
         </div>
     )
+
+
 }
 
-export default DrinksDataFetching
+export default FoodsDataFetching

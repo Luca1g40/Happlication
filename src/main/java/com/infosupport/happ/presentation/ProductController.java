@@ -57,6 +57,12 @@ public final class ProductController {
         return productService.findAllDrinks();
     }
 
+    @GetMapping("/product/food")
+    @CrossOrigin
+    private List<Product> findAllFood() {
+        return productService.findAllFood();
+    }
+
     @PutMapping("/product/{productid}/prepstatus")
     private ProductData changePrepStatus(@PathVariable("productid") Long productId) {
         try {

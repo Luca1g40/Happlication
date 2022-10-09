@@ -9,8 +9,6 @@
     width: 57%;
     height: 50%;
     border-radius: 10px;
-
-
 }
 
 .drankenlijst {
@@ -22,62 +20,15 @@
 
 }
 
-.productList {
-    list-style-type: none;
-    cursor: pointer;
-    display: inline-block;
-    min-width: 150px;
-    text-align: left;
-    margin-left: 0px;
-
-}
-
-.productListPrice {
-    display: inline-block;
-    margin-left: 70%;
-}
-
-.drinkList {
-    text-align: center;
-
-}
-
-.productSpanPrice {
-    width: 50px;
-}
-
-.drinkListDiv {
-    width: 50%;
-    max-width: 800px;
-    margin: auto;
-}
-
-.productSpan {
-    margin-right: auto;
-    margin-left: 0;
-}
-
-.listItem {
-    font-family: Helvetica, serif;
-    padding: 15px;
-    margin: 2px;
-    border-bottom: 1px solid #e3a768;
-    cursor: pointer;
-    list-style: none;
-    display: flex;
-}
-
-.listItemDiv :hover {
-    background-color: rgba(227, 167, 104, 0.19);
-}
-
 .drinksContainer {
     position: relative;
     height: 750px;
     width: 1000px;
     margin: auto;
 
-    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    box-shadow: rgba(0, 0, 0, 0.19)
+    0 10px 20px, rgba(0, 0, 0, 0.23)
+    0 6px 6px;
 }
 
 .terug {
@@ -88,8 +39,6 @@
 .drinksToFood {
     right: 0;
     position: absolute;
-    margin: auto;
-    margin-right: 3%;
-    margin-top: 2%;
+    margin: 2% 3% auto auto;
 }
 
