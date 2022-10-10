@@ -68,4 +68,8 @@ public class Product {
     public boolean isReady() {
         return isReady;
     }
+
+    public Long getId() {
+        return id;
+    }
 }

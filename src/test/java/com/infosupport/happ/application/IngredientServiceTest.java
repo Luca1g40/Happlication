@@ -22,7 +22,7 @@ public class IngredientServiceTest {
 
 
     @BeforeEach
-    void beforeEach(){
+    void beforeEach() {
         this.ingredientRepository = mock(IngredientRepository.class);
         this.ingredientService = new IngredientService(ingredientRepository);
 
@@ -38,51 +38,51 @@ public class IngredientServiceTest {
 
     @Test
     @DisplayName("Ingredient can be created")
-    void createIngredient(){
+    void createIngredient() {
         IngredientData ingredientData = ingredientService.createIngredient("Kaas", 5);
         assertNotNull(ingredientData);
-        assertEquals( "Kaas", ingredientData.name);
+        assertEquals("Kaas", ingredientData.name);
     }
 
     @Test
     @DisplayName("Update ingredient")
-    void updateIngredient(){
+    void updateIngredient() {
         IngredientData ingredientData = ingredientService.updateIngredient(2L, "Worst", 4);
         assertNotNull(ingredientData);
-        assertEquals( "Worst", ingredientData.name);
+        assertEquals("Worst", ingredientData.name);
         assertEquals(4, ingredientData.amount);
     }
 
     @Test
     @DisplayName("Get the correct ingredient")
-    void getIngredient(){
+    void getIngredient() {
         IngredientData ingredientData = ingredientService.getIngredientById(2L);
         assertEquals("Kaas", ingredientData.name);
     }
 
     @Test
     @DisplayName("Increase ingredient amount")
-    void increaseIngredientAmount(){
+    void increaseIngredientAmount() {
         IngredientData ingredientData = ingredientService.increaseIngredientAmount(2L, 4);
         assertEquals(9, ingredientData.amount);
     }
 
     @Test
     @DisplayName("Decrease ingredient amount")
-    void decreaseIngredientAmount(){
+    void decreaseIngredientAmount() {
         IngredientData ingredientData = ingredientService.decreaseIngredientAmount(2L, 4);
         assertEquals(1, ingredientData.amount);
     }
 
     @Test
     @DisplayName("Ingredient does not exist")
-    void ingredientDoesNotExist(){
-        assertThrows(ItemNotFound.class, ()-> ingredientService.getIngredientById(4L));
+    void ingredientDoesNotExist() {
+        assertThrows(ItemNotFound.class, () -> ingredientService.getIngredientById(4L));
     }
 
     @Test
     @DisplayName("Find all ingredients")
-    void findAllIngredients(){
+    void findAllIngredients() {
         List<IngredientData> ingredientDataList = ingredientService.findAll();
         assertEquals(1, ingredientDataList.size());
         assertEquals("Kaas", ingredientDataList.get(0).name);
