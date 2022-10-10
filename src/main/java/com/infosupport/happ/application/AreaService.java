@@ -4,8 +4,10 @@ import com.infosupport.happ.application.dto.AreaData;
 import com.infosupport.happ.application.dto.StaffWithoutAreasData;
 import com.infosupport.happ.data.AreaRepository;
 import com.infosupport.happ.data.StaffRepository;
+import com.infosupport.happ.data.TableRepository;
 import com.infosupport.happ.domain.Area;
 import com.infosupport.happ.domain.Staff;
+import com.infosupport.happ.domain.Table;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import org.springframework.stereotype.Service;
 
@@ -16,10 +18,12 @@ import java.util.List;
 public class AreaService {
     private final AreaRepository areaRepository;
     private final StaffRepository staffRepository;
+    private final TableRepository tableRepository;
 
-    public AreaService(AreaRepository areaRepository, StaffRepository staffRepository) {
+    public AreaService(AreaRepository areaRepository, StaffRepository staffRepository, TableRepository tableRepository) {
         this.areaRepository = areaRepository;
         this.staffRepository = staffRepository;
+        this.tableRepository = tableRepository;
     }
 
     public AreaData createArea(String name){
@@ -47,6 +51,15 @@ public class AreaService {
         Staff staff = staffRepository.getById(staffId);
         Area area = areaRepository.getById(areaId);
         area.addStaff(staff);
+        areaRepository.save(area);
+        return createAreaData(area);
+    }
+
+    public AreaData addTableToArea(Long tableId, Long areaId) {
+        areaExists(areaId);
+        Area area = areaRepository.getById(areaId);
+        Table table = tableRepository.getById(tableId);
+        area.addTable(table);
         areaRepository.save(area);
         return createAreaData(area);
     }
@@ -91,6 +104,12 @@ public class AreaService {
         );
     }
 
+    public List<Area> findAll() {
+        return areaRepository.findAll();
+    }
+
+
+
     public List<StaffWithoutAreasData> createStaffWithoutArea(Area area) {
         List<StaffWithoutAreasData> staffWithoutAreasList = new ArrayList<>();
         if(area.getStaffList() != null) {
@@ -106,5 +125,6 @@ public class AreaService {
         }
         return staffWithoutAreasList;
     }
+
 
 }

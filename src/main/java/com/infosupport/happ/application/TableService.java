@@ -15,16 +15,31 @@ import java.util.List;
 public class TableService {
     private final TableRepository tableRepository;
     private final ProductService productService;
+    private final AreaService areaService;
 
-    public TableService(TableRepository tableRepository, ProductService productService) {
+    public TableService(TableRepository tableRepository, ProductService productService, AreaService areaService) {
         this.tableRepository = tableRepository;
         this.productService = productService;
+        this.areaService = areaService;
     }
 
     public TableData createTable(int amountOfPeople, int tableNr, TableStatus tableStatus) {
         Table table = tableRepository.save(new Table(new ArrayList<>(), LocalTime.of(0, 0, 0),
                 LocalTime.of(2, 0, 0), amountOfPeople, tableNr, tableStatus, new ShoppingCart()));
         return createTableData(table);
+    }
+
+    public List<Staff> callOber(Long tableId) {
+        tableExists(tableId);
+        Table table = tableRepository.getById(tableId);
+        List<Area> areaList = areaService.findAll();
+        List<Staff> staffList = new ArrayList<>();
+        for (Area area : areaList) {
+            if (area.getTables().contains(table)){
+                 staffList = area.getStaffList();
+            }
+        }
+        return staffList;
     }
 
     public Table getTable(Long tableId) {

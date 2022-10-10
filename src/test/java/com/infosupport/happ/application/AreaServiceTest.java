@@ -3,6 +3,7 @@ package com.infosupport.happ.application;
 import com.infosupport.happ.application.dto.AreaData;
 import com.infosupport.happ.data.AreaRepository;
 import com.infosupport.happ.data.StaffRepository;
+import com.infosupport.happ.data.TableRepository;
 import com.infosupport.happ.domain.Area;
 import com.infosupport.happ.domain.Staff;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
@@ -22,12 +23,13 @@ public class AreaServiceTest {
     private AreaService areaService;
     private AreaRepository areaRepository;
     private StaffRepository staffRepository;
+    private TableRepository tableRepository;
 
     @BeforeEach
     void beforeEach(){
         this.areaRepository = mock(AreaRepository.class);
         this.staffRepository = mock(StaffRepository.class);
-        this.areaService = new AreaService(areaRepository, staffRepository);
+        this.areaService = new AreaService(areaRepository, staffRepository, tableRepository);
 
         Staff staff = new Staff(1, "Staff");
         Area area = new Area("Nieuwe area");

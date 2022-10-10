@@ -1,7 +1,6 @@
 package com.infosupport.happ.domain;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +24,6 @@ public class Area {
 
     public Area(String name) {
         this.name = name;
-        this.tables = tables = new ArrayList<>();
         this.tables = new ArrayList<>();
         this.staffList = new ArrayList<>();
     }
@@ -59,5 +57,9 @@ public class Area {
 
     public void editStaffList(List<Staff> staffList) {
         this.staffList = staffList;
+    }
+
+    public void addTable(Table table) {
+        this.tables.add(table);
     }
 }

@@ -2,6 +2,7 @@ package com.infosupport.happ.presentation;
 
 import com.infosupport.happ.application.TableService;
 import com.infosupport.happ.application.dto.TableData;
+import com.infosupport.happ.domain.Staff;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import com.infosupport.happ.presentation.dto.ProductRequest;
 import com.infosupport.happ.presentation.dto.ShoppingCartRequest;
@@ -9,6 +10,8 @@ import com.infosupport.happ.presentation.dto.TableRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/happ")
@@ -24,6 +27,7 @@ public class TableController {
         return tableService.createTable(tableRequest.amountOfPeople, tableRequest.tableNr, tableRequest.tableStatus);
     }
 
+    @CrossOrigin
     @GetMapping("/table/{id}")
     public TableData getTable(@PathVariable Long id) {
         try {
@@ -51,6 +55,11 @@ public class TableController {
     @DeleteMapping("/table/{tableid}")
     private void deleteTable(@PathVariable("tableid") Long tableId) {
         this.tableService.deleteTable(tableId);
+    }
+
+    @PostMapping("/table/{id}/callober")
+    private List<Staff> callOber(@PathVariable Long id) {
+        return this.tableService.callOber(id);
     }
 
 

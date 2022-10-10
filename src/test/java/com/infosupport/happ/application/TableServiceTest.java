@@ -32,13 +32,14 @@ public class TableServiceTest {
     private Product productStarter;
     private Product productMain;
     private Table table;
+    private AreaService areaService;
 
 
     @BeforeEach
     void beforeEach(){
         this.tableRepository = mock(TableRepository.class);
         this.productService = mock(ProductService.class);
-        this.tableService = new TableService(tableRepository, productService);
+        this.tableService = new TableService(tableRepository, productService, areaService);
         this.productStarter = new Product("kip",  new ArrayList<>(), STARTER, 12.50);
         this.productMain = new Product("vis",  new ArrayList<>(), MAIN_COURSE, 7.50);
 

@@ -19,6 +19,7 @@ public class OperationController {
         return operationService.createOperation(operationDTO.operationType, operationDTO.details);
     }
 
+    @CrossOrigin
     @GetMapping("/operation/{id}")
     public OperationData getOperation(@PathVariable Long id) {
         return operationService.createOperationData(operationService.getOperation(id));
