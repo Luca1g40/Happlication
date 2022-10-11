@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Entity(name = "tafel")
@@ -71,12 +72,15 @@ public class Table {
         orders.add(order);
     }
 
+    //TODO meerdere producten verwijderen
     public void deleteFromShoppingCart(Product product) {
         shoppingCart.removeFromShoppingCart(product);
     }
 
-    public void addToShoppingCart(Product product){
-        this.shoppingCart.addToShoppingCart(product);
+    public void addToShoppingCart(Product product, int amount){
+        for (int i=0; i<=amount;i++){
+            this.shoppingCart.addToShoppingCart(product);
+        }
     }
 
     public Long getId() {
@@ -93,10 +97,14 @@ public class Table {
 
     public void placeOrder(){
         Order order = new Order(this, java.time.LocalDateTime.now(),new ArrayList<>());
-        for (Product product:this.shoppingCart.getProducts()) {
-             order.addToProducts(product);
-        }
-        addToOrders(order);
+        this.shoppingCart.getProducts().forEach(order::addToProducts);
+
+
+//        for (Product product:this.shoppingCart.getProducts()) {
+//             order.addToProducts(product);
+//        }
+
+        this.addToOrders(order);
         shoppingCart.clearShoppingCart();
     }
 

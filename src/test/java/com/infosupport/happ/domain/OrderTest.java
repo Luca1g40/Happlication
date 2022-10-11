@@ -26,7 +26,7 @@ public class OrderTest {
                 add(product);
             }
         };
-        this.order = new Order(this.table, LocalDateTime.now(), products);
+        //this.order = new Order(this.table, LocalDateTime.now(), products);
     }
 
     @Test

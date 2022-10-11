@@ -26,6 +26,7 @@ public class StaffServiceTest {
         staffRepository = mock(StaffRepository.class);
         areaRepository = mock(AreaRepository.class);
         staffService = new StaffService(staffRepository,areaRepository);
+
         when(staffRepository.getById(1L)).thenReturn(staff);
         when(staffRepository.existsById(1L)).thenReturn(true);
 
@@ -33,7 +34,13 @@ public class StaffServiceTest {
 
     @Test
     void getStaff(){
-        assertEquals(staff,staffService.getStaff(1L));
+        StaffData staffData = staffService.getStaff(1L);
+        //assertEquals(1L,staff2.getId());
+        assertEquals(staff.getOperations(),staffData.operations);
+        assertEquals(staff.getAreas(),staffData.area);
+        assertEquals(staff.getName(),staffData.name);
+        assertThrows(ItemNotFound.class, ()-> staffService.getStaff(4L));
+
     }
 
     @Test
@@ -46,10 +53,7 @@ public class StaffServiceTest {
         assertEquals(123,staffData.password);
     }
 
-    @Test
-    void staffExists(){
-        assertThrows(ItemNotFound.class, ()-> staffService.getStaff(4L));
-    }
+
 
 //    @Test
 //    void addAreaToStaff(){

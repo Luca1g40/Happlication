@@ -8,6 +8,7 @@ import java.util.List;
 public class ProductRequest {
     public Long id;
     public String name;
+    public Integer amount;
     public ProductCategory productCategory;
     public double price;
     public List<Ingredient> ingredients;

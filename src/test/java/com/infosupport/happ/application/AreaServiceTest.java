@@ -69,7 +69,6 @@ public class AreaServiceTest {
 
         assertEquals(1, areaData.staffWithoutAreasList.size());
         assertThrows(ItemNotFound.class, ()-> areaService.addStaffToArea(1L, 4L));
-
     }
 
     @Test

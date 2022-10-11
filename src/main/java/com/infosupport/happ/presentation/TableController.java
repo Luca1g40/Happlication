@@ -1,6 +1,7 @@
 package com.infosupport.happ.presentation;
 
 import com.infosupport.happ.application.TableService;
+import com.infosupport.happ.application.dto.ShoppingCartData;
 import com.infosupport.happ.application.dto.TableData;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import com.infosupport.happ.presentation.dto.ProductRequest;
@@ -50,7 +51,7 @@ public class TableController {
     @PostMapping("/table/{id}/shoppingcart")
     public TableData addToShoppingCart(@PathVariable Long id, @RequestBody ProductRequest productRequest){
         try{
-            return tableService.addToShoppingCart(id,productRequest.id);
+            return tableService.addToShoppingCart(id,productRequest.id, productRequest.amount);
         }catch(ItemNotFound itemNotFound){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, itemNotFound.getMessage());
         }catch (Exception exception){
@@ -66,6 +67,15 @@ public class TableController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, itemNotFound.getMessage());
         }catch (Exception exception){
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
+        }
+    }
+
+    @GetMapping("/table/{id}/shoppingcart")
+    public ShoppingCartData getTableShoppingCart(@PathVariable Long id){
+        try{
+            return tableService.getTableShoppingCart(id);
+        }catch (ItemNotFound itemNotFound){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, itemNotFound.getMessage());
         }
     }
 

@@ -22,15 +22,15 @@ public class OrderService {
         this.orderRepository = orderRepository;
     }
 
-    public OrderData createOrder(Long tableId, List<Product> productList) {
-
-        Table table = this.orderAssistant.getTable(tableId);
-        Order order = new Order(table, LocalDateTime.now(), productList);
-
-        this.orderRepository.save(order);
-
-        return createOrderData(order);
-    }
+//    public OrderData createOrder(Long tableId, List<Product> productList) {
+//
+//        Table table = this.orderAssistant.getTable(tableId);
+//        Order order = new Order(table, LocalDateTime.now(), productList);
+//
+//        this.orderRepository.save(order);
+//
+//        return createOrderData(order);
+//    }
 
     public OrderData claimOrder(Long staffId, Long orderId) {
 

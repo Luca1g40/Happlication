@@ -58,6 +58,8 @@ public class ProductServiceTest {
     void switchPrepStatus(){
         ProductData productData = productService.switchProductPrepStatus(1L);
         assertTrue(productData.isReady);
+        assertThrows(ItemNotFound.class, ()-> productService.switchProductPrepStatus(10L));
+
     }
 
     @Test
@@ -68,6 +70,8 @@ public class ProductServiceTest {
         assertEquals("T-bone steak",productData.name);
         assertEquals(0,productData.ingredientList.size());
         assertEquals(ProductCategory.MAIN_COURSE,productData.productCategory);
+        assertThrows(ItemNotFound.class, ()-> productService.updateProduct("T-bone steak",ProductCategory.MAIN_COURSE,199.99,10L,new ArrayList<>()));
+
     }
 
     @Test
@@ -75,9 +79,5 @@ public class ProductServiceTest {
         assertEquals(this.product, productService.getProduct(1L));
     }
 
-    @Test
-    void ProductDoesNotExist(){
-        assertThrows(ItemNotFound.class, ()-> productService.getProduct(10L));
-    }
 }
 

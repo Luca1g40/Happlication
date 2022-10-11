@@ -21,9 +21,10 @@ public class StaffService {
         this.areaRepository = areaRepository;
     }
 
-    public Staff getStaff(Long id) {
+    public StaffData getStaff(Long id) {
         staffExists(id);
-        return staffRepository.getById(id);
+        Staff staff = staffRepository.getById(id);
+        return createStaffData(staff);
     }
 
     public StaffData createStaff(int password, String name) {
@@ -32,13 +33,13 @@ public class StaffService {
         return createStaffData(staff);
     }
 
-    public StaffData addAreaToStaff(Long areaId, Long staffId) {
-        staffExists(staffId);
-        Staff staff = staffRepository.getById(staffId);
-        Area area = areaRepository.getById(areaId);
-        staff.addArea(area);
-        return createStaffData(staff);
-    }
+//    public StaffData addAreaToStaff(Long areaId, Long staffId) {
+//        staffExists(staffId);
+//        Staff staff = staffRepository.getById(staffId);
+//        Area area = areaRepository.getById(areaId);
+//        staff.addArea(area);
+//        return createStaffData(staff);
+//    }
 
 
     public StaffData createStaffData(Staff staff) {

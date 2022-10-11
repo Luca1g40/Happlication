@@ -29,21 +29,21 @@ public class TableTest {
         table = new Table(new ArrayList<>(), LocalTime.now(), LocalTime.now(),5,1,OCCUPIED,shoppingCart);
     }
 
-    @Test
-    @DisplayName("ShoppingCart is cleared when placing a new order")
-    void placeOrder(){
-        shoppingCart.addToShoppingCart(product);
-        table.placeOrder();
-        assertEquals(0,table.getShoppingCart().getProducts().size());
-    }
+//    @Test
+//    @DisplayName("ShoppingCart is cleared when placing a new order")
+//    void placeOrder(){
+//        shoppingCart.addToShoppingCart(product);
+//        table.placeOrder();
+//        assertEquals(0,table.getShoppingCart().getProducts().size());
+//    }
 
-    @Test
-    @DisplayName("Correct products are placed in the order after placing the order.")
-    void correctProductsInOrder(){
-        table.addToShoppingCart(product2);
-        table.placeOrder();
-
-        assertEquals(table.getLastOrder().getProducts(), List.of(product2));
-
-    }
+//    @Test
+//    @DisplayName("Correct products are placed in the order after placing the order.")
+//    void correctProductsInOrder(){
+//        table.addToShoppingCart(product2);
+//        table.placeOrder();
+//
+//        assertEquals(table.getLastOrder().getProducts(), List.of(product2));
+//
+//    }
 }

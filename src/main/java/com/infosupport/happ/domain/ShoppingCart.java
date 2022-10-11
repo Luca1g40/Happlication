@@ -3,6 +3,8 @@ package com.infosupport.happ.domain;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashMap;
+
 
 @Entity
 public class ShoppingCart {
@@ -10,9 +12,11 @@ public class ShoppingCart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @OneToMany
     private List<Product> products;
 
+    //HashMap<String, String> capitalCities = new HashMap<String, String>();
     public ShoppingCart() {
         this.products = new ArrayList<>();
     }
@@ -30,6 +34,9 @@ public class ShoppingCart {
     }
 
     public void addToShoppingCart(Product product){
+//        if (products.containsKey(product)){
+//            products.replace(product, products.get(product)+amount);
+//        }else products.put(product,amount);
         products.add(product);
     }
 
