@@ -3,7 +3,6 @@ package com.infosupport.happ.domain;
 import com.infosupport.happ.domain.exceptions.AttributeMustBeBiggerThanZero;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -68,7 +67,7 @@ public class Table {
         return tableStatus;
     }
 
-    private void addToOrders(Order order){
+    private void addToOrders(Order order) {
         orders.add(order);
     }
 
@@ -108,8 +107,8 @@ public class Table {
         shoppingCart.clearShoppingCart();
     }
 
-    public Order getLastOrder(){
-        return orders.get(orders.size()-1);
+    public Order getLastOrder() {
+        return orders.get(orders.size() - 1);
     }
 
 

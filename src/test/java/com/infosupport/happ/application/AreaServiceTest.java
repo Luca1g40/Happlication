@@ -14,7 +14,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @SpringBootTest
 public class AreaServiceTest {
@@ -24,7 +25,7 @@ public class AreaServiceTest {
     private StaffRepository staffRepository;
 
     @BeforeEach
-    void beforeEach(){
+    void beforeEach() {
         this.areaRepository = mock(AreaRepository.class);
         this.staffRepository = mock(StaffRepository.class);
         this.areaService = new AreaService(areaRepository, staffRepository);
@@ -42,19 +43,19 @@ public class AreaServiceTest {
 
     @Test
     @DisplayName("Area can be created")
-    void createArea(){
+    void createArea() {
 
         AreaData areaData = areaService.createArea("Nieuw area");
 
         assertNotNull(areaData);
 
-        assertEquals( "Nieuw area", areaData.name);
+        assertEquals("Nieuw area", areaData.name);
 
     }
 
     @Test
     @DisplayName("Get the correct area")
-    void getArea(){
+    void getArea() {
 
         AreaData area = areaService.getArea(2L);
         assertEquals("Nieuwe area", area.name);
@@ -63,17 +64,18 @@ public class AreaServiceTest {
 
     @Test
     @DisplayName("Add staff to area")
-    void addStaff(){
+    void addStaff() {
 
         AreaData areaData = areaService.addStaffToArea(1L, 2L);
 
         assertEquals(1, areaData.staffWithoutAreasList.size());
-        assertThrows(ItemNotFound.class, ()-> areaService.addStaffToArea(1L, 4L));
+        assertThrows(ItemNotFound.class, () -> areaService.addStaffToArea(1L, 4L));
+
     }
 
     @Test
     @DisplayName("Edit staff of area")
-    void editAreaStaff(){
+    void editAreaStaff() {
         Staff otherStaff = new Staff(1, "Other staff");
 
 
@@ -81,26 +83,28 @@ public class AreaServiceTest {
         AreaData areaData = areaService.editStaffListInArea(2L, List.of(otherStaff));
 
         assertEquals("Other staff", areaData.staffWithoutAreasList.get(0).name);
-        assertThrows(ItemNotFound.class, ()-> areaService.editStaffListInArea(4L, List.of(otherStaff)));
+        assertThrows(ItemNotFound.class, () -> areaService.editStaffListInArea(4L, List.of(otherStaff)));
 
     }
 
     @Test
     @DisplayName("delete staff of area")
-    void deleteAreaStaff(){
+    void deleteAreaStaff() {
 
         areaService.addStaffToArea(1L, 2L);
         AreaData areaData = areaService.deleteStaffFromArea(1L, 2L);
 
         assertEquals(0, areaData.staffWithoutAreasList.size());
-        assertThrows(ItemNotFound.class, ()-> areaService.deleteStaffFromArea(1L, 4L));
+        assertThrows(ItemNotFound.class, () -> areaService.deleteStaffFromArea(1L, 4L));
 
     }
 
     @Test
     @DisplayName("Area does not exist")
-    void areaDoesNotExist(){
-        assertThrows(ItemNotFound.class, ()-> areaService.getArea(4L));
+    void areaDoesNotExist() {
+
+        assertThrows(ItemNotFound.class, () -> areaService.getArea(4L));
+
     }
 
 }

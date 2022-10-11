@@ -1,0 +1,44 @@
+.lijst {
+    font-family: Arial, Helvetica, sans-serif;
+
+    display: block;
+    background-color: rgb(255, 255, 255);
+    justify-content: center;
+    margin-bottom: 50%;
+    padding: 100px;
+    width: 57%;
+    height: 50%;
+    border-radius: 10px;
+}
+
+.drankenlijst {
+    position: fixed;
+    width: 50%;
+    height: 68%;
+    top: 10%;
+    left: 25%;
+
+}
+
+.drinksContainer {
+    position: relative;
+    height: 750px;
+    width: 1000px;
+    margin: auto;
+
+    box-shadow: rgba(0, 0, 0, 0.19)
+    0 10px 20px, rgba(0, 0, 0, 0.23)
+    0 6px 6px;
+}
+
+.terug {
+    margin-left: 3%;
+    margin-top: 2%;
+}
+
+.drinksToFood {
+    right: 0;
+    position: absolute;
+    margin: 2% 3% auto auto;
+}
+

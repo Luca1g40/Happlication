@@ -1,6 +1,5 @@
 package com.infosupport.happ.application;
 
-import com.infosupport.happ.application.dto.AreaData;
 import com.infosupport.happ.application.dto.StaffData;
 import com.infosupport.happ.data.AreaRepository;
 import com.infosupport.happ.data.StaffRepository;
@@ -8,8 +7,6 @@ import com.infosupport.happ.domain.Area;
 import com.infosupport.happ.domain.Staff;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 
 @Service
 public class StaffService {

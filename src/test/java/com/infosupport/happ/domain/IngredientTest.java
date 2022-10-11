@@ -6,7 +6,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class IngredientTest {
 
@@ -19,7 +20,7 @@ public class IngredientTest {
 
     @Test
     @DisplayName("change amount of ingredient")
-    void changeAmount(){
+    void changeAmount() {
         ingredient.increaseAmount(1);
         assertEquals(3, ingredient.getAmount());
 
@@ -29,13 +30,13 @@ public class IngredientTest {
 
     @Test
     @DisplayName("NotEnoughIngredientsException is thrown")
-    void decreaseToMinus(){
+    void decreaseToMinus() {
         assertThrows(NotEnoughIngredientsException.class, () -> ingredient.decreaseAmount(5));
     }
 
     @Test
     @DisplayName("Update ingredient")
-    void updateIngredient(){
+    void updateIngredient() {
         assertEquals(ingredient.getName(), "Kaas");
         ingredient.updateIngredient("Worst", 4);
         assertEquals(ingredient.getName(), "Worst");
@@ -43,7 +44,7 @@ public class IngredientTest {
 
     @Test
     @DisplayName("Update ingredient with negative")
-    void updateIngredientWithNegative(){
+    void updateIngredientWithNegative() {
         assertThrows(AttributeMustBeBiggerThanZero.class, () -> ingredient.updateIngredient("Worst", -4));
     }
 }

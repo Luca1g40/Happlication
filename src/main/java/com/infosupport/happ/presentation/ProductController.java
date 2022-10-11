@@ -2,11 +2,14 @@ package com.infosupport.happ.presentation;
 
 import com.infosupport.happ.application.ProductService;
 import com.infosupport.happ.application.dto.ProductData;
+import com.infosupport.happ.domain.Product;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import com.infosupport.happ.presentation.dto.ProductRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/happ")
@@ -29,6 +32,35 @@ public final class ProductController {
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @GetMapping("/product/{id}")
+    private ProductData getById(@PathVariable Long id) {
+        try {
+            return productService.createProductData(productService.getProduct(id));
+        } catch (ItemNotFound itemNotFound) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, itemNotFound.getMessage());
+        } catch (Exception exception) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, exception.getMessage());
+        }
+    }
+
+    @GetMapping("/product/findall")
+    @CrossOrigin
+    private List<Product> findAll() {
+        return productService.findAll();
+    }
+
+    @GetMapping("/product/drinks")
+    @CrossOrigin
+    private List<Product> findAllDrinks() {
+        return productService.findAllDrinks();
+    }
+
+    @GetMapping("/product/food")
+    @CrossOrigin
+    private List<Product> findAllFood() {
+        return productService.findAllFood();
     }
 
     @PutMapping("/product/{productid}/prepstatus")
