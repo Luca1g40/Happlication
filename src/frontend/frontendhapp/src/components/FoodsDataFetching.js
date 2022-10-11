@@ -22,11 +22,12 @@ function FoodsDataFetching() {
     return (
         <div className={"listDiv"}>
             <ul className={"list"}>
-                <h1>Voorgerechten</h1>
+                <h1>Gerechten</h1>
                 {
-                    products.map(product =>
+
+                    products.map((product, i) =>
                         <div className="listItemDiv">
-                            <li key={product.id} className={"listItem"} onClick={() => {
+                            <li key={product.id} className={"listItem"}  onClick={() => {
                                 setButtonPopup(true);
                             }}>
                                 <Popup trigger={buttonPopup}
@@ -35,7 +36,8 @@ function FoodsDataFetching() {
                                 <span>€</span>
                                 <span className={"productSpanPrice"}> {product.price}.-</span>
                             </li>
-                        </div>
+                        </div>,
+
                     )
                 }
             </ul>

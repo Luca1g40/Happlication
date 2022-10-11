@@ -15,7 +15,10 @@
 
 .list {
     text-align: center;
+}
 
+.list::-webkit-scrollbar {
+    display: none;
 }
 
 .productSpanPrice {
@@ -43,9 +46,7 @@
     display: flex;
 }
 
-.listItemDiv :hover {
-    background-color: rgba(227, 167, 104, 0.19);
-}
+
 
 ul {
     padding: 0;
@@ -55,3 +56,4 @@ ul {
     position: absolute;
     height: 80%;
 }
+
