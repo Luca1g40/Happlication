@@ -43,7 +43,7 @@ public class TableServiceTest {
         this.productStarter = new Product("kip",  new ArrayList<>(), STARTER, 12.50);
         this.productMain = new Product("vis",  new ArrayList<>(), MAIN_COURSE, 7.50);
 
-        this.table = new Table(new ArrayList<>(), LocalTime.now(), LocalTime.parse("02:00:00"),
+        this.table = new Table(LocalTime.now(), LocalTime.parse("02:00:00"),
                 4, 3, TableStatus.OCCUPIED, new ShoppingCart());
 
         when(tableRepository.existsById(1L)).thenReturn(true);

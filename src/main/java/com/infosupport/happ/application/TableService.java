@@ -8,6 +8,7 @@ import com.infosupport.happ.domain.*;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +26,12 @@ public class TableService {
     }
 
     public TableData createTable(int amountOfPeople, int tableNr, TableStatus tableStatus) {
-        Table table = tableRepository.save(new Table(new ArrayList<>(), LocalTime.of(0, 0, 0),
-                LocalTime.of(2, 0, 0), amountOfPeople, tableNr, tableStatus, new ShoppingCart()));
+        LocalTime elapsedTime = LocalTime.of(0, 0, 0);
+        LocalTime timeLeftToOrder = LocalTime.of(2, 0, 0);
+
+        Table table = tableRepository.save(new Table(elapsedTime, timeLeftToOrder, amountOfPeople,
+                tableNr, tableStatus, new ShoppingCart()));
+
         return createTableData(table);
     }
 

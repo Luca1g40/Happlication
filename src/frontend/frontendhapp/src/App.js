@@ -5,6 +5,7 @@ import Drinks from "./pages/Drinks";
 import Foods from "./pages/Foods";
 import Home from "./pages/Home";
 import "./styles/Home.css"
+import AllOrders from "./pages/AllOrders";
 
 function App() {
     return (
@@ -12,7 +13,7 @@ function App() {
             <Route path="/" element={<Home/>}/>
             <Route path="Drinks" element={<Drinks/>}/>
             <Route path="Foods" element={<Foods/>}/>
-            <Route path="test" element={<test/>}/>
+            <Route path="allorders" element={<AllOrders/>}/>
 
         </Routes>
     )
