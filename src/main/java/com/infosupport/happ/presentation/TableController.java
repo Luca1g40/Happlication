@@ -1,6 +1,7 @@
 package com.infosupport.happ.presentation;
 
 import com.infosupport.happ.application.TableService;
+import com.infosupport.happ.application.dto.StaffWithoutAreasData;
 import com.infosupport.happ.application.dto.TableData;
 import com.infosupport.happ.domain.Staff;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
@@ -57,10 +58,9 @@ public class TableController {
         this.tableService.deleteTable(tableId);
     }
 
-    @PostMapping("/table/{id}/callober")
-    private List<Staff> callOber(@PathVariable Long id) {
+    @GetMapping("/table/{id}/callober")
+    private List<StaffWithoutAreasData> callOber(@PathVariable Long id) {
         return this.tableService.callOber(id);
     }
-
 
 }

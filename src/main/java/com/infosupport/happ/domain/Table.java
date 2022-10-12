@@ -3,11 +3,9 @@ package com.infosupport.happ.domain;
 import com.infosupport.happ.domain.exceptions.AttributeMustBeBiggerThanZero;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-
 @Entity(name = "tafel")
 public class Table {
 
@@ -48,6 +46,7 @@ public class Table {
     public int getTableNumber() {
         return tableNumber;
     }
+
 
     public LocalTime getElapsedTimeSinceOrder() {
         return elapsedTimeSinceOrder;
@@ -94,8 +93,13 @@ public class Table {
         shoppingCart.clearShoppingCart();
     }
 
+    //todo --> kijken naar de return
     public Order getLastOrder(){
-        return orders.get(orders.size()-1);
+        if (orders.isEmpty()){
+            return null;
+        }else{
+            return orders.get(orders.size()-1);
+        }
     }
 
 

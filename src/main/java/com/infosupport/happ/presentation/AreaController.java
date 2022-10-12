@@ -32,7 +32,7 @@ public class AreaController {
     }
 
     @PostMapping("/staff/{staffid}/area")
-    public AreaData adding_staff_to_area(@PathVariable("staffid") Long staffId, @RequestBody AreaRequest areaRequest) {
+    public AreaData addStaffToArea(@PathVariable("staffid") Long staffId, @RequestBody AreaRequest areaRequest) {
         try {
             return this.areaService.addStaffToArea(staffId, areaRequest.id);
         } catch (ItemNotFound e) {
@@ -42,8 +42,20 @@ public class AreaController {
         }
     }
 
+    @PostMapping("/table/{tableid}/area")
+    public AreaData addTableToArea(@PathVariable("tableid") Long tableId, @RequestBody AreaRequest areaRequest) {
+        try {
+            return this.areaService.addTableToArea(tableId, areaRequest.id);
+        }catch (ItemNotFound e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
     @DeleteMapping("/staff/{staffid}/area")
-    public AreaData deleting_staff_from_area(@PathVariable("staffid") Long staffId, @RequestBody AreaRequest areaRequest) {
+    public AreaData deleteStaffFromArea(@PathVariable("staffid") Long staffId, @RequestBody AreaRequest areaRequest) {
         try {
             return this.areaService.deleteStaffFromArea(staffId, areaRequest.id);
         } catch (ItemNotFound e) {
@@ -53,7 +65,7 @@ public class AreaController {
         }
     }
 
-    @DeleteMapping("/staff/{id}")
+    @DeleteMapping("/area/{id}")
     public void deleteArea(@PathVariable("id") Long id) {
         try {
             this.areaService.deleteArea(id);
@@ -65,8 +77,8 @@ public class AreaController {
     }
 
     @PutMapping("/staff/{areaid}/area")
-    public AreaData edit_staff_in_area(@PathVariable Long areaid, AreaRequest areaRequest) {
-        return areaService.editStaffListInArea(areaid, areaRequest.staffList);
+    public AreaData editStaffInArea(@PathVariable Long areaid, AreaRequest areaRequest) {
+        return areaService.editStaffListInArea(areaid, areaRequest.staffIdList);
     }
 
 
