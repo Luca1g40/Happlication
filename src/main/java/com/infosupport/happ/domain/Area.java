@@ -1,5 +1,8 @@
 package com.infosupport.happ.domain;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +15,7 @@ public class Area {
     private Long id;
 
     private String name;
+
     @OneToMany
     private List<Table> tables;
 
@@ -30,6 +34,7 @@ public class Area {
 
     public Area() {
     }
+
 
     public Long getId() {
         return id;
@@ -61,5 +66,9 @@ public class Area {
 
     public void addTable(Table table) {
         this.tables.add(table);
+    }
+
+    public void deleteTable(Table table) {
+        this.tables.remove(table);
     }
 }

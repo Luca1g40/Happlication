@@ -53,6 +53,17 @@ public class AreaController {
         }
     }
 
+    @DeleteMapping("/table/{tableid}/area")
+    public AreaData deleteTableFromArea(@PathVariable("tableid") Long tableId, @RequestBody AreaRequest areaRequest) {
+        try {
+            return this.areaService.deleteTableFromArea(tableId, areaRequest.id);
+        } catch (ItemNotFound e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 
     @DeleteMapping("/staff/{staffid}/area")
     public AreaData deleteStaffFromArea(@PathVariable("staffid") Long staffId, @RequestBody AreaRequest areaRequest) {

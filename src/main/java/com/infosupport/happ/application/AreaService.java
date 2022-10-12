@@ -64,6 +64,17 @@ public class AreaService {
         return createAreaData(area);
     }
 
+    public AreaData deleteTableFromArea(Long tabelId, Long areaId) {
+        areaExists(areaId);
+        Area area = areaRepository.getById(areaId);
+        Table table = tableRepository.getById(tabelId);
+        area.deleteTable(table);
+        areaRepository.save(area);
+        return createAreaData(area);
+    }
+
+
+
     public AreaData deleteStaffFromArea(Long staffId, Long areaId) {
         areaExists(areaId);
         Staff staff = staffRepository.getById(staffId);
