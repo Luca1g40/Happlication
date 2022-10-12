@@ -6,10 +6,6 @@ export default function ItemRegel({product}){
     const [buttonPopup, setButtonPopup] = useState(false)
     const [item,setItem] = useState();
 
-    ItemRegel.addEventListener('sluiten', (e) => {
-        setButtonPopup(false);
-    }, false);
-
     return(
         <div className="listItemDiv">
             <li key={product.id} className={"listItem"}  onClick={() => {
