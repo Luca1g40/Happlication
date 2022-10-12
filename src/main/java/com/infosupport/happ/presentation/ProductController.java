@@ -46,19 +46,16 @@ public final class ProductController {
     }
 
     @GetMapping("/product/findall")
-    @CrossOrigin
     private List<Product> findAll() {
         return productService.findAll();
     }
 
     @GetMapping("/product/drinks")
-    @CrossOrigin
     private List<Product> findAllDrinks() {
         return productService.findAllDrinks();
     }
 
     @GetMapping("/product/food")
-    @CrossOrigin
     private List<Product> findAllFood() {
         return productService.findAllFood();
     }
