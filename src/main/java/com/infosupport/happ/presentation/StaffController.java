@@ -5,10 +5,13 @@ import com.infosupport.happ.application.StaffService;
 import com.infosupport.happ.application.dto.OrderData;
 import com.infosupport.happ.application.dto.StaffData;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
+import com.infosupport.happ.presentation.dto.OrderRequest;
 import com.infosupport.happ.presentation.dto.StaffRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.List;
 
 
 @RestController
@@ -28,6 +31,13 @@ public class StaffController {
     public OrderData claimOrder(@PathVariable("orderid") Long orderId, @RequestBody StaffRequest staffRequest) {
 
         return this.orderService.claimOrder(staffRequest.id, orderId);
+
+    }
+
+    @PostMapping("/staff/{staffid}/claim")
+    public List<OrderData> claimMultipleOrders(@PathVariable("staffid") Long staffId, @RequestBody OrderRequest orderRequest) {
+
+        return this.orderService.claimMultipleOrders(staffId, orderRequest.selectedOrders);
 
     }
 

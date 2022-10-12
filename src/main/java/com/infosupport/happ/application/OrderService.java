@@ -11,6 +11,7 @@ import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -47,6 +48,14 @@ public class OrderService {
         orderRepository.save(order);
 
         return this.createOrderData(order);
+    }
+
+    public List<OrderData> claimMultipleOrders(Long staffId, List<Long> orders) {
+        List<OrderData> dataOrders = new ArrayList<>();
+        for(Long orderId: orders){
+            dataOrders.add(claimOrder(staffId, orderId));
+        }
+        return dataOrders;
     }
 
     public OrderData getOrder(Long id) {
