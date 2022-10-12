@@ -1,5 +1,7 @@
 package com.infosupport.happ.domain;
 
+
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -57,10 +59,6 @@ public class Staff implements Serializable {
 
         this.claimedOrders.add(order);
 
-    }
-
-    public void addArea(Area area) {
-        this.areas.add(area);
     }
 
     public List<Order> getClaimedOrders() {
