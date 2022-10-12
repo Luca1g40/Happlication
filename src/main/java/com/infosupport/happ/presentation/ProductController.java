@@ -50,6 +50,16 @@ public final class ProductController {
         return productService.findAll();
     }
 
+    @GetMapping("/product/drinks")
+    private List<Product> findAllDrinks() {
+        return productService.findAllDrinks();
+    }
+
+    @GetMapping("/product/food")
+    private List<Product> findAllFood() {
+        return productService.findAllFood();
+    }
+
     @PutMapping("/product/{productid}/prepstatus")
     private ProductData changePrepStatus(@PathVariable("productid") Long productId) {
         try {

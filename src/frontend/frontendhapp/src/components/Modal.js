@@ -1,7 +1,7 @@
 import React, {useState} from "react";
-import "../Modal.css";
+import "../styles/Modal.css";
 
-export default function Modal(){
+export default function Modal() {
 
     const [modal, setModal] = useState(false);
 
@@ -20,10 +20,10 @@ export default function Modal(){
             {modal && (
 
 
-            <div className="modal">
-                <div
-                    onClick={toggleModal}
-                    className="overlay"></div>
+                <div className="modal">
+                    <div
+                        onClick={toggleModal}
+                        className="overlay"></div>
                     <div className="modal-content">
 
                         <p className="name">Sushi roll</p>
@@ -32,16 +32,17 @@ export default function Modal(){
                         <p className="amount">1</p>.
                         <br/>
                         <p className="description"> Sushi roll me komkommer
-                        en tonijn.</p>
+                            en tonijn.</p>
                         <br/>
                         <br/>
-                        <img className="foto" src="../images/foto.JPG" alt=""></img>
+                        <img className="foto" src="../../../src/images/foto.JPG" alt=""></img>
                         <button
-                        className='close-modal'
-                        onClick={toggleModal}>bestellen</button>
+                            className='close-modal'
+                            onClick={toggleModal}>bestellen
+                        </button>
 
                     </div>
-            </div>
+                </div>
             )}
         </>
     );

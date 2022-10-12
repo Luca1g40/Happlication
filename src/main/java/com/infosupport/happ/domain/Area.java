@@ -1,7 +1,6 @@
 package com.infosupport.happ.domain;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 

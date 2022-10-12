@@ -1,7 +1,6 @@
 package com.infosupport.happ.application;
 
 import com.infosupport.happ.application.dto.OrderData;
-import com.infosupport.happ.application.dto.StaffData;
 import com.infosupport.happ.data.OrderAssistant;
 import com.infosupport.happ.data.OrderRepository;
 import com.infosupport.happ.domain.*;
@@ -19,7 +18,6 @@ import java.util.List;
 import static com.infosupport.happ.domain.PreperationStatus.CLAIMED;
 import static com.infosupport.happ.domain.PreperationStatus.UNCLAIMED;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -67,14 +65,14 @@ public class OrderServiceTest {
 
     @Test
     @DisplayName("Get an order")
-    void getOrder(){
+    void getOrder() {
 
 
         OrderData orderData = orderService.getOrder(1L);
 
         assertNotNull(orderData);
 
-        assertThrows(ItemNotFound.class, ()-> orderService.getOrder(4L));
+        assertThrows(ItemNotFound.class, () -> orderService.getOrder(4L));
 
     }
 
@@ -82,9 +80,9 @@ public class OrderServiceTest {
     @DisplayName("Ordered products are split in food and drinks")
     void orderSplitFoodDrinks() {
 
-        Product drinkProduct = new Product("cola", new ArrayList<>() , ProductCategory.DRINKS,5);
-        Product foodProduct = new Product("Sushi Roll", new ArrayList<>() , ProductCategory.MAIN_COURSE,5);
-        Product foodProduct2 = new Product("Soup", new ArrayList<>() , ProductCategory.STARTER,5);
+        Product drinkProduct = new Product("cola", new ArrayList<>(), ProductCategory.DRINKS, 5);
+        Product foodProduct = new Product("Sushi Roll", new ArrayList<>(), ProductCategory.MAIN_COURSE, 5);
+        Product foodProduct2 = new Product("Soup", new ArrayList<>(), ProductCategory.STARTER, 5);
         List products = List.of(drinkProduct, foodProduct, foodProduct2);
 
 
@@ -96,7 +94,7 @@ public class OrderServiceTest {
 
     @Test
     @DisplayName("Staff can claim an order")
-    void claimOrder(){
+    void claimOrder() {
 
         Product product = new Product();
 

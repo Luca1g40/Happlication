@@ -42,7 +42,7 @@ public class AreaService {
         this.areaRepository.deleteById(id);
     }
 
-    public AreaData addStaffToArea(Long staffId, Long areaId){
+    public AreaData addStaffToArea(Long staffId, Long areaId) {
         areaExists(areaId);
         Staff staff = staffRepository.getById(staffId);
         Area area = areaRepository.getById(areaId);
@@ -93,7 +93,7 @@ public class AreaService {
 
     public List<StaffWithoutAreasData> createStaffWithoutArea(Area area) {
         List<StaffWithoutAreasData> staffWithoutAreasList = new ArrayList<>();
-        if(area.getStaffList() != null) {
+        if (area.getStaffList() != null) {
             for (Staff staff : area.getStaffList()) {
                 staffWithoutAreasList.add(new StaffWithoutAreasData(
                         staff.getId(),

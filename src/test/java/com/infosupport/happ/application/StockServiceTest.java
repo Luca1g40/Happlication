@@ -28,7 +28,7 @@ public class StockServiceTest {
     private Ingredient ingredient;
 
     @BeforeEach
-    void beforeEach(){
+    void beforeEach() {
         this.stockRepository = mock(StockRepository.class);
         this.ingredientRepository = mock(IngredientRepository.class);
         this.stockService = new StockService(stockRepository, ingredientRepository);
@@ -44,18 +44,18 @@ public class StockServiceTest {
 
     @Test
     @DisplayName("Add new ingredient to stock")
-    void addIngredientsToStock(){
+    void addIngredientsToStock() {
 
-        StockData stockData = stockService.addNewIngredientToStock(1L,  "Kip", 1);
+        StockData stockData = stockService.addNewIngredientToStock(1L, "Kip", 1);
 
         assertEquals(1, stockData.ingredients.size());
-        assertThrows(ItemNotFound.class, ()-> stockService.addNewIngredientToStock(4L, "Error", 1));
+        assertThrows(ItemNotFound.class, () -> stockService.addNewIngredientToStock(4L, "Error", 1));
 
     }
 
     @Test
     @DisplayName("Create new stock")
-    void createStock(){
+    void createStock() {
 
         StockData stockData = stockService.createStock();
 
@@ -66,40 +66,40 @@ public class StockServiceTest {
 
     @Test
     @DisplayName("Get stock")
-    void getStock(){
+    void getStock() {
 
         StockData stockData = stockService.getStock(1L);
 
         assertNotNull(stockData);
         assertEquals(0, stockData.ingredients.size());
-        assertThrows(ItemNotFound.class, ()-> stockService.getStock(4L));
+        assertThrows(ItemNotFound.class, () -> stockService.getStock(4L));
 
 
     }
 
     @Test
     @DisplayName("Delete ingredients from stock")
-    void deleteIngredient(){
+    void deleteIngredient() {
 
-        StockData stockData = stockService.addNewIngredientToStock(1L,  "Kip", 1);
+        StockData stockData = stockService.addNewIngredientToStock(1L, "Kip", 1);
 
         assertEquals(1, stockData.ingredients.size());
 
         stockData = stockService.removeIngredientFromStock(1L, 1L);
 
         assertEquals(0, stockData.ingredients.size());
-        assertThrows(ItemNotFound.class, ()-> stockService.removeIngredientFromStock(4L, 1L));
+        assertThrows(ItemNotFound.class, () -> stockService.removeIngredientFromStock(4L, 1L));
 
 
     }
 
     @Test
     @DisplayName("update ingredients in stock")
-    void updateIngredients(){
+    void updateIngredients() {
 
         Ingredient updateIngredient = new Ingredient("Vis", 1);
 
-        stockService.addNewIngredientToStock(1L,  "Kip", 1);
+        stockService.addNewIngredientToStock(1L, "Kip", 1);
 
         Ingredient updateIngredient2 = new Ingredient("Kip", 5);
 
@@ -108,7 +108,7 @@ public class StockServiceTest {
 
         assertEquals("Vis", stockData.ingredients.get(0).getName());
         assertEquals(5, stockData.ingredients.get(1).getAmount());
-        assertThrows(ItemNotFound.class, ()-> stockService.updateStock(4L, List.of(updateIngredient, updateIngredient2)));
+        assertThrows(ItemNotFound.class, () -> stockService.updateStock(4L, List.of(updateIngredient, updateIngredient2)));
 
 
     }

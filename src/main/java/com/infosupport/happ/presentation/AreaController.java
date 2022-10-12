@@ -23,8 +23,8 @@ public class AreaController {
     }
 
     @GetMapping("/area/{id}")
-    public AreaData getArea(@PathVariable Long id){
-        try{
+    public AreaData getArea(@PathVariable Long id) {
+        try {
             return this.areaService.getArea(id);
         } catch (ItemNotFound e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
@@ -32,7 +32,7 @@ public class AreaController {
     }
 
     @PostMapping("/staff/{staffid}/area")
-    public AreaData adding_staff_to_area(@PathVariable("staffid") Long staffId, @RequestBody AreaRequest areaRequest){
+    public AreaData adding_staff_to_area(@PathVariable("staffid") Long staffId, @RequestBody AreaRequest areaRequest) {
         try {
             return this.areaService.addStaffToArea(staffId, areaRequest.id);
         } catch (ItemNotFound e) {
@@ -44,7 +44,7 @@ public class AreaController {
 
     @DeleteMapping("/staff/{staffid}/area")
     public AreaData deleting_staff_from_area(@PathVariable("staffid") Long staffId, @RequestBody AreaRequest areaRequest) {
-        try{
+        try {
             return this.areaService.deleteStaffFromArea(staffId, areaRequest.id);
         } catch (ItemNotFound e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());

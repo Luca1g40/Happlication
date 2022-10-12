@@ -38,9 +38,9 @@ public class Stock {
         this.ingredients = ingredients;
     }
 
-    public void removeIngredients(Ingredient ingredient){
-        for (int i = 0; i < ingredients.size(); i++){
-            if (Objects.equals(ingredients.get(i).getName(), ingredient.getName())){
+    public void removeIngredients(Ingredient ingredient) {
+        for (int i = 0; i < ingredients.size(); i++) {
+            if (Objects.equals(ingredients.get(i).getName(), ingredient.getName())) {
                 ingredients.remove(i);
                 break;
             }
