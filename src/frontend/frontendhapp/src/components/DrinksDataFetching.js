@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import Popup from "./Popup";
+import ItemRegel from "./itemRegel";
 
 
 function DrinksDataFetching() {
@@ -18,23 +19,29 @@ function DrinksDataFetching() {
             })
     }, [])
 
+    var i = 0;
+
     return (
         <div className={"listDiv"}>
             <ul className={"list"}>
-                <h1>Fris dranken</h1>
+                <h1>Frisdranken</h1>
                 {
-                    products.map(product =>
-                        <div className="listItemDiv">
-                            <li key={product.id} className={"listItem"} onClick={() => {
-                                setButtonPopup(true);
-                            }}>
-                                <Popup trigger={buttonPopup}
-                                       setTrigger={setButtonPopup}> {product.name} {product.price} </Popup>
-                                <span className={"productSpan"}> {product.name}</span>
-                                <span>€</span>
-                                <span className={"productSpanPrice"}> {product.price}.-</span>
-                            </li>
-                        </div>
+
+                    products.map((product, i) =>
+                        // <div className="listItemDiv">
+                        //     <li key={product.id} className={"listItem"}  onClick={() => {
+                        //         setButtonPopup(true);
+                        //     }}>
+                        //         <Popup trigger={buttonPopup}
+                        //                setTrigger={setButtonPopup}> {product.name} {product.price} </Popup>
+                        //         <span className={"productSpan"}> {product.name}</span>
+                        //         <span>€</span>
+                        //         <span className={"productSpanPrice"}> {product.price}.-</span>
+                        //     </li>
+                        // </div>
+                        <ItemRegel product={product} />
+
+
                     )
                 }
             </ul>
