@@ -2,6 +2,7 @@ package com.infosupport.happ.domain;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.HashMap;
 
@@ -13,15 +14,18 @@ public class ShoppingCart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.MERGE)
     private List<Product> products;
 
-    //HashMap<String, String> capitalCities = new HashMap<String, String>();
     public ShoppingCart() {
         this.products = new ArrayList<>();
     }
 
     public void editShoppingCart(List<Product> products) {
+        setProducts(products);
+    }
+
+    public void setProducts(List<Product> products) {
         this.products = products;
     }
 

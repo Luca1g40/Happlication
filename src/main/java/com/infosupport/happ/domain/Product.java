@@ -22,12 +22,24 @@ public class Product {
 
     private boolean isReady;
 
-    public Product(String name, List<Ingredient> ingredients, ProductCategory productCategory, double price) {
+    private String details;
+
+    public Product(String name, List<Ingredient> ingredients, ProductCategory productCategory, double price, String details) {
         this.name = name;
         this.ingredients = ingredients;
         this.productCategory = productCategory;
         this.price = price;
         this.isReady = false;
+        this.details = details;
+
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
     }
 
     public List<Ingredient> getIngredients() {

@@ -4,6 +4,7 @@ package com.infosupport.happ.application;
 import com.infosupport.happ.application.dto.OrderData;
 import com.infosupport.happ.application.dto.ShoppingCartData;
 import com.infosupport.happ.application.dto.TableData;
+import com.infosupport.happ.data.OrderRepository;
 import com.infosupport.happ.data.TableRepository;
 import com.infosupport.happ.domain.Product;
 import com.infosupport.happ.domain.ShoppingCart;
@@ -24,10 +25,13 @@ import java.util.List;
 public class TableService {
     private final TableRepository tableRepository;
     private final ProductService productService;
+    private final OrderRepository orderRepository;
 
-    public TableService(TableRepository tableRepository, ProductService productService) {
+    public TableService(TableRepository tableRepository, ProductService productService, OrderRepository orderRepository) {
         this.tableRepository = tableRepository;
         this.productService = productService;
+        this.orderRepository = orderRepository;
+
     }
 
     public TableData createTable(int amountOfPeople, int tableNr, TableStatus tableStatus) {
@@ -77,6 +81,7 @@ public class TableService {
         tableExists(tableId);
         Table table = tableRepository.getById(tableId);
         table.placeOrder();
+        orderRepository.save(table.getLastOrder());
         tableRepository.save(table);
         return createTableData(table);
     }

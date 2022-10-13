@@ -14,6 +14,7 @@ export default function SubmitButton({submitUrl,buttonText,productAmount,product
         // fetch(submitUrl, requestOptions)
         //     .then(response => response.json())
         //     .then(data => {});
+        console.log("Added");
     }
 
     return(

@@ -1,21 +1,23 @@
 import React, {useState} from 'react'
 import "../styles/Popup.css"
 import Counter from "./Counter";
+import SubmitButton from "./SubmitButton";
 
 
 function Popup(props) {
-    const event = new Event('sluiten');
 
 
-    const [trigger, setTrigger] = useState(false)
     return (props.trigger) ? (
         <div className="popup">
             <div className="popup-inner">
-                <button className="close-btn" onClick={() => {props.setTrigger(false); console.log(props.trigger); dispatchEvent(event)}}> close</button>
-                {props.children}
+                <button className="close-btn" onClick={() => {props.setTrigger(false); console.log(props.trigger);}}> close</button>
+                <p>{props.product.name} </p>
+                <textarea disabled={true} value={props.product.details}/>
+                <SubmitButton buttonText={"Add to Cart"}/>
+
 
             </div>
-            <Counter initialValue={0}></Counter>
+            <Counter initialValue={0}/>
         </div>
     ) : "";
 

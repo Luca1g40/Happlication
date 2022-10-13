@@ -7,5 +7,6 @@ import java.util.List;
 
 public class ShoppingCartRequest {
     public List<Product> productList;
+    public List<Long> productIdList;
 
 }

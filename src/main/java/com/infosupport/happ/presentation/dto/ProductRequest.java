@@ -12,5 +12,6 @@ public class ProductRequest {
     public ProductCategory productCategory;
     public double price;
     public List<Ingredient> ingredients;
+    public String details;
 
 }

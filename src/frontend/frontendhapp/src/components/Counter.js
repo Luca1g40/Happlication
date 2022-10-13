@@ -2,8 +2,8 @@ import React, {useState} from "react";
 import "./SubmitButton.css"
 
 
-export default function Counter({initialValue}){
-    const [count, setCount] = useState(initialValue);
+export default function Counter(props){
+    const [count, setCount] = useState(props.initialValue);
 
     const increment = () => setCount(prevCount => prevCount + 1);
     const decrement = () =>{
@@ -17,9 +17,6 @@ export default function Counter({initialValue}){
             <button  className="add-up" onClick={increment}>+</button>
             <h2>{count}</h2>
             <button  className="subtract" onClick={decrement}>-</button>
-
         </div>
     )
-
-
 }

@@ -2,29 +2,38 @@
 import React,{useState,useEffect} from "react";
 import ShoppingCartItem from "./ShoppingCartItem";
 import Counter from "./Counter";
+import axios from "axios";
 export default function ShoppingCart() {
     const [shoppingCart, setShoppingCart] = useState();
+    const [productsAlreadyAdded,setProductsAlreadyAdded] = useState([])
 
 
     useEffect(() => {
-        fetch("localhost:8080/happ/table/1/shoppingcart")
-            .then((response) => response.json())
-            .then((json) => {
-                console.log(json);
-                setShoppingCart(json);
-            });
+        axios.get("localhost:8080/happ/table/1/shoppingcart")
+            .then(res => {
+                console.log(res)
+                setShoppingCart(res.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
         }, [])
 
-        // function countProduct(product){
-        // let count = 0;
-        //     shoppingCart.map((product){
-        //
-        //     }
-        //         if
-        //
-        //
-        //     )
-        // }
+
+
+        function countProduct(target){
+            let count = 0;
+            shoppingCart.map(()=>{
+                for (product of shoppingCart) {
+                    if (product === target) {
+                        count++;
+                    }
+                }
+            }
+            )
+            setProductsAlreadyAdded(state => [...state,target]);
+            return count;
+        }
 
 
 
@@ -33,14 +42,15 @@ export default function ShoppingCart() {
     return (
         <div>
             {shoppingCart.map((item, index) => {
+                if (!productsAlreadyAdded.includes(item)){
+                    return (
+                        <div key={index}>
+                            <ShoppingCartItem productName={item.name} amount={countProduct(item)} />
+                            <hr />
+                        </div>
+                    );
+                }
 
-                return (
-                    <div key={index}>
-                        <ShoppingCartItem productName={item.name} amount={item.amount} />
-                        <Counter initialValue={item.amount} />
-                        <hr />
-                    </div>
-                );
             })}
         </div>
 

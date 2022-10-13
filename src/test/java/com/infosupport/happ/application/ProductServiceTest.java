@@ -33,7 +33,7 @@ public class ProductServiceTest {
         ingredientList = new ArrayList<>();
         ingredient = new Ingredient("gember",10);
         ingredientList.add(ingredient);
-        product = new Product("gember stukjes",ingredientList, ProductCategory.DESSERT,39.99);
+        product = new Product("gember stukjes",ingredientList, ProductCategory.DESSERT,39.99,"Stukjes gember");
 
         when(productRepository.getById(1L)).thenReturn(product);
         when(productRepository.existsById(1L)).thenReturn(true);
@@ -43,7 +43,7 @@ public class ProductServiceTest {
 
     @Test
     void createProduct(){
-        ProductData productData = productService.createProduct(product.getName(),product.getProductCategory(),product.getPrice(),product.getIngredients());
+        ProductData productData = productService.createProduct(product.getName(),product.getProductCategory(),product.getPrice(),product.getIngredients(), product.getDetails());
 
         assertNotNull(productData);
 
@@ -64,13 +64,13 @@ public class ProductServiceTest {
 
     @Test
     void updateProduct(){
-        ProductData productData = productService.updateProduct("T-bone steak",ProductCategory.MAIN_COURSE,199.99,1L,new ArrayList<>());
+        ProductData productData = productService.updateProduct("T-bone steak",ProductCategory.MAIN_COURSE,199.99,1L,new ArrayList<>(),"Zeer goeie steek");
 
         assertEquals(199.99,productData.price);
         assertEquals("T-bone steak",productData.name);
         assertEquals(0,productData.ingredientList.size());
         assertEquals(ProductCategory.MAIN_COURSE,productData.productCategory);
-        assertThrows(ItemNotFound.class, ()-> productService.updateProduct("T-bone steak",ProductCategory.MAIN_COURSE,199.99,10L,new ArrayList<>()));
+        assertThrows(ItemNotFound.class, ()-> productService.updateProduct("T-bone steak",ProductCategory.MAIN_COURSE,199.99,10L,new ArrayList<>(),"Matige Steak"));
 
     }
 
