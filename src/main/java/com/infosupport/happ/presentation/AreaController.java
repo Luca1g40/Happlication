@@ -53,7 +53,7 @@ public class AreaController {
         }
     }
 
-    @DeleteMapping("/staff/{id}")
+    @DeleteMapping("/area/{id}")
     public void deleteArea(@PathVariable("id") Long id) {
         try {
             this.areaService.deleteArea(id);
@@ -65,8 +65,8 @@ public class AreaController {
     }
 
     @PutMapping("/staff/{areaid}/area")
-    public AreaData edit_staff_in_area(@PathVariable Long areaid, AreaRequest areaRequest) {
-        return areaService.editStaffListInArea(areaid, areaRequest.staffList);
+    public AreaData editStaffInArea(@PathVariable Long areaid, @RequestBody AreaRequest areaRequest) {
+        return areaService.editStaffListInArea(areaid, areaRequest.staffIdList);
     }
 
 

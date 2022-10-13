@@ -24,6 +24,7 @@ public class Area {
 
     public Area(String name) {
         this.name = name;
+        this.tables = tables = new ArrayList<>();
         this.tables = new ArrayList<>();
         this.staffList = new ArrayList<>();
     }

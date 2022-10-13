@@ -1,31 +1,27 @@
 package com.infosupport.happ.domain;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
-
 public class StaffTest {
+
     Staff staff;
+    Order order;
 
     @BeforeEach
-    void beforeEach(){
-        staff = new Staff(123,"Johan");
-    }
+    void beforeEach() {
+        staff = new Staff(111, "staff");
+        order = new Order();
 
-
-    @Test
-    void addArea(){
-        Area area = new Area();
-        staff.addArea(area);
-        assertTrue(staff.getAreas().contains(area));
     }
 
     @Test
-    void claimOrder(){
-        Order order = new Order();
+    @DisplayName("add claimed orders to staff")
+    void addOrder() {
         staff.addOrder(order);
-        assertTrue(staff.getClaimedOrders().contains(order));
+        assertNotNull(staff.getClaimedOrders());
     }
-
 }

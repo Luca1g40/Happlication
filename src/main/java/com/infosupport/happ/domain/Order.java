@@ -2,6 +2,7 @@ package com.infosupport.happ.domain;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,8 +27,12 @@ public class Order {
     }
 
     public Order(Table table, LocalDateTime timeOfOrder, List<Product> products) {
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+
         this.table = table;
-        this.timeOfOrder = timeOfOrder;
+        this.timeOfOrder = now;
         this.preperationStatus = UNCLAIMED;
         this.products = products;
     }

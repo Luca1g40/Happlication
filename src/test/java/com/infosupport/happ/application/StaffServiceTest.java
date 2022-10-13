@@ -1,67 +1,44 @@
 package com.infosupport.happ.application;
 
 import com.infosupport.happ.application.dto.StaffData;
-import com.infosupport.happ.data.AreaRepository;
 import com.infosupport.happ.data.StaffRepository;
-import com.infosupport.happ.domain.Area;
 import com.infosupport.happ.domain.Staff;
-import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+
 @SpringBootTest
 public class StaffServiceTest {
-    Staff staff;
-    StaffRepository staffRepository;
-    AreaRepository areaRepository;
-    StaffService staffService;
+    private StaffService staffService;
+    private StaffRepository staffRepository;
 
     @BeforeEach
-    void beforeEach(){
-        staff = new Staff(123,"Jan");
-        staffRepository = mock(StaffRepository.class);
-        areaRepository = mock(AreaRepository.class);
-        staffService = new StaffService(staffRepository,areaRepository);
+    void beforeEach() {
+        this.staffRepository = mock(StaffRepository.class);
+        this.staffService = new StaffService(staffRepository);
 
-        when(staffRepository.getById(1L)).thenReturn(staff);
+        Staff staff = new Staff(1234, "Geber");
+
         when(staffRepository.existsById(1L)).thenReturn(true);
-
+        when(staffRepository.getById(1L)).thenReturn(staff);
     }
 
     @Test
-    void getStaff(){
-        StaffData staffData = staffService.getStaff(1L);
-        //assertEquals(1L,staff2.getId());
-        assertEquals(staff.getOperations(),staffData.operations);
-        assertEquals(staff.getAreas(),staffData.area);
-        assertEquals(staff.getName(),staffData.name);
-        assertThrows(ItemNotFound.class, ()-> staffService.getStaff(4L));
-
-    }
-
-    @Test
-    void createStaff(){
-        StaffData staffData = staffService.createStaff(123,"Misher");
-
+    @DisplayName("Staff can be created")
+    void createStaff() {
+        StaffData staffData = staffService.createStaff(111, "new staff");
         assertNotNull(staffData);
-
-        assertEquals( "Misher", staffData.name);
-        assertEquals(123,staffData.password);
+        assertEquals(111, staffData.password);
     }
 
-
-
-//    @Test
-//    void addAreaToStaff(){
-//        AreaRepository areaRepository = mock(AreaRepository.class);
-//        Area area = new Area();
-//        when(areaRepository.getById(1L)).thenReturn(area);
-//        staffService.addAreaToStaff(1L,1L);
-//        assertTrue(staffService.getStaff(1L).getAreas().contains(area));
-//    }
-
+    @Test
+    @DisplayName("Get the correct staff")
+    void getStaff() {
+        Staff staff = staffService.getStaff(1L);
+        assertEquals(1234, staff.getPassword());
+    }
 }
