@@ -11,8 +11,9 @@ import java.util.List;
 public class Table {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long id;
+
     @OneToMany
     private List<Order> orders;
     private LocalTime elapsedTimeSinceOrder;
@@ -24,7 +25,7 @@ public class Table {
     private ShoppingCart shoppingCart;
 
     //TODO GOOI ORDERS
-    public Table(List<Order> orders, LocalTime elapsedTimeSinceOrder, LocalTime timeLeftToOrder, int amountOfPeople, int tableNumber, TableStatus tableStatus, ShoppingCart shoppingCart) {
+    public Table(LocalTime elapsedTimeSinceOrder, LocalTime timeLeftToOrder, int amountOfPeople, int tableNumber, TableStatus tableStatus, ShoppingCart shoppingCart) {
         if (tableNumber < 0) {
             throw new AttributeMustBeBiggerThanZero(getClass().getSimpleName(), "table number");
         }
