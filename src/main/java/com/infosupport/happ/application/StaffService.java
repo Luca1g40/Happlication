@@ -4,6 +4,7 @@ import com.infosupport.happ.application.dto.AreaWithoutStaffData;
 import com.infosupport.happ.application.dto.StaffData;
 import com.infosupport.happ.data.StaffRepository;
 import com.infosupport.happ.domain.Area;
+import com.infosupport.happ.domain.Rights;
 import com.infosupport.happ.domain.Staff;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import org.springframework.stereotype.Service;
@@ -31,8 +32,8 @@ public class StaffService {
         }
     }
 
-    public StaffData createStaff(int password, String name) {
-        Staff staff = new Staff(password, name);
+    public StaffData createStaff(int password, String name, List<Rights> rights) {
+        Staff staff = new Staff(password, name, rights);
         staffRepository.save(staff);
         return createStaffData(staff);
     }

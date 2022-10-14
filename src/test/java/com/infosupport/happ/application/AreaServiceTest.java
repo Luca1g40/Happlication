@@ -11,6 +11,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -30,7 +31,7 @@ public class AreaServiceTest {
         this.staffRepository = mock(StaffRepository.class);
         this.areaService = new AreaService(areaRepository, staffRepository);
 
-        Staff staff = new Staff(1, "Staff");
+        Staff staff = new Staff(1, "Staff", new ArrayList<>());
         Area area = new Area("Nieuwe area");
 
         when(areaRepository.existsById(2L)).thenReturn(true);
@@ -76,7 +77,7 @@ public class AreaServiceTest {
     @Test
     @DisplayName("Edit staff of area")
     void editAreaStaff() {
-        Staff otherStaff = new Staff(1, "Other staff");
+        Staff otherStaff = new Staff(1, "Other staff",new ArrayList<>());
 
         when(staffRepository.getById(1L)).thenReturn(otherStaff);
 

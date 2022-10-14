@@ -21,14 +21,16 @@ public class Table {
     private int amountOfPeople;
     private int tableNumber;
     private TableStatus tableStatus;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.PERSIST)
     private ShoppingCart shoppingCart;
 
     //TODO GOOI ORDERS
     public Table(LocalTime elapsedTimeSinceOrder, LocalTime timeLeftToOrder, int amountOfPeople, int tableNumber, TableStatus tableStatus, ShoppingCart shoppingCart) {
         if (tableNumber < 0) {
             throw new AttributeMustBeBiggerThanZero(getClass().getSimpleName(), "table number");
-        }
+        }else if(amountOfPeople < 0) throw new AttributeMustBeBiggerThanZero(getClass().getSimpleName(), "amount of people");
+
+
         this.orders = new ArrayList<>();
         this.elapsedTimeSinceOrder = elapsedTimeSinceOrder;
         this.timeLeftToOrder = timeLeftToOrder;
@@ -69,12 +71,15 @@ public class Table {
         orders.add(order);
     }
 
+    //TODO meerdere producten verwijderen
     public void deleteFromShoppingCart(Product product) {
         shoppingCart.removeFromShoppingCart(product);
     }
 
-    public void addToShoppingCart(Product product) {
-        this.shoppingCart.addToShoppingCart(product);
+    public void addToShoppingCart(Product product, int amount){
+        for (int i=0; i<amount;i++){
+            this.shoppingCart.addToShoppingCart(product);
+        }
     }
 
     public Long getId() {
@@ -90,8 +95,15 @@ public class Table {
     }
 
     public void placeOrder(){
-        Order order = new Order(this, java.time.LocalDateTime.now(), new ArrayList<>(shoppingCart.getProducts()));
-        addToOrders(order);
+        Order order = new Order(this, java.time.LocalDateTime.now(),new ArrayList<>());
+        this.shoppingCart.getProducts().forEach(order::addToProducts);
+
+
+//        for (Product product:this.shoppingCart.getProducts()) {
+//             order.addToProducts(product);
+//        }
+
+        this.addToOrders(order);
         shoppingCart.clearShoppingCart();
     }
 

@@ -14,7 +14,7 @@
 	<name>Info support</name>
 	<description>Info support horeca app</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -99,6 +99,14 @@
 					<jvmArgs>
 						<jvmArg>-Dspring.profiles.active=ci</jvmArg>
 					</jvmArgs>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>10</source>
+					<target>10</target>
 				</configuration>
 			</plugin>
 

@@ -4,7 +4,9 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.infosupport.happ.domain.PreperationStatus.*;
 
@@ -17,6 +19,7 @@ public class Order {
     private Table table;
     private LocalDateTime timeOfOrder;
     private PreperationStatus preperationStatus;
+
     @OneToMany(cascade = CascadeType.ALL)
     private List<Product> products;
 
@@ -55,6 +58,10 @@ public class Order {
     }
 
     public boolean checkIfAllProductsAreDone() {
+//        for (Product key : products.keySet()) {
+//            if (!key.isReady()) return false;
+//        }
+
         for (Product product : products) {
             if (!product.isReady()) {
                 return false;
@@ -76,10 +83,22 @@ public class Order {
     }
 
     public void addToProducts(Product product) {
+//        if (products.containsKey(product)){
+//            products.replace(product, products.get(product)+amount);
+//        }else products.put(product,1);
+
         products.add(product);
     }
 
     public List<Product> getBarOrders() {
+//        HashMap<Product,Integer> barOrders = new HashMap<>();
+//
+//        for (Map.Entry<Product, Integer> entry : products.entrySet()) {
+//            if (entry.getKey().getProductCategory()==ProductCategory.DRINKS){
+//                barOrders.put(entry.getKey(), entry.getValue());
+//            }
+//        }
+
         List<Product> barOrders = new ArrayList<>();
         for (Product product : products) {
             if (product.getProductCategory() == ProductCategory.DRINKS) {
@@ -90,6 +109,16 @@ public class Order {
     }
 
     public List<Product> getFoodOrders() {
+//        HashMap<Product,Integer> kitchenOrders = new HashMap<>();
+//
+//        for (Map.Entry<Product, Integer> entry : products.entrySet()) {
+//            if (entry.getKey().getProductCategory()==ProductCategory.DRINKS){
+//                kitchenOrders.put(entry.getKey(), entry.getValue());
+//            }
+//        }
+
+
+
         List<Product> kitchenOrders = new ArrayList<>();
         for (Product product : products) {
             if (product.getProductCategory() != ProductCategory.DRINKS) {
@@ -98,4 +127,15 @@ public class Order {
         }
         return kitchenOrders;
     }
+
+
+//    public HashMap<Product, Integer> getProductBasedOnCategory(ProductCategory productCategory){
+//        HashMap<Product,Integer> productHashmap = new HashMap<>();
+//        for (Map.Entry<Product, Integer> entry : products.entrySet()) {
+//            if (entry.getKey().getProductCategory()==productCategory){
+//                productHashmap.put(entry.getKey(), entry.getValue());
+//            }
+//        }
+//        return productHashmap;
+//    }
 }

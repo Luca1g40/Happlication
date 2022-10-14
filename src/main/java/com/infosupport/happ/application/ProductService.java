@@ -22,17 +22,15 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public ProductData createProduct(String name, ProductCategory productCategory, double price, List<Ingredient> ingredients) {
-        Product product = new Product(name, ingredients, productCategory, price);
+    public ProductData createProduct(String name, ProductCategory productCategory, double price, List<Ingredient> ingredients,String details) {
+        Product product = new Product(name, ingredients, productCategory, price,details);
         productRepository.save(product);
-
         return createProductData(product);
-
     }
 
     public ProductData switchProductPrepStatus(Long id) {
         productExists(id);
-        Product product = getProduct(id);
+        Product product = productRepository.getById(id);
         product.switchReadyStatus();
 
         this.productRepository.save(product);
@@ -40,14 +38,15 @@ public class ProductService {
     }
 
 
-    public ProductData updateProduct(String name, ProductCategory productCategory, double price, Long id, List<Ingredient> ingredients) {
+    public ProductData updateProduct(String name, ProductCategory productCategory, double price, Long id, List<Ingredient> ingredients,String details) {
         productExists(id);
-        Product product = getProduct(id);
+        Product product = productRepository.getById(id);
 
         product.setName(name);
         product.setProductCategory(productCategory);
         product.setPrice(price);
         product.setIngredients(ingredients);
+        product.setDetails(details);
 
         this.productRepository.save(product);
 
@@ -66,10 +65,14 @@ public class ProductService {
 
     public ProductData createProductData(Product product) {
         return new ProductData(
-                product.getId(), product.getName(),
+                product.getId(),
+                product.getName(),
                 product.getProductCategory(),
                 product.getPrice(),
-                product.isReady());
+                product.isReady(),
+                product.getIngredients(),
+                product.getDetails()
+                );
     }
 
     private void productExists(Long id) {

@@ -1,21 +1,35 @@
 import React, {useState} from 'react'
 import "../styles/Popup.css"
+import {Redirect} from 'react-router-dom';
+
 import Counter from "./Counter";
+import SubmitButton from "./submitData/SubmitButton";
+import {AddProductToShoppingCart} from "./submitData/UrlMappings"
 
 
 function Popup(props) {
-    const event = new Event('sluiten');
+    const [productAmount,setProductAmount] = useState(1)
 
+    function closePopUp(){
+        props.setTrigger(false);
+        console.log(props.trigger);
+    }
 
-    const [trigger, setTrigger] = useState(false)
+    // function onSubmit  ()  {
+    //     closePopUp()
+    //     return  <Redirect to="/" />
+    //
+    // }
+
     return (props.trigger) ? (
         <div className="popup">
             <div className="popup-inner">
-                <button className="close-btn" onClick={() => {props.setTrigger(false); console.log(props.trigger); dispatchEvent(event)}}> close</button>
-                {props.children}
-
+                <p>{props.product.name} </p>
+                <Counter initialValue={productAmount} updateCount={count=>setProductAmount(count) }/>
+                <textarea disabled={true} value={props.product.details}/>
+                <button className="close-btn" onClick={closePopUp}> close</button>
+                <SubmitButton tableId={1} buttonText={"Add to Cart"} action={"Add to shopping cart"} productAmount={productAmount} productId={props.product.id}/>
             </div>
-            <Counter initialValue={0}></Counter>
         </div>
     ) : "";
 

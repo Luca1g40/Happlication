@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import Popup from "./Popup";
-
+import ItemRegel from "./itemRegel";
+// import from "../styles/Shoppingcart.css"
 
 
 function FoodsDataFetching() {
@@ -24,23 +25,14 @@ function FoodsDataFetching() {
             <ul className={"list"}>
                 <h1>Gerechten</h1>
                 {
-
                     products.map((product, i) =>
-                        <div className="listItemDiv">
-                            <li key={product.id} className={"listItem"}  onClick={() => {
-                                setButtonPopup(true);
-                            }}>
-                                <Popup trigger={buttonPopup}
-                                       setTrigger={setButtonPopup}> {product.name} {product.price} </Popup>
-                                <span className={"productSpan"}> {product.name}</span>
-                                <span>€</span>
-                                <span className={"productSpanPrice"}> {product.price}.-</span>
-                            </li>
-                        </div>,
 
+
+                        <ItemRegel key={product.id} product={product} />
                     )
                 }
             </ul>
+            <button className={"shoppingcartIcon"}>shooo</button>
         </div>
     )
 

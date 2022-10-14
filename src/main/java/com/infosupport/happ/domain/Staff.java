@@ -23,15 +23,24 @@ public class Staff implements Serializable {
     @ManyToMany(mappedBy = "staffList")
     private List<Area> areas;
 
+    @ElementCollection
+    @Enumerated(EnumType.STRING)
+    private List<Rights> rights;
+
     public Staff() {
     }
 
-    public Staff(int password, String name) {
+    public Staff(int password, String name, List<Rights> rights) {
         this.password = password;
         this.name = name;
         this.operations = new ArrayList<>();
         this.claimedOrders = new ArrayList<>();
         this.areas = new ArrayList<>();
+        this.rights = rights;
+    }
+
+    public List<Rights> getRights() {
+        return rights;
     }
 
     public Long getId() {
@@ -55,11 +64,7 @@ public class Staff implements Serializable {
         return areas;
     }
 
-    public void addOrder(Order order) {
-
-        this.claimedOrders.add(order);
-
-    }
+    public void addOrder(Order order) {this.claimedOrders.add(order);}
 
     public List<Order> getClaimedOrders() {
         return claimedOrders;

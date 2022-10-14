@@ -45,7 +45,8 @@ public class StaffController {
     public StaffData createStaff(@RequestBody StaffRequest staffRequest) {
         return this.staffService.createStaff(
                 staffRequest.password,
-                staffRequest.name);
+                staffRequest.name,
+                staffRequest.rights);
     }
 
     @GetMapping("/staff/{id}")
