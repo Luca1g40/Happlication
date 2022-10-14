@@ -27,7 +27,7 @@ public class TableTest {
         shoppingCart = new ShoppingCart();
         product = new Product("champagne", new ArrayList<>(), ProductCategory.DRINKS, 56.99,"heerlijk champagne");
         product2 = new Product("Broodje frikandel", new ArrayList<>(), ProductCategory.STARTER, 25.50,"goeie broodje frikandel");
-        table = new Table(new ArrayList<>(), LocalTime.now(), LocalTime.now(), 5, 1, OCCUPIED, shoppingCart);
+        table = new Table(LocalTime.now(), LocalTime.now(), 5, 1, OCCUPIED, shoppingCart);
     }
 
     @Test

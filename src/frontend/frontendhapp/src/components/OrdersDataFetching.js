@@ -1,17 +1,23 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
+import OrderItem from "./OrderItem";
+import countOccuranceProduct from "./Util";
+import OrderItemList from "./OrderItemList"
 
-function OrdersDataFetching() {
+
+function OrdersDataFetching(props) {
     const [orders, setOrders] = useState([])
     const [selectedOrders, setSelectedOrders] = useState([])
     const [doneSelecting, setDoneSelecting] = useState(false)
     const [isActive, setIsActive] = useState(false);
+
 
     useEffect(() => {
         axios.get("http://localhost:8080/happ/orders")
             .then(res => {
                 console.log(res)
                 setOrders(res.data)
+
             })
             .catch(err => {
                 console.log(err)
@@ -64,13 +70,18 @@ function OrdersDataFetching() {
                     <div key={order.id} className={"grid-item grid-item"+i} onClick={(event) => {addOrders(order.id); changeStyle(event)}}>
                         <div className={"order-item"}>
                             <p className={"table-number"}>{order.tableNr}</p>
-                            {order.foodProducts.map(product =>
-                                <p key={product.id} className={"order-products"}>{product.name}</p>
-                            )}
+                            <OrderItemList order={order} staffRole={"bar"}/>
+
+                            {/*{order.foodProducts.map(product =>*/}
+                            {/*        <OrderItem product={product} amount={countOccuranceProduct(product,order.foodProducts,setProductsAlreadyAdded)}/>*/}
+
+                            {/*    // <p key={product.id} className={"order-products"}>{product.name}</p>*/}
+
+                            {/*)}*/}
                         </div>
-                        <div className={"order-time"}>
-                            <p> {order.orderTime} {order.orderDate} </p>
-                        </div>
+                        {/*<div className={"order-time"}>*/}
+                        {/*    <p> {order.orderTime} {order.orderDate} </p>*/}
+                        {/*</div>*/}
                     </div>
                 )
             }

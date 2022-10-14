@@ -30,7 +30,7 @@ public class ProductService {
 
     public ProductData switchProductPrepStatus(Long id) {
         productExists(id);
-        Product product = getProduct(id);
+        Product product = productRepository.getById(id);
         product.switchReadyStatus();
 
         this.productRepository.save(product);
@@ -40,7 +40,7 @@ public class ProductService {
 
     public ProductData updateProduct(String name, ProductCategory productCategory, double price, Long id, List<Ingredient> ingredients,String details) {
         productExists(id);
-        Product product = getProduct(id);
+        Product product = productRepository.getById(id);
 
         product.setName(name);
         product.setProductCategory(productCategory);

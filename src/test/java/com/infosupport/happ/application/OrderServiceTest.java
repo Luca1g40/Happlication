@@ -37,7 +37,7 @@ public class OrderServiceTest {
         this.orderService = new OrderService(orderRepository, orderAssistant);
 
         Table table = new Table(LocalTime.now(), LocalTime.now(), 4, 3, TableStatus.OCCUPIED, new ShoppingCart());
-        Staff staff = new Staff(1, "staff");
+        Staff staff = new Staff(1, "staff",new ArrayList<>());
         Product product = new Product();
 
         when(orderAssistant.getStaff(1L)).thenReturn(staff);

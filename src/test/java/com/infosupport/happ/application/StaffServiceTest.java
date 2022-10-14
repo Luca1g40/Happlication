@@ -7,6 +7,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -21,7 +24,7 @@ public class StaffServiceTest {
         this.staffRepository = mock(StaffRepository.class);
         this.staffService = new StaffService(staffRepository);
 
-        Staff staff = new Staff(1234, "Geber");
+        Staff staff = new Staff(1234, "Geber",new ArrayList<>());
 
         when(staffRepository.existsById(1L)).thenReturn(true);
         when(staffRepository.getById(1L)).thenReturn(staff);
@@ -30,7 +33,7 @@ public class StaffServiceTest {
     @Test
     @DisplayName("Staff can be created")
     void createStaff() {
-        StaffData staffData = staffService.createStaff(111, "new staff");
+        StaffData staffData = staffService.createStaff(111, "new staff",new ArrayList<>());
         assertNotNull(staffData);
         assertEquals(111, staffData.password);
     }

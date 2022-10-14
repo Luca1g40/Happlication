@@ -14,7 +14,7 @@ public class ShoppingCart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(cascade = CascadeType.MERGE)
+    @OneToMany
     private List<Product> products;
 
     public ShoppingCart() {

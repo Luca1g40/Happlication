@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import "./SubmitButton.css"
+import React, {useEffect, useState} from "react";
+import "./submitData/SubmitButton.css"
 
 
 export default function Counter(props){
@@ -11,6 +11,11 @@ export default function Counter(props){
             setCount(prevCount => prevCount - 1)
         }
     };
+
+    useEffect(()=>{
+        console.log("count")
+        props.updateCount(count);
+    },[count])
 
     return(
         <div>

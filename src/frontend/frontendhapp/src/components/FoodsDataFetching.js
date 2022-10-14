@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import Popup from "./Popup";
 import ItemRegel from "./itemRegel";
+// import from "../styles/Shoppingcart.css"
 
 
 function FoodsDataFetching() {
@@ -25,10 +26,13 @@ function FoodsDataFetching() {
                 <h1>Gerechten</h1>
                 {
                     products.map((product, i) =>
-                        <ItemRegel key={i} product={product} />
+
+
+                        <ItemRegel key={product.id} product={product} />
                     )
                 }
             </ul>
+            <button className={"shoppingcartIcon"}>shooo</button>
         </div>
     )
 

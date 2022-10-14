@@ -9,6 +9,5 @@ export default function ShoppingCartItem({amount,productName}){
             <p>{productName}</p>
             <Counter initialValue={amount}/>
         </div>
-
     )
 }
