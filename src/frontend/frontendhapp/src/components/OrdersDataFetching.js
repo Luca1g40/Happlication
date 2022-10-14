@@ -85,9 +85,9 @@ function OrdersDataFetching(props) {
 
                             {/*)}*/}
                         </div>
-                        {/*<div className={"order-time"}>*/}
-                        {/*    <p> {order.orderTime} {order.orderDate} </p>*/}
-                        {/*</div>*/}
+                        <div className={"order-time"}>
+                            <p> {order.orderTime} {order.orderDate} </p>
+                        </div>
                     </div>
                 )
             }
