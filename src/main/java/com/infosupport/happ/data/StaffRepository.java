@@ -4,4 +4,5 @@ import com.infosupport.happ.domain.Staff;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface StaffRepository extends JpaRepository<Staff, Long> {
+    Staff getByName(String name);
 }

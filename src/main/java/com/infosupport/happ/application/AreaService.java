@@ -95,9 +95,9 @@ public class AreaService {
         List<StaffWithoutAreasData> staffWithoutAreasList = new ArrayList<>();
         if (area.getStaffList() != null) {
             for (Staff staff : area.getStaffList()) {
-                staffWithoutAreasList.add(new StaffWithoutAreasData(
+                staffWithoutAreasList.add(
+                        new StaffWithoutAreasData(
                         staff.getId(),
-                        staff.getPassword(),
                         staff.getName(),
                         staff.getOperations(),
                         staff.getClaimedOrders()
