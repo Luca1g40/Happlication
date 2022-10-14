@@ -27,11 +27,13 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(myUserDetailsService);
+
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-       http.csrf().disable()
+       http.cors();
+        http.csrf().disable()
                .authorizeRequests().antMatchers("/authenticate").permitAll()
                .anyRequest().authenticated() // Gives everybody acces to API "//authenticate" so then can login
                .and().sessionManagement()

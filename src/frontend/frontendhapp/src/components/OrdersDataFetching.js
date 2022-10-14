@@ -7,8 +7,15 @@ function OrdersDataFetching() {
     const [doneSelecting, setDoneSelecting] = useState(false)
     const [isActive, setIsActive] = useState(false);
 
+    const config = {
+        headers: {
+            Authorization: sessionStorage.getItem("Authorization")
+
+        }
+    }
+
     useEffect(() => {
-        axios.get("http://localhost:8080/happ/orders")
+        axios.get("http://localhost:8080/happ/orders", config)
             .then(res => {
                 console.log(res)
                 setOrders(res.data)
@@ -33,10 +40,11 @@ function OrdersDataFetching() {
 
 
     function claimOrder(orders){
-        console.log(orders)
-        axios.post(`http://localhost:8080/happ/staff/86/claim`,{ //TODO Een random staffmember moet de claim maken niet 86
+        console.log()
+        const staffId = sessionStorage.getItem("name");
+        axios.post(`http://localhost:8080/happ/staff/${staffId}/claim`,{ //TODO Een random staffmember moet de claim maken niet 86
             "selectedOrders" : orders
-        })
+        }, config)
             .then(res => {
                 console.log(res)
                 setDoneSelecting(false)
@@ -80,7 +88,7 @@ function OrdersDataFetching() {
                 <button onClick={() => {claimOrder(selectedOrders); setDoneSelecting(true)}}> Claim Orders </button>
             </div>
             <span>
-                <p>Signed in as: user</p>
+                <p>Signed in as: {sessionStorage.getItem("name")}</p>
             </span>
         </div>
     </div>
