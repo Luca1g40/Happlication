@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import Popup from "./Popup";
+import Notifications from "../staff_components/Notifications";
 
 
 
@@ -41,6 +42,9 @@ function FoodsDataFetching() {
                     )
                 }
             </ul>
+            <div>
+                <Notifications/>
+            </div>
         </div>
     )
 

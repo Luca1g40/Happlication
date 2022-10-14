@@ -6,6 +6,7 @@ import Foods from "./pages/Foods";
 import Home from "./pages/Home";
 import "./styles/Home.css"
 import AllOrders from "./pages/AllOrders";
+import StaffDashboard from "./pages/StaffDashboard";
 
 function App() {
     return (
@@ -14,6 +15,7 @@ function App() {
             <Route path="Drinks" element={<Drinks/>}/>
             <Route path="Foods" element={<Foods/>}/>
             <Route path="allorders" element={<AllOrders/>}/>
+            <Route path="staff" element={<StaffDashboard/>}/>
 
         </Routes>
     )

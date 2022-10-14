@@ -6,6 +6,7 @@ import "../styles/Lists.css"
 import {Link} from "react-router-dom";
 import DrinksDataFetching from "../components/DrinksDataFetching"
 
+
 export default function Drinks() {
 
     return (
@@ -15,6 +16,8 @@ export default function Drinks() {
                 <Link className="button drinksToFood" to="/Foods">Gerechten</Link>
                 <DrinksDataFetching/>
             </div>
+
+
         </>
     );
 }
