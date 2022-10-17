@@ -8,6 +8,6 @@ import java.util.List;
 public class OrderRequest {
     public Long tableId;
     public PreperationStatus status;
-    public List<Product> productList;
+    public List<Long> productList;
     public List<Long> selectedOrders;
 }

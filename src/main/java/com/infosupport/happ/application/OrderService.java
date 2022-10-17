@@ -27,10 +27,16 @@ public class OrderService {
         this.orderRepository = orderRepository;
     }
 
-    public OrderData createOrder(Long tableId, List<Product> productList) {
-
+    public OrderData createOrder(Long tableId, List<Long> productList) {
+        List<Product> products = new ArrayList<>();
         Table table = this.orderAssistant.getTable(tableId);
-        Order order = new Order(table, LocalDateTime.now(), productList);
+
+        for (Long id:productList ) {
+            products.add(orderAssistant.getProductById(id));
+        }
+        System.out.println(table);
+
+        Order order = new Order(table, LocalDateTime.now(), products);
 
         this.orderRepository.save(order);
 
