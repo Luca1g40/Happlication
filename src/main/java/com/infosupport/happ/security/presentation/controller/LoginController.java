@@ -1,8 +1,8 @@
-package com.infosupport.happ.presentation;
+package com.infosupport.happ.security.presentation.controller;
 
-import com.infosupport.happ.presentation.dto.AuthenticationRequest;
-import com.infosupport.happ.presentation.dto.AuthenticationResponse;
-import com.infosupport.happ.util.JwtUtil;
+import com.infosupport.happ.security.presentation.dto.AuthenticationRequest;
+import com.infosupport.happ.security.presentation.dto.AuthenticationResponse;
+import com.infosupport.happ.security.util.JwtUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;

@@ -1,4 +1,4 @@
-package com.infosupport.happ.presentation.dto;
+package com.infosupport.happ.security.presentation.dto;
 
 public class AuthenticationResponse {
 

@@ -1,7 +1,7 @@
-package com.infosupport.happ.filters;
+package com.infosupport.happ.security.presentation.filters;
 
-import com.infosupport.happ.application.MyUserDetailsService;
-import com.infosupport.happ.util.JwtUtil;
+import com.infosupport.happ.security.application.MyUserDetailsService;
+import com.infosupport.happ.security.util.JwtUtil;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
