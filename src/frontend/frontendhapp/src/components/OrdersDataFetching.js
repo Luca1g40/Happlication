@@ -1,15 +1,11 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import OrderItem from "./OrderItem";
-import countOccuranceProduct from "./Util";
-import OrderItemList from "./OrderItemList"
 
 
-function OrdersDataFetching(props) {
+function OrdersDataFetching() {
     const [orders, setOrders] = useState([])
     const [selectedOrders, setSelectedOrders] = useState([])
     const [doneSelecting, setDoneSelecting] = useState(false)
-    const [isActive, setIsActive] = useState(false);
 
     const config = {
         headers: {
@@ -77,14 +73,8 @@ function OrdersDataFetching(props) {
                         <p className={"table-number"}>Tafel: {order.tableNr}</p>
                         <div className={"order-item"}>
                             {order.foodProducts.map(product =>
-
                                 <p key={product.id} className={"order-products"}>{product.name}</p>
-
-                            )}    {order.foodProducts.map(product =>
-
-                            <p key={product.id} className={"order-products"}>{product.name}</p>
-
-                        )}
+                            )}
                         </div>
                         <div className={"order-time"}>
                             <p className={"order-time-paragraph"}> {order.orderTime}  </p>
@@ -104,8 +94,6 @@ function OrdersDataFetching(props) {
         </div>
     </div>
     )
-
-
 }
 
 export default OrdersDataFetching

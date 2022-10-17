@@ -48,15 +48,18 @@
 
 .order-products {
     margin-left: 10px;
-    margin-top: -5px;
 }
 
 .order-item{
+    border-style: solid;
+    border-width: 2px;
+    border-color: #e9b986;
     height: 80%;
+    width: 98%;
     overflow: hidden;
     overflow-y: scroll;
-
 }
+
 
 .order-time{
     text-align: center;
