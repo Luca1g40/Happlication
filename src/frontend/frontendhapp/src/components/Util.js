@@ -12,3 +12,10 @@ export default function countOccuranceProduct(list){
     // setNewList(state => [...state,target]);
     return productOccurances;
 }
+
+export const config = {
+    headers: {
+        Authorization: sessionStorage.getItem("Authorization")
+
+    }
+}
