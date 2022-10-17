@@ -16,6 +16,7 @@
 .grid-container{
     display: grid;
     grid-template-columns: repeat(5, minmax(0, 1fr));
+
     grid-auto-rows: 340px;
     grid-row-gap: 10px;
     grid-column-gap: 5px;
@@ -27,9 +28,11 @@
 
 .table-number{
     text-align: center;
+    margin: 5px;
 }
 
 .grid-item {
+    position: relative;
     user-select: none;
     height: 100%;
     min-width: 180px;
@@ -44,11 +47,12 @@
 }
 
 .order-products {
-    padding-left: 10px;
+    margin-left: 10px;
+    margin-top: -5px;
 }
 
 .order-item{
-    height: 85%;
+    height: 80%;
     overflow: hidden;
     overflow-y: scroll;
 
@@ -82,8 +86,22 @@
 
     box-shadow:
             inset
-            0px 0px 20px 10px
+            0 0 20px 10px
             rgb(159, 118, 73);
 
+}
+
+.order-time-paragraph{
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+}
+
+.order-date-paragraph{
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    right: 0;
 }
 
