@@ -20,7 +20,7 @@ public class Order {
     private LocalDateTime timeOfOrder;
     private PreperationStatus preperationStatus;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     private List<Product> products;
 
     public Order() {

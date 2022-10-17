@@ -19,6 +19,7 @@ public class Table {
     private LocalTime elapsedTimeSinceOrder;
     private LocalTime timeLeftToOrder;
     private int amountOfPeople;
+    @Column(unique=true)
     private int tableNumber;
     private TableStatus tableStatus;
     @OneToOne(cascade = CascadeType.ALL)
