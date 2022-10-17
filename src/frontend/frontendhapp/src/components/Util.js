@@ -1,12 +1,14 @@
-export default function countOccuranceProduct(target,list,setNewList){
-    let count = 0;
+export default function countOccuranceProduct(list){
+    const productOccurances = new Map();
     list.map((product)=>{
+        if (productOccurances.has(product)){
+            productOccurances.set(product,productOccurances.get(product)+1)
+        }else{
+            productOccurances.set(product,1)
+        }
 
-            if (product === target) {
-                count++;
-            }
         }
     )
-    setNewList(state => [...state,target]);
-    return count;
+    // setNewList(state => [...state,target]);
+    return productOccurances;
 }

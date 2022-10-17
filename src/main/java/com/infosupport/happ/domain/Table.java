@@ -21,7 +21,7 @@ public class Table {
     private int amountOfPeople;
     private int tableNumber;
     private TableStatus tableStatus;
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.ALL)
     private ShoppingCart shoppingCart;
 
     //TODO GOOI ORDERS

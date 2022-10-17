@@ -76,14 +76,14 @@ function OrdersDataFetching(props) {
                     <div key={order.id} className={"grid-item grid-item"+i} onClick={(event) => {addOrders(order.id); changeStyle(event)}}>
                         <div className={"order-item"}>
                             <p className={"table-number"}>{order.tableNr}</p>
-                            <OrderItemList order={order} staffRole={"bar"}/>
+                            {/*<OrderItemList order={order} staffRole={"bar"}/>*/}
 
-                            {/*{order.foodProducts.map(product =>*/}
-                            {/*        <OrderItem product={product} amount={countOccuranceProduct(product,order.foodProducts,setProductsAlreadyAdded)}/>*/}
+                            {order.foodProducts.map(product =>
+                                    // <OrderItem product={product} amount={countOccuranceProduct(product,order.foodProducts,setProductsAlreadyAdded)}/>
 
-                            {/*    // <p key={product.id} className={"order-products"}>{product.name}</p>*/}
+                                <p key={product.id} className={"order-products"}>{product.name}</p>
 
-                            {/*)}*/}
+                            )}
                         </div>
                         <div className={"order-time"}>
                             <p> {order.orderTime} {order.orderDate} </p>
