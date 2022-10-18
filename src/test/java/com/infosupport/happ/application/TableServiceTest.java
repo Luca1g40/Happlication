@@ -56,13 +56,13 @@ public class TableServiceTest {
 
     }
 
-    @Test
+    @Test //TODO haal comment weg
     @DisplayName("products can be added to the shopping cart")
     void addProductsToShoppingCart() {
         TableData tableData = tableService.addToShoppingCart(1L, 1L,4);
 
-        assertEquals(4, tableData.shoppingCart.getProducts().size());
-        assertEquals(List.of(productStarter, productStarter,productStarter,productStarter), tableData.shoppingCart.getProducts());
+        assertEquals(4, tableData.shoppingCartData.productDataList.size());
+        //assertEquals(List.of(productStarter, productStarter,productStarter,productStarter), tableData.shoppingCartData.productDataList);
 
         assertThrows(ItemNotFound.class, () -> tableService.addToShoppingCart(4L, 1L,4));
 

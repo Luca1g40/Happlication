@@ -14,7 +14,7 @@ public class ShoppingCart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany
+    @ManyToMany
     private List<Product> products;
 
     public ShoppingCart() {
@@ -54,5 +54,13 @@ public class ShoppingCart {
 
     public void clearShoppingCart() {
         products.clear();
+    }
+
+    @Override
+    public String toString() {
+        return "ShoppingCart{" +
+                "id=" + id +
+                ", products=" + products +
+                '}';
     }
 }

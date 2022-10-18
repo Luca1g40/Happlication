@@ -86,13 +86,13 @@ public class TableService {
         Table table = tableRepository.getById(tableId);
         table.placeOrder();
         orderRepository.save(table.getLastOrder());
-        tableRepository.save(table);
+        //tableRepository.save(table);
         return createTableData(table);
     }
 
     private void tableExists(Long id) {
         if (!tableRepository.existsById(id)) {
-            throw new ItemNotFound("table");
+            throw new ItemNotFound(Table.class.getSimpleName());
         }
     }
 
@@ -107,7 +107,7 @@ public class TableService {
                 table.getTimeLeftToOrder(),
                 table.getOrders(),
                 table.getTableStatus(),
-                table.getShoppingCart());
+                new ShoppingCartData(table.getShoppingCart().getProducts()));
     }
 }
 

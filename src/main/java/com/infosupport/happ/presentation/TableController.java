@@ -51,6 +51,8 @@ public class TableController {
     @PostMapping("/table/{id}/shoppingcart")
     public TableData addToShoppingCart(@PathVariable Long id, @RequestBody ProductRequest productRequest){
         try{
+            System.out.println(productRequest.id);
+            System.out.println(productRequest.amount);
             return tableService.addToShoppingCart(id,productRequest.id, productRequest.amount);
         }catch(ItemNotFound itemNotFound){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, itemNotFound.getMessage());
