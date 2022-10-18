@@ -48,7 +48,7 @@ export default function ShoppingCart() {
                 if (!productsAlreadyAdded.includes(item)){
                     return (
                         <div key={item.id}>
-                            <ShoppingCartItem productName={item.name} amount={countOccuranceProduct(item,shoppingCart,setProductsAlreadyAdded)} />
+                            <ShoppingCartItem productName={item.name} amount={1} />
                             <hr />
                         </div>
                     );

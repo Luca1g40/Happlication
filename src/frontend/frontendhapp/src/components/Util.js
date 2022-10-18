@@ -1,5 +1,6 @@
 export default function countOccuranceProduct(list){
-    const productOccurances = new Map();
+    let productOccurances = new Map();
+    console.log(list)
     list.map((product)=>{
         if (productOccurances.has(product)){
             productOccurances.set(product,productOccurances.get(product)+1)
@@ -10,12 +11,7 @@ export default function countOccuranceProduct(list){
         }
     )
     // setNewList(state => [...state,target]);
+    console.log(productOccurances)
     return productOccurances;
 }
 
-export const config = {
-    headers: {
-        Authorization: sessionStorage.getItem("Authorization")
-
-    }
-}

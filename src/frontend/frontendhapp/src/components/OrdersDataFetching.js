@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
+import OrdersFetching from "./OrdersFetching";
 import OrderItem from "./OrderItem";
 import countOccuranceProduct from "./Util";
 import OrderItemList from "./OrderItemList"
@@ -70,33 +71,31 @@ function OrdersDataFetching(props) {
 
     return (
         <div>
-         <div className={"grid-container"}>
-            {
-                orders.map((order, i) =>
-                    <div key={order.id} className={"grid-item grid-item"+i} onClick={(event) => {addOrders(order.id); changeStyle(event)}}>
-                        <p className={"table-number"}>Tafel: {order.tableNr}</p>
-                        <div className={"order-item"}>
-                            <p className={"table-number"}>{order.tableNr}</p>
-                            {/*<OrderItemList order={order} staffRole={"bar"}/>*/}
+        {/* <div className={"grid-container"}>*/}
+        {/*    {*/}
+        {/*        orders.map((order, i) =>*/}
+        {/*            <div key={order.id} className={"grid-item grid-item"+i} onClick={(event) => {addOrders(order.id); changeStyle(event)}}>*/}
+        {/*                <p className={"table-number"}>Tafel: {order.tableNr}</p>*/}
+        {/*                <div className={"order-item"}>*/}
+        {/*                    /!*<p className={"table-number"}>{order.tableNr}</p>*!/*/}
+        {/*                    /!*<OrderItemList order={order} staffRole={"bar"}/>*!/*/}
 
-                            {order.foodProducts.map(product =>
+        {/*                    {order.foodProducts.map(product =>*/}
 
-                                <p key={product.id} className={"order-products"}>{product.name}</p>
+        {/*                        <p key={product.id} className={"order-products"}>{product.name}</p>*/}
 
-                            )}    {order.foodProducts.map(product =>
+        {/*                    )}*/}
+        {/*                </div>*/}
+        {/*                <div className={"order-time"}>*/}
+        {/*                    <p className={"order-time-paragraph"}> {order.orderTime}  </p>*/}
+        {/*                    <p className={"order-date-paragraph"}> {order.orderDate} </p>*/}
+        {/*                </div>*/}
+        {/*            </div>*/}
+        {/*        )*/}
+        {/*    }*/}
+        {/*</div>*/}
+        <OrdersFetching orders={orders}/>
 
-                            <p key={product.id} className={"order-products"}>{product.name}</p>
-
-                        )}
-                        </div>
-                        <div className={"order-time"}>
-                            <p className={"order-time-paragraph"}> {order.orderTime}  </p>
-                            <p className={"order-date-paragraph"}> {order.orderDate} </p>
-                        </div>
-                    </div>
-                )
-            }
-        </div>
         <div className={"bottom-bar"}>
             <div className={"claim-order-button"}>
                 <button onClick={() => {claimOrder(selectedOrders); setDoneSelecting(true)}}> Claim Orders </button>

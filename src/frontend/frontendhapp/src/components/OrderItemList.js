@@ -1,6 +1,5 @@
 import React,{useState,useEffect} from "react"
 import OrderItem from "./OrderItem";
-import countOccuranceProduct from "./Util";
 
 export default function OrderItemList({order,staffRole}){
     const [orderProducts,setOrderProducts] = useState([])
@@ -24,13 +23,12 @@ export default function OrderItemList({order,staffRole}){
         <div>
             {orderProducts.map((product) => {
                 if(!productsAlreadyAdded.includes(product)){
-                    return <OrderItem product={product} amount={countOccuranceProduct(product,orderProducts,setProductsAlreadyAdded)}/>
+                    return <OrderItem key={product.id} product={product} amount={1} className={"order-products"}/>
+                }else{
+                    setProductsAlreadyAdded(state => [...state,product]);
                 }
-
             }
 
-
-            // <p key={product.id} className={"order-products"}>{product.name}</p>
 
         )}
 

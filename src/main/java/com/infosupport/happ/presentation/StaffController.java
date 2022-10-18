@@ -68,4 +68,9 @@ public class StaffController {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("/orders/staff/{staffId}")
+    public List<OrderData> getAllClaimedOrders(@PathVariable Long staffId){
+        return null;
+    }
 }
