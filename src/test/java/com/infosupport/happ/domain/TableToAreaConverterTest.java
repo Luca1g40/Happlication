@@ -12,7 +12,7 @@ import static com.infosupport.happ.domain.TableStatus.OCCUPIED;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-public class TableTest {
+public class TableToAreaConverterTest {
     Product product = new Product();
     Product product2 = new Product();
     Order order;
@@ -27,7 +27,7 @@ public class TableTest {
         shoppingCart = new ShoppingCart();
         product = new Product("champagne", new ArrayList<>(), ProductCategory.DRINKS, 56.99);
         product2 = new Product("Broodje frikandel", new ArrayList<>(), ProductCategory.STARTER, 25.50);
-        table = new Table(LocalTime.now(), LocalTime.now(), 5, 1, OCCUPIED, shoppingCart);
+        table = new Table(LocalTime.now(), LocalTime.now(), 5, 1, OCCUPIED, shoppingCart, false);
     }
 
     @Test

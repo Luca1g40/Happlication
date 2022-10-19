@@ -1,28 +1,24 @@
 package com.infosupport.happ.application;
 
 
-import com.infosupport.happ.application.dto.StaffWithoutAreasData;
 import com.infosupport.happ.application.dto.TableData;
 import com.infosupport.happ.data.TableRepository;
 import com.infosupport.happ.domain.*;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
+
 
 @Service
 public class TableService {
     private final TableRepository tableRepository;
     private final ProductService productService;
-    private final AreaService areaService;
 
-    public TableService(TableRepository tableRepository, ProductService productService, AreaService areaService) {
+    public TableService(TableRepository tableRepository, ProductService productService) {
         this.tableRepository = tableRepository;
         this.productService = productService;
-        this.areaService = areaService;
     }
 
     public TableData createTable(int amountOfPeople, int tableNr, TableStatus tableStatus) {
@@ -30,31 +26,21 @@ public class TableService {
         LocalTime timeLeftToOrder = LocalTime.of(2, 0, 0);
 
         Table table = tableRepository.save(new Table(elapsedTime, timeLeftToOrder, amountOfPeople,
-                tableNr, tableStatus, new ShoppingCart()));
+                tableNr, tableStatus, new ShoppingCart(), false));
 
         return createTableData(table);
     }
 
-
-    public List<StaffWithoutAreasData> callOber(Long tableId) {
-        tableExists(tableId);
-        Table table = tableRepository.getById(tableId);
-        List<Area> areaList = areaService.findAll();
-        List<StaffWithoutAreasData> staffWithoutAreasDataList = new ArrayList<>();
-        for (Area area : areaList) {
-            if (area.getTables().contains(table)){
-                staffWithoutAreasDataList = areaService.createStaffWithoutArea(area);
-            }
-        }
-        System.out.println("staffList "  + staffWithoutAreasDataList) ;
-        return staffWithoutAreasDataList;
+    public TableData setBoolHulp(Long tableId, boolean hulpNodig) {
+        Table table = getTable(tableId);
+        table.setHulpNodig(hulpNodig);
+        return createTableData(table);
     }
 
     public Table getTable(Long tableId) {
         tableExists(tableId);
         return tableRepository.getById(tableId);
     }
-
 
     public TableData addToShoppingCart(Long tableId, Long productId) {
         tableExists(tableId);
@@ -105,7 +91,8 @@ public class TableService {
                 table.getTimeLeftToOrder(),
                 table.getOrders(),
                 table.getTableStatus(),
-                table.getShoppingCart());
+                table.getShoppingCart(),
+                table.isHulpNodig());
     }
 }
 

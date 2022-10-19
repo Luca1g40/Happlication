@@ -22,9 +22,10 @@ public class Table {
     private TableStatus tableStatus;
     @OneToOne(cascade = CascadeType.ALL)
     private ShoppingCart shoppingCart;
+    private boolean hulpNodig = false;
 
     //TODO GOOI ORDERS
-    public Table(LocalTime elapsedTimeSinceOrder, LocalTime timeLeftToOrder, int amountOfPeople, int tableNumber, TableStatus tableStatus, ShoppingCart shoppingCart) {
+    public Table(LocalTime elapsedTimeSinceOrder, LocalTime timeLeftToOrder, int amountOfPeople, int tableNumber, TableStatus tableStatus, ShoppingCart shoppingCart, boolean hulpNodig) {
         if (tableNumber < 0) {
             throw new AttributeMustBeBiggerThanZero(getClass().getSimpleName(), "table number");
         }
@@ -35,9 +36,18 @@ public class Table {
         this.tableNumber = tableNumber;
         this.tableStatus = tableStatus;
         this.shoppingCart = shoppingCart;
+        this.hulpNodig = hulpNodig;
     }
 
     public Table() {
+    }
+
+    public boolean isHulpNodig() {
+        return hulpNodig;
+    }
+
+    public void setHulpNodig(boolean hulpNodig) {
+        this.hulpNodig = hulpNodig;
     }
 
     public int getAmountOfPeople() {
@@ -47,7 +57,6 @@ public class Table {
     public int getTableNumber() {
         return tableNumber;
     }
-
 
     public LocalTime getElapsedTimeSinceOrder() {
         return elapsedTimeSinceOrder;

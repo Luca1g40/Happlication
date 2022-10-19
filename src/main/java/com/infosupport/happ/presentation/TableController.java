@@ -1,20 +1,18 @@
 package com.infosupport.happ.presentation;
 
 import com.infosupport.happ.application.TableService;
-import com.infosupport.happ.application.dto.StaffWithoutAreasData;
 import com.infosupport.happ.application.dto.TableData;
-import com.infosupport.happ.domain.Staff;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import com.infosupport.happ.presentation.dto.ProductRequest;
 import com.infosupport.happ.presentation.dto.ShoppingCartRequest;
 import com.infosupport.happ.presentation.dto.TableRequest;
 import org.springframework.http.HttpStatus;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
-
 @RestController
+@Transactional
 @RequestMapping("/happ")
 public class TableController {
     private final TableService tableService;
@@ -26,6 +24,12 @@ public class TableController {
     @PostMapping("/table")
     public TableData createTable(@RequestBody TableRequest tableRequest) {
         return tableService.createTable(tableRequest.amountOfPeople, tableRequest.tableNr, tableRequest.tableStatus);
+    }
+
+    @CrossOrigin
+    @PutMapping("/table/{id}/helpNodig")
+    public TableData setBoolHelp(@PathVariable Long id, @RequestBody TableRequest tableRequest) {
+         return this.tableService.setBoolHulp(id, tableRequest.setHulpBool);
     }
 
     @CrossOrigin
@@ -57,10 +61,4 @@ public class TableController {
     private void deleteTable(@PathVariable("tableid") Long tableId) {
         this.tableService.deleteTable(tableId);
     }
-
-    @GetMapping("/table/{id}/callober")
-    private List<StaffWithoutAreasData> callOber(@PathVariable Long id) {
-        return this.tableService.callOber(id);
-    }
-
 }

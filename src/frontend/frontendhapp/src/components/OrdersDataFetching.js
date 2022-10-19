@@ -21,10 +21,16 @@ function OrdersDataFetching() {
     const changeStyle = event => {
         if (event.currentTarget.style.borderStyle) {
             event.currentTarget.style.borderStyle = null;
+            event.currentTarget.style.backgroundColor = "#f8cfad"
+
+
         } else {
             event.currentTarget.style.borderStyle = "outset"
+            event.currentTarget.style.backgroundColor = "#FFB27B"
+
         }
     };
+
 
     function claimOrder(orders){
         console.log(orders)
@@ -55,7 +61,7 @@ function OrdersDataFetching() {
          <div className={"grid-container"}>
             {
                 orders.map((order, i) =>
-                    <div key={order.id} className={"grid-item grid-item"+i} onClick={() => {addOrders(order.id)}}>
+                    <div key={order.id} className={"grid-item grid-item"+i} onClick={(event) => {addOrders(order.id); changeStyle(event)}}>
                         <div className={"order-item"}>
                             <p className={"table-number"}>{order.tableNr}</p>
                             {order.foodProducts.map(product =>
@@ -71,8 +77,11 @@ function OrdersDataFetching() {
         </div>
         <div className={"bottom-bar"}>
             <div className={"claim-order-button"}>
-                <button onClick={() => {claimOrder(selectedOrders); setDoneSelecting(true)}}> DOE DINGEN TOEVOEGEN EN ZO</button>
+                <button onClick={() => {claimOrder(selectedOrders); setDoneSelecting(true)}}> Claim Orders </button>
             </div>
+            <span>
+                <p>Signed in as: user</p>
+            </span>
         </div>
     </div>
     )

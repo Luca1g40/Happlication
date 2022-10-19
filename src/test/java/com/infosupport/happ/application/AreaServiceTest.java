@@ -1,5 +1,6 @@
 package com.infosupport.happ.application;
 
+import com.infosupport.happ.application.converter.TableToAreaConverter;
 import com.infosupport.happ.application.dto.AreaData;
 import com.infosupport.happ.data.AreaRepository;
 import com.infosupport.happ.data.StaffRepository;
@@ -24,12 +25,13 @@ public class AreaServiceTest {
     private AreaRepository areaRepository;
     private StaffRepository staffRepository;
     private TableRepository tableRepository;
+    private TableToAreaConverter tableToAreaConverter;
 
     @BeforeEach
     void beforeEach(){
         this.areaRepository = mock(AreaRepository.class);
         this.staffRepository = mock(StaffRepository.class);
-        this.areaService = new AreaService(areaRepository, staffRepository, tableRepository);
+        this.areaService = new AreaService(areaRepository, staffRepository, tableRepository, tableToAreaConverter);
 
         Staff staff = new Staff(1, "Staff");
         Area area = new Area("Nieuwe area");

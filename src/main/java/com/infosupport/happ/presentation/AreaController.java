@@ -5,10 +5,12 @@ import com.infosupport.happ.application.dto.AreaData;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import com.infosupport.happ.presentation.dto.AreaRequest;
 import org.springframework.http.HttpStatus;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController
+@Transactional
 @RequestMapping("/happ")
 public class AreaController {
     private final AreaService areaService;

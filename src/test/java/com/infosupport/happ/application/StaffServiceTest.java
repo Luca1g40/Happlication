@@ -15,11 +15,13 @@ import static org.mockito.Mockito.when;
 public class StaffServiceTest {
     private StaffService staffService;
     private StaffRepository staffRepository;
+    private AreaService areaService;
+
 
     @BeforeEach
     void beforeEach() {
         this.staffRepository = mock(StaffRepository.class);
-        this.staffService = new StaffService(staffRepository);
+        this.staffService = new StaffService(staffRepository, areaService);
 
         Staff staff = new Staff(1234, "Geber");
 

@@ -36,7 +36,7 @@ public class OrderServiceTest {
         this.tableService = mock(TableService.class);
         this.orderService = new OrderService(orderRepository, orderAssistant);
 
-        Table table = new Table(LocalTime.now(), LocalTime.now(), 4, 3, TableStatus.OCCUPIED, new ShoppingCart());
+        Table table = new Table(LocalTime.now(), LocalTime.now(), 4, 3, TableStatus.OCCUPIED, new ShoppingCart(), false);
         Staff staff = new Staff(1, "staff");
         Product product = new Product();
 

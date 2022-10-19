@@ -1,8 +1,5 @@
 package com.infosupport.happ.domain;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +31,6 @@ public class Area {
 
     public Area() {
     }
-
 
     public Long getId() {
         return id;

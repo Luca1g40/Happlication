@@ -5,6 +5,7 @@ import com.infosupport.happ.application.dto.StaffData;
 import com.infosupport.happ.data.StaffRepository;
 import com.infosupport.happ.domain.Area;
 import com.infosupport.happ.domain.Staff;
+import com.infosupport.happ.domain.Table;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import org.springframework.stereotype.Service;
 
@@ -15,14 +16,25 @@ import java.util.List;
 public class StaffService {
 
     private final StaffRepository staffRepository;
+    private final AreaService areaService;
 
-    public StaffService(StaffRepository staffRepository) {
+    public StaffService(StaffRepository staffRepository, AreaService areaService) {
         this.staffRepository = staffRepository;
+        this.areaService = areaService;
     }
 
     public Staff getStaff(Long id) {
         staffExists(id);
         return staffRepository.getById(id);
+    }
+
+    public List<Table> getTableThatNeedHelp(Long staffId) {
+        Staff staff = getStaff(staffId);
+        List<Table> tableListWithHelp = new ArrayList<>();
+        for (Area area : staff.getAreas()) {
+            tableListWithHelp.addAll(areaService.getTablesThatNeedHelp(area.getId()));
+        }
+        return tableListWithHelp;
     }
 
     public void staffExists(Long id) {
@@ -41,7 +53,6 @@ public class StaffService {
         staffExists(id);
         this.staffRepository.deleteById(id);
     }
-
 
     public StaffData createStaffData(Staff staff) {
         return new StaffData(
@@ -67,5 +78,4 @@ public class StaffService {
         }
         return areaWithoutStaffDataList;
     }
-
 }

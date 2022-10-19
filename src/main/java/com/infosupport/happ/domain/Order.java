@@ -23,6 +23,10 @@ public class Order {
     public Order() {
     }
 
+    public Table getTable() {
+        return table;
+    }
+
     public Order(Table table, LocalDateTime timeOfOrder, List<Product> products) {
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");

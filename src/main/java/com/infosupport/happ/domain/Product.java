@@ -30,6 +30,10 @@ public class Product {
         this.isReady = false;
     }
 
+    public List<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
     public String getName() {
         return name;
     }

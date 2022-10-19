@@ -4,10 +4,12 @@ import com.infosupport.happ.application.OrderService;
 import com.infosupport.happ.application.StaffService;
 import com.infosupport.happ.application.dto.OrderData;
 import com.infosupport.happ.application.dto.StaffData;
+import com.infosupport.happ.domain.Table;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import com.infosupport.happ.presentation.dto.OrderRequest;
 import com.infosupport.happ.presentation.dto.StaffRequest;
 import org.springframework.http.HttpStatus;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -15,6 +17,7 @@ import java.util.List;
 
 
 @RestController
+@Transactional
 @RequestMapping("/happ")
 public class StaffController {
 
@@ -24,6 +27,11 @@ public class StaffController {
     public StaffController(StaffService staffService, OrderService orderService) {
         this.staffService = staffService;
         this.orderService = orderService;
+    }
+
+    @GetMapping("/staff/{staffid}/tablethatneedhelp")
+    public List<Table> getTableThatNeedHelp(@PathVariable("staffid") Long staffId) {
+        return this.staffService.getTableThatNeedHelp(staffId);
     }
 
 

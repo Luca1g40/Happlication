@@ -24,7 +24,7 @@ import static org.mockito.Mockito.when;
 
 
 @SpringBootTest
-public class TableServiceTest {
+public class TableToAreaConverterServiceTest {
 
     private TableService tableService;
     private TableRepository tableRepository;
@@ -32,19 +32,18 @@ public class TableServiceTest {
     private Product productStarter;
     private Product productMain;
     private Table table;
-    private AreaService areaService;
 
 
     @BeforeEach
     void beforeEach(){
         this.tableRepository = mock(TableRepository.class);
         this.productService = mock(ProductService.class);
-        this.tableService = new TableService(tableRepository, productService, areaService);
+        this.tableService = new TableService(tableRepository, productService);
         this.productStarter = new Product("kip",  new ArrayList<>(), STARTER, 12.50);
         this.productMain = new Product("vis",  new ArrayList<>(), MAIN_COURSE, 7.50);
 
         this.table = new Table(LocalTime.now(), LocalTime.parse("02:00:00"),
-                4, 3, TableStatus.OCCUPIED, new ShoppingCart());
+                4, 3, TableStatus.OCCUPIED, new ShoppingCart(), false);
 
         when(tableRepository.existsById(1L)).thenReturn(true);
         when(tableRepository.getById(1L)).thenReturn(table);
