@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class StaffTest {
 
@@ -15,7 +15,7 @@ public class StaffTest {
 
     @BeforeEach
     void beforeEach() {
-        staff = new Staff(111, "staff",new ArrayList<>());
+        staff = new Staff(111, "staff", new ArrayList<>());
         order = new Order();
 
     }

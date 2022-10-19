@@ -1,15 +1,12 @@
-
-import React,{useState,useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import ShoppingCartItem from "./ShoppingCartItem";
-import Counter from "./Counter";
 import axios from "axios";
 import SubmitButton from "./submitData/SubmitButton";
-import {PlaceOrder} from "./submitData/UrlMappings"
-import countOccuranceProduct from "./Util";
+import {PlaceOrder} from "../urlMappings/TableRequests";
 
 export default function ShoppingCart() {
     const [shoppingCart, setShoppingCart] = useState([]);
-    const [productsAlreadyAdded,setProductsAlreadyAdded] = useState([])
+    const [productsAlreadyAdded, setProductsAlreadyAdded] = useState([])
 
 
     useEffect(() => {
@@ -21,35 +18,16 @@ export default function ShoppingCart() {
             .catch(err => {
                 console.log(err)
             })
-        }, [])
+    }, [])
 
-
-
-        // function countProduct(target,list,setNewList){
-        //     let count = 0;
-        //     list.map((product)=>{
-        //
-        //         if (product === target) {
-        //             count++;
-        //         }
-        //     }
-        //     )
-        //     setNewList(state => [...state,target]);
-        //     return count;
-        // }
-
-
-
-
-
-    return (shoppingCart.length>0) ? (
+    return (shoppingCart.length > 0) ? (
         <div>
             {shoppingCart.map((item, index) => {
-                if (!productsAlreadyAdded.includes(item)){
+                if (!productsAlreadyAdded.includes(item)) {
                     return (
                         <div key={item.id}>
-                            <ShoppingCartItem productName={item.name} amount={1} />
-                            <hr />
+                            <ShoppingCartItem productName={item.name} amount={1}/>
+                            <hr/>
                         </div>
                     );
                 }
@@ -58,6 +36,6 @@ export default function ShoppingCart() {
             <SubmitButton buttonText={"Order"} submitUrl={PlaceOrder(1)}/>
         </div>
 
-    ) : <div> <h1 align="center">Your shoppingcart is empty</h1></div>
+    ) : <div><h1 align="center">Your shoppingcart is empty</h1></div>
 
 }

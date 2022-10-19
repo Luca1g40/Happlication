@@ -32,23 +32,23 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-       http.cors();
+        http.cors();
         http.csrf().disable()
-               .authorizeRequests().antMatchers("/authenticate").permitAll()
-               .anyRequest().authenticated() // Gives everybody acces to API "//authenticate" so then can login
-               .and().sessionManagement()
-               .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-       http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+                .authorizeRequests().antMatchers("/authenticate").permitAll()
+                .anyRequest().authenticated() // Gives everybody acces to API "//authenticate" so then can login
+                .and().sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
     @Override
     @Bean
-    public AuthenticationManager authenticationManagerBean() throws Exception{
+    public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return NoOpPasswordEncoder.getInstance();
     }
 }

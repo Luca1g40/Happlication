@@ -1,7 +1,6 @@
 package com.infosupport.happ.application;
 
 
-import com.infosupport.happ.application.dto.OrderData;
 import com.infosupport.happ.application.dto.ShoppingCartData;
 import com.infosupport.happ.application.dto.TableData;
 import com.infosupport.happ.data.OrderRepository;
@@ -12,13 +11,8 @@ import com.infosupport.happ.domain.Table;
 import com.infosupport.happ.domain.TableStatus;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PathVariable;
 
-import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -50,7 +44,7 @@ public class TableService {
         return tableRepository.getById(tableId);
     }
 
-    public ShoppingCartData getTableShoppingCart(Long tableId){
+    public ShoppingCartData getTableShoppingCart(Long tableId) {
         tableExists(tableId);
         return new ShoppingCartData(tableRepository.getById(tableId).getShoppingCart().getProducts());
     }
@@ -60,12 +54,12 @@ public class TableService {
         tableExists(tableId);
         Table table = tableRepository.getById(tableId);
 
-        table.addToShoppingCart(productService.getProduct(productId),amount);
+        table.addToShoppingCart(productService.getProduct(productId), amount);
         tableRepository.save(table);
         return createTableData(table);
     }
 
-    public TableData removeFromShoppingCart(Long tableId,Product product){
+    public TableData removeFromShoppingCart(Long tableId, Product product) {
         tableExists(tableId);
         Table table = tableRepository.getById(tableId);
         table.deleteFromShoppingCart(product);

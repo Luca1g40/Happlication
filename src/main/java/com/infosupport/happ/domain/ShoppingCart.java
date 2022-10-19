@@ -2,9 +2,7 @@ package com.infosupport.happ.domain;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.HashMap;
 
 
 @Entity
@@ -37,7 +35,7 @@ public class ShoppingCart {
         this.id = id;
     }
 
-    public void addToShoppingCart(Product product){
+    public void addToShoppingCart(Product product) {
 //        if (products.containsKey(product)){
 //            products.replace(product, products.get(product)+amount);
 //        }else products.put(product,amount);

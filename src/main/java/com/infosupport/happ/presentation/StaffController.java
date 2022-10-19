@@ -4,6 +4,7 @@ import com.infosupport.happ.application.OrderService;
 import com.infosupport.happ.application.StaffService;
 import com.infosupport.happ.application.dto.OrderData;
 import com.infosupport.happ.application.dto.StaffData;
+import com.infosupport.happ.application.dto.StaffWithoutAreasData;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import com.infosupport.happ.presentation.dto.OrderRequest;
 import com.infosupport.happ.presentation.dto.StaffRequest;
@@ -50,8 +51,8 @@ public class StaffController {
     }
 
     @GetMapping("/staff/{id}")
-    public StaffData getStaff(@PathVariable Long id){
-        try{
+    public StaffData getStaff(@PathVariable Long id) {
+        try {
             return this.staffService.createStaffData(staffService.getStaff(id));
         } catch (ItemNotFound e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
@@ -70,7 +71,13 @@ public class StaffController {
     }
 
     @GetMapping("/orders/staff/{staffId}")
-    public List<OrderData> getAllClaimedOrders(@PathVariable Long staffId){
-        return null;
+    public List<OrderData> getAllClaimedOrders(@PathVariable Long staffId) {
+        try {
+            return this.staffService.getAllClaimedOrders(staffId);
+        } catch (ItemNotFound itemNotFound) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

@@ -1,7 +1,6 @@
 package com.infosupport.happ.application;
 
 import com.infosupport.happ.application.dto.ProductData;
-import com.infosupport.happ.application.dto.StaffData;
 import com.infosupport.happ.data.ProductRepository;
 import com.infosupport.happ.domain.Ingredient;
 import com.infosupport.happ.domain.Product;
@@ -28,12 +27,12 @@ public class ProductServiceTest {
     ProductRepository productRepository;
 
     @BeforeEach
-    void beforeEach(){
+    void beforeEach() {
         productRepository = mock(ProductRepository.class);
         ingredientList = new ArrayList<>();
-        ingredient = new Ingredient("gember",10);
+        ingredient = new Ingredient("gember", 10);
         ingredientList.add(ingredient);
-        product = new Product("gember stukjes",ingredientList, ProductCategory.DESSERT,39.99,"Stukjes gember");
+        product = new Product("gember stukjes", ingredientList, ProductCategory.DESSERT, 39.99, "Stukjes gember");
 
         when(productRepository.getById(1L)).thenReturn(product);
         when(productRepository.existsById(1L)).thenReturn(true);
@@ -42,40 +41,31 @@ public class ProductServiceTest {
     }
 
     @Test
-    void createProduct(){
-        ProductData productData = productService.createProduct(product.getName(),product.getProductCategory(),product.getPrice(),product.getIngredients(), product.getDetails());
+    void createProduct() {
+        ProductData productData = productService.createProduct(product.getName(), product.getProductCategory(), product.getPrice(), product.getIngredients(), product.getDetails());
 
         assertNotNull(productData);
 
-        assertEquals( product.getName(), productData.name);
-        assertEquals(product.getIngredients(),productData.ingredientList);
-        assertEquals(product.getProductCategory(),productData.productCategory);
-        assertEquals(product.getPrice(),productData.price);
-        assertEquals(product.isReady(),productData.isReady);
+        assertEquals(product.getName(), productData.name);
+        assertEquals(product.getIngredients(), productData.ingredientList);
+        assertEquals(product.getProductCategory(), productData.productCategory);
+        assertEquals(product.getPrice(), productData.price);
     }
 
     @Test
-    void switchPrepStatus(){
-        ProductData productData = productService.switchProductPrepStatus(1L);
-        assertTrue(productData.isReady);
-        assertThrows(ItemNotFound.class, ()-> productService.switchProductPrepStatus(10L));
+    void updateProduct() {
+        ProductData productData = productService.updateProduct("T-bone steak", ProductCategory.MAIN_COURSE, 199.99, 1L, new ArrayList<>(), "Zeer goeie steek");
 
-    }
-
-    @Test
-    void updateProduct(){
-        ProductData productData = productService.updateProduct("T-bone steak",ProductCategory.MAIN_COURSE,199.99,1L,new ArrayList<>(),"Zeer goeie steek");
-
-        assertEquals(199.99,productData.price);
-        assertEquals("T-bone steak",productData.name);
-        assertEquals(0,productData.ingredientList.size());
-        assertEquals(ProductCategory.MAIN_COURSE,productData.productCategory);
-        assertThrows(ItemNotFound.class, ()-> productService.updateProduct("T-bone steak",ProductCategory.MAIN_COURSE,199.99,10L,new ArrayList<>(),"Matige Steak"));
+        assertEquals(199.99, productData.price);
+        assertEquals("T-bone steak", productData.name);
+        assertEquals(0, productData.ingredientList.size());
+        assertEquals(ProductCategory.MAIN_COURSE, productData.productCategory);
+        assertThrows(ItemNotFound.class, () -> productService.updateProduct("T-bone steak", ProductCategory.MAIN_COURSE, 199.99, 10L, new ArrayList<>(), "Matige Steak"));
 
     }
 
     @Test
-    void productExists(){
+    void productExists() {
         assertEquals(this.product, productService.getProduct(1L));
     }
 

@@ -15,9 +15,8 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.infosupport.happ.domain.PreperationStatus.CLAIMED;
-import static com.infosupport.happ.domain.PreperationStatus.UNCLAIMED;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -37,7 +36,7 @@ public class OrderServiceTest {
         this.orderService = new OrderService(orderRepository, orderAssistant);
 
         Table table = new Table(LocalTime.now(), LocalTime.now(), 4, 3, TableStatus.OCCUPIED, new ShoppingCart());
-        Staff staff = new Staff(1, "staff",new ArrayList<>());
+        Staff staff = new Staff(1, "staff", new ArrayList<>());
         Product product = new Product();
 
         when(orderAssistant.getStaff(1L)).thenReturn(staff);
@@ -53,7 +52,7 @@ public class OrderServiceTest {
     }
 
 //    @Test
-//    @DisplayName("Order can be created")
+//    @DisplayName("SingleOrder can be created")
 //    void CreateNewOrder() {
 //
 //        Product product = new Product();
@@ -75,7 +74,6 @@ public class OrderServiceTest {
         assertThrows(ItemNotFound.class, () -> orderService.getOrder(4L));
 
     }
-
 
 
 //    @Test

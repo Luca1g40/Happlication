@@ -19,7 +19,7 @@ public class Table {
     private LocalTime elapsedTimeSinceOrder;
     private LocalTime timeLeftToOrder;
     private int amountOfPeople;
-    @Column(unique=true)
+    @Column(unique = true)
     private int tableNumber;
     private TableStatus tableStatus;
     @OneToOne(cascade = CascadeType.ALL)
@@ -29,7 +29,8 @@ public class Table {
     public Table(LocalTime elapsedTimeSinceOrder, LocalTime timeLeftToOrder, int amountOfPeople, int tableNumber, TableStatus tableStatus, ShoppingCart shoppingCart) {
         if (tableNumber < 0) {
             throw new AttributeMustBeBiggerThanZero(getClass().getSimpleName(), "table number");
-        }else if(amountOfPeople < 0) throw new AttributeMustBeBiggerThanZero(getClass().getSimpleName(), "amount of people");
+        } else if (amountOfPeople < 0)
+            throw new AttributeMustBeBiggerThanZero(getClass().getSimpleName(), "amount of people");
 
 
         this.orders = new ArrayList<>();
@@ -77,8 +78,8 @@ public class Table {
         shoppingCart.removeFromShoppingCart(product);
     }
 
-    public void addToShoppingCart(Product product, int amount){
-        for (int i=0; i<amount;i++){
+    public void addToShoppingCart(Product product, int amount) {
+        for (int i = 0; i < amount; i++) {
             this.shoppingCart.addToShoppingCart(product);
         }
     }
@@ -95,8 +96,8 @@ public class Table {
         return shoppingCart;
     }
 
-    public void placeOrder(){
-        Order order = new Order(this, java.time.LocalDateTime.now(),new ArrayList<>());
+    public void placeOrder() {
+        Order order = new Order(this, java.time.LocalDateTime.now(), new ArrayList<>());
         this.shoppingCart.getProducts().forEach(order::addToProducts);
 
 
