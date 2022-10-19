@@ -31,6 +31,17 @@ public class StaffService {
         }
     }
 
+    public Staff getStaffByPassword(int password) {
+        staffExistsByPassword(password);
+        return staffRepository.getByPassword(password);
+    }
+
+    public void staffExistsByPassword(int password) {
+        if (!staffRepository.existsByPassword(password)) {
+            throw new ItemNotFound("staff");
+        }
+    }
+
     public StaffData createStaff(int password, String name) {
         Staff staff = new Staff(password, name);
         staffRepository.save(staff);

@@ -1,7 +1,6 @@
 package com.infosupport.happ.security.application;
 
 import com.infosupport.happ.application.StaffService;
-import com.infosupport.happ.data.StaffRepository;
 import com.infosupport.happ.domain.Staff;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,8 +21,9 @@ public class MyUserDetailsService implements UserDetailsService {
 
     @Override
     @Transactional
-    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        Staff staff = staffService.getStaff(Long.parseLong(userName));
-        return new User(String.valueOf(staff.getId()), String.valueOf(staff.getPassword()), new ArrayList<>());
+    public UserDetails loadUserByUsername(String password) throws UsernameNotFoundException {
+        Staff staff = staffService.getStaffByPassword(Integer.parseInt(password));
+        return new User("staff", String.valueOf(staff.getPassword()), new ArrayList<>());
     }
 }
+
