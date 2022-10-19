@@ -77,7 +77,7 @@ public class AreaServiceTest {
     @Test
     @DisplayName("Edit staff of area")
     void editAreaStaff() {
-        Staff otherStaff = new Staff(1, "Other staff",new ArrayList<>());
+        Staff otherStaff = new Staff(1, "Other staff", new ArrayList<>());
 
         when(staffRepository.getById(1L)).thenReturn(otherStaff);
 
@@ -86,7 +86,7 @@ public class AreaServiceTest {
         AreaData areaData = areaService.editStaffListInArea(2L, List.of(1L));
 
         assertEquals("Other staff", areaData.staffWithoutAreasList.get(0).name);
-        assertThrows(ItemNotFound.class, ()-> areaService.editStaffListInArea(4L, List.of(1L)));
+        assertThrows(ItemNotFound.class, () -> areaService.editStaffListInArea(4L, List.of(1L)));
 
     }
 

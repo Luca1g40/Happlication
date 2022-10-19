@@ -1,11 +1,12 @@
 package com.infosupport.happ.domain;
 
 
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.infosupport.happ.domain.PreperationStatus.CLAIMED;
 
 @Entity
 public class Staff implements Serializable {
@@ -64,9 +65,24 @@ public class Staff implements Serializable {
         return areas;
     }
 
-    public void addOrder(Order order) {this.claimedOrders.add(order);}
+    public void addOrder(Order order) {
+        this.claimedOrders.add(order);
+    }
 
-    public List<Order> getClaimedOrders() {
+    public List<Order> getClaimedAndFinishedOrders() {
         return claimedOrders;
     }
+
+    public List<Order> getClaimedOrders() {
+        List<Order> ordersNotFinished = new ArrayList<>();
+
+        for (Order order : claimedOrders) {
+            if (order.getPreperationStatus() == CLAIMED) {
+                ordersNotFinished.add(order);
+            }
+        }
+
+        return ordersNotFinished;
+    }
+
 }

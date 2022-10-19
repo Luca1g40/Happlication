@@ -1,19 +1,17 @@
-*{
+* {
     font-family: Helvetica, sans-serif;
 }
 
-.orderContainer{
+.orderContainer {
     position: relative;
     height: 750px;
     width: 1000px;
     margin: auto;
 
-    box-shadow: rgba(0, 0, 0, 0.19)
-    0 10px 20px, rgba(0, 0, 0, 0.23)
-    0 6px 6px;
+    box-shadow: rgba(0, 0, 0, 0.19) 0 10px 20px, rgba(0, 0, 0, 0.23) 0 6px 6px;
 }
 
-.grid-container{
+.grid-container {
     display: grid;
     grid-template-columns: repeat(5, minmax(0, 1fr));
 
@@ -26,7 +24,7 @@
     overflow-y: scroll;
 }
 
-.table-number{
+.table-number {
     text-align: center;
     margin: 5px;
 }
@@ -37,9 +35,7 @@
     height: 100%;
     min-width: 180px;
     background: #f8cfad;
-    box-shadow: rgba(0, 0, 0, 0.25)
-    0 10px 20px, rgba(0, 0, 0, 0.5)
-    0 6px 6px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0 10px 20px, rgba(0, 0, 0, 0.5) 0 6px 6px;
 }
 
 .grid-item:hover {
@@ -50,7 +46,7 @@
     margin-left: 10px;
 }
 
-.order-item{
+.order-item {
     border-style: solid;
     border-width: 2px;
     border-color: #e9b986;
@@ -61,7 +57,7 @@
 }
 
 
-.order-time{
+.order-time {
     text-align: center;
     font-size: 11px;
     margin: -25px
@@ -71,7 +67,7 @@
     display: none;
 }
 
-.claim-order-button{
+.claim-order-button {
     margin: 0;
     position: absolute;
     top: 50%;
@@ -80,31 +76,42 @@
     transform: translate(-50%, -50%);
 }
 
-.bottom-bar{
+.bottom-bar {
     bottom: 0;
     position: absolute;
     background-color: #e3a768;
     width: 100%;
     height: 7%;
 
-    box-shadow:
-            inset
-            0 0 20px 10px
-            rgb(159, 118, 73);
+    box-shadow: inset 0 0 20px 10px rgb(159, 118, 73);
 
 }
 
-.order-time-paragraph{
+.order-time-paragraph {
     position: absolute;
     bottom: 10px;
     left: 0;
     right: 0;
 }
 
-.order-date-paragraph{
+.order-date-paragraph {
     position: absolute;
     bottom: -5px;
     left: 0;
     right: 0;
+}
+
+/*PERSONAL ORDER SCHERM CSS*/
+.order-done-button {
+    position: absolute;
+    bottom: 1%;
+    right: 1%;
+    height: 34px;
+    width: 34px;
+    background: none;
+    cursor: pointer;
+    border-style: double;
+    border-width: 1px;
+    border-radius: 5px;
 }
 

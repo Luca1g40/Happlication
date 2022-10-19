@@ -9,11 +9,12 @@ import com.infosupport.happ.domain.Staff;
 import com.infosupport.happ.domain.Table;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import org.springframework.stereotype.Service;
-import static com.infosupport.happ.domain.PreperationStatus.UNCLAIMED;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.infosupport.happ.domain.PreperationStatus.UNCLAIMED;
 
 
 @Service
@@ -29,8 +30,10 @@ public class OrderService {
 
     public OrderData createOrder(Long tableId, List<Long> productList) {
         List<Product> products = new ArrayList<>();
+
         Table table = this.orderAssistant.getTable(tableId);
-        for (Long id:productList ) {
+
+        for (Long id : productList) {
             products.add(orderAssistant.getProductById(id));
         }
         System.out.println(table);
@@ -56,9 +59,20 @@ public class OrderService {
         return this.createOrderData(order);
     }
 
+    public OrderData setStatusToDone(Long orderId) {
+        Order order = orderAssistant.getOrderById(orderId);
+
+        order.setPreparationStatusToDone();
+
+        orderRepository.save(order);
+
+        return this.createOrderData(order);
+
+    }
+
     public List<OrderData> claimMultipleOrders(Long staffId, List<Long> orders) {
         List<OrderData> dataOrders = new ArrayList<>();
-        for(Long orderId: orders){
+        for (Long orderId : orders) {
             dataOrders.add(claimOrder(staffId, orderId));
         }
         return dataOrders;
@@ -78,14 +92,13 @@ public class OrderService {
 
     public List<OrderData> getAllUnclaimedOrders() {
         List<Order> unclaimedOrders = new ArrayList<>();
-        for (Order order : orderRepository.findAll()){
-            if (order.getPreperationStatus() == UNCLAIMED){
+
+        for (Order order : orderRepository.findAll()) {
+            if (order.getPreperationStatus() == UNCLAIMED) {
                 unclaimedOrders.add(order);
             }
         }
-
         return convertToOrderDataList(unclaimedOrders);
-
     }
 
     private void orderExists(Long id) {
@@ -97,7 +110,7 @@ public class OrderService {
     public List<OrderData> convertToOrderDataList(List<Order> orders) {
         List<OrderData> ordersData = new ArrayList<>();
 
-        for (Order order : orders){
+        for (Order order : orders) {
             ordersData.add(createOrderData(order));
         }
 

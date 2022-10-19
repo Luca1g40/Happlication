@@ -1,6 +1,5 @@
 package com.infosupport.happ.application;
 
-import com.infosupport.happ.application.dto.OrderData;
 import com.infosupport.happ.application.dto.TableData;
 import com.infosupport.happ.data.OrderRepository;
 import com.infosupport.happ.data.TableRepository;
@@ -40,9 +39,9 @@ public class TableServiceTest {
         this.tableRepository = mock(TableRepository.class);
         this.productService = mock(ProductService.class);
         this.orderRepository = mock(OrderRepository.class);
-        this.tableService = new TableService(tableRepository, productService,orderRepository);
-        this.productStarter = new Product("kip", new ArrayList<>(), STARTER, 12.50,"lekker vis");
-        this.productMain = new Product("vis", new ArrayList<>(), MAIN_COURSE, 7.50,"lekker kip");
+        this.tableService = new TableService(tableRepository, productService, orderRepository);
+        this.productStarter = new Product("kip", new ArrayList<>(), STARTER, 12.50, "lekker vis");
+        this.productMain = new Product("vis", new ArrayList<>(), MAIN_COURSE, 7.50, "lekker kip");
 
         this.table = new Table(LocalTime.now(), LocalTime.parse("02:00:00"),
                 4, 3, TableStatus.OCCUPIED, new ShoppingCart());
@@ -56,15 +55,15 @@ public class TableServiceTest {
 
     }
 
-    @Test //TODO haal comment weg
+    @Test
     @DisplayName("products can be added to the shopping cart")
     void addProductsToShoppingCart() {
-        TableData tableData = tableService.addToShoppingCart(1L, 1L,4);
+        TableData tableData = tableService.addToShoppingCart(1L, 1L, 4);
 
-        assertEquals(4, tableData.shoppingCartData.productDataList.size());
-        //assertEquals(List.of(productStarter, productStarter,productStarter,productStarter), tableData.shoppingCartData.productDataList);
+        assertEquals(4, tableData.shoppingCart.getProducts().size());
+        assertEquals(List.of(productStarter, productStarter, productStarter, productStarter), tableData.shoppingCart.getProducts());
 
-        assertThrows(ItemNotFound.class, () -> tableService.addToShoppingCart(4L, 1L,4));
+        assertThrows(ItemNotFound.class, () -> tableService.addToShoppingCart(4L, 1L, 4));
 
 
     }
@@ -72,7 +71,7 @@ public class TableServiceTest {
     @Test
     @DisplayName("products can be removed from the shopping cart")
     void removeProductsFromShoppingCart() {
-        tableService.addToShoppingCart(1L,1L,1);
+        tableService.addToShoppingCart(1L, 1L, 1);
         assertEquals(1, tableService.getTable(1L).getShoppingCart().getProducts().size());
 
         tableService.removeFromShoppingCart(1L, productStarter);
@@ -115,10 +114,10 @@ public class TableServiceTest {
     }
 
     @Test
-    @DisplayName("Order can be placed")
+    @DisplayName("SingleOrder can be placed")
     void placeOrder() {
-       // assertEquals(1, tableService.getTable(1L).getShoppingCart().getProducts().size());
-        tableService.addToShoppingCart(1L,1L,1);
+        // assertEquals(1, tableService.getTable(1L).getShoppingCart().getProducts().size());
+        tableService.addToShoppingCart(1L, 1L, 1);
         TableData tableData = tableService.placeOrder(1L);
 
         Order order = new Order(this.table, tableService.getTable(1L).getLastOrder().getTimeOfOrder(), List.of(productStarter));

@@ -1,23 +1,19 @@
 import React, {useEffect, useState} from "react";
-import axios from "axios";
-import Popup from "./Popup";
-import ItemRegel from "./itemRegel";
-// import from "../styles/Shoppingcart.css"
+import MenuItem from "./MenuItem";
+import {getMenuFoodItems} from "../urlMappings/MenuRequests";
 
 
-function FoodsDataFetching() {
-    const [buttonPopup, setButtonPopup] = useState(false)
+function FoodMenu() {
     const [products, setProducts] = useState([])
 
     useEffect(() => {
-        axios.get("http://localhost:8080/happ/product/food")
-            .then(res => {
-                console.log(res)
+        getMenuFoodItems()
+            .then(res =>
                 setProducts(res.data)
-            })
-            .catch(err => {
+            )
+            .catch(err =>
                 console.log(err)
-            })
+            )
     }, [])
 
     return (
@@ -26,17 +22,13 @@ function FoodsDataFetching() {
                 <h1>Gerechten</h1>
                 {
                     products.map((product, i) =>
-
-
-                        <ItemRegel key={product.id} product={product} />
+                        <MenuItem key={product.id} product={product}/>
                     )
                 }
             </ul>
             <button className={"shoppingcartIcon"}>shooo</button>
         </div>
     )
-
-
 }
 
-export default FoodsDataFetching
+export default FoodMenu

@@ -19,9 +19,7 @@ public class Table {
     private LocalTime elapsedTimeSinceOrder;
     private LocalTime timeLeftToOrder;
     private int amountOfPeople;
-
-
-    @Column(unique=true)
+    @Column(unique = true)
     private int tableNumber;
     private TableStatus tableStatus;
     @OneToOne(cascade = CascadeType.ALL)
@@ -79,8 +77,8 @@ public class Table {
         shoppingCart.removeFromShoppingCart(product);
     }
 
-    public void addToShoppingCart(Product product, int amount){
-        for (int i=0; i<amount;i++){
+    public void addToShoppingCart(Product product, int amount) {
+        for (int i = 0; i < amount; i++) {
             this.shoppingCart.addToShoppingCart(product);
         }
     }

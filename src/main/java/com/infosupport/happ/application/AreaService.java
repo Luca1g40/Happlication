@@ -22,7 +22,7 @@ public class AreaService {
         this.staffRepository = staffRepository;
     }
 
-    public AreaData createArea(String name){
+    public AreaData createArea(String name) {
 
         Area area = new Area(name);
 
@@ -60,7 +60,7 @@ public class AreaService {
         return createAreaData(area);
     }
 
-    public AreaData editStaffListInArea( Long areaId, List<Long> staffIdList) {
+    public AreaData editStaffListInArea(Long areaId, List<Long> staffIdList) {
         areaExists(areaId);
         List<Staff> staffList = new ArrayList<>();
         for (Long id : staffIdList) {
@@ -97,11 +97,11 @@ public class AreaService {
             for (Staff staff : area.getStaffList()) {
                 staffWithoutAreasList.add(
                         new StaffWithoutAreasData(
-                        staff.getId(),
-                        staff.getName(),
-                        staff.getOperations(),
-                        staff.getClaimedOrders()
-                ));
+                                staff.getId(),
+                                staff.getName(),
+                                staff.getOperations(),
+                                staff.getClaimedOrders(),
+                                staff.getRights()));
             }
         }
         return staffWithoutAreasList;
