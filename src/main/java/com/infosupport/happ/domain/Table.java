@@ -19,7 +19,8 @@ public class Table {
     private LocalTime elapsedTimeSinceOrder;
     private LocalTime timeLeftToOrder;
     private int amountOfPeople;
-    //TODO table nummer moet NIET uniek zijn er kunnen meerdere tafels met dezelfde tafel nr zijn in de database
+
+
     @Column(unique=true)
     private int tableNumber;
     private TableStatus tableStatus;
@@ -97,7 +98,7 @@ public class Table {
     }
 
     public void placeOrder(){
-        Order order = new Order(this, java.time.LocalDateTime.now(),new ArrayList<>());
+        Order order = new Order(this, new ArrayList<>());
         this.shoppingCart.getProducts().forEach(order::addToProducts);
 
 

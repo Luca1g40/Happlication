@@ -26,10 +26,8 @@ public class Order {
     public Order() {
     }
 
-    public Order(Table table, LocalDateTime timeOfOrder, List<Product> products) {
+    public Order(Table table, List<Product> products) {
         LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-
 
         this.table = table;
         this.timeOfOrder = now;
@@ -91,13 +89,7 @@ public class Order {
     }
 
     public List<Product> getBarOrders() {
-//        HashMap<Product,Integer> barOrders = new HashMap<>();
-//
-//        for (Map.Entry<Product, Integer> entry : products.entrySet()) {
-//            if (entry.getKey().getProductCategory()==ProductCategory.DRINKS){
-//                barOrders.put(entry.getKey(), entry.getValue());
-//            }
-//        }
+
 
         List<Product> barOrders = new ArrayList<>();
         for (Product product : products) {
@@ -109,13 +101,6 @@ public class Order {
     }
 
     public List<Product> getFoodOrders() {
-//        HashMap<Product,Integer> kitchenOrders = new HashMap<>();
-//
-//        for (Map.Entry<Product, Integer> entry : products.entrySet()) {
-//            if (entry.getKey().getProductCategory()==ProductCategory.DRINKS){
-//                kitchenOrders.put(entry.getKey(), entry.getValue());
-//            }
-//        }
 
 
 

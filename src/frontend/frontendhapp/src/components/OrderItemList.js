@@ -28,8 +28,6 @@ export default function OrderItemList({order,staffRole}){
                     setProductsAlreadyAdded(state => [...state,product]);
                 }
             }
-
-
         )}
 
     </div>)

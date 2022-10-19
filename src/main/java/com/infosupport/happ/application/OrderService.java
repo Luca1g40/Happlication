@@ -30,13 +30,12 @@ public class OrderService {
     public OrderData createOrder(Long tableId, List<Long> productList) {
         List<Product> products = new ArrayList<>();
         Table table = this.orderAssistant.getTable(tableId);
-
         for (Long id:productList ) {
             products.add(orderAssistant.getProductById(id));
         }
         System.out.println(table);
 
-        Order order = new Order(table, LocalDateTime.now(), products);
+        Order order = new Order(table,  products);
 
         this.orderRepository.save(order);
 

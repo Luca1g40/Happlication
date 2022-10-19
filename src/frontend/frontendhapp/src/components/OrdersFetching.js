@@ -4,32 +4,27 @@ import OrderItemList from "./OrderItemList";
 import countOccuranceProduct from "./Util"
 
 export default function OrdersFetching(props){
-    const [selectedOrders, setSelectedOrders] = useState([])
+   // const [selectedOrders, setSelectedOrders] = useState([])
 
     const changeStyle = event => {
         if (event.currentTarget.style.borderStyle) {
             event.currentTarget.style.borderStyle = null;
             event.currentTarget.style.backgroundColor = "#f8cfad"
-
-
         } else {
             event.currentTarget.style.borderStyle = "outset"
             event.currentTarget.style.backgroundColor = "#FFB27B"
-
         }
     };
 
     const addOrders = (selectedOrder) => {
-        const index = selectedOrders.indexOf(selectedOrder);
+        const index = props.selectedOrders.indexOf(selectedOrder);
         if (index > -1) {
-            selectedOrders.splice(index, 1);
+            props.selectedOrders.splice(index, 1);
         } else {
-            setSelectedOrders(state => [...state, selectedOrder])
+            props.setSelectedOrders(state => [...state, selectedOrder])
         }
     }
     return (
-
-
         <div className={"grid-container"}>
             {
                 props.orders.map((order, i) =>

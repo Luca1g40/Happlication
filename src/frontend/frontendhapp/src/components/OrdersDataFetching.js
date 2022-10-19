@@ -30,18 +30,18 @@ function OrdersDataFetching(props) {
             })
     }, [doneSelecting])
 
-    const changeStyle = event => {
-        if (event.currentTarget.style.borderStyle) {
-            event.currentTarget.style.borderStyle = null;
-            event.currentTarget.style.backgroundColor = "#f8cfad"
-
-
-        } else {
-            event.currentTarget.style.borderStyle = "outset"
-            event.currentTarget.style.backgroundColor = "#FFB27B"
-
-        }
-    };
+    // const changeStyle = event => {
+    //     if (event.currentTarget.style.borderStyle) {
+    //         event.currentTarget.style.borderStyle = null;
+    //         event.currentTarget.style.backgroundColor = "#f8cfad"
+    //
+    //
+    //     } else {
+    //         event.currentTarget.style.borderStyle = "outset"
+    //         event.currentTarget.style.backgroundColor = "#FFB27B"
+    //
+    //     }
+    // };
 
 
     function claimOrder(orders){
@@ -59,14 +59,14 @@ function OrdersDataFetching(props) {
             })
     }
 
-    const addOrders = (selectedOrder) => {
-        const index = selectedOrders.indexOf(selectedOrder);
-        if (index > -1) {
-            selectedOrders.splice(index, 1);
-        } else {
-            setSelectedOrders(state => [...state, selectedOrder])
-        }
-    }
+    // const addOrders = (selectedOrder) => {
+    //     const index = selectedOrders.indexOf(selectedOrder);
+    //     if (index > -1) {
+    //         selectedOrders.splice(index, 1);
+    //     } else {
+    //         setSelectedOrders(state => [...state, selectedOrder])
+    //     }
+    // }
 
 
     return (
@@ -94,7 +94,7 @@ function OrdersDataFetching(props) {
         {/*        )*/}
         {/*    }*/}
         {/*</div>*/}
-        <OrdersFetching orders={orders}/>
+        <OrdersFetching orders={orders} selectedOrders={selectedOrders} setSelectedOrders={setSelectedOrders}/>
 
         <div className={"bottom-bar"}>
             <div className={"claim-order-button"}>
