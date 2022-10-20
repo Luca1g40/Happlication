@@ -15,8 +15,7 @@ export default function SubmitButton(props) {
 
             case Actions.ADD_TO_SHOPPING_CART:
                 AddProductToShoppingCart(props.tableId, props.productId, props.productAmount)
-                console.log(props.trigger == undefined)
-                if (!props.trigger == undefined){
+                if (!(props.trigger === undefined)){
                     props.trigger();
                 }
                 break;

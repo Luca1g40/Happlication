@@ -22,7 +22,7 @@ function ProductDetailsPopup(props) {
                 <textarea disabled={true} value={props.product.details}/>
                 <button className="close-btn" onClick={closePopUp}> close</button>
                 <SubmitButton className="button foodsToDrinks" tableId={43} buttonText={"Add to Cart"} action={Actions.ADD_TO_SHOPPING_CART}
-                              productAmount={productAmount} productId={props.product.id} trigger={closePopUp}/>
+                              productAmount={productAmount} productId={props.product.id} trigger={() =>closePopUp()}/>
             </div>
         </div>
     ) : "";
