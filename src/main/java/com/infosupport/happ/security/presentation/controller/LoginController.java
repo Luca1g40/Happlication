@@ -31,11 +31,13 @@ public class LoginController {
     @PostMapping("/authenticate")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) {
         try {
-            Staff staff = staffService.getStaffByPassword(Integer.parseInt(authenticationRequest.password));
-            final UserDetails userDetails = userDetailsService
-                    .loadUserByUsername(String.valueOf(staff.getPassword()));
-            final String jwt = jwtTokenUtil.generateToken(userDetails);
-            return ResponseEntity.ok().body(new AuthenticationResponse(jwt, staff.getId()));
+            if(authenticationRequest.password != null) {
+                Staff staff = staffService.getStaffByPassword(Integer.parseInt(authenticationRequest.password));
+                final UserDetails userDetails = userDetailsService
+                        .loadUserByUsername(String.valueOf(staff.getPassword()));
+                final String jwt = jwtTokenUtil.generateToken(userDetails);
+                return ResponseEntity.ok().body(new AuthenticationResponse(jwt, staff.getId()));
+            } throw new ItemNotFound("Staff");
         } catch (ItemNotFound e) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "User is not found");
         }
