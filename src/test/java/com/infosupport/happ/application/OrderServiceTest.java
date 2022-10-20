@@ -43,7 +43,7 @@ public class OrderServiceTest {
         when(orderAssistant.getTable(1L)).thenReturn(table);
         when(orderAssistant.existsById(1L)).thenReturn(true);
 
-        Order order = new Order(orderAssistant.getTable(1L), LocalDateTime.now(), List.of(product));
+        Order order = new Order(orderAssistant.getTable(1L),  List.of(product));
 
         when(orderRepository.getById(1L)).thenReturn(order);
         when(orderAssistant.getOrderById(1L)).thenReturn(order);

@@ -1,14 +1,14 @@
 import axios from "axios";
+import {configuration} from "./JwtHeader";
 
 
 export function AddProductToShoppingCart(tableId, productId, amount) {
-    return axios.post(`http://localhost:8080/happ/table/${tableId}/shoppingcart`, {
+     axios.post(`http://localhost:8080/happ/table/${tableId}/shoppingcart`, {
         "id": productId,
         "amount": amount
-    })
+    }, configuration)
         .then(res => {
             console.log(res)
-            return res;
         })
         .catch(err => {
             console.log(err)
@@ -16,10 +16,20 @@ export function AddProductToShoppingCart(tableId, productId, amount) {
 }
 
 export function PlaceOrder(tableId) {
-    return axios.post(`http://localhost:8080/happ/table/${tableId}/order`)
+     axios.post(`http://localhost:8080/happ/table/${tableId}/order`)
         .then(res => {
             console.log(res)
-            return res;
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+
+export function GetShoppingCart(tableId){
+    return axios.get(`http://localhost:8080/happ/table/${tableId}/shoppingcart`,configuration)
+        .then(res => {
+            console.log(res)
+            return res.data.productDataList;
         })
         .catch(err => {
             console.log(err)

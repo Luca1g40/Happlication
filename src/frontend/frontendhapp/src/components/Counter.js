@@ -7,7 +7,7 @@ export default function Counter(props) {
 
     const increment = () => setCount(prevCount => prevCount + 1);
     const decrement = () => {
-        if (count !== 0) {
+        if (count !== 1) {
             setCount(prevCount => prevCount - 1)
         }
     };
@@ -18,10 +18,10 @@ export default function Counter(props) {
     }, [count])
 
     return (
-        <div>
+        <span>
             <button className="add-up" onClick={increment}>+</button>
-            <h2>{count}</h2>
+            <p>{count}</p>
             <button className="subtract" onClick={decrement}>-</button>
-        </div>
+        </span>
     )
 }

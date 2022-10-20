@@ -2,7 +2,8 @@ import React, {useEffect, useState} from "react";
 import ShoppingCartItem from "./ShoppingCartItem";
 import axios from "axios";
 import SubmitButton from "./submitData/SubmitButton";
-import {PlaceOrder} from "../urlMappings/TableRequests";
+import {GetShoppingCart, PlaceOrder} from "../urlMappings/TableRequests";
+import {Actions} from "./submitData/Actions"
 
 export default function ShoppingCart() {
     const [shoppingCart, setShoppingCart] = useState([]);
@@ -10,10 +11,11 @@ export default function ShoppingCart() {
 
 
     useEffect(() => {
-        axios.get("localhost:8080/happ/table/1/shoppingcart")
+
+        GetShoppingCart(43)
             .then(res => {
-                console.log(res)
-                setShoppingCart(res.data)
+                setShoppingCart(res)
+                console.log(shoppingCart.length )
             })
             .catch(err => {
                 console.log(err)
@@ -21,19 +23,20 @@ export default function ShoppingCart() {
     }, [])
 
     return (shoppingCart.length > 0) ? (
-        <div>
+
+        <div className={"listDiv"}>
+            <div>
+                <h1 align="center">Shopping cart</h1>
+            </div>
             {shoppingCart.map((item, index) => {
-                if (!productsAlreadyAdded.includes(item)) {
                     return (
-                        <div key={item.id}>
+                        <span key={item.id}>
                             <ShoppingCartItem productName={item.name} amount={1}/>
                             <hr/>
-                        </div>
+                        </span>
                     );
-                }
-
             })}
-            <SubmitButton buttonText={"Order"} submitUrl={PlaceOrder(1)}/>
+            <SubmitButton buttonText={"Order"} submitUrl={() => PlaceOrder(43)}/>
         </div>
 
     ) : <div><h1 align="center">Your shoppingcart is empty</h1></div>

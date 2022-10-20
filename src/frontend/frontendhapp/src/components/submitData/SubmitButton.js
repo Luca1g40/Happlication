@@ -1,6 +1,7 @@
 import React from "react";
 import "./SubmitButton.css";
 import {AddProductToShoppingCart, PlaceOrder} from "../../urlMappings/TableRequests";
+import {Actions} from "./Actions"
 
 
 export default function SubmitButton(props) {
@@ -8,12 +9,16 @@ export default function SubmitButton(props) {
     function handleClick() {
 
         switch (props.action) {
-            case "Place order":
+            case Actions.PLACE_ORDER:
                 PlaceOrder(props.tableId);
                 break;
 
-            case "Add product to shopping cart":
-                AddProductToShoppingCart(props.tableId, props.productId, props.amount)
+            case Actions.ADD_TO_SHOPPING_CART:
+                AddProductToShoppingCart(props.tableId, props.productId, props.productAmount)
+                console.log(props.trigger == undefined)
+                if (!props.trigger == undefined){
+                    props.trigger();
+                }
                 break;
         }
         console.log("Added");
