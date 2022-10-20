@@ -58,12 +58,13 @@ body.active-modal {
 .add-up {
     float: right;
     top: 10px;
+    display: inline;
 }
 
 .subtract {
     float: right;
     top: 10px;
-
+    display: inline;
 }
 
 

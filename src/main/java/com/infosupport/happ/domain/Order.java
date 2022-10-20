@@ -16,8 +16,10 @@ public class Order {
     @ManyToOne
     private Table table;
     private LocalDateTime timeOfOrder;
+    @Enumerated(EnumType.STRING)
     private PreperationStatus preperationStatus;
-    @OneToMany(cascade = CascadeType.ALL)
+
+    @OneToMany
     private List<Product> products;
 
     public Order() {
@@ -54,14 +56,6 @@ public class Order {
         return products;
     }
 
-    public boolean checkIfAllProductsAreDone() {
-        for (Product product : products) {
-            if (!product.isReady()) {
-                return false;
-            }
-        }
-        return true;
-    }
 
     public void claimOrder() {
         if (this.preperationStatus == UNCLAIMED) {
@@ -69,10 +63,8 @@ public class Order {
         }
     }
 
-    public void setPreperationStatusToDone() {
-        if (checkIfAllProductsAreDone()) {
-            this.preperationStatus = DONE;
-        }
+    public void setPreparationStatusToDone() {
+        this.preperationStatus = DONE;
     }
 
     public void addToProducts(Product product) {
@@ -97,5 +89,16 @@ public class Order {
             }
         }
         return kitchenOrders;
+    }
+
+    @Override
+    public String toString() {
+        return "SingleOrder{" +
+                "id=" + id +
+
+                ", timeOfOrder=" + timeOfOrder +
+                ", preperationStatus=" + preperationStatus +
+                ", products=" + products +
+                '}';
     }
 }

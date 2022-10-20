@@ -4,12 +4,14 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Entity
 public class ShoppingCart {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @OneToMany
     private List<Product> products;
 
@@ -18,6 +20,10 @@ public class ShoppingCart {
     }
 
     public void editShoppingCart(List<Product> products) {
+        setProducts(products);
+    }
+
+    public void setProducts(List<Product> products) {
         this.products = products;
     }
 
@@ -30,6 +36,9 @@ public class ShoppingCart {
     }
 
     public void addToShoppingCart(Product product) {
+//        if (products.containsKey(product)){
+//            products.replace(product, products.get(product)+amount);
+//        }else products.put(product,amount);
         products.add(product);
     }
 

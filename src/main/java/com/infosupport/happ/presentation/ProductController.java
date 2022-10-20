@@ -28,7 +28,8 @@ public final class ProductController {
                     productRequest.name,
                     productRequest.productCategory,
                     productRequest.price,
-                    productRequest.ingredients);
+                    productRequest.ingredients,
+                    productRequest.details);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -79,7 +80,8 @@ public final class ProductController {
                     productRequest.productCategory,
                     productRequest.price,
                     productId,
-                    productRequest.ingredients
+                    productRequest.ingredients,
+                    productRequest.details
             );
         } catch (ItemNotFound e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());

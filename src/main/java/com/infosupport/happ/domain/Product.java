@@ -20,14 +20,27 @@ public class Product {
     private ProductCategory productCategory;
     private double price;
 
-    private boolean isReady;
+    private String details;
 
-    public Product(String name, List<Ingredient> ingredients, ProductCategory productCategory, double price) {
+    public Product(String name, List<Ingredient> ingredients, ProductCategory productCategory, double price, String details) {
         this.name = name;
         this.ingredients = ingredients;
         this.productCategory = productCategory;
         this.price = price;
-        this.isReady = false;
+        this.details = details;
+
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
+    }
+
+    public List<Ingredient> getIngredients() {
+        return ingredients;
     }
 
     public String getName() {
@@ -43,10 +56,6 @@ public class Product {
     }
 
     public Product() {
-    }
-
-    public void switchReadyStatus() {
-        this.isReady = !this.isReady;
     }
 
     public void setName(String name) {
@@ -65,11 +74,9 @@ public class Product {
         this.ingredients = ingredients;
     }
 
-    public boolean isReady() {
-        return isReady;
-    }
 
     public Long getId() {
         return id;
     }
+
 }

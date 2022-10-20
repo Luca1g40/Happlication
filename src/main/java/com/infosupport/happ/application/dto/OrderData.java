@@ -25,13 +25,14 @@ public class OrderData {
         this.id = id;
 
     }
-    public String getOrderTimeFormated(LocalDateTime timeOfOrder){
+
+    public String getOrderTimeFormated(LocalDateTime timeOfOrder) {
         String orderTimeString;
         orderTimeString = (timeOfOrder.getHour() + ":" + timeOfOrder.getMinute());
         return orderTimeString;
     }
 
-    public String getOrderDateFormated(LocalDateTime timeOfOrder){
+    public String getOrderDateFormated(LocalDateTime timeOfOrder) {
         String orderDateString;
         orderDateString = (timeOfOrder.getYear() + "-" + timeOfOrder.getMonthValue() + "-" + timeOfOrder.getDayOfMonth());
         return orderDateString;

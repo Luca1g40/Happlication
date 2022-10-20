@@ -28,6 +28,15 @@ public class OrderController {
         }
     }
 
+    @PostMapping("/order/{orderid}")
+    public OrderData orderIsDone(@PathVariable Long orderid) {
+        try {
+            return orderService.setStatusToDone(orderid);
+        } catch (ItemNotFound exception) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, exception.getMessage());
+        }
+    }
+
     @GetMapping("/order/{id}")
     public OrderData getOrder(@PathVariable Long id) {
         try {
@@ -38,13 +47,14 @@ public class OrderController {
     }
 
     @GetMapping("/orders")
-    public List<OrderData> getAllOrders(){
+    public List<OrderData> getAllUnclaimedOrders() {
         try {
             return orderService.getAllUnclaimedOrders();
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
         }
     }
+
 
     @DeleteMapping("/order/{orderid}")
     private void deleteOrder(@PathVariable("orderid") Long orderId) {

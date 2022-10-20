@@ -1,6 +1,7 @@
 package com.infosupport.happ.data;
 
 import com.infosupport.happ.domain.Order;
+import com.infosupport.happ.domain.Product;
 import com.infosupport.happ.domain.Staff;
 import com.infosupport.happ.domain.Table;
 import org.springframework.stereotype.Component;
@@ -15,4 +16,6 @@ public interface OrderAssistant {
     Order getOrderById(Long id);
 
     boolean existsById(Long id);
+
+    Product getProductById(Long id);
 }

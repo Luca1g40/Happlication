@@ -8,8 +8,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.infosupport.happ.domain.PreperationStatus.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static com.infosupport.happ.domain.PreperationStatus.CLAIMED;
+import static com.infosupport.happ.domain.PreperationStatus.UNCLAIMED;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class OrderTest {
 
@@ -30,31 +31,21 @@ public class OrderTest {
     }
 
     @Test
-    @DisplayName("Order can be claimed by staff member")
+    @DisplayName("SingleOrder can be claimed by staff member")
     void staffClaimsOrder() {
         assertEquals(UNCLAIMED, order.getPreperationStatus());
         order.claimOrder();
         assertEquals(CLAIMED, order.getPreperationStatus());
     }
 
-    @Test
-    @DisplayName("Order knows if products are done or not")
-    void productOfOrderIsDone() {
-
-        assertFalse(order.checkIfAllProductsAreDone());
-        product.switchReadyStatus();
-        assertTrue(order.checkIfAllProductsAreDone());
-    }
-
-    @Test
-    @DisplayName("Order can't be set to done before all products are ready")
-    void orderIsDone() {
-
-        assertNotEquals(DONE, order.getPreperationStatus());
-        this.product.switchReadyStatus();
-        order.setPreperationStatusToDone();
-        assertEquals(DONE, order.getPreperationStatus());
-    }
+//    @Test
+//    @DisplayName("SingleOrder can't be set to done before all products are ready")
+//    void orderIsDone() {
+//
+//        assertNotEquals(DONE, order.getPreperationStatus());
+//        order.setPreparationStatusToDone();
+//        assertEquals(DONE, order.getPreperationStatus());
+//    }
 
     @Test
     void placeOrder() {

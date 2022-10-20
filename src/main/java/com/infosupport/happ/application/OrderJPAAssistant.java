@@ -2,6 +2,7 @@ package com.infosupport.happ.application;
 
 import com.infosupport.happ.data.OrderAssistant;
 import com.infosupport.happ.domain.Order;
+import com.infosupport.happ.domain.Product;
 import com.infosupport.happ.domain.Staff;
 import com.infosupport.happ.domain.Table;
 import org.springframework.stereotype.Component;
@@ -35,6 +36,11 @@ public class OrderJPAAssistant implements OrderAssistant {
     @Override
     public boolean existsById(Long id) {
         return entities.find(Order.class, id) != null;
+    }
+
+    @Override
+    public Product getProductById(Long id) {
+        return entities.find(Product.class, id);
     }
 
 
