@@ -1,9 +1,6 @@
 package com.infosupport.happ.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -22,13 +19,16 @@ public class Product {
 
     private String details;
 
-    public Product(String name, List<Ingredient> ingredients, ProductCategory productCategory, double price, String details) {
+    @Enumerated(EnumType.STRING)
+    private ProductDestination productDestination;
+
+    public Product(String name, List<Ingredient> ingredients, ProductCategory productCategory, double price, String details, ProductDestination productDestination) {
         this.name = name;
         this.ingredients = ingredients;
         this.productCategory = productCategory;
         this.price = price;
         this.details = details;
-
+        this.productDestination = productDestination;
     }
 
     public String getDetails() {
@@ -79,4 +79,16 @@ public class Product {
         return id;
     }
 
+    public ProductDestination getProductDestination() {
+        return productDestination;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "name='" + name + '\'' +
+                ", productCategory=" + productCategory +
+                ", productDestination=" + productDestination +
+                '}';
+    }
 }

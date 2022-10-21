@@ -17,6 +17,7 @@ export function getMenuDrinkItems() {
     return axios.get("http://localhost:8080/happ/product/drinks", configuration)
         .then(res => {
             console.log(res)
+            return res.data;
         })
         .catch(err => {
             console.log(err)

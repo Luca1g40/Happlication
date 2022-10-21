@@ -40,8 +40,8 @@ public class TableServiceTest {
         this.productService = mock(ProductService.class);
         this.orderRepository = mock(OrderRepository.class);
         this.tableService = new TableService(tableRepository, productService, orderRepository);
-        this.productStarter = new Product("kip", new ArrayList<>(), STARTER, 12.50, "lekker vis");
-        this.productMain = new Product("vis", new ArrayList<>(), MAIN_COURSE, 7.50, "lekker kip");
+        this.productStarter = new Product("kip", new ArrayList<>(), STARTER, 12.50, "lekker vis",ProductDestination.KITCHEN_PRODUCT);
+        this.productMain = new Product("vis", new ArrayList<>(), MAIN_COURSE, 7.50, "lekker kip", ProductDestination.KITCHEN_PRODUCT);
 
         this.table = new Table(LocalTime.now(), LocalTime.parse("02:00:00"),
                 4, 3, TableStatus.OCCUPIED, new ShoppingCart());
@@ -51,21 +51,13 @@ public class TableServiceTest {
 
         when(productService.getProduct(anyLong())).thenReturn(productStarter);
 
-        //tableService.addToShoppingCart(1L, 1L);
 
     }
 
     @Test
     @DisplayName("products can be added to the shopping cart")
     void addProductsToShoppingCart() {
-        TableData tableData = tableService.addToShoppingCart(1L, 1L, 4);
-
-        //assertEquals(4, tableData.shoppingCart.getProducts().size());
-        //assertEquals(List.of(productStarter, productStarter, productStarter, productStarter), tableData.shoppingCart.getProducts());
-
         assertThrows(ItemNotFound.class, () -> tableService.addToShoppingCart(4L, 1L, 4));
-
-
     }
 
     @Test
@@ -81,23 +73,6 @@ public class TableServiceTest {
         assertThrows(ItemNotFound.class, () -> tableService.removeFromShoppingCart(4L, productStarter));
 
     }
-    //TODO waarom is het lijst immutable
-//    @Test
-//    @DisplayName("Ordered products are split in food and drinks")
-//    void orderSplitFoodDrinks() {
-//
-//        Product drinkProduct = new Product("cola", new ArrayList<>(), ProductCategory.DRINKS, 5);
-//        Product foodProduct = new Product("Sushi Roll", new ArrayList<>(), ProductCategory.MAIN_COURSE, 5);
-//        Product foodProduct2 = new Product("Soup", new ArrayList<>(), ProductCategory.STARTER, 5);
-//        List<Product> products = List.of(drinkProduct, foodProduct, foodProduct2);
-//        tableService.editShoppingCart(1L,products);
-//        TableData tableData = tableService.placeOrder(1L);
-//
-//
-//
-//        assertEquals(1, tableData.latestOrder.drinkProducts.size());
-//        assertEquals(2, tableData.latestOrder.foodProducts.size());
-//    }
 
     @Test
     @DisplayName("products can be edited in the shopping cart")
@@ -113,25 +88,6 @@ public class TableServiceTest {
 
     }
 
-    @Test
-    @DisplayName("SingleOrder can be placed")
-    void placeOrder() {
-        // assertEquals(1, tableService.getTable(1L).getShoppingCart().getProducts().size());
-        tableService.addToShoppingCart(1L, 1L, 1);
-        TableData tableData = tableService.placeOrder(1L);
-
-        Order order = new Order(this.table,  List.of(productStarter));
-
-        assertEquals(0, tableService.getTable(1L).getShoppingCart().getProducts().size());
-
-        assertEquals(order.getProducts(), tableService.getTable(1L).getLastOrder().getProducts());
-        assertEquals(order.getBarOrders(), tableService.getTable(1L).getLastOrder().getBarOrders());
-        assertEquals(order.getTableNr(), tableService.getTable(1L).getLastOrder().getTableNr());
-        assertEquals(order.getTimeOfOrder(), tableService.getTable(1L).getLastOrder().getTimeOfOrder());
-        assertEquals(order.getPreperationStatus(), tableService.getTable(1L).getLastOrder().getPreperationStatus());
-        assertNotNull(tableData);
-        assertThrows(ItemNotFound.class, () -> tableService.placeOrder(4L));
-    }
 
     @Test
     @DisplayName("Table does not exist")

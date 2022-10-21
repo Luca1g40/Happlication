@@ -12,7 +12,7 @@ export default function ShoppingCart() {
 
     useEffect(() => {
 
-        GetShoppingCart(43)
+        GetShoppingCart(52)
             .then(res => {
                 setShoppingCart(res)
 
@@ -38,7 +38,7 @@ export default function ShoppingCart() {
                         </span>
                     );
             })}
-            <SubmitButton buttonText={"Order"} submitUrl={() => PlaceOrder(43)}/>
+            <SubmitButton buttonText={"Order"} tableId={52} action={Actions.PLACE_ORDER}/>
         </div>
 
     ) : <div><h1 align="center">Your shoppingcart is empty</h1></div>

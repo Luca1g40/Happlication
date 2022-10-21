@@ -1,18 +1,17 @@
 package com.infosupport.happ.application;
 
 
+import com.infosupport.happ.application.dto.OrderData;
 import com.infosupport.happ.application.dto.ShoppingCartData;
 import com.infosupport.happ.application.dto.TableData;
 import com.infosupport.happ.data.OrderRepository;
 import com.infosupport.happ.data.TableRepository;
-import com.infosupport.happ.domain.Product;
-import com.infosupport.happ.domain.ShoppingCart;
-import com.infosupport.happ.domain.Table;
-import com.infosupport.happ.domain.TableStatus;
+import com.infosupport.happ.domain.*;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -79,8 +78,9 @@ public class TableService {
         tableExists(tableId);
         Table table = tableRepository.getById(tableId);
         table.placeOrder();
-        orderRepository.save(table.getLastOrder());
-        //tableRepository.save(table);
+        System.out.println(table.getShoppingCart().getProducts());
+
+        tableRepository.save(table);
         return createTableData(table);
     }
 
@@ -93,15 +93,42 @@ public class TableService {
     public void deleteTable(Long id) {
         tableRepository.deleteById(id);
     }
-
     public TableData createTableData(Table table) {
         return new TableData(table.getAmountOfPeople(),
                 table.getTableNumber(),
                 table.getElapsedTimeSinceOrder(),
                 table.getTimeLeftToOrder(),
-                table.getOrders(),
                 table.getTableStatus(),
-                new ShoppingCartData(table.getShoppingCart().getProducts()));
+                new ShoppingCartData(table.getShoppingCart().getProducts()),
+                convertToKitchenOrderDataList(table.getKitchenOrders()),
+                convertToBarOrderDataList(table.getBarOrders()));
+    }
+
+    public OrderData createOrderData(Order order) {
+        return new OrderData(order.getTableNr(),
+                order.getTimeOfOrder(),
+                order.getPreperationStatus(),
+                order.getProducts(),
+                order.getId());
+    }
+
+    public List<OrderData> convertToBarOrderDataList(List<BarOrder> orders) {
+        List<OrderData> ordersData = new ArrayList<>();
+
+        for (BarOrder order : orders) {
+            ordersData.add(createOrderData(order));
+        }
+
+        return ordersData;
+    }
+    public List<OrderData> convertToKitchenOrderDataList(List<KitchenOrder> orders) {
+        List<OrderData> ordersData = new ArrayList<>();
+
+        for (KitchenOrder order : orders) {
+            ordersData.add(createOrderData(order));
+        }
+
+        return ordersData;
     }
 }
 

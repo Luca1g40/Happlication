@@ -3,7 +3,6 @@ import OrderItemList from "./OrderItemList";
 
 export default function OrdersOverview(props) {
 
-
     const changeStyle = event => {
         if (event.currentTarget.style.borderStyle) {
             event.currentTarget.style.borderStyle = null;

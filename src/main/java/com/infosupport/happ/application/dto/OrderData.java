@@ -12,16 +12,16 @@ public class OrderData {
     public final String orderDate;
     public final String orderTime;
     public final PreperationStatus preperationStatus;
-    public final List<Product> drinkProducts;
-    public final List<Product> foodProducts;
 
-    public OrderData(int tableNr, LocalDateTime timeOfOrder, PreperationStatus preperationStatus, List<Product> drinkProducts, List<Product> foodProducts, Long id) {
+    public final List<Product> products;
+
+    public OrderData(int tableNr, LocalDateTime timeOfOrder, PreperationStatus preperationStatus,List<Product> products ,Long id) {
         this.tableNr = tableNr;
         this.orderDate = getOrderDateFormated(timeOfOrder);
         this.orderTime = getOrderTimeFormated(timeOfOrder);
         this.preperationStatus = preperationStatus;
-        this.drinkProducts = drinkProducts;
-        this.foodProducts = foodProducts;
+        this.products = products;
+
         this.id = id;
 
     }

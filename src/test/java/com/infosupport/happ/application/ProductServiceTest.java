@@ -5,6 +5,7 @@ import com.infosupport.happ.data.ProductRepository;
 import com.infosupport.happ.domain.Ingredient;
 import com.infosupport.happ.domain.Product;
 import com.infosupport.happ.domain.ProductCategory;
+import com.infosupport.happ.domain.ProductDestination;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,7 +33,7 @@ public class ProductServiceTest {
         ingredientList = new ArrayList<>();
         ingredient = new Ingredient("gember", 10);
         ingredientList.add(ingredient);
-        product = new Product("gember stukjes", ingredientList, ProductCategory.DESSERT, 39.99, "Stukjes gember");
+        product = new Product("gember stukjes", ingredientList, ProductCategory.DESSERT, 39.99, "Stukjes gember", ProductDestination.KITCHEN_PRODUCT);
 
         when(productRepository.getById(1L)).thenReturn(product);
         when(productRepository.existsById(1L)).thenReturn(true);
@@ -42,7 +43,7 @@ public class ProductServiceTest {
 
     @Test
     void createProduct() {
-        ProductData productData = productService.createProduct(product.getName(), product.getProductCategory(), product.getPrice(), product.getIngredients(), product.getDetails());
+        ProductData productData = productService.createProduct(product.getName(), product.getProductCategory(), product.getPrice(), product.getIngredients(), product.getDetails(), product.getProductDestination());
 
         assertNotNull(productData);
 

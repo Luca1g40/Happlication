@@ -3,7 +3,7 @@ import {configuration} from "./JwtHeader";
 
 export function loginRequest(password){
     axios.post(`http://localhost:8080/authenticate`, {
-        "username": 9,
+        "username": 66,
         "password": password
 
     })

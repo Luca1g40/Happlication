@@ -6,23 +6,16 @@ export default function OrderItemList(props) {
     const [productsAlreadyAdded, setProductsAlreadyAdded] = useState([])
 
 
-    function determineProducts() {
-        if (props.staffRights === "BAR_RIGHTS") {
-            setOrderProducts(props.order.drinkProducts);
-        } else if (props.staffRights === "KITCHEN_RIGHTS") {
-            setOrderProducts(props.order.foodProducts)
-        }
-    }
 
     useEffect(() => {
+        console.log(props.order)
 
-        determineProducts();
     }, [])
 
 
     return (
         <div>
-            {orderProducts.map((product) => {
+            {props.order.products.map((product) => {
                     if (!productsAlreadyAdded.includes(product)) {
                         return <OrderItem key={product.id} product={product} amount={1} className={"order-products"}/>
                     } else {

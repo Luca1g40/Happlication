@@ -21,7 +21,7 @@ function ProductDetailsPopup(props) {
                 <Counter initialValue={productAmount} updateCount={count => setProductAmount(count)}/>
                 <textarea disabled={true} value={props.product.details}/>
                 <button className="close-btn" onClick={closePopUp}> close</button>
-                <SubmitButton className="button foodsToDrinks" tableId={43} buttonText={"Add to Cart"} action={Actions.ADD_TO_SHOPPING_CART}
+                <SubmitButton className="button foodsToDrinks" tableId={52} buttonText={"Add to Cart"} action={Actions.ADD_TO_SHOPPING_CART}
                               productAmount={productAmount} productId={props.product.id} trigger={() =>closePopUp()}/>
             </div>
         </div>

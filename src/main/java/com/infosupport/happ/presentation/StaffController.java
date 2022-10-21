@@ -50,19 +50,19 @@ public class StaffController {
                 staffRequest.rights);
     }
 
-    @GetMapping("/staff/{id}")
-    public StaffData getStaff(@PathVariable Long id) {
+    @GetMapping("/staff/{staffId}")
+    public StaffData getStaff(@PathVariable Long staffId) {
         try {
-            return this.staffService.createStaffData(staffService.getStaff(id));
+            return this.staffService.createStaffData(staffService.getStaff(staffId));
         } catch (ItemNotFound e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         }
     }
 
-    @DeleteMapping("/staff/{id}")
-    public void deleteStaff(@PathVariable("id") Long id) {
+    @DeleteMapping("/staff/{staffId}")
+    public void deleteStaff(@PathVariable("staffId") Long staffId) {
         try {
-            this.staffService.deleteStaff(id);
+            this.staffService.deleteStaff(staffId);
         } catch (ItemNotFound itemNotFound) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         } catch (Exception e) {
@@ -70,10 +70,21 @@ public class StaffController {
         }
     }
 
-    @GetMapping("/orders/staff/{staffId}")
+    @GetMapping("/staff/{staffId}/myorders")
     public List<OrderData> getAllClaimedOrders(@PathVariable Long staffId) {
         try {
             return this.staffService.getAllClaimedOrders(staffId);
+        } catch (ItemNotFound itemNotFound) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/staff/{staffId}/orders")
+    public List<OrderData> getAllUnclaimedOrders(@PathVariable Long staffId){
+        try {
+            return this.staffService.getAllUnclaimedOrders(staffId);
         } catch (ItemNotFound itemNotFound) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         } catch (Exception e) {

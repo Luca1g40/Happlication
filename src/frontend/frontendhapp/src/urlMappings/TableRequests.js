@@ -16,7 +16,7 @@ export function AddProductToShoppingCart(tableId, productId, amount) {
 }
 
 export function PlaceOrder(tableId) {
-     axios.post(`http://localhost:8080/happ/table/${tableId}/order`)
+     axios.post(`http://localhost:8080/happ/table/${tableId}/order`,{},configuration)
         .then(res => {
             console.log(res)
         })
