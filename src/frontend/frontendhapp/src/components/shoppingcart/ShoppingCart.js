@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from "react";
 import ShoppingCartItem from "./ShoppingCartItem";
-import axios from "axios";
-import SubmitButton from "./submitData/SubmitButton";
-import {GetShoppingCart, PlaceOrder} from "../urlMappings/TableRequests";
-import {Actions} from "./submitData/Actions"
+import SubmitButton from "../submitData/SubmitButton";
+import {GetShoppingCart, PlaceOrder} from "../../urlMappings/TableRequests";
+import {Actions} from "../submitData/Actions";
+import countOccurances from "../Util"
 
 export default function ShoppingCart() {
     const [shoppingCart, setShoppingCart] = useState([]);
-    const [productsAlreadyAdded, setProductsAlreadyAdded] = useState([])
+    //const [productsAlreadyAdded, setProductsAlreadyAdded] = useState([])
 
 
     useEffect(() => {
@@ -15,7 +15,9 @@ export default function ShoppingCart() {
         GetShoppingCart(43)
             .then(res => {
                 setShoppingCart(res)
-                console.log(shoppingCart.length )
+
+                console.log(shoppingCart.length)
+                //console.log(countOccurances(shoppingCart))
             })
             .catch(err => {
                 console.log(err)

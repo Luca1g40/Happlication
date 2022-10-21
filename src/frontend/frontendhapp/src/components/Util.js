@@ -1,4 +1,4 @@
-export  function countOccuranceProduct(list) {
+export default function countOccuranceProduct(list) {
     let productOccurances = new Map();
     list.map((product) => {
             if (productOccurances.has(product)) {
@@ -12,7 +12,3 @@ export  function countOccuranceProduct(list) {
     return productOccurances;
 }
 
-export default function returniets(string) {
-
-    return string;
-}

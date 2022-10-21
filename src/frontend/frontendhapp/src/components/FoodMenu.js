@@ -1,15 +1,13 @@
 import React, {useEffect, useState} from "react";
 import MenuItem from "./MenuItem";
 import {getMenuFoodItems} from "../urlMappings/MenuRequests";
-import returniets from "./Util";
+
 
 
 function FoodMenu() {
     const [products, setProducts] = useState([])
 
     useEffect(() => {
-        let string = "kakaka"
-        console.log(returniets(string))
         getMenuFoodItems()
             .then(res =>
                 setProducts(res)
