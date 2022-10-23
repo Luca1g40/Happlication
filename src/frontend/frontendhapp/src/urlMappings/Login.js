@@ -2,7 +2,7 @@ import axios from "axios";
 import {configuration} from "./JwtHeader";
 
 export function loginRequest(password){
-    axios.post(`http://localhost:8080/authenticate`, {
+    return axios.post(`http://localhost:8080/authenticate`, {
         "password": password
     })
         .then(res => {
@@ -16,7 +16,7 @@ export function loginRequest(password){
                     sessionStorage.setItem("rights", res.data.rights)
                 })
                 .catch(err => console.log(err))
-
+            return res.status
         })
         .catch(err => {
             console.log(err)
