@@ -14,6 +14,18 @@ export function AddProductToShoppingCart(tableId, productId, amount) {
             console.log(err)
         })
 }
+//TODO pa orabo primi plus of min bo update e shoppingcart
+export function RemoveProductFromShoppingCart(tableId, productId) {
+    axios.put(`http://localhost:8080/happ/table/${tableId}/shoppingcart`, {
+        "id": productId
+    }, configuration)
+        .then(res => {
+            console.log(res)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
 
 export function PlaceOrder(tableId) {
      axios.post(`http://localhost:8080/happ/table/${tableId}/order`,{},configuration)

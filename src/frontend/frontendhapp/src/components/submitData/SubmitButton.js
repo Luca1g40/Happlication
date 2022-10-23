@@ -1,13 +1,12 @@
 import React from "react";
 import "./SubmitButton.css";
-import {AddProductToShoppingCart, PlaceOrder} from "../../urlMappings/TableRequests";
+import {AddProductToShoppingCart, PlaceOrder, RemoveProductFromShoppingCart} from "../../urlMappings/TableRequests";
 import {Actions} from "./Actions"
 
 
 export default function SubmitButton(props) {
 
     function handleClick() {
-
         switch (props.action) {
             case Actions.PLACE_ORDER:
                 PlaceOrder(props.tableId);
@@ -18,6 +17,15 @@ export default function SubmitButton(props) {
                 if (!(props.trigger === undefined)){
                     props.trigger();
                 }
+                if (!props.updateCount === undefined){
+                    props.updateCount();
+                }
+                props.updateCount();
+                console.log("added to shopping cart")
+                break;
+            case Actions.REMOVE_FROM_SHOPPING_CART:
+                RemoveProductFromShoppingCart(props.tableId,props.productId);
+                console.log("removed from shoppingcart")
                 break;
         }
         console.log("Added");

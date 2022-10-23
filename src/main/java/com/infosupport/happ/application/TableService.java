@@ -58,10 +58,10 @@ public class TableService {
         return createTableData(table);
     }
 
-    public TableData removeFromShoppingCart(Long tableId, Product product) {
+    public TableData removeFromShoppingCart(Long tableId, Long productId) {
         tableExists(tableId);
         Table table = tableRepository.getById(tableId);
-        table.deleteFromShoppingCart(product);
+        table.deleteFromShoppingCart(productService.getProduct(productId));
         tableRepository.save(table);
         return createTableData(table);
     }
