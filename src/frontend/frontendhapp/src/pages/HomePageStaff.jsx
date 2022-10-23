@@ -1,5 +1,5 @@
 import "../styles/HomePageStaff.css"
-import LoginComponent from "../components/LoginComponent";
+import Login from "../components/Login";
 
 
 export default function Staff() {
@@ -7,7 +7,7 @@ export default function Staff() {
     return (
         <>
             <div className="foodContainer">
-                <LoginComponent/>
+                <Login/>
             </div>
         </>
     );

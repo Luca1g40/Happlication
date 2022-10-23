@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import React, {useState} from "react";
 import {loginRequest} from "../urlMappings/Login";
 
-function LoginComponent() {
+function Login() {
     let navigate = useNavigate();
 
     const [password, setPassword] = useState("")
@@ -22,7 +22,7 @@ function LoginComponent() {
          const status = await loginRequest(password)
          console.log(status)
          if (status === 200) {
-             navigate("/Foods");
+             navigate("/Orders");
          }
      }
 
@@ -57,4 +57,4 @@ function LoginComponent() {
 
 }
 
-export default LoginComponent
+export default Login
