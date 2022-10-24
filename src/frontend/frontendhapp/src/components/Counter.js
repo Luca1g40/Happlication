@@ -23,7 +23,7 @@ export default function Counter(props) {
         <span>
             <SubmitButton className="add-up" action={props.addUpAction} buttonText={"+"} tableId={props.tableId} productId={props.productId} productAmount={1} updateCount={()=>increment()} />
             <p>{count}</p>
-            <SubmitButton className="subtract" action={props.subtractAction} buttonText={"-"} tableId={props.tableId} productId={props.productId}/>
+            <SubmitButton className="subtract" action={props.subtractAction} buttonText={"-"} tableId={props.tableId} productId={props.productId} updateCount={()=>decrement()}/>
         </span>
     ) : <span>
             <button className="add-up" onClick={increment}>+</button>

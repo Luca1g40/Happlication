@@ -1,6 +1,11 @@
 import React from "react";
 import "./SubmitButton.css";
-import {AddProductToShoppingCart, PlaceOrder, RemoveProductFromShoppingCart} from "../../urlMappings/TableRequests";
+import {
+    AddProductToShoppingCart,
+    PlaceOrder,
+    RemoveAllProductOccurancesFromCart,
+    RemoveProductFromShoppingCart
+} from "../../urlMappings/TableRequests";
 import {Actions} from "./Actions"
 
 
@@ -26,6 +31,15 @@ export default function SubmitButton(props) {
             case Actions.REMOVE_FROM_SHOPPING_CART:
                 RemoveProductFromShoppingCart(props.tableId,props.productId);
                 console.log("removed from shoppingcart")
+                if (!props.updateCount === undefined){
+                    console.log("in if")
+                    props.updateCount();
+                }
+                props.updateCount();
+
+                break;
+            case Actions.REMOVE_ALL_OCCURANCES_OF_A_PRODUCT:
+                RemoveAllProductOccurancesFromCart(props.tableId,props.productId);
                 break;
         }
         console.log("Added");

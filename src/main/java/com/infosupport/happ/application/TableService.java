@@ -62,6 +62,7 @@ public class TableService {
         tableExists(tableId);
         Table table = tableRepository.getById(tableId);
         table.deleteFromShoppingCart(productService.getProduct(productId));
+        System.out.println("came here");
         tableRepository.save(table);
         return createTableData(table);
     }
@@ -70,6 +71,14 @@ public class TableService {
         tableExists(tableId);
         Table table = tableRepository.getById(tableId);
         table.editShoppingCart(products);
+        tableRepository.save(table);
+        return createTableData(table);
+    }
+
+    public TableData removeAllOccurancesOfAProductFromShoppingcart(Long tableId,Long productId){
+        tableExists(tableId);
+        Table table = tableRepository.getById(tableId);
+        table.removeAllOccurancesOfAProuctFromShoppingcart(productService.getProduct(productId));
         tableRepository.save(table);
         return createTableData(table);
     }
@@ -130,5 +139,7 @@ public class TableService {
 
         return ordersData;
     }
+
+
 }
 

@@ -98,6 +98,10 @@ public class Table {
         shoppingCart.removeFromShoppingCart(product);
     }
 
+    public void removeAllOccurancesOfAProuctFromShoppingcart(Product product){
+        shoppingCart.removeEveryOccurrencesOfAProduct(product);
+    }
+
     public void addToShoppingCart(Product product, int amount) {
         for (int i = 0; i < amount; i++) {
             this.shoppingCart.addToShoppingCart(product);
