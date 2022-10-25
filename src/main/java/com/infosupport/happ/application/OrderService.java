@@ -1,6 +1,7 @@
 package com.infosupport.happ.application;
 
 import com.infosupport.happ.application.dto.OrderData;
+import com.infosupport.happ.application.dto.ProductData;
 import com.infosupport.happ.data.BarOrderRepository;
 import com.infosupport.happ.data.KitchenOrderRepository;
 import com.infosupport.happ.data.OrderAssistant;
@@ -39,6 +40,7 @@ public class OrderService {
 
 
     public OrderData claimOrder(Long staffId, Long orderId) {
+        System.out.println("here");
 
         Staff staff = orderAssistant.getStaff(staffId);
 
@@ -50,6 +52,7 @@ public class OrderService {
         saveOrder(order);
 
         return this.createOrderData(order);
+
     }
 
     public OrderData setStatusToDone(Long orderId) {
@@ -123,12 +126,27 @@ public class OrderService {
     public void deleteKitchenOrder(Long orderId) {
         kitchenOrderRepository.deleteById(orderId);
     }
+
+
     public OrderData createOrderData(Order order) {
         return new OrderData(order.getTableNr(),
                 order.getTimeOfOrder(),
                 order.getPreperationStatus(),
-                order.getProducts(),
+                convertToProductDataList(order.getProducts()),
                 order.getId());
+    }
+
+    public List<ProductData> convertToProductDataList(List<Product> products) {
+        List<ProductData> productDataList = new ArrayList<>();
+
+        for (Product product : products) {
+            productDataList.add(createProductData(product));
+        }
+
+        return productDataList;
+    }
+    public ProductData createProductData(Product product) {
+        return new ProductData(product.getId(),product.getName(),product.getProductCategory(),product.getPrice(),product.getIngredients(),product.getDetails());
     }
 
 

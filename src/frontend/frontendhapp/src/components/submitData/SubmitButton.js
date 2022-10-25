@@ -22,24 +22,25 @@ export default function SubmitButton(props) {
                 if (!(props.trigger === undefined)){
                     props.trigger();
                 }
-                if (!props.updateCount === undefined){
+
+                if (!(props.updateCount === undefined)){
                     props.updateCount();
                 }
-                props.updateCount();
+
                 console.log("added to shopping cart")
                 break;
             case Actions.REMOVE_FROM_SHOPPING_CART:
                 RemoveProductFromShoppingCart(props.tableId,props.productId);
                 console.log("removed from shoppingcart")
-                if (!props.updateCount === undefined){
+                if (!props.updateCount() === undefined){
                     console.log("in if")
                     props.updateCount();
                 }
-                props.updateCount();
 
                 break;
             case Actions.REMOVE_ALL_OCCURANCES_OF_A_PRODUCT:
                 RemoveAllProductOccurancesFromCart(props.tableId,props.productId);
+                console.log("removed all")
                 break;
         }
         console.log("Added");

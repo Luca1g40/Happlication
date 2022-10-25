@@ -18,7 +18,7 @@ function ProductDetailsPopup(props) {
         <div className="popup">
             <div className="popup-inner">
                 <p>{props.product.name} </p>
-                <Counter initialValue={productAmount} updateCount={count => setProductAmount(count)}/>
+                <Counter initialValue={productAmount} updateCount={count => setProductAmount(count)} submitMode={false}/>
                 <textarea disabled={true} value={props.product.details}/>
                 <button className="close-btn" onClick={closePopUp}> close</button>
                 <SubmitButton className="button foodsToDrinks" tableId={69} buttonText={"Add to Cart"} action={Actions.ADD_TO_SHOPPING_CART}

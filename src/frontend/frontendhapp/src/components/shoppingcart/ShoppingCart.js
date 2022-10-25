@@ -33,7 +33,7 @@ export default function ShoppingCart() {
                         </span>
                 );
             })}
-            <SubmitButton buttonText={"Order"} tableId={52} action={Actions.PLACE_ORDER}/>
+            <SubmitButton buttonText={"Order"} tableId={69} action={Actions.PLACE_ORDER}/>
         </div>
 
     ) : <div><h1 align="center">Your shoppingcart is empty</h1></div>

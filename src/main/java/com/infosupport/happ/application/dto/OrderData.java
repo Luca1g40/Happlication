@@ -13,9 +13,9 @@ public class OrderData {
     public final String orderTime;
     public final PreperationStatus preperationStatus;
 
-    public final List<Product> products;
+    public final List<ProductData> products;
 
-    public OrderData(int tableNr, LocalDateTime timeOfOrder, PreperationStatus preperationStatus,List<Product> products ,Long id) {
+    public OrderData(int tableNr, LocalDateTime timeOfOrder, PreperationStatus preperationStatus,List<ProductData> products ,Long id) {
         this.tableNr = tableNr;
         this.orderDate = getOrderDateFormated(timeOfOrder);
         this.orderTime = getOrderTimeFormated(timeOfOrder);

@@ -16,14 +16,21 @@ export default function Counter(props) {
 
     useEffect(() => {
         props.updateCount(count);
+        console.log(props.submitMode)
     }, [count])
 
 
     return (props.submitMode) ? (
         <span>
-            <SubmitButton className="add-up" action={props.addUpAction} buttonText={"+"} tableId={props.tableId} productId={props.productId} productAmount={1} updateCount={()=>increment()} />
-            <p>{count}</p>
-            <SubmitButton className="subtract" action={props.subtractAction} buttonText={"-"} tableId={props.tableId} productId={props.productId} updateCount={()=>decrement()}/>
+            <span>
+                <SubmitButton className="add-up" action={props.addUpAction} buttonText={"+"} tableId={props.tableId} productId={props.productId} productAmount={1} updateCount={()=>increment()} />
+            </span>
+             <span>
+                 <p>{count}</p>
+            </span>
+             <span>
+                 <SubmitButton className="subtract" action={props.subtractAction} buttonText={"-"} tableId={props.tableId} productId={props.productId} updateCount={()=>decrement()}/>
+            </span>
         </span>
     ) : <span>
             <button className="add-up" onClick={increment}>+</button>

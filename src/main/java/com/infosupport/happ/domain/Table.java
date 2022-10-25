@@ -124,6 +124,7 @@ public class Table {
         Order barOrder = new BarOrder(this);
         Order kitchenOrder = new KitchenOrder(this);
 
+
         for (Product product: shoppingCart.getProducts()) {
              if (product.getProductDestination()==BAR_PRODUCT){
                  barOrder.addToProducts(product);

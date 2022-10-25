@@ -12,8 +12,7 @@ public interface OrderAssistant {
     Staff getStaff(Long staffId);
 
     Table getTable(Long id);
-
-    Order getOrderById(Long id);
+    Order getOrderById(Long orderId);
 
     boolean existsById(Long id);
 

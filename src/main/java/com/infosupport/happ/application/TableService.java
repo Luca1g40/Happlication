@@ -2,6 +2,7 @@ package com.infosupport.happ.application;
 
 
 import com.infosupport.happ.application.dto.OrderData;
+import com.infosupport.happ.application.dto.ProductData;
 import com.infosupport.happ.application.dto.ShoppingCartData;
 import com.infosupport.happ.application.dto.TableData;
 import com.infosupport.happ.data.OrderRepository;
@@ -117,8 +118,21 @@ public class TableService {
         return new OrderData(order.getTableNr(),
                 order.getTimeOfOrder(),
                 order.getPreperationStatus(),
-                order.getProducts(),
+                convertToProductDataList(order.getProducts()),
                 order.getId());
+    }
+
+    public List<ProductData> convertToProductDataList(List<Product> products) {
+        List<ProductData> productDataList = new ArrayList<>();
+
+        for (Product product : products) {
+            productDataList.add(createProductData(product));
+        }
+
+        return productDataList;
+    }
+    public ProductData createProductData(Product product) {
+        return new ProductData(product.getId(),product.getName(),product.getProductCategory(),product.getPrice(),product.getIngredients(),product.getDetails());
     }
 
     public List<OrderData> convertToBarOrderDataList(List<BarOrder> orders) {

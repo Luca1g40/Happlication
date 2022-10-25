@@ -49,9 +49,9 @@ public class TableController {
 //    }
 
     @PostMapping("/table/{tableId}/shoppingcart/remove/products")
-    public TableData removeAllProductOccurancesFromCart(@PathVariable Long tableId,ProductRequest productRequest){
+    public TableData removeAllProductOccurancesFromCart(@PathVariable Long tableId, @RequestBody ProductRequest productRequest){
         try {
-            return tableService.removeFromShoppingCart(tableId, productRequest.id);
+            return tableService.removeAllOccurancesOfAProductFromShoppingcart(tableId, productRequest.id);
         } catch (ItemNotFound itemNotFound) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, itemNotFound.getMessage());
         } catch (Exception exception) {
