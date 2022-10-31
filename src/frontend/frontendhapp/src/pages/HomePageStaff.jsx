@@ -1,6 +1,4 @@
-import { browserHistory } from 'react-router'
 import "../styles/HomePageStaff.css"
-import {config} from "../components/Util"
 import React, {useState} from "react";
 import axios from "axios";
 
@@ -30,7 +28,7 @@ export default function Staff(){
     const login = () => {
         console.log(config)
         axios.post(`http://localhost:8080/authenticate`,{
-            "username" : 392,
+            "username" : 518,
             "password" : password
 
         })
@@ -38,6 +36,7 @@ export default function Staff(){
                 const id = parseJwt(res.data.jwt).sub
                 sessionStorage.setItem("Authorization", "Bearer " + res.data.jwt)
                 sessionStorage.setItem("name", id)
+
 
                 axios.get(`localhost:8080/happ/staff/${id}`, config)
                     .then(res => {

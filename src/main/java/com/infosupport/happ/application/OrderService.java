@@ -34,7 +34,6 @@ public class OrderService {
         for (Long id:productList ) {
             products.add(orderAssistant.getProductById(id));
         }
-        System.out.println(table);
 
         Order order = new Order(table, LocalDateTime.now(), products);
 
