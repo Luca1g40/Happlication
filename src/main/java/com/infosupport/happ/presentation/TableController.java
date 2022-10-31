@@ -31,50 +31,72 @@ public class TableController {
             return tableService.createTableData(tableService.getTable(id));
         } catch (ItemNotFound exception) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, exception.getMessage());
-        }catch (Exception exception){
+        } catch (Exception exception) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
         }
     }
 
-    @PutMapping("/table/{id}/shoppingcart")
-    public TableData editShoppingCart(@PathVariable Long id, @RequestBody ShoppingCartRequest shoppingCartRequest){
-        try{
-            return tableService.editShoppingCart(id,shoppingCartRequest.productList);
-        }catch (ItemNotFound itemNotFound){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, itemNotFound.getMessage());
-        }catch (Exception exception){
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
+//    @PutMapping("/table/{id}/shoppingcart")
+//    public TableData editShoppingCart(@PathVariable Long id, @RequestBody ShoppingCartRequest shoppingCartRequest) {
+//        try {
+//            return tableService.editShoppingCart(id, shoppingCartRequest.productList);
+//        } catch (ItemNotFound itemNotFound) {
+//            throw new ResponseStatusException(HttpStatus.NOT_FOUND, itemNotFound.getMessage());
+//        } catch (Exception exception) {
+//            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
+//
+//        }
+//    }
 
+    @PostMapping("/table/{tableId}/shoppingcart/remove/products")
+    public TableData removeAllProductOccurancesFromCart(@PathVariable Long tableId, @RequestBody ProductRequest productRequest){
+        try {
+            return tableService.removeAllOccurancesOfAProductFromShoppingcart(tableId, productRequest.id);
+        } catch (ItemNotFound itemNotFound) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, itemNotFound.getMessage());
+        } catch (Exception exception) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
+        }
+    }
+
+    @PostMapping("/table/{tableId}/shoppingcart/remove/product")
+    public TableData removeProductFromShoppingcart(@PathVariable Long tableId,@RequestBody ProductRequest productRequest){
+        try {
+            return tableService.removeFromShoppingCart(tableId, productRequest.id);
+        } catch (ItemNotFound itemNotFound) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, itemNotFound.getMessage());
+        } catch (Exception exception) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
         }
     }
 
     @PostMapping("/table/{id}/shoppingcart")
-    public TableData addToShoppingCart(@PathVariable Long id, @RequestBody ProductRequest productRequest){
-        try{
-            return tableService.addToShoppingCart(id,productRequest.id, productRequest.amount);
-        }catch(ItemNotFound itemNotFound){
+    public TableData addToShoppingCart(@PathVariable Long id, @RequestBody ProductRequest productRequest) {
+        try {
+            return tableService.addToShoppingCart(id, productRequest.id, productRequest.amount);
+        } catch (ItemNotFound itemNotFound) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, itemNotFound.getMessage());
-        }catch (Exception exception){
+        } catch (Exception exception) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
         }
     }
 
     @PostMapping("/table/{id}/order")
-    public TableData placeOrder(@PathVariable Long id){
-        try{
+    public TableData placeOrder(@PathVariable Long id) {
+        try {
             return tableService.placeOrder(id);
-        }catch (ItemNotFound itemNotFound){
+        } catch (ItemNotFound itemNotFound) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, itemNotFound.getMessage());
-        }catch (Exception exception){
+        } catch (Exception exception) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
         }
     }
 
     @GetMapping("/table/{id}/shoppingcart")
-    public ShoppingCartData getTableShoppingCart(@PathVariable Long id){
-        try{
+    public ShoppingCartData getTableShoppingCart(@PathVariable Long id) {
+        try {
             return tableService.getTableShoppingCart(id);
-        }catch (ItemNotFound itemNotFound){
+        } catch (ItemNotFound itemNotFound) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, itemNotFound.getMessage());
         }
     }

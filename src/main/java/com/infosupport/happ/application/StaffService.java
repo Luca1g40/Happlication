@@ -1,11 +1,10 @@
 package com.infosupport.happ.application;
 
 import com.infosupport.happ.application.dto.AreaWithoutStaffData;
+import com.infosupport.happ.application.dto.OrderData;
 import com.infosupport.happ.application.dto.StaffData;
 import com.infosupport.happ.data.StaffRepository;
-import com.infosupport.happ.domain.Area;
-import com.infosupport.happ.domain.Rights;
-import com.infosupport.happ.domain.Staff;
+import com.infosupport.happ.domain.*;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import org.springframework.stereotype.Service;
 
@@ -16,9 +15,11 @@ import java.util.List;
 public class StaffService {
 
     private final StaffRepository staffRepository;
+    private final OrderService orderService;
 
-    public StaffService(StaffRepository staffRepository) {
+    public StaffService(StaffRepository staffRepository, OrderService orderService) {
         this.staffRepository = staffRepository;
+        this.orderService = orderService;
     }
 
     public Staff getStaff(Long id) {
@@ -43,21 +44,44 @@ public class StaffService {
         this.staffRepository.deleteById(id);
     }
 
+    public List<OrderData> getAllClaimedOrders(Long staffId) {
+        Staff staff = getStaff(staffId);
+
+        List<Order> claimedOrders = staff.getClaimedOrders();
+
+        return orderService.convertToOrderDataList(claimedOrders);
+    }
+
+    public List<OrderData> getAllUnclaimedOrders(Long staffId){
+        staffExists(staffId);
+        List<Rights> rights = staffRepository.getById(staffId).getRights();
+        List<OrderData> orderData = new ArrayList<>();
+
+        for (Order order: orderService.getAllUnclaimedOrders()) {
+            if (order instanceof KitchenOrder && rights.contains(Rights.KITCHEN_RIGHTS)){
+                orderData.add(orderService.createOrderData(order));
+            }else if (order instanceof BarOrder && rights.contains(Rights.BAR_RIGHTS)){
+                orderData.add(orderService.createOrderData(order));
+            }
+        }
+
+        return orderData;
+    }
+
 
     public StaffData createStaffData(Staff staff) {
         return new StaffData(
                 staff.getId(),
-                staff.getPassword(),
                 staff.getName(),
                 staff.getOperations(),
                 staff.getClaimedOrders(),
-                createAreaWithoutStaff(staff)
-        );
+                createAreaWithoutStaff(staff),
+                staff.getRights());
     }
 
     public List<AreaWithoutStaffData> createAreaWithoutStaff(Staff staff) {
         List<AreaWithoutStaffData> areaWithoutStaffDataList = new ArrayList<>();
-        if(staff.getAreas() != null) {
+        if (staff.getAreas() != null) {
             for (Area area : staff.getAreas()) {
                 areaWithoutStaffDataList.add(new AreaWithoutStaffData(
                         area.getId(),
@@ -68,5 +92,6 @@ public class StaffService {
         }
         return areaWithoutStaffDataList;
     }
+
 
 }

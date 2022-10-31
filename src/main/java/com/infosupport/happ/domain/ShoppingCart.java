@@ -2,9 +2,7 @@ package com.infosupport.happ.domain;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.HashMap;
 
 
 @Entity
@@ -14,7 +12,7 @@ public class ShoppingCart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany
+    @ManyToMany
     private List<Product> products;
 
     public ShoppingCart() {
@@ -29,6 +27,9 @@ public class ShoppingCart {
         this.products = products;
     }
 
+    public void removeEveryOccurrencesOfAProduct(Product product){
+        products.removeAll(List.of(product));
+    }
     public void removeFromShoppingCart(Product product) {
         products.remove(product);
     }
@@ -37,10 +38,7 @@ public class ShoppingCart {
         this.id = id;
     }
 
-    public void addToShoppingCart(Product product){
-//        if (products.containsKey(product)){
-//            products.replace(product, products.get(product)+amount);
-//        }else products.put(product,amount);
+    public void addToShoppingCart(Product product) {
         products.add(product);
     }
 
@@ -54,5 +52,13 @@ public class ShoppingCart {
 
     public void clearShoppingCart() {
         products.clear();
+    }
+
+    @Override
+    public String toString() {
+        return "ShoppingCart{" +
+                "id=" + id +
+                ", products=" + products +
+                '}';
     }
 }

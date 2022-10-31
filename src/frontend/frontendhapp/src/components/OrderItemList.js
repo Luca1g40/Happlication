@@ -1,36 +1,25 @@
-import React,{useState,useEffect} from "react"
+import React, {useEffect, useState} from "react"
 import OrderItem from "./OrderItem";
-
-export default function OrderItemList({order,staffRole}){
-    const [orderProducts,setOrderProducts] = useState([])
-    const [productsAlreadyAdded,setProductsAlreadyAdded] = useState([])
+import getOccuranceProducts from "./Util";
 
 
-    function determineProducts(){
-        if (staffRole === "bar"){
-            setOrderProducts(order.drinkProducts);
-        }else if (staffRole === "kitchen"){
-            setOrderProducts(order.foodProducts)
-        }
-    }
+export default function OrderItemList(props) {
+    const [productsAlreadyAdded, setProductsAlreadyAdded] = useState([])
+
+
 
     useEffect(() => {
-        determineProducts();
+        console.log(props.order)
+
     }, [])
 
 
     return (
         <div>
-            {orderProducts.map((product) => {
-                if(!productsAlreadyAdded.includes(product)){
-                    return <OrderItem key={product.id} product={product} amount={1} className={"order-products"}/>
-                }else{
-                    setProductsAlreadyAdded(state => [...state,product]);
+            {Array.from(getOccuranceProducts(props.order.products).keys()).map((product,index) => {
+                return <OrderItem key={product.id} product={product} amount={Array.from(getOccuranceProducts(props.order.products).values())[index]} className={"order-products"}/>
                 }
-            }
+            )}
 
-
-        )}
-
-    </div>)
+        </div>)
 }

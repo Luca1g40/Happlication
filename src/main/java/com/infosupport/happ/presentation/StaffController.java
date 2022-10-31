@@ -4,6 +4,7 @@ import com.infosupport.happ.application.OrderService;
 import com.infosupport.happ.application.StaffService;
 import com.infosupport.happ.application.dto.OrderData;
 import com.infosupport.happ.application.dto.StaffData;
+import com.infosupport.happ.application.dto.StaffWithoutAreasData;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import com.infosupport.happ.presentation.dto.OrderRequest;
 import com.infosupport.happ.presentation.dto.StaffRequest;
@@ -49,19 +50,19 @@ public class StaffController {
                 staffRequest.rights);
     }
 
-    @GetMapping("/staff/{id}")
-    public StaffData getStaff(@PathVariable Long id){
-        try{
-            return this.staffService.createStaffData(staffService.getStaff(id));
+    @GetMapping("/staff/{staffId}")
+    public StaffData getStaff(@PathVariable Long staffId) {
+        try {
+            return this.staffService.createStaffData(staffService.getStaff(staffId));
         } catch (ItemNotFound e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         }
     }
 
-    @DeleteMapping("/staff/{id}")
-    public void deleteStaff(@PathVariable("id") Long id) {
+    @DeleteMapping("/staff/{staffId}")
+    public void deleteStaff(@PathVariable("staffId") Long staffId) {
         try {
-            this.staffService.deleteStaff(id);
+            this.staffService.deleteStaff(staffId);
         } catch (ItemNotFound itemNotFound) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         } catch (Exception e) {
@@ -69,8 +70,25 @@ public class StaffController {
         }
     }
 
-    @GetMapping("/orders/staff/{staffId}")
-    public List<OrderData> getAllClaimedOrders(@PathVariable Long staffId){
-        return null;
+    @GetMapping("/staff/{staffId}/myorders")
+    public List<OrderData> getAllClaimedOrders(@PathVariable Long staffId) {
+        try {
+            return this.staffService.getAllClaimedOrders(staffId);
+        } catch (ItemNotFound itemNotFound) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/staff/{staffId}/orders")
+    public List<OrderData> getAllUnclaimedOrders(@PathVariable Long staffId){
+        try {
+            return this.staffService.getAllUnclaimedOrders(staffId);
+        } catch (ItemNotFound itemNotFound) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

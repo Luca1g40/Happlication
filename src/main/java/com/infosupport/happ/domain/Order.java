@@ -2,15 +2,12 @@ package com.infosupport.happ.domain;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static com.infosupport.happ.domain.PreperationStatus.*;
 
-@Entity(name = "customer_order")
+@MappedSuperclass
 public class Order {
     @Id
     @GeneratedValue
@@ -18,23 +15,22 @@ public class Order {
     @ManyToOne
     private Table table;
     private LocalDateTime timeOfOrder;
+    @Enumerated(EnumType.STRING)
     private PreperationStatus preperationStatus;
 
-    @OneToMany
+    @ManyToMany
     private List<Product> products;
 
     public Order() {
     }
 
-    public Order(Table table, LocalDateTime timeOfOrder, List<Product> products) {
+    public Order(Table table) {
         LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-
 
         this.table = table;
         this.timeOfOrder = now;
         this.preperationStatus = UNCLAIMED;
-        this.products = products;
+        this.products = new ArrayList<>();
     }
 
     public Long getId() {
@@ -57,18 +53,6 @@ public class Order {
         return products;
     }
 
-    public boolean checkIfAllProductsAreDone() {
-//        for (Product key : products.keySet()) {
-//            if (!key.isReady()) return false;
-//        }
-
-        for (Product product : products) {
-            if (!product.isReady()) {
-                return false;
-            }
-        }
-        return true;
-    }
 
     public void claimOrder() {
         if (this.preperationStatus == UNCLAIMED) {
@@ -76,66 +60,45 @@ public class Order {
         }
     }
 
-    public void setPreperationStatusToDone() {
-        if (checkIfAllProductsAreDone()) {
-            this.preperationStatus = DONE;
-        }
+    public void setPreparationStatusToDone() {
+        this.preperationStatus = DONE;
     }
 
     public void addToProducts(Product product) {
-//        if (products.containsKey(product)){
-//            products.replace(product, products.get(product)+amount);
-//        }else products.put(product,1);
-
         products.add(product);
     }
 
-    public List<Product> getBarOrders() {
-//        HashMap<Product,Integer> barOrders = new HashMap<>();
+//    public List<Product> getBarOrders() {
 //
-//        for (Map.Entry<Product, Integer> entry : products.entrySet()) {
-//            if (entry.getKey().getProductCategory()==ProductCategory.DRINKS){
-//                barOrders.put(entry.getKey(), entry.getValue());
-//            }
-//        }
-
-        List<Product> barOrders = new ArrayList<>();
-        for (Product product : products) {
-            if (product.getProductCategory() == ProductCategory.DRINKS) {
-                barOrders.add(product);
-            }
-        }
-        return barOrders;
-    }
-
-    public List<Product> getFoodOrders() {
-//        HashMap<Product,Integer> kitchenOrders = new HashMap<>();
 //
-//        for (Map.Entry<Product, Integer> entry : products.entrySet()) {
-//            if (entry.getKey().getProductCategory()==ProductCategory.DRINKS){
-//                kitchenOrders.put(entry.getKey(), entry.getValue());
+//        List<Product> barOrders = new ArrayList<>();
+//        for (Product product : products) {
+//            if (product.getProductCategory() == ProductCategory.DRINKS) {
+//                barOrders.add(product);
 //            }
 //        }
-
-
-
-        List<Product> kitchenOrders = new ArrayList<>();
-        for (Product product : products) {
-            if (product.getProductCategory() != ProductCategory.DRINKS) {
-                kitchenOrders.add(product);
-            }
-        }
-        return kitchenOrders;
-    }
-
-
-//    public HashMap<Product, Integer> getProductBasedOnCategory(ProductCategory productCategory){
-//        HashMap<Product,Integer> productHashmap = new HashMap<>();
-//        for (Map.Entry<Product, Integer> entry : products.entrySet()) {
-//            if (entry.getKey().getProductCategory()==productCategory){
-//                productHashmap.put(entry.getKey(), entry.getValue());
-//            }
-//        }
-//        return productHashmap;
+//        return barOrders;
 //    }
+//
+//    public List<Product> getFoodOrders() {
+//
+//        List<Product> kitchenOrders = new ArrayList<>();
+//        for (Product product : products) {
+//            if (product.getProductCategory() != ProductCategory.DRINKS) {
+//                kitchenOrders.add(product);
+//            }
+//        }
+//        return kitchenOrders;
+//    }
+
+    @Override
+    public String toString() {
+        return "SingleOrder{" +
+                "id=" + id +
+
+                ", timeOfOrder=" + timeOfOrder +
+                ", preperationStatus=" + preperationStatus +
+                ", products=" + products +
+                '}';
+    }
 }

@@ -1,6 +1,8 @@
 package com.infosupport.happ.application;
 
 import com.infosupport.happ.application.dto.OrderData;
+import com.infosupport.happ.data.BarOrderRepository;
+import com.infosupport.happ.data.KitchenOrderRepository;
 import com.infosupport.happ.data.OrderAssistant;
 import com.infosupport.happ.data.OrderRepository;
 import com.infosupport.happ.domain.*;
@@ -15,9 +17,8 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.infosupport.happ.domain.PreperationStatus.CLAIMED;
-import static com.infosupport.happ.domain.PreperationStatus.UNCLAIMED;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -27,33 +28,36 @@ public class OrderServiceTest {
     private OrderService orderService;
     private OrderAssistant orderAssistant;
     private TableService tableService;
-    private OrderRepository orderRepository;
+    private KitchenOrderRepository kitchenOrderRepository;
+    private BarOrderRepository barOrderRepository;
 
     @BeforeEach
     void beforeEach() {
-        this.orderRepository = mock(OrderRepository.class);
+        this.barOrderRepository = mock(BarOrderRepository.class);
+        this.kitchenOrderRepository = mock(KitchenOrderRepository.class);
+
         this.orderAssistant = mock(OrderAssistant.class);
         this.tableService = mock(TableService.class);
-        this.orderService = new OrderService(orderRepository, orderAssistant);
+
+        this.orderService = new OrderService(orderAssistant,barOrderRepository,kitchenOrderRepository);
 
         Table table = new Table(LocalTime.now(), LocalTime.now(), 4, 3, TableStatus.OCCUPIED, new ShoppingCart());
-        Staff staff = new Staff(1, "staff",new ArrayList<>());
+        Staff staff = new Staff(1, "staff", new ArrayList<>());
         Product product = new Product();
 
         when(orderAssistant.getStaff(1L)).thenReturn(staff);
         when(orderAssistant.getTable(1L)).thenReturn(table);
         when(orderAssistant.existsById(1L)).thenReturn(true);
 
-        Order order = new Order(orderAssistant.getTable(1L), LocalDateTime.now(), List.of(product));
+        Order order = new Order(orderAssistant.getTable(1L));
 
-        when(orderRepository.getById(1L)).thenReturn(order);
-        when(orderAssistant.getOrderById(1L)).thenReturn(order);
+
 
 
     }
 
 //    @Test
-//    @DisplayName("Order can be created")
+//    @DisplayName("SingleOrder can be created")
 //    void CreateNewOrder() {
 //
 //        Product product = new Product();
@@ -62,20 +66,6 @@ public class OrderServiceTest {
 //
 //        assertEquals(UNCLAIMED, orderData.preperationStatus);
 //    }
-
-    @Test
-    @DisplayName("Get an order")
-    void getOrder() {
-
-
-        OrderData orderData = orderService.getOrder(1L);
-
-        assertNotNull(orderData);
-
-        assertThrows(ItemNotFound.class, () -> orderService.getOrder(4L));
-
-    }
-
 
 
 //    @Test

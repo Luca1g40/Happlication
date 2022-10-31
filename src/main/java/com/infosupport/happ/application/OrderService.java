@@ -1,48 +1,46 @@
 package com.infosupport.happ.application;
 
 import com.infosupport.happ.application.dto.OrderData;
+import com.infosupport.happ.application.dto.ProductData;
+import com.infosupport.happ.data.BarOrderRepository;
+import com.infosupport.happ.data.KitchenOrderRepository;
 import com.infosupport.happ.data.OrderAssistant;
 import com.infosupport.happ.data.OrderRepository;
-import com.infosupport.happ.domain.Order;
-import com.infosupport.happ.domain.Product;
-import com.infosupport.happ.domain.Staff;
-import com.infosupport.happ.domain.Table;
+import com.infosupport.happ.domain.*;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import org.springframework.stereotype.Service;
-import static com.infosupport.happ.domain.PreperationStatus.UNCLAIMED;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.infosupport.happ.domain.PreperationStatus.UNCLAIMED;
 
 
 @Service
 public class OrderService {
 
     private final OrderAssistant orderAssistant;
-    private final OrderRepository orderRepository;
+    private final BarOrderRepository barOrderRepository;
+    private final KitchenOrderRepository kitchenOrderRepository ;
 
-    public OrderService(OrderRepository orderRepository, OrderAssistant orderAssistant) {
+    public OrderService(OrderAssistant orderAssistant, BarOrderRepository barOrderRepository, KitchenOrderRepository kitchenOrderRepository) {
         this.orderAssistant = orderAssistant;
-        this.orderRepository = orderRepository;
+        this.barOrderRepository = barOrderRepository;
+        this.kitchenOrderRepository = kitchenOrderRepository;
     }
 
-    public OrderData createOrder(Long tableId, List<Long> productList) {
-        List<Product> products = new ArrayList<>();
-        Table table = this.orderAssistant.getTable(tableId);
-
-        for (Long id:productList ) {
-            products.add(orderAssistant.getProductById(id));
+    public Order saveOrder(Order order){
+        if (order instanceof BarOrder){
+            return barOrderRepository.save((BarOrder) order);
+        }else{
+            return kitchenOrderRepository.save((KitchenOrder) order);
         }
-
-        Order order = new Order(table, LocalDateTime.now(), products);
-
-        this.orderRepository.save(order);
-
-        return createOrderData(order);
     }
+
 
     public OrderData claimOrder(Long staffId, Long orderId) {
+        System.out.println("here");
 
         Staff staff = orderAssistant.getStaff(staffId);
 
@@ -51,42 +49,60 @@ public class OrderService {
         staff.addOrder(order);
         order.claimOrder();
 
-        orderRepository.save(order);
+        saveOrder(order);
 
         return this.createOrderData(order);
+
+    }
+
+    public OrderData setStatusToDone(Long orderId) {
+        Order order = orderAssistant.getOrderById(orderId);
+
+        order.setPreparationStatusToDone();
+
+        saveOrder(order);
+
+        return this.createOrderData(order);
+
     }
 
     public List<OrderData> claimMultipleOrders(Long staffId, List<Long> orders) {
         List<OrderData> dataOrders = new ArrayList<>();
-        for(Long orderId: orders){
+        for (Long orderId : orders) {
             dataOrders.add(claimOrder(staffId, orderId));
         }
         return dataOrders;
     }
 
-    public OrderData getOrder(Long id) {
-        orderExists(id);
-        Order order = this.orderRepository.getById(id);
+    public OrderData getBarOrder(Long orderId) {
+        orderExists(orderId);
+        BarOrder order = barOrderRepository.getById(orderId);
+        return createOrderData(order);
+    }
+
+    public OrderData getKitchenOrder(Long orderId) {
+        orderExists(orderId);
+        KitchenOrder order = kitchenOrderRepository.getById(orderId);
         return createOrderData(order);
     }
 
     public List<OrderData> getAllOrders() {
-
-        return convertToOrderDataList(orderRepository.findAll());
+        List<Order> orders = new ArrayList<>();
+        orders.addAll(kitchenOrderRepository.findAll());
+        orders.addAll(barOrderRepository.findAll());
+        return convertToOrderDataList(orders);
 
     }
 
-    public List<OrderData> getAllUnclaimedOrders() {
+    public List<Order> getAllUnclaimedOrders() {
         List<Order> unclaimedOrders = new ArrayList<>();
-        for (Order order : orderRepository.findAll()){
-            if (order.getPreperationStatus() == UNCLAIMED){
-                unclaimedOrders.add(order);
-            }
-        }
 
-        return convertToOrderDataList(unclaimedOrders);
+        unclaimedOrders.addAll(barOrderRepository.getBarOrdersByPreperationStatus(UNCLAIMED));
+        unclaimedOrders.addAll(kitchenOrderRepository.getKitchenOrdersByPreperationStatus(UNCLAIMED));
 
+        return unclaimedOrders;
     }
+
 
     private void orderExists(Long id) {
         if (!orderAssistant.existsById(id)) {
@@ -97,24 +113,40 @@ public class OrderService {
     public List<OrderData> convertToOrderDataList(List<Order> orders) {
         List<OrderData> ordersData = new ArrayList<>();
 
-        for (Order order : orders){
+        for (Order order : orders) {
             ordersData.add(createOrderData(order));
         }
 
         return ordersData;
     }
 
-    public void deleteOrder(Long id) {
-        orderRepository.deleteById(id);
+    public void deleteBarOrder(Long orderId) {
+        barOrderRepository.deleteById(orderId);
     }
+    public void deleteKitchenOrder(Long orderId) {
+        kitchenOrderRepository.deleteById(orderId);
+    }
+
 
     public OrderData createOrderData(Order order) {
         return new OrderData(order.getTableNr(),
                 order.getTimeOfOrder(),
                 order.getPreperationStatus(),
-                order.getBarOrders(),
-                order.getFoodOrders(),
+                convertToProductDataList(order.getProducts()),
                 order.getId());
+    }
+
+    public List<ProductData> convertToProductDataList(List<Product> products) {
+        List<ProductData> productDataList = new ArrayList<>();
+
+        for (Product product : products) {
+            productDataList.add(createProductData(product));
+        }
+
+        return productDataList;
+    }
+    public ProductData createProductData(Product product) {
+        return new ProductData(product.getId(),product.getName(),product.getProductCategory(),product.getPrice(),product.getIngredients(),product.getDetails());
     }
 
 

@@ -5,6 +5,7 @@ import com.infosupport.happ.data.ProductRepository;
 import com.infosupport.happ.domain.Ingredient;
 import com.infosupport.happ.domain.Product;
 import com.infosupport.happ.domain.ProductCategory;
+import com.infosupport.happ.domain.ProductDestination;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import org.springframework.stereotype.Service;
 
@@ -22,8 +23,8 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public ProductData createProduct(String name, ProductCategory productCategory, double price, List<Ingredient> ingredients,String details) {
-        Product product = new Product(name, ingredients, productCategory, price,details);
+    public ProductData createProduct(String name, ProductCategory productCategory, double price, List<Ingredient> ingredients, String details, ProductDestination productDestination) {
+        Product product = new Product(name, ingredients, productCategory, price, details,productDestination);
         productRepository.save(product);
         return createProductData(product);
     }
@@ -31,14 +32,13 @@ public class ProductService {
     public ProductData switchProductPrepStatus(Long id) {
         productExists(id);
         Product product = productRepository.getById(id);
-        product.switchReadyStatus();
 
         this.productRepository.save(product);
         return createProductData(product);
     }
 
 
-    public ProductData updateProduct(String name, ProductCategory productCategory, double price, Long id, List<Ingredient> ingredients,String details) {
+    public ProductData updateProduct(String name, ProductCategory productCategory, double price, Long id, List<Ingredient> ingredients, String details) {
         productExists(id);
         Product product = productRepository.getById(id);
 
@@ -69,10 +69,9 @@ public class ProductService {
                 product.getName(),
                 product.getProductCategory(),
                 product.getPrice(),
-                product.isReady(),
                 product.getIngredients(),
                 product.getDetails()
-                );
+        );
     }
 
     private void productExists(Long id) {
