@@ -8,7 +8,6 @@ import getOccuranceProducts from "../Util";
 export default function ShoppingCart() {
     const [shoppingCart, setShoppingCart] = useState([]);
 
-//TODO count dje producto meste kambia orabo primi e plus
     useEffect(() => {
         GetShoppingCart(69)
             .then(res => {
@@ -28,12 +27,12 @@ export default function ShoppingCart() {
             {Array.from(getOccuranceProducts(shoppingCart).keys()).map((item, index) =>{
                 return (
                     <span key={item.id}>
-                            <ShoppingCartItem productName={item.name} productId={item.id} amount={Array.from(getOccuranceProducts(shoppingCart).values())[index]}/>
+                            <ShoppingCartItem productName={item.name} productId={item.id} amount={Array.from(getOccuranceProducts(shoppingCart).values())[index]} updateShoppingCart={shoppingcart => setShoppingCart(shoppingcart)}/>
                             <hr/>
                         </span>
                 );
             })}
-            <SubmitButton buttonText={"Order"} tableId={69} action={Actions.PLACE_ORDER}/>
+            <SubmitButton buttonText={"Order"} tableId={69} action={Actions.PLACE_ORDER} emptyShoppingcart={()=>setShoppingCart([])}/>
         </div>
 
     ) : <div><h1 align="center">Your shoppingcart is empty</h1></div>

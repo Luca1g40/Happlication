@@ -14,14 +14,13 @@ export function AddProductToShoppingCart(tableId, productId, amount) {
             console.log(err)
         })
 }
-//TODO pa orabo primi plus of min bo update e shoppingcart
 export function RemoveProductFromShoppingCart(tableId, productId) {
-    axios.post(`http://localhost:8080/happ/table/${tableId}/shoppingcart/remove/product`, {
+    return axios.post(`http://localhost:8080/happ/table/${tableId}/shoppingcart/remove/product`, {
         "id": productId
     }, configuration)
         .then(res => {
-            console.log(productId)
             console.log(res)
+            return res.data.shoppingCart.productDataList;
         })
         .catch(err => {
             console.log(productId)
@@ -51,11 +50,12 @@ export function GetShoppingCart(tableId){
 }
 
 export function RemoveAllProductOccurancesFromCart(tableId,productId){
-    axios.post(`http://localhost:8080/happ/table/${tableId}/shoppingcart/remove/products`,{
+   return axios.post(`http://localhost:8080/happ/table/${tableId}/shoppingcart/remove/products`,{
         "id":productId
     },configuration)
         .then(res => {
-            console.log(res)
+            console.log(res.data.shoppingCart.productDataList)
+            return res.data.shoppingCart.productDataList;
         })
         .catch(err => {
             console.log(err)

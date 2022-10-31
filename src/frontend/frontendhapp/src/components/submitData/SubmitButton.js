@@ -15,6 +15,9 @@ export default function SubmitButton(props) {
         switch (props.action) {
             case Actions.PLACE_ORDER:
                 PlaceOrder(props.tableId);
+                if (!(props.emptyShoppingcart === undefined)){
+                    props.emptyShoppingcart();
+                }
                 break;
 
             case Actions.ADD_TO_SHOPPING_CART:
@@ -32,14 +35,24 @@ export default function SubmitButton(props) {
             case Actions.REMOVE_FROM_SHOPPING_CART:
                 RemoveProductFromShoppingCart(props.tableId,props.productId);
                 console.log("removed from shoppingcart")
-                if (!props.updateCount() === undefined){
+                if (!(props.updateCount === undefined)){
                     console.log("in if")
                     props.updateCount();
                 }
 
                 break;
             case Actions.REMOVE_ALL_OCCURANCES_OF_A_PRODUCT:
-                RemoveAllProductOccurancesFromCart(props.tableId,props.productId);
+                RemoveAllProductOccurancesFromCart(props.tableId,props.productId)
+                    .then(res => {
+                        if (!(props.updateShoppingCart === undefined)){
+                            props.updateShoppingCart(res);
+                        }
+                        console.log(res)
+
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    });
                 console.log("removed all")
                 break;
         }
