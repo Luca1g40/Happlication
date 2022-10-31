@@ -18,6 +18,10 @@ export default function SubmitButton(props) {
                 if (!(props.emptyShoppingcart === undefined)){
                     props.emptyShoppingcart();
                 }
+
+                if (!(props.triggerPopUp === undefined)){
+                    props.triggerPopUp();
+                }
                 break;
 
             case Actions.ADD_TO_SHOPPING_CART:
