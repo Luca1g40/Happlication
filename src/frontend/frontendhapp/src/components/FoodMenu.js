@@ -3,13 +3,14 @@ import MenuItem from "./MenuItem";
 import {getMenuFoodItems} from "../urlMappings/MenuRequests";
 
 
+
 function FoodMenu() {
     const [products, setProducts] = useState([])
 
     useEffect(() => {
         getMenuFoodItems()
             .then(res =>
-                setProducts(res.data)
+                setProducts(res)
             )
             .catch(err =>
                 console.log(err)

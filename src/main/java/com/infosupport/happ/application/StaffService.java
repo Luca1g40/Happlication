@@ -4,11 +4,7 @@ import com.infosupport.happ.application.dto.AreaWithoutStaffData;
 import com.infosupport.happ.application.dto.OrderData;
 import com.infosupport.happ.application.dto.StaffData;
 import com.infosupport.happ.data.StaffRepository;
-import com.infosupport.happ.domain.Area;
-import com.infosupport.happ.domain.Order;
-import com.infosupport.happ.domain.Rights;
-import com.infosupport.happ.domain.Rights;
-import com.infosupport.happ.domain.Staff;
+import com.infosupport.happ.domain.*;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import org.springframework.stereotype.Service;
 
@@ -65,6 +61,22 @@ public class StaffService {
         List<Order> claimedOrders = staff.getClaimedOrders();
 
         return orderService.convertToOrderDataList(claimedOrders);
+    }
+
+    public List<OrderData> getAllUnclaimedOrders(Long staffId){
+        staffExists(staffId);
+        List<Rights> rights = staffRepository.getById(staffId).getRights();
+        List<OrderData> orderData = new ArrayList<>();
+
+        for (Order order: orderService.getAllUnclaimedOrders()) {
+            if (order instanceof KitchenOrder && rights.contains(Rights.KITCHEN_RIGHTS)){
+                orderData.add(orderService.createOrderData(order));
+            }else if (order instanceof BarOrder && rights.contains(Rights.BAR_RIGHTS)){
+                orderData.add(orderService.createOrderData(order));
+            }
+        }
+
+        return orderData;
     }
 
 

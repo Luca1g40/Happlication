@@ -1,11 +1,10 @@
 import axios from "axios";
 import {configuration} from "./JwtHeader";
 
-
+const staffId = sessionStorage.getItem("name");
 export function getPersonallyClaimedOrders() {
-    const staffId = sessionStorage.getItem("name");
 
-    return axios.get(`http://localhost:8080/happ/orders/staff/${staffId}`, configuration)
+    return axios.get(`http://localhost:8080/happ/staff/${staffId}/myorders`, configuration)
         .then(res => {
             console.log(res)
             return res.data
@@ -15,8 +14,8 @@ export function getPersonallyClaimedOrders() {
         })
 }
 
-export function setOrderToDone(id) {
-    return axios.post(`http://localhost:8080/happ/order/${id}`, {}, configuration)
+export function setOrderToDone(orderId) {
+    return axios.post(`http://localhost:8080/happ/order/${orderId}`, {}, configuration)
         .then(res => {
             console.log(res.data)
             return res.data
@@ -27,12 +26,14 @@ export function setOrderToDone(id) {
 }
 
 export function getAllUnclaimedOrders() {
-    return axios.get("http://localhost:8080/happ/orders", configuration)
+
+    return axios.get(`http://localhost:8080/happ/staff/${staffId}/orders`, configuration)
         .then(res => {
             console.log(res.data)
             return res.data
         })
         .catch(err => {
+            console.log("catch")
             console.log(err)
         })
 }

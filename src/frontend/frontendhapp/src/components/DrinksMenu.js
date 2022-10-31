@@ -9,7 +9,7 @@ function DrinksMenu() {
     useEffect(() => {
         getMenuDrinkItems()
             .then(res =>
-                setProducts(res.data)
+                setProducts(res)
             )
             .catch(err => {
                 console.log(err)
@@ -23,7 +23,7 @@ function DrinksMenu() {
                 {
                     products.map(
                         (product) =>
-                            <MenuItem product={product}/>
+                            <MenuItem key={product.id} product={product}/>
                     )
                 }
             </ul>

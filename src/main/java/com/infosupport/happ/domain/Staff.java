@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.infosupport.happ.domain.PreperationStatus.CLAIMED;
+import static com.infosupport.happ.domain.PreperationStatus.DONE;
 
 @Entity
 public class Staff implements Serializable {
@@ -18,8 +19,12 @@ public class Staff implements Serializable {
     private String name;
     @OneToMany
     private List<Operation> operations;
+
     @OneToMany
-    private List<Order> claimedOrders;
+    private List<KitchenOrder> claimedKitchenOrders;
+
+    @OneToMany
+    private List<BarOrder> claimedBarOrders;
 
     @ManyToMany(mappedBy = "staffList")
     private List<Area> areas;
@@ -35,7 +40,8 @@ public class Staff implements Serializable {
         this.password = password;
         this.name = name;
         this.operations = new ArrayList<>();
-        this.claimedOrders = new ArrayList<>();
+        this.claimedKitchenOrders = new ArrayList<>();
+        this.claimedBarOrders = new ArrayList<>();
         this.areas = new ArrayList<>();
         this.rights = rights;
     }
@@ -66,23 +72,37 @@ public class Staff implements Serializable {
     }
 
     public void addOrder(Order order) {
-        this.claimedOrders.add(order);
+        if (order instanceof KitchenOrder){
+            claimedKitchenOrders.add((KitchenOrder) order);
+        }else if (order instanceof BarOrder){
+            claimedBarOrders.add((BarOrder) order);
+        }
     }
 
     public List<Order> getClaimedAndFinishedOrders() {
-        return claimedOrders;
+       return getOrderBasedOnStatus(DONE);
     }
 
-    public List<Order> getClaimedOrders() {
-        List<Order> ordersNotFinished = new ArrayList<>();
+    private List<Order> getOrderBasedOnStatus(PreperationStatus preperationStatus){
+        List<Order> orders = new ArrayList<>();
 
-        for (Order order : claimedOrders) {
-            if (order.getPreperationStatus() == CLAIMED) {
-                ordersNotFinished.add(order);
+        for (Order order : claimedKitchenOrders) {
+            if (order.getPreperationStatus() == preperationStatus) {
+                orders.add(order);
             }
         }
 
-        return ordersNotFinished;
+        for (Order order : claimedBarOrders) {
+            if (order.getPreperationStatus() == preperationStatus) {
+                orders.add(order);
+            }
+        }
+
+        return orders;
+    }
+
+    public List<Order> getClaimedOrders() {
+      return getOrderBasedOnStatus(CLAIMED);
     }
 
 }

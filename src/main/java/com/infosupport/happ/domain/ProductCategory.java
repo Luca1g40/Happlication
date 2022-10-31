@@ -7,6 +7,5 @@ public enum ProductCategory {
     SIDE,
     DESSERT,
     DRINKS,
-    EXTRA
-
+    EXTRA,
 }

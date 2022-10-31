@@ -15,7 +15,6 @@ export default function Foods() {
                 <Link className="button foodsToHome" to="/"> Terug </Link>
                 <Link className="button foodsToDrinks" to="/Drinks">Dranken</Link>
                 <FoodMenu/>
-
             </div>
         </>
     );

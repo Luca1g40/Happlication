@@ -12,7 +12,7 @@ public class ShoppingCart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany
+    @ManyToMany
     private List<Product> products;
 
     public ShoppingCart() {
@@ -27,6 +27,9 @@ public class ShoppingCart {
         this.products = products;
     }
 
+    public void removeEveryOccurrencesOfAProduct(Product product){
+        products.removeAll(List.of(product));
+    }
     public void removeFromShoppingCart(Product product) {
         products.remove(product);
     }
@@ -36,9 +39,6 @@ public class ShoppingCart {
     }
 
     public void addToShoppingCart(Product product) {
-//        if (products.containsKey(product)){
-//            products.replace(product, products.get(product)+amount);
-//        }else products.put(product,amount);
         products.add(product);
     }
 
@@ -52,5 +52,13 @@ public class ShoppingCart {
 
     public void clearShoppingCart() {
         products.clear();
+    }
+
+    @Override
+    public String toString() {
+        return "ShoppingCart{" +
+                "id=" + id +
+                ", products=" + products +
+                '}';
     }
 }

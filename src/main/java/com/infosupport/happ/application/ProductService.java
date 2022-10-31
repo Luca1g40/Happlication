@@ -5,6 +5,7 @@ import com.infosupport.happ.data.ProductRepository;
 import com.infosupport.happ.domain.Ingredient;
 import com.infosupport.happ.domain.Product;
 import com.infosupport.happ.domain.ProductCategory;
+import com.infosupport.happ.domain.ProductDestination;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import org.springframework.stereotype.Service;
 
@@ -22,8 +23,8 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public ProductData createProduct(String name, ProductCategory productCategory, double price, List<Ingredient> ingredients, String details) {
-        Product product = new Product(name, ingredients, productCategory, price, details);
+    public ProductData createProduct(String name, ProductCategory productCategory, double price, List<Ingredient> ingredients, String details, ProductDestination productDestination) {
+        Product product = new Product(name, ingredients, productCategory, price, details,productDestination);
         productRepository.save(product);
         return createProductData(product);
     }

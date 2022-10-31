@@ -7,6 +7,8 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.infosupport.happ.domain.ProductDestination.*;
+
 @Entity(name = "tafel")
 public class Table {
 
@@ -14,14 +16,20 @@ public class Table {
     @GeneratedValue
     private Long id;
 
-    @OneToMany
-    private List<Order> orders;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<KitchenOrder> kitchenOrders;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<BarOrder> barOrders;
+
     private LocalTime elapsedTimeSinceOrder;
     private LocalTime timeLeftToOrder;
     private int amountOfPeople;
     @Column(unique = true)
     private int tableNumber;
     private TableStatus tableStatus;
+
     @OneToOne(cascade = CascadeType.ALL)
     private ShoppingCart shoppingCart;
 
@@ -29,11 +37,12 @@ public class Table {
     public Table(LocalTime elapsedTimeSinceOrder, LocalTime timeLeftToOrder, int amountOfPeople, int tableNumber, TableStatus tableStatus, ShoppingCart shoppingCart) {
         if (tableNumber < 0) {
             throw new AttributeMustBeBiggerThanZero(getClass().getSimpleName(), "table number");
-        } else if (amountOfPeople < 0)
-            throw new AttributeMustBeBiggerThanZero(getClass().getSimpleName(), "amount of people");
+        }else if(amountOfPeople < 0) throw new AttributeMustBeBiggerThanZero(getClass().getSimpleName(), "amount of people");
 
 
-        this.orders = new ArrayList<>();
+        this.kitchenOrders = new ArrayList<>();
+        this.barOrders = new ArrayList<>();
+
         this.elapsedTimeSinceOrder = elapsedTimeSinceOrder;
         this.timeLeftToOrder = timeLeftToOrder;
         this.amountOfPeople = amountOfPeople;
@@ -61,21 +70,36 @@ public class Table {
         return timeLeftToOrder;
     }
 
-    public List<Order> getOrders() {
-        return orders;
-    }
+
 
     public TableStatus getTableStatus() {
         return tableStatus;
     }
 
     private void addToOrders(Order order) {
-        orders.add(order);
+        if (order instanceof KitchenOrder){
+            kitchenOrders.add((KitchenOrder) order);
+        }else if (order instanceof BarOrder){
+            barOrders.add((BarOrder) order);
+        }
+    }
+
+
+    public List<KitchenOrder> getKitchenOrders() {
+        return kitchenOrders;
+    }
+
+    public List<BarOrder> getBarOrders() {
+        return barOrders;
     }
 
     //TODO meerdere producten verwijderen
     public void deleteFromShoppingCart(Product product) {
         shoppingCart.removeFromShoppingCart(product);
+    }
+
+    public void removeAllOccurancesOfAProuctFromShoppingcart(Product product){
+        shoppingCart.removeEveryOccurrencesOfAProduct(product);
     }
 
     public void addToShoppingCart(Product product, int amount) {
@@ -96,22 +120,35 @@ public class Table {
         return shoppingCart;
     }
 
-    public void placeOrder() {
-        Order order = new Order(this, java.time.LocalDateTime.now(), new ArrayList<>());
-        this.shoppingCart.getProducts().forEach(order::addToProducts);
+    public void placeOrder(){
+        Order barOrder = new BarOrder(this);
+        Order kitchenOrder = new KitchenOrder(this);
 
 
-//        for (Product product:this.shoppingCart.getProducts()) {
-//             order.addToProducts(product);
-//        }
+        for (Product product: shoppingCart.getProducts()) {
+             if (product.getProductDestination()==BAR_PRODUCT){
+                 barOrder.addToProducts(product);
+             }
+             else kitchenOrder.addToProducts(product);
+        }
 
-        this.addToOrders(order);
+        if (!barOrder.getProducts().isEmpty()){
+            this.addToOrders(barOrder);
+        }
+        if (!kitchenOrder.getProducts().isEmpty()){
+            this.addToOrders(kitchenOrder);
+        }
+
         shoppingCart.clearShoppingCart();
     }
 
-    public Order getLastOrder() {
-        return orders.get(orders.size() - 1);
+    @Override
+    public String toString() {
+        return "Table{" +
+                "kitchenOrders=" + kitchenOrders +
+                ", barOrders=" + barOrders +
+                ", tableStatus=" + tableStatus +
+                ", shoppingCart=" + shoppingCart +
+                '}';
     }
-
-
 }

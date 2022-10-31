@@ -4,9 +4,9 @@ import {Route, Routes} from "react-router-dom";
 import Drinks from "./pages/Drinks";
 import Foods from "./pages/Foods";
 import Home from "./pages/Home";
-import "./styles/Home.css"
+import "./styles/Home.css";
 import Orders from "./pages/Orders";
-import ShoppingCart from "./components/ShoppingCart";
+import ShoppingCart from "./components/shoppingcart/ShoppingCart";
 import Staff from "./pages/HomePageStaff";
 import PersonalModule from "./pages/PersonalModule";
 

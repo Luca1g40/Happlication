@@ -2,13 +2,12 @@ package com.infosupport.happ.domain;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.infosupport.happ.domain.PreperationStatus.*;
 
-@Entity(name = "customer_order")
+@MappedSuperclass
 public class Order {
     @Id
     @GeneratedValue
@@ -19,21 +18,19 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private PreperationStatus preperationStatus;
 
-    @OneToMany
+    @ManyToMany
     private List<Product> products;
 
     public Order() {
     }
 
-    public Order(Table table, LocalDateTime timeOfOrder, List<Product> products) {
+    public Order(Table table) {
         LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-
 
         this.table = table;
         this.timeOfOrder = now;
         this.preperationStatus = UNCLAIMED;
-        this.products = products;
+        this.products = new ArrayList<>();
     }
 
     public Long getId() {
@@ -71,25 +68,28 @@ public class Order {
         products.add(product);
     }
 
-    public List<Product> getBarOrders() {
-        List<Product> barOrders = new ArrayList<>();
-        for (Product product : products) {
-            if (product.getProductCategory() == ProductCategory.DRINKS) {
-                barOrders.add(product);
-            }
-        }
-        return barOrders;
-    }
-
-    public List<Product> getFoodOrders() {
-        List<Product> kitchenOrders = new ArrayList<>();
-        for (Product product : products) {
-            if (product.getProductCategory() != ProductCategory.DRINKS) {
-                kitchenOrders.add(product);
-            }
-        }
-        return kitchenOrders;
-    }
+//    public List<Product> getBarOrders() {
+//
+//
+//        List<Product> barOrders = new ArrayList<>();
+//        for (Product product : products) {
+//            if (product.getProductCategory() == ProductCategory.DRINKS) {
+//                barOrders.add(product);
+//            }
+//        }
+//        return barOrders;
+//    }
+//
+//    public List<Product> getFoodOrders() {
+//
+//        List<Product> kitchenOrders = new ArrayList<>();
+//        for (Product product : products) {
+//            if (product.getProductCategory() != ProductCategory.DRINKS) {
+//                kitchenOrders.add(product);
+//            }
+//        }
+//        return kitchenOrders;
+//    }
 
     @Override
     public String toString() {

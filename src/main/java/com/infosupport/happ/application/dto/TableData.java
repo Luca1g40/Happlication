@@ -1,8 +1,6 @@
 package com.infosupport.happ.application.dto;
 
-import com.infosupport.happ.domain.Order;
-import com.infosupport.happ.domain.ShoppingCart;
-import com.infosupport.happ.domain.TableStatus;
+import com.infosupport.happ.domain.*;
 
 import java.time.LocalTime;
 import java.util.List;
@@ -12,25 +10,24 @@ public class TableData {
     public final int tableNumber;
     public final LocalTime elapsedTimeSinceOrder;
     public final LocalTime timeLeftToOrder;
-    public final List<Order> orders;
+
     public final TableStatus tableStatus;
-    public final ShoppingCart shoppingCart;
-    //TODO kan dit beter????
-    public OrderData latestOrder;
+    public final ShoppingCartData shoppingCart;
+    public final List<OrderData> kitchenOrders;
+    public final List<OrderData> barOrders;
 
 
-    public TableData(int amountOfPeople, int tableNumber, LocalTime elapsedTimeSinceOrder, LocalTime timeLeftToOrder, List<Order> orders, TableStatus tableStatus, ShoppingCart shoppingCart) {
+
+    public TableData(int amountOfPeople, int tableNumber, LocalTime elapsedTimeSinceOrder, LocalTime timeLeftToOrder,  TableStatus tableStatus, ShoppingCartData shoppingCartData, List<OrderData> kitchenOrders, List<OrderData> barOrders) {
         this.amountOfPeople = amountOfPeople;
         this.tableNumber = tableNumber;
         this.elapsedTimeSinceOrder = elapsedTimeSinceOrder;
         this.timeLeftToOrder = timeLeftToOrder;
-        this.orders = orders;
+
         this.tableStatus = tableStatus;
-        this.shoppingCart = shoppingCart;
-        if (!orders.isEmpty()) {
-            this.latestOrder = new OrderData(tableNumber, orders.get(orders.size() - 1).getTimeOfOrder(), orders.get(orders.size() - 1).getPreperationStatus(), orders.get(orders.size() - 1).getBarOrders(), orders.get(orders.size() - 1).getFoodOrders(), orders.get(orders.size() - 1).getId());
-        } else {
-            this.latestOrder = null;
-        }
+        this.shoppingCart = shoppingCartData;
+        this.kitchenOrders = kitchenOrders;
+        this.barOrders = barOrders;
+
     }
 }
