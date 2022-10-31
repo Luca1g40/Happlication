@@ -35,6 +35,8 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
         http.cors();
         http.csrf().disable()
                 .authorizeRequests().antMatchers("/authenticate").permitAll()
+                .antMatchers("/happ/product/**").permitAll()
+                .antMatchers("/happ/table/**").permitAll()
                 .anyRequest().authenticated() // Gives everybody acces to API "//authenticate" so then can login
                 .and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
