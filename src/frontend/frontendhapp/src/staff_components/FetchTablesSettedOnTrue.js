@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
 import "../styles/staffNotificationCard.css"
 
@@ -6,7 +6,7 @@ function FetchTablesSettedOnTrue() {
     const [tafelsonTrue, setTafelsOnTrue] = useState([])
 
     useEffect(() => {
-        axios.get("http://localhost:8080/happ/staff/66/tablethatneedhelp")
+        axios.get("http://localhost:8080/happ/staff/73/tablethatneedhelp")
             .then(res => {
                 console.log(res)
                 setTafelsOnTrue(res.data)

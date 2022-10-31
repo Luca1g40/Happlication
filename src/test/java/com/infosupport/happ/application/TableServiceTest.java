@@ -23,8 +23,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 
-@SpringBootTest
-public class TableToAreaConverterServiceTest {
+public class TableServiceTest {
 
     private TableService tableService;
     private TableRepository tableRepository;

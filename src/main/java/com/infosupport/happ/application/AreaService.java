@@ -1,6 +1,6 @@
 package com.infosupport.happ.application;
 
-import com.infosupport.happ.application.converter.TableToAreaConverter;
+import com.infosupport.happ.application.converter.AreaConverter;
 import com.infosupport.happ.application.dto.AreaData;
 import com.infosupport.happ.application.dto.StaffWithoutAreasData;
 import com.infosupport.happ.data.AreaRepository;
@@ -22,13 +22,13 @@ public class AreaService {
     private final AreaRepository areaRepository;
     private final StaffRepository staffRepository;
     private final TableRepository tableRepository;
-    private final TableToAreaConverter tableToAreaConverter;
+    private final AreaConverter areaConverter;
 
-    public AreaService(AreaRepository areaRepository, StaffRepository staffRepository, TableRepository tableRepository, TableToAreaConverter tableToAreaConverter) {
+    public AreaService(AreaRepository areaRepository, StaffRepository staffRepository, TableRepository tableRepository, AreaConverter areaConverter) {
         this.areaRepository = areaRepository;
         this.staffRepository = staffRepository;
         this.tableRepository = tableRepository;
-        this.tableToAreaConverter = tableToAreaConverter;
+        this.areaConverter = areaConverter;
     }
 
     public AreaData createArea(String name){
@@ -121,7 +121,7 @@ public class AreaService {
     public AreaData createAreaData(Area area) {
         return new AreaData(
                 area.getName(),
-                area.getTables().stream().map(tableToAreaConverter::createTableData).collect(Collectors.toList()),
+                area.getTables().stream().map(areaConverter::createTableData).collect(Collectors.toList()),
                 createStaffWithoutArea(area)
         );
     }

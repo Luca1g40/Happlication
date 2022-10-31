@@ -1,46 +1,52 @@
 package com.infosupport.happ.application;
 
-import com.infosupport.happ.application.converter.TableToAreaConverter;
+import com.infosupport.happ.application.converter.AreaConverter;
 import com.infosupport.happ.application.dto.AreaData;
 import com.infosupport.happ.data.AreaRepository;
 import com.infosupport.happ.data.StaffRepository;
 import com.infosupport.happ.data.TableRepository;
 import com.infosupport.happ.domain.Area;
+import com.infosupport.happ.domain.ShoppingCart;
 import com.infosupport.happ.domain.Staff;
+import com.infosupport.happ.domain.Table;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalTime;
 import java.util.List;
 
+import static com.infosupport.happ.domain.TableStatus.OCCUPIED;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-@SpringBootTest
 public class AreaServiceTest {
 
     private AreaService areaService;
-    private AreaRepository areaRepository;
     private StaffRepository staffRepository;
-    private TableRepository tableRepository;
-    private TableToAreaConverter tableToAreaConverter;
 
     @BeforeEach
     void beforeEach(){
-        this.areaRepository = mock(AreaRepository.class);
+        AreaConverter areaConverter = new AreaConverter();
+        AreaRepository areaRepository = mock(AreaRepository.class);
         this.staffRepository = mock(StaffRepository.class);
-        this.areaService = new AreaService(areaRepository, staffRepository, tableRepository, tableToAreaConverter);
+        TableRepository tableRepository = mock(TableRepository.class);
+        this.areaService = new AreaService(areaRepository, staffRepository, tableRepository, areaConverter);
 
+        ShoppingCart shoppingCart = new ShoppingCart();
         Staff staff = new Staff(1, "Staff");
         Area area = new Area("Nieuwe area");
+        Table table = new Table(LocalTime.now(), LocalTime.now(), 5, 1, OCCUPIED, shoppingCart, false);
 
         when(areaRepository.existsById(2L)).thenReturn(true);
         when(areaRepository.getById(2L)).thenReturn(area);
 
         when(staffRepository.existsById(1L)).thenReturn(true);
         when(staffRepository.getById(1L)).thenReturn(staff);
+
+        when(tableRepository.existsById(3L)).thenReturn(true);
+        when(tableRepository.getById(3L)).thenReturn(table);
 
     }
 
@@ -77,11 +83,22 @@ public class AreaServiceTest {
     }
 
     @Test
+    @DisplayName("Add table to area")
+    void addTableToARea(){
+        AreaData areaData = areaService.addTableToArea(3L, 2L);
+
+        assertEquals(1, areaData.tables.size());
+        assertThrows(ItemNotFound.class, ()-> areaService.addTableToArea(3L, 4L));
+    }
+
+
+    @Test
     @DisplayName("Edit staff of area")
     void editAreaStaff(){
         Staff otherStaff = new Staff(1, "Other staff");
 
         when(staffRepository.getById(1L)).thenReturn(otherStaff);
+
 
 
         areaService.addStaffToArea(1L, 2L);

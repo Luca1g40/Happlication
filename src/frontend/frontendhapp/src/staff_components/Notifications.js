@@ -6,7 +6,7 @@ import axios from "axios";
 
 function Notifications(){
 
-    let tafelId = 63;
+    let tafelId = 72;
 
     function tableHelp(){
         axios.put(`http://localhost:8080/happ/table/${tafelId}/helpNodig`, {//todo->tafelId moet zelf opgehaald worden

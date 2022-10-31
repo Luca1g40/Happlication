@@ -30,7 +30,7 @@ public class IngredientTest {
 
     @Test
     @DisplayName("NotEnoughIngredientsException is thrown")
-    void decreaseToMinus() {
+    void ingredientAmountIsNegative() {
         assertThrows(NotEnoughIngredientsException.class, () -> ingredient.decreaseAmount(5));
     }
 

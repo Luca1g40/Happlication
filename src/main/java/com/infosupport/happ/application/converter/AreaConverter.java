@@ -5,7 +5,7 @@ import com.infosupport.happ.domain.Table;
 import org.springframework.stereotype.Component;
 
 @Component
-public class TableToAreaConverter {
+public class AreaConverter {
 
         public TableData createTableData(Table table) {
         return new TableData(table.getAmountOfPeople(),

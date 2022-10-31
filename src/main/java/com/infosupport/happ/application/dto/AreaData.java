@@ -1,7 +1,5 @@
 package com.infosupport.happ.application.dto;
 
-import com.infosupport.happ.domain.Table;
-
 import java.util.List;
 
 public class AreaData {
