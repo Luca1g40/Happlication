@@ -2,13 +2,12 @@ package com.infosupport.happ.domain;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.infosupport.happ.domain.PreperationStatus.*;
 
-@Entity(name = "customer_order")
+@MappedSuperclass
 public class Order {
     @Id
     @GeneratedValue
@@ -16,26 +15,27 @@ public class Order {
     @ManyToOne
     private Table table;
     private LocalDateTime timeOfOrder;
+    @Enumerated(EnumType.STRING)
     private PreperationStatus preperationStatus;
-    @OneToMany(cascade = CascadeType.ALL)
+
+    @ManyToMany
     private List<Product> products;
 
     public Order() {
     }
 
+    public Order(Table table) {
     public Table getTable() {
         return table;
     }
 
     public Order(Table table, LocalDateTime timeOfOrder, List<Product> products) {
         LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-
 
         this.table = table;
         this.timeOfOrder = now;
         this.preperationStatus = UNCLAIMED;
-        this.products = products;
+        this.products = new ArrayList<>();
     }
 
     public Long getId() {
@@ -58,14 +58,6 @@ public class Order {
         return products;
     }
 
-    public boolean checkIfAllProductsAreDone() {
-        for (Product product : products) {
-            if (!product.isReady()) {
-                return false;
-            }
-        }
-        return true;
-    }
 
     public void claimOrder() {
         if (this.preperationStatus == UNCLAIMED) {
@@ -73,33 +65,45 @@ public class Order {
         }
     }
 
-    public void setPreperationStatusToDone() {
-        if (checkIfAllProductsAreDone()) {
-            this.preperationStatus = DONE;
-        }
+    public void setPreparationStatusToDone() {
+        this.preperationStatus = DONE;
     }
 
     public void addToProducts(Product product) {
         products.add(product);
     }
 
-    public List<Product> getBarOrders() {
-        List<Product> barOrders = new ArrayList<>();
-        for (Product product : products) {
-            if (product.getProductCategory() == ProductCategory.DRINKS) {
-                barOrders.add(product);
-            }
-        }
-        return barOrders;
-    }
+//    public List<Product> getBarOrders() {
+//
+//
+//        List<Product> barOrders = new ArrayList<>();
+//        for (Product product : products) {
+//            if (product.getProductCategory() == ProductCategory.DRINKS) {
+//                barOrders.add(product);
+//            }
+//        }
+//        return barOrders;
+//    }
+//
+//    public List<Product> getFoodOrders() {
+//
+//        List<Product> kitchenOrders = new ArrayList<>();
+//        for (Product product : products) {
+//            if (product.getProductCategory() != ProductCategory.DRINKS) {
+//                kitchenOrders.add(product);
+//            }
+//        }
+//        return kitchenOrders;
+//    }
 
-    public List<Product> getFoodOrders() {
-        List<Product> kitchenOrders = new ArrayList<>();
-        for (Product product : products) {
-            if (product.getProductCategory() != ProductCategory.DRINKS) {
-                kitchenOrders.add(product);
-            }
-        }
-        return kitchenOrders;
+    @Override
+    public String toString() {
+        return "SingleOrder{" +
+                "id=" + id +
+
+                ", timeOfOrder=" + timeOfOrder +
+                ", preperationStatus=" + preperationStatus +
+                ", products=" + products +
+                '}';
     }
 }

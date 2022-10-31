@@ -4,13 +4,15 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Entity
 public class ShoppingCart {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToMany
+
+    @ManyToMany
     private List<Product> products;
 
     public ShoppingCart() {
@@ -18,9 +20,16 @@ public class ShoppingCart {
     }
 
     public void editShoppingCart(List<Product> products) {
+        setProducts(products);
+    }
+
+    public void setProducts(List<Product> products) {
         this.products = products;
     }
 
+    public void removeEveryOccurrencesOfAProduct(Product product){
+        products.removeAll(List.of(product));
+    }
     public void removeFromShoppingCart(Product product) {
         products.remove(product);
     }
@@ -43,5 +52,13 @@ public class ShoppingCart {
 
     public void clearShoppingCart() {
         products.clear();
+    }
+
+    @Override
+    public String toString() {
+        return "ShoppingCart{" +
+                "id=" + id +
+                ", products=" + products +
+                '}';
     }
 }

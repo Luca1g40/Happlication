@@ -12,26 +12,27 @@ public class OrderData {
     public final String orderDate;
     public final String orderTime;
     public final PreperationStatus preperationStatus;
-    public final List<Product> drinkProducts;
-    public final List<Product> foodProducts;
 
-    public OrderData(int tableNr, LocalDateTime timeOfOrder, PreperationStatus preperationStatus, List<Product> drinkProducts, List<Product> foodProducts, Long id) {
+    public final List<ProductData> products;
+
+    public OrderData(int tableNr, LocalDateTime timeOfOrder, PreperationStatus preperationStatus,List<ProductData> products ,Long id) {
         this.tableNr = tableNr;
         this.orderDate = getOrderDateFormated(timeOfOrder);
         this.orderTime = getOrderTimeFormated(timeOfOrder);
         this.preperationStatus = preperationStatus;
-        this.drinkProducts = drinkProducts;
-        this.foodProducts = foodProducts;
+        this.products = products;
+
         this.id = id;
 
     }
-    public String getOrderTimeFormated(LocalDateTime timeOfOrder){
+
+    public String getOrderTimeFormated(LocalDateTime timeOfOrder) {
         String orderTimeString;
         orderTimeString = (timeOfOrder.getHour() + ":" + timeOfOrder.getMinute());
         return orderTimeString;
     }
 
-    public String getOrderDateFormated(LocalDateTime timeOfOrder){
+    public String getOrderDateFormated(LocalDateTime timeOfOrder) {
         String orderDateString;
         orderDateString = (timeOfOrder.getYear() + "-" + timeOfOrder.getMonthValue() + "-" + timeOfOrder.getDayOfMonth());
         return orderDateString;

@@ -6,6 +6,9 @@ import javax.persistence.*;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.infosupport.happ.domain.ProductDestination.*;
+
 @Entity(name = "tafel")
 public class Table {
 
@@ -13,13 +16,20 @@ public class Table {
     @GeneratedValue
     private Long id;
 
-    @OneToMany
-    private List<Order> orders;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<KitchenOrder> kitchenOrders;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<BarOrder> barOrders;
+
     private LocalTime elapsedTimeSinceOrder;
     private LocalTime timeLeftToOrder;
     private int amountOfPeople;
+    @Column(unique = true)
     private int tableNumber;
     private TableStatus tableStatus;
+
     @OneToOne(cascade = CascadeType.ALL)
     private ShoppingCart shoppingCart;
     private boolean hulpNodig = false;
@@ -28,8 +38,12 @@ public class Table {
     public Table(LocalTime elapsedTimeSinceOrder, LocalTime timeLeftToOrder, int amountOfPeople, int tableNumber, TableStatus tableStatus, ShoppingCart shoppingCart, boolean hulpNodig) {
         if (tableNumber < 0) {
             throw new AttributeMustBeBiggerThanZero(getClass().getSimpleName(), "table number");
-        }
-        this.orders = new ArrayList<>();
+        }else if(amountOfPeople < 0) throw new AttributeMustBeBiggerThanZero(getClass().getSimpleName(), "amount of people");
+
+
+        this.kitchenOrders = new ArrayList<>();
+        this.barOrders = new ArrayList<>();
+
         this.elapsedTimeSinceOrder = elapsedTimeSinceOrder;
         this.timeLeftToOrder = timeLeftToOrder;
         this.amountOfPeople = amountOfPeople;
@@ -66,25 +80,42 @@ public class Table {
         return timeLeftToOrder;
     }
 
-    public List<Order> getOrders() {
-        return orders;
-    }
-
     public TableStatus getTableStatus() {
         return tableStatus;
     }
 
-    private void addToOrders(Order order){
-        orders.add(order);
+    private void addToOrders(Order order) {
+        if (order instanceof KitchenOrder){
+            kitchenOrders.add((KitchenOrder) order);
+        }else if (order instanceof BarOrder){
+            barOrders.add((BarOrder) order);
+        }
     }
 
+
+    public List<KitchenOrder> getKitchenOrders() {
+        return kitchenOrders;
+    }
+
+    public List<BarOrder> getBarOrders() {
+        return barOrders;
+    }
+
+    //TODO meerdere producten verwijderen
     public void deleteFromShoppingCart(Product product) {
         shoppingCart.removeFromShoppingCart(product);
     }
 
-    public void addToShoppingCart(Product product){
-        this.shoppingCart.addToShoppingCart(product);
+    public void removeAllOccurancesOfAProuctFromShoppingcart(Product product){
+        shoppingCart.removeEveryOccurrencesOfAProduct(product);
     }
+
+    public void addToShoppingCart(Product product, int amount) {
+        for (int i = 0; i < amount; i++) {
+            this.shoppingCart.addToShoppingCart(product);
+        }
+    }
+
     public Long getId() {
         return id;
     }
@@ -98,19 +129,34 @@ public class Table {
     }
 
     public void placeOrder(){
-        Order order = new Order(this, java.time.LocalDateTime.now(), new ArrayList<>(shoppingCart.getProducts()));
-        addToOrders(order);
+        Order barOrder = new BarOrder(this);
+        Order kitchenOrder = new KitchenOrder(this);
+
+
+        for (Product product: shoppingCart.getProducts()) {
+             if (product.getProductDestination()==BAR_PRODUCT){
+                 barOrder.addToProducts(product);
+             }
+             else kitchenOrder.addToProducts(product);
+        }
+
+        if (!barOrder.getProducts().isEmpty()){
+            this.addToOrders(barOrder);
+        }
+        if (!kitchenOrder.getProducts().isEmpty()){
+            this.addToOrders(kitchenOrder);
+        }
+
         shoppingCart.clearShoppingCart();
     }
 
-    //todo --> kijken naar de return
-    public Order getLastOrder(){
-        if (orders.isEmpty()){
-            return null;
-        }else{
-            return orders.get(orders.size()-1);
-        }
+    @Override
+    public String toString() {
+        return "Table{" +
+                "kitchenOrders=" + kitchenOrders +
+                ", barOrders=" + barOrders +
+                ", tableStatus=" + tableStatus +
+                ", shoppingCart=" + shoppingCart +
+                '}';
     }
-
-
 }

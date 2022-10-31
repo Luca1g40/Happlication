@@ -19,35 +19,50 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    @PostMapping("/order")
-    public OrderData createOrder(@RequestBody OrderRequest orderRequest) {
+//    @PostMapping("/order")
+//    public OrderData createOrder(@RequestBody OrderRequest orderRequest) {
+//        try {
+//            return orderService.createOrder(orderRequest.tableId, orderRequest.productList);
+//        } catch (ItemNotFound exception) {
+//            throw new ResponseStatusException(HttpStatus.NOT_FOUND, exception.getMessage());
+//        }
+//    }
+
+    @PostMapping("/order/{orderid}")
+    public OrderData orderIsDone(@PathVariable Long orderid) {
         try {
-            return orderService.createOrder(orderRequest.tableId, orderRequest.productList);
+            return orderService.setStatusToDone(orderid);
         } catch (ItemNotFound exception) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, exception.getMessage());
         }
     }
 
-    @GetMapping("/order/{id}")
-    public OrderData getOrder(@PathVariable Long id) {
+    @GetMapping("/order/{id}/bar")
+    public OrderData getBarOrder(@PathVariable Long id) {
         try {
-            return orderService.getOrder(id);
+            return orderService.getBarOrder(id);
         } catch (ItemNotFound exception) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, exception.getMessage());
         }
     }
 
-    @GetMapping("/orders")
-    public List<OrderData> getAllOrders(){
+    @GetMapping("/order/{id}/kitchen")
+    public OrderData getKitchenOrder(@PathVariable Long id) {
         try {
-            return orderService.getAllUnclaimedOrders();
-        } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+            return orderService.getKitchenOrder(id);
+        } catch (ItemNotFound exception) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, exception.getMessage());
         }
     }
 
-    @DeleteMapping("/order/{orderid}")
-    private void deleteOrder(@PathVariable("orderid") Long orderId) {
-        this.orderService.deleteOrder(orderId);
+    @DeleteMapping("/order/{orderid}/kitchen")
+    private void deleteKitchenOrder(@PathVariable("orderid") Long orderId) {
+        this.orderService.deleteKitchenOrder(orderId);
+    }
+
+
+    @DeleteMapping("/order/{orderid}/bar")
+    private void deleteBarOrder(@PathVariable("orderid") Long orderId) {
+        this.orderService.deleteBarOrder(orderId);
     }
 }

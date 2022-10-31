@@ -4,7 +4,7 @@ import "../styles/Home.css"
 import "../styles/Lists.css"
 
 import {Link} from "react-router-dom";
-import DrinksDataFetching from "../components/DrinksDataFetching"
+import DrinksMenu from "../components/DrinksMenu"
 
 
 export default function Drinks() {
@@ -14,7 +14,7 @@ export default function Drinks() {
             <div className="drinksContainer">
                 <Link className="button terug" to="/">Terug</Link>
                 <Link className="button drinksToFood" to="/Foods">Gerechten</Link>
-                <DrinksDataFetching/>
+                <DrinksMenu/>
             </div>
 
 

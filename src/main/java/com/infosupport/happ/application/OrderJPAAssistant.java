@@ -1,9 +1,7 @@
 package com.infosupport.happ.application;
 
 import com.infosupport.happ.data.OrderAssistant;
-import com.infosupport.happ.domain.Order;
-import com.infosupport.happ.domain.Staff;
-import com.infosupport.happ.domain.Table;
+import com.infosupport.happ.domain.*;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
@@ -28,13 +26,23 @@ public class OrderJPAAssistant implements OrderAssistant {
     }
 
     @Override
-    public Order getOrderById(Long id) {
-        return entities.find(Order.class, id);
+    public Order getOrderById(Long orderId) {
+        if (!(entities.find(BarOrder.class, orderId) ==null)){
+            return entities.find(BarOrder.class, orderId);
+        }else{
+            return entities.find(KitchenOrder.class, orderId);
+        }
     }
+
 
     @Override
     public boolean existsById(Long id) {
         return entities.find(Order.class, id) != null;
+    }
+
+    @Override
+    public Product getProductById(Long id) {
+        return entities.find(Product.class, id);
     }
 
 

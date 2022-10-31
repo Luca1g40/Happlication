@@ -14,6 +14,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -34,6 +35,7 @@ public class AreaServiceTest {
         TableRepository tableRepository = mock(TableRepository.class);
         this.areaService = new AreaService(areaRepository, staffRepository, tableRepository, areaConverter);
 
+        Staff staff = new Staff(1, "Staff", new ArrayList<>());
         ShoppingCart shoppingCart = new ShoppingCart();
         Staff staff = new Staff(1, "Staff");
         Area area = new Area("Nieuwe area");
@@ -94,18 +96,15 @@ public class AreaServiceTest {
 
     @Test
     @DisplayName("Edit staff of area")
-    void editAreaStaff(){
-        Staff otherStaff = new Staff(1, "Other staff");
-
+    void editAreaStaff() {
+        Staff otherStaff = new Staff(1, "Other staff", new ArrayList<>());
         when(staffRepository.getById(1L)).thenReturn(otherStaff);
-
-
 
         areaService.addStaffToArea(1L, 2L);
         AreaData areaData = areaService.editStaffListInArea(2L, List.of(1L));
 
         assertEquals("Other staff", areaData.staffWithoutAreasList.get(0).name);
-        assertThrows(ItemNotFound.class, ()-> areaService.editStaffListInArea(4L, List.of(1L)));
+        assertThrows(ItemNotFound.class, () -> areaService.editStaffListInArea(4L, List.of(1L)));
 
     }
 

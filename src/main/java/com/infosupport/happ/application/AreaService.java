@@ -33,7 +33,9 @@ public class AreaService {
 
     public AreaData createArea(String name){
         Area area = new Area(name);
+
         this.areaRepository.save(area);
+
         return createAreaData(area);
     }
 
@@ -95,7 +97,7 @@ public class AreaService {
         return createAreaData(area);
     }
 
-    public AreaData editStaffListInArea( Long areaId, List<Long> staffIdList) {
+    public AreaData editStaffListInArea(Long areaId, List<Long> staffIdList) {
         areaExists(areaId);
         List<Staff> staffList = new ArrayList<>();
         for (Long id : staffIdList) {
@@ -134,15 +136,16 @@ public class AreaService {
         List<StaffWithoutAreasData> staffWithoutAreasList = new ArrayList<>();
         if(area.getStaffList() != null) {
             for (Staff staff : area.getStaffList()) {
-                staffWithoutAreasList.add(new StaffWithoutAreasData(
-                        staff.getId(),
-                        staff.getPassword(),
-                        staff.getName(),
-                        staff.getOperations(),
-                        staff.getClaimedOrders()
-                ));
+                staffWithoutAreasList.add(
+                        new StaffWithoutAreasData(
+                                staff.getId(),
+                                staff.getName(),
+                                staff.getOperations(),
+                                staff.getClaimedOrders(),
+                                staff.getRights()));
             }
         }
         return staffWithoutAreasList;
     }
+
 }

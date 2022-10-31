@@ -1,6 +1,7 @@
 package com.infosupport.happ.application;
 
 import com.infosupport.happ.application.dto.TableData;
+import com.infosupport.happ.data.OrderRepository;
 import com.infosupport.happ.data.TableRepository;
 import com.infosupport.happ.domain.*;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
@@ -31,12 +32,17 @@ public class TableServiceTest {
     private Product productStarter;
     private Product productMain;
     private Table table;
+    private OrderRepository orderRepository;
 
 
     @BeforeEach
     void beforeEach(){
         this.tableRepository = mock(TableRepository.class);
         this.productService = mock(ProductService.class);
+        this.orderRepository = mock(OrderRepository.class);
+        this.tableService = new TableService(tableRepository, productService, orderRepository);
+        this.productStarter = new Product("kip", new ArrayList<>(), STARTER, 12.50, "lekker vis",ProductDestination.KITCHEN_PRODUCT);
+        this.productMain = new Product("vis", new ArrayList<>(), MAIN_COURSE, 7.50, "lekker kip", ProductDestination.KITCHEN_PRODUCT);
         this.tableService = new TableService(tableRepository, productService);
         this.productStarter = new Product("kip",  new ArrayList<>(), STARTER, 12.50);
         this.productMain = new Product("vis",  new ArrayList<>(), MAIN_COURSE, 7.50);

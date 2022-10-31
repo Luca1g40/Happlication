@@ -1,0 +1,7 @@
+.shoppingcartIcon {
+    background-image: url("../images/shoppingcart.png");
+    right: 0;
+    position: absolute;
+    margin: 2% 3% auto auto;
+    width: 190px;
+}
