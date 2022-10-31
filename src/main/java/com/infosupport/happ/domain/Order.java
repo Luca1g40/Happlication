@@ -24,7 +24,7 @@ public class Order {
     public Order() {
     }
 
-    public Order(Table table) {
+    public Order(Table table) {}
     public Table getTable() {
         return table;
     }

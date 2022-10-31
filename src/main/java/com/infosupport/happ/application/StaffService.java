@@ -18,8 +18,7 @@ public class StaffService {
     private final OrderService orderService;
     private final AreaService areaService;
 
-    public StaffService(StaffRepository staffRepository, OrderService orderService) {
-    public StaffService(StaffRepository staffRepository, AreaService areaService) {
+    public StaffService(StaffRepository staffRepository, OrderService orderService,  AreaService areaService) {
         this.staffRepository = staffRepository;
         this.orderService = orderService;
         this.areaService = areaService;

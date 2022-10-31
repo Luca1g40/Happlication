@@ -43,10 +43,6 @@ public class Product {
         return ingredients;
     }
 
-    public List<Ingredient> getIngredients() {
-        return ingredients;
-    }
-
     public String getName() {
         return name;
     }

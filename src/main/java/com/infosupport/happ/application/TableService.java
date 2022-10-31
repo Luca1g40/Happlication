@@ -12,18 +12,17 @@ import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class TableService {
     private final TableRepository tableRepository;
     private final ProductService productService;
-    private final OrderRepository orderRepository;
 
-    public TableService(TableRepository tableRepository, ProductService productService, OrderRepository orderRepository) {
+    public TableService(TableRepository tableRepository, ProductService productService) {
         this.tableRepository = tableRepository;
         this.productService = productService;
-        this.orderRepository = orderRepository;
 
     }
 
@@ -114,7 +113,7 @@ public class TableService {
                 table.getTableStatus(),
                 new ShoppingCartData(table.getShoppingCart().getProducts()),
                 convertToKitchenOrderDataList(table.getKitchenOrders()),
-                convertToBarOrderDataList(table.getBarOrders()));
+                convertToBarOrderDataList(table.getBarOrders()),
                 table.isHulpNodig());
     }
 

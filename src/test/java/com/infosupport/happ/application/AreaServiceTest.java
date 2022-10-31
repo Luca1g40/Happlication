@@ -37,7 +37,7 @@ public class AreaServiceTest {
 
         Staff staff = new Staff(1, "Staff", new ArrayList<>());
         ShoppingCart shoppingCart = new ShoppingCart();
-        Staff staff = new Staff(1, "Staff");
+        Staff staff2 = new Staff(1, "Staff", new ArrayList<>());
         Area area = new Area("Nieuwe area");
         Table table = new Table(LocalTime.now(), LocalTime.now(), 5, 1, OCCUPIED, shoppingCart, false);
 
