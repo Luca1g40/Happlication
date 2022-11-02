@@ -9,6 +9,7 @@ import Orders from "./pages/Orders";
 import ShoppingCart from "./components/shoppingcart/ShoppingCart";
 import Staff from "./pages/HomePageStaff";
 import PersonalModule from "./pages/PersonalModule";
+import StaffDashboard from "./pages/StaffDashboard";
 
 function App() {
     return (
@@ -20,7 +21,7 @@ function App() {
             <Route path="shoppingcart" element={<ShoppingCart/>}/>
             <Route path="staff" element={<Staff/>}/>
             <Route path="claims" element={<PersonalModule/>}/>
-
+            <Route path="staffDashboard" element={<StaffDashboard/>}/>
         </Routes>
     )
 

@@ -6,4 +6,5 @@ public class TableRequest {
     public int amountOfPeople;
     public int tableNr;
     public TableStatus tableStatus;
+    public boolean setHulpBool;
 }

@@ -12,6 +12,7 @@ public class Area {
     private Long id;
 
     private String name;
+
     @OneToMany
     private List<Table> tables;
 
@@ -24,7 +25,6 @@ public class Area {
 
     public Area(String name) {
         this.name = name;
-        this.tables = tables = new ArrayList<>();
         this.tables = new ArrayList<>();
         this.staffList = new ArrayList<>();
     }
@@ -58,5 +58,13 @@ public class Area {
 
     public void editStaffList(List<Staff> staffList) {
         this.staffList = staffList;
+    }
+
+    public void addTable(Table table) {
+        this.tables.add(table);
+    }
+
+    public void deleteTable(Table table) {
+        this.tables.remove(table);
     }
 }

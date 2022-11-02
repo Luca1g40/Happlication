@@ -16,15 +16,26 @@ public class StaffService {
 
     private final StaffRepository staffRepository;
     private final OrderService orderService;
+    private final AreaService areaService;
 
-    public StaffService(StaffRepository staffRepository, OrderService orderService) {
+    public StaffService(StaffRepository staffRepository, OrderService orderService,  AreaService areaService) {
         this.staffRepository = staffRepository;
         this.orderService = orderService;
+        this.areaService = areaService;
     }
 
     public Staff getStaff(Long id) {
         staffExists(id);
         return staffRepository.getById(id);
+    }
+
+    public List<Table> getTableThatNeedHelp(Long staffId) {
+        Staff staff = getStaff(staffId);
+        List<Table> tableListWithHelp = new ArrayList<>();
+        for (Area area : staff.getAreas()) {
+            tableListWithHelp.addAll(areaService.getTablesThatNeedHelp(area.getId()));
+        }
+        return tableListWithHelp;
     }
 
     public void staffExists(Long id) {
@@ -103,5 +114,4 @@ public class StaffService {
         }
         return areaWithoutStaffDataList;
     }
-
 }

@@ -19,12 +19,10 @@ import java.util.List;
 public class TableService {
     private final TableRepository tableRepository;
     private final ProductService productService;
-    private final OrderRepository orderRepository;
 
-    public TableService(TableRepository tableRepository, ProductService productService, OrderRepository orderRepository) {
+    public TableService(TableRepository tableRepository, ProductService productService) {
         this.tableRepository = tableRepository;
         this.productService = productService;
-        this.orderRepository = orderRepository;
 
     }
 
@@ -33,11 +31,16 @@ public class TableService {
         LocalTime timeLeftToOrder = LocalTime.of(2, 0, 0);
 
         Table table = tableRepository.save(new Table(elapsedTime, timeLeftToOrder, amountOfPeople,
-                tableNr, tableStatus, new ShoppingCart()));
+                tableNr, tableStatus, new ShoppingCart(), false));
 
         return createTableData(table);
     }
 
+    public TableData setBoolHulp(Long tableId, boolean hulpNodig) {
+        Table table = getTable(tableId);
+        table.setHulpNodig(hulpNodig);
+        return createTableData(table);
+    }
 
     public Table getTable(Long tableId) {
         tableExists(tableId);
@@ -88,8 +91,6 @@ public class TableService {
         tableExists(tableId);
         Table table = tableRepository.getById(tableId);
         table.placeOrder();
-        System.out.println(table.getShoppingCart().getProducts());
-
         tableRepository.save(table);
         return createTableData(table);
     }
@@ -103,6 +104,7 @@ public class TableService {
     public void deleteTable(Long id) {
         tableRepository.deleteById(id);
     }
+
     public TableData createTableData(Table table) {
         return new TableData(table.getAmountOfPeople(),
                 table.getTableNumber(),
@@ -111,7 +113,8 @@ public class TableService {
                 table.getTableStatus(),
                 new ShoppingCartData(table.getShoppingCart().getProducts()),
                 convertToKitchenOrderDataList(table.getKitchenOrders()),
-                convertToBarOrderDataList(table.getBarOrders()));
+                convertToBarOrderDataList(table.getBarOrders()),
+                table.isHulpNodig());
     }
 
     public OrderData createOrderData(Order order) {
