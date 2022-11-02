@@ -21,20 +21,26 @@ export default function Counter(props) {
 
 
     return (props.submitMode) ? (
-        <span>
-            <span>
+        <div>
+            <div>
                 <SubmitButton className="add-up" action={props.addUpAction} buttonText={"+"} tableId={props.tableId} productId={props.productId} productAmount={1} updateCount={()=>increment()} />
-            </span>
-             <span>
+            </div>
+             <div>
                  <p>{count}</p>
-            </span>
-             <span>
+            </div>
+             <div>
                  <SubmitButton className="subtract" action={props.subtractAction} buttonText={"-"} tableId={props.tableId} productId={props.productId} updateCount={()=>decrement()}/>
-            </span>
-        </span>
-    ) : <span>
-            <button className="add-up" onClick={increment}>+</button>
-            <p>{count}</p>
-            <button className="subtract" onClick={decrement}>-</button>
-        </span>;
+            </div>
+        </div>
+    ) : <div className={"counter-grid"}>
+            <div className={"grid-item-3"}>
+                <button className="add-up" onClick={increment}>+</button>
+            </div>
+            <div className={"grid-item-2"} >
+                <p>{count}</p>
+            </div>
+            <div className={"grid-item-4"}>
+                <button className="subtract grid-item-2" onClick={decrement}>-</button>
+            </div>
+        </div>;
 }
