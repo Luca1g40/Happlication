@@ -39,6 +39,17 @@ public class StaffService {
         return createStaffData(staff);
     }
 
+    public Staff getStaffByPassword(int password) {
+        staffExistsByPassword(password);
+        return staffRepository.getByPassword(password);
+    }
+
+    public void staffExistsByPassword(int password) {
+        if (!staffRepository.existsByPassword(password)) {
+            throw new ItemNotFound("staff");
+        }
+    }
+
     public void deleteStaff(Long id) {
         staffExists(id);
         this.staffRepository.deleteById(id);
@@ -92,6 +103,5 @@ public class StaffService {
         }
         return areaWithoutStaffDataList;
     }
-
 
 }

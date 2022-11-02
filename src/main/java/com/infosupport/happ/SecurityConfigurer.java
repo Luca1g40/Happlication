@@ -1,7 +1,7 @@
 package com.infosupport.happ;
 
-import com.infosupport.happ.application.MyUserDetailsService;
-import com.infosupport.happ.filters.JwtRequestFilter;
+import com.infosupport.happ.security.application.MyUserDetailsService;
+import com.infosupport.happ.security.presentation.filters.JwtRequestFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -35,6 +35,8 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
         http.cors();
         http.csrf().disable()
                 .authorizeRequests().antMatchers("/authenticate").permitAll()
+                .antMatchers("/happ/product/**").permitAll()
+                .antMatchers("/happ/table/**").permitAll()
                 .anyRequest().authenticated() // Gives everybody acces to API "//authenticate" so then can login
                 .and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);

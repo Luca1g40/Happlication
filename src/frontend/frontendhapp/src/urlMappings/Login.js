@@ -2,15 +2,13 @@ import axios from "axios";
 import {configuration} from "./JwtHeader";
 
 export function loginRequest(password){
-    axios.post(`http://localhost:8080/authenticate`, {
-        "username": 521,
+    return axios.post(`http://localhost:8080/authenticate`, {
         "password": password
-
     })
         .then(res => {
-            const id = parseJwt(res.data.jwt).sub
+            const id = res.data.staffId
             sessionStorage.setItem("Authorization", "Bearer " + res.data.jwt)
-            sessionStorage.setItem("name", id)
+            sessionStorage.setItem("staffId", id)
 
             axios.get(`http://localhost:8080/happ/staff/${id}`, configuration)
                 .then(res => {
@@ -18,7 +16,7 @@ export function loginRequest(password){
                     sessionStorage.setItem("rights", res.data.rights)
                 })
                 .catch(err => console.log(err))
-
+            return res.status
         })
         .catch(err => {
             console.log(err)
