@@ -24,12 +24,7 @@ public class Order {
     public Order() {
     }
 
-    public Order(Table table) {}
-    public Table getTable() {
-        return table;
-    }
-
-    public Order(Table table, LocalDateTime timeOfOrder, List<Product> products) {
+    public Order(Table table) {
         LocalDateTime now = LocalDateTime.now();
 
         this.table = table;

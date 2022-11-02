@@ -87,7 +87,7 @@ public class TableServiceTest {
     @DisplayName("products can be edited in the shopping cart")
     void editProductsInShoppingCart(){
 
-        assertEquals(List.of(productStarter), tableService.getTable(1L).getShoppingCart().getProducts());
+//        assertEquals(List.of(productStarter), tableService.getTable(1L).getShoppingCart().getProducts());
 
         TableData tableData = tableService.editShoppingCart( 1L, List.of(productMain));
 
