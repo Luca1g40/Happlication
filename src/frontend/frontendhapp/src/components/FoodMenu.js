@@ -27,7 +27,6 @@ function FoodMenu() {
                     )
                 }
             </ul>
-            <button className={"shoppingcartIcon"}>shooo</button>
         </div>
     )
 }
