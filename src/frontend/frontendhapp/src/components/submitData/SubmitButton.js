@@ -7,6 +7,7 @@ import {
     RemoveProductFromShoppingCart
 } from "../../urlMappings/TableRequests";
 import {Actions} from "./Actions"
+import {createProduct} from "../../urlMappings/MenuRequests";
 
 
 export default function SubmitButton(props) {
@@ -59,6 +60,10 @@ export default function SubmitButton(props) {
                     });
                 console.log("removed all")
                 break;
+            case Actions.CREATE_PRODUCT:
+                console.log(props.inputs)
+                console.log(props.ingredientList)
+                // createProduct(props.productName,props.productIngredients,props.productDestination,props.productCategory,props.details,props.price)
         }
         console.log("Added");
     }
