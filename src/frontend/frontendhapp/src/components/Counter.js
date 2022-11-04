@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import "./submitData/SubmitButton.css"
+import "../styles/Counter.css"
 import SubmitButton from "./submitData/SubmitButton";
 
 
@@ -34,13 +34,13 @@ export default function Counter(props) {
         </div>
     ) : <div className={"counter-grid"}>
             <div className={"grid-item-3"}>
-                <button className="add-up" onClick={increment}>+</button>
+                    <button className="add-up counter-button" onClick={increment}>+</button>
             </div>
             <div className={"grid-item-2"} >
                 <p>{count}</p>
             </div>
             <div className={"grid-item-4"}>
-                <button className="subtract grid-item-2" onClick={decrement}>-</button>
+                <button className="subtract grid-item-2 counter-button" onClick={decrement}>-</button>
             </div>
         </div>;
 }

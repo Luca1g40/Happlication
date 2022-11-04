@@ -1,5 +1,6 @@
 import React from "react";
-import "./SubmitButton.css";
+import "../../styles/SubmitButton.css";
+
 import {
     AddProductToShoppingCart,
     PlaceOrder,
@@ -33,14 +34,10 @@ export default function SubmitButton(props) {
                 if (!(props.updateCount === undefined)){
                     props.updateCount();
                 }
-
-                console.log("added to shopping cart")
                 break;
             case Actions.REMOVE_FROM_SHOPPING_CART:
                 RemoveProductFromShoppingCart(props.tableId,props.productId);
-                console.log("removed from shoppingcart")
                 if (!(props.updateCount === undefined)){
-                    console.log("in if")
                     props.updateCount();
                 }
 
@@ -57,15 +54,13 @@ export default function SubmitButton(props) {
                     .catch(err => {
                         console.log(err)
                     });
-                console.log("removed all")
                 break;
         }
-        console.log("Added");
     }
 
     return (
-        <div>
-            <button onClick={handleClick}>{props.buttonText}</button>
+        <div className={"submit-button-div"}>
+            <button className={"submit-button"} onClick={handleClick}>{props.buttonText}</button>
         </div>
     )
 }
