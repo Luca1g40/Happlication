@@ -10,6 +10,8 @@ import ShoppingCart from "./components/shoppingcart/ShoppingCart";
 import Staff from "./pages/HomePageStaff";
 import PersonalModule from "./pages/PersonalModule";
 import StaffDashboard from "./pages/StaffDashboard";
+import CreateStaff from "./pages/CreateStaff"
+import AllStaffMembers from "./administration_components/AllStaffMembers";
 
 function App() {
     return (
@@ -22,6 +24,8 @@ function App() {
             <Route path="staff" element={<Staff/>}/>
             <Route path="claims" element={<PersonalModule/>}/>
             <Route path="staffDashboard" element={<StaffDashboard/>}/>
+            <Route path="createStaff" element={<CreateStaff/>}/>
+            <Route path="allStaffMembers" element={<AllStaffMembers/>}/>
         </Routes>
     )
 

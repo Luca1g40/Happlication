@@ -29,6 +29,10 @@ public class StaffService {
         return staffRepository.getById(id);
     }
 
+    public List<Staff> findAll() {
+        return staffRepository.findAll();
+    }
+
     public List<Table> getTableThatNeedHelp(Long staffId) {
         Staff staff = getStaff(staffId);
         List<Table> tableListWithHelp = new ArrayList<>();
