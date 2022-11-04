@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/happ")
 public class IngredientController {
@@ -20,6 +22,11 @@ public class IngredientController {
     @PostMapping("/ingredient")
     public IngredientData createIngredient(@RequestBody IngredientRequest ingredientRequest) {
         return ingredientService.createIngredient(ingredientRequest.name, ingredientRequest.amount);
+    }
+
+    @GetMapping("/ingredients")
+    public List<IngredientData> getAllIngredients(){
+        return ingredientService.findAll();
     }
 
     @DeleteMapping("/ingredient/{id}")

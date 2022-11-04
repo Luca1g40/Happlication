@@ -50,8 +50,8 @@ public class IngredientService {
     public IngredientData createIngredient(String name, int amount) {
         ingredientRepository.existsIngredientsByName(name);
 
-        ingredientRepository.save(new Ingredient(name, amount));
-        return new IngredientData(name, amount);
+        Ingredient ingredient = ingredientRepository.save(new Ingredient(name, amount));
+        return createIngredientData(ingredient);
     }
 
     public void deleteIngredient(Long id) {
@@ -72,5 +72,9 @@ public class IngredientService {
         if (!ingredientRepository.existsById(id)) {
             throw new ItemNotFound("ingredient");
         }
+    }
+
+    public IngredientData createIngredientData(Ingredient ingredient){
+        return new IngredientData(ingredient.getId(),ingredient.getName(),ingredient.getAmount());
     }
 }
