@@ -23,6 +23,7 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
+    //TODO give ingreedients id inplats van hele ingredient
     public ProductData createProduct(String name, ProductCategory productCategory, double price, List<Ingredient> ingredients, String details, ProductDestination productDestination) {
         Product product = new Product(name, ingredients, productCategory, price, details,productDestination);
         productRepository.save(product);

@@ -61,9 +61,27 @@ export default function SubmitButton(props) {
                 console.log("removed all")
                 break;
             case Actions.CREATE_PRODUCT:
-                console.log(props.inputs)
-                console.log(props.ingredientList)
-                // createProduct(props.productName,props.productIngredients,props.productDestination,props.productCategory,props.details,props.price)
+                console.log(Object.keys(props.inputs).length)
+                console.log(props.ingredientList.length)
+
+
+                if (Object.keys(props.inputs).length===5 && props.ingredientList.length>0){
+                    for (const key in props.inputs) {
+                        if (!(props.inputs[key].trim().length>0)){
+                            console.log("ging fout")
+                            props.setFoutMelding(`Je hebt een lege input gegeven bij ${key.replace("-", " ")} je ezel`)
+                            return;
+                        }else{
+                            console.log("ging goed")
+                        }
+                    }
+                }else{
+                    console.log("ging heel fout")
+                    props.setFoutMelding(`Je hebt een of meer lege input velden je ezel`)
+                    return;
+                }
+
+                 //createProduct(props.inputs.product-name,props.ingredientList,props.inputs.product-destination,props.productCategory,props.inputs.product-details,props.inputs.product-price)
         }
         console.log("Added");
     }
