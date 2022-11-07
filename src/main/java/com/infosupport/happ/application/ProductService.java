@@ -1,6 +1,7 @@
 package com.infosupport.happ.application;
 
 import com.infosupport.happ.application.dto.ProductData;
+import com.infosupport.happ.data.IngredientRepository;
 import com.infosupport.happ.data.ProductRepository;
 import com.infosupport.happ.domain.Ingredient;
 import com.infosupport.happ.domain.Product;
@@ -18,14 +19,17 @@ import static com.infosupport.happ.domain.ProductCategory.DRINKS;
 public class ProductService {
 
     private final ProductRepository productRepository;
+    private final IngredientRepository ingredientRepository;
 
-    public ProductService(ProductRepository productRepository) {
+    public ProductService(ProductRepository productRepository,IngredientRepository ingredientRepository) {
         this.productRepository = productRepository;
+        this.ingredientRepository = ingredientRepository;
     }
 
     //TODO give ingreedients id inplats van hele ingredient
-    public ProductData createProduct(String name, ProductCategory productCategory, double price, List<Ingredient> ingredients, String details, ProductDestination productDestination) {
-        Product product = new Product(name, ingredients, productCategory, price, details,productDestination);
+    public ProductData createProduct(String name, ProductCategory productCategory, double price, List<String> ingredients, String details, ProductDestination productDestination) {
+
+        Product product = new Product(name, convertIngredientStringToIngredient(ingredients), productCategory, price, details,productDestination);
         productRepository.save(product);
         return createProductData(product);
     }
@@ -39,14 +43,14 @@ public class ProductService {
     }
 
 
-    public ProductData updateProduct(String name, ProductCategory productCategory, double price, Long id, List<Ingredient> ingredients, String details) {
+    public ProductData updateProduct(String name, ProductCategory productCategory, double price, Long id, List<String> ingredients, String details) {
         productExists(id);
         Product product = productRepository.getById(id);
 
         product.setName(name);
         product.setProductCategory(productCategory);
         product.setPrice(price);
-        product.setIngredients(ingredients);
+        product.setIngredients(convertIngredientStringToIngredient(ingredients));
         product.setDetails(details);
 
         this.productRepository.save(product);
@@ -71,7 +75,8 @@ public class ProductService {
                 product.getProductCategory(),
                 product.getPrice(),
                 product.getIngredients(),
-                product.getDetails()
+                product.getDetails(),
+                product.getProductDestination()
         );
     }
 
@@ -79,6 +84,14 @@ public class ProductService {
         if (!productRepository.existsById(id)) {
             throw new ItemNotFound("product");
         }
+    }
+
+    private List<Ingredient> convertIngredientStringToIngredient(List<String> ingredientStringList){
+        List<Ingredient> ingredientList = new ArrayList<>();
+        for (String ingredient:ingredientStringList) {
+            ingredientList.add(ingredientRepository.getIngredientByName(ingredient));
+        }
+        return ingredientList;
     }
 
     public List<Product> findAll() {

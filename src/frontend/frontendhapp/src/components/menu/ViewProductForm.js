@@ -3,47 +3,56 @@ import SubmitButton from "../submitData/SubmitButton";
 import {Actions} from "../submitData/Actions";
 import React, {useEffect, useState} from "react";
 import {getAllIngredients, getProduct} from "../../urlMappings/MenuRequests";
+import {useParams} from "react-router";
+import {ProductFormModes} from "./ProductFormModes";
 
 
 export default function ViewProductForm(props){
     const [disabled,setDisabled] = useState(true)
+
     const [inputs, setInputs] = useState({
         "product-category":"DRINKS",
-        "product-destination":"BAR_PRODUCT"
+        "productDestination":"BAR_PRODUCT"
     })
     const [errorMeldingText,setErrorMeldingText] = useState("");
     const [product,setProduct] = useState();
     const [toegevoegdeIngredienten,setToegevoegdeIngredienten] = useState([])
+    const [formMode,setFormMode] = useState(true);
+    const params = useParams();
+
 
     useEffect(() => {
-        console.log("rerender")
-        getProduct(84)
-            .then(res => {
-                console.log(res)
-                setProduct(res);
-                setToegevoegdeIngredienten(res.ingredientList.map((ingredient)=>{return ingredient.name}))
+        if (!(params.id===undefined)){
+            getProduct(params.id)
+                .then(res => {
+                    console.log(res.id)
+                    setProduct(res);
+                    setToegevoegdeIngredienten(res.ingredientList.map((ingredient)=>{return ingredient.name}))
+                })
+                .catch(err => {
+                    // setProduct(undefined)
+                })
+        }else{
+            setProduct({
+                "category":"DRINKS",
+                "destination":"BAR_PRODUCT"
             })
-            .catch(err => {
-                console.log(err)
-            })
+        }
     },[])
+
+
 
     //TODO remove border
     //TODO edit product backend
     const handleChange = (event) => {
-
         const name = event.target.name;
-
         const value = event.target.value;
-        console.log(value)
-        setInputs(values => ({...values, [name]: value}))
         setProduct(values => ({...values, [name]: value}))
     }
 
     const addIngredient = (newIngredient) => {
         if (!(toegevoegdeIngredienten.includes(newIngredient))){
             setToegevoegdeIngredienten(state => [...state, newIngredient])
-
             setErrorMeldingText("");
         }else{
             setErrorMeldingText("kijk goed wat je doet ezel.")
@@ -59,12 +68,17 @@ export default function ViewProductForm(props){
         setErrorMeldingText("");
     }
 
-    return(
+    return (params.id===undefined) ? (
         <div>
-            <ProductForm product={product} toegevoegdeIngredienten={toegevoegdeIngredienten} disabled={disabled} handleChange={event=>handleChange(event)} removeFromIngredientsList={(target=>removeFromIngredientsList(target))} setToegevoegdeIngredienten={(ingredient)=>setToegevoegdeIngredienten(ingredient)} addIngredient={ingredient=>addIngredient(ingredient)} errorMeldingText={errorMeldingText}/>
+            <ProductForm productFormMode={ProductFormModes.CREATING} toegevoegdeIngredienten={toegevoegdeIngredienten} disabled={disabled} handleChange={event=>handleChange(event)} removeFromIngredientsList={(target=>removeFromIngredientsList(target))} setToegevoegdeIngredienten={(ingredient)=>setToegevoegdeIngredienten(ingredient)} addIngredient={ingredient=>addIngredient(ingredient)} errorMeldingText={errorMeldingText}/>
+            <SubmitButton action={Actions.CREATE_PRODUCT} buttonText={"Create product"} setProduct={product=>setProduct(product)} product={product}  ingredientList={toegevoegdeIngredienten} setMode={mode=>setFormMode(mode)} setFoutMelding={fout=>setErrorMeldingText(fout)} />
+        </div>
+    ) :(
+        <div>
+            <ProductForm productFormMode={ProductFormModes.READING} product={product} toegevoegdeIngredienten={toegevoegdeIngredienten} disabled={disabled} handleChange={event=>handleChange(event)} removeFromIngredientsList={(target=>removeFromIngredientsList(target))} setToegevoegdeIngredienten={(ingredient)=>setToegevoegdeIngredienten(ingredient)} addIngredient={ingredient=>addIngredient(ingredient)} errorMeldingText={errorMeldingText}/>
+            <SubmitButton disabled={disabled} setDisabled={disabled=>setDisabled(disabled)} action={Actions.UPDATE_PRODUCT} buttonText={"Update"} product={product} ingredientList={toegevoegdeIngredienten}/>
             <button onClick={()=>setDisabled(false)} disabled={!disabled}>Edit</button>
             <button onClick={()=>setDisabled(true)} disabled={disabled}>Cancel</button>
-
         </div>
     )
 }

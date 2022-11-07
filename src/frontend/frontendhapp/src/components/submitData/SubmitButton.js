@@ -1,5 +1,6 @@
 import React from "react";
 import "./SubmitButton.css";
+import { useNavigate } from "react-router-dom";
 import {
     AddProductToShoppingCart,
     PlaceOrder,
@@ -7,11 +8,11 @@ import {
     RemoveProductFromShoppingCart
 } from "../../urlMappings/TableRequests";
 import {Actions} from "./Actions"
-import {createProduct} from "../../urlMappings/MenuRequests";
+import {createProduct, editProduct} from "../../urlMappings/MenuRequests";
 
 
 export default function SubmitButton(props) {
-
+    let navigate = useNavigate();
     function handleClick() {
         switch (props.action) {
             case Actions.PLACE_ORDER:
@@ -61,13 +62,10 @@ export default function SubmitButton(props) {
                 console.log("removed all")
                 break;
             case Actions.CREATE_PRODUCT:
-                console.log(Object.keys(props.inputs).length)
-                console.log(props.ingredientList.length)
-
-
-                if (Object.keys(props.inputs).length===5 && props.ingredientList.length>0){
-                    for (const key in props.inputs) {
-                        if (!(props.inputs[key].trim().length>0)){
+                console.log(Object.keys(props.product))
+                if (Object.keys(props.product).length===5 && props.ingredientList.length>0){
+                    for (const key in props.product) {
+                        if (!(props.product[key].trim().length>0)){
                             console.log("ging fout")
                             props.setFoutMelding(`Je hebt een lege input gegeven bij ${key.replace("-", " ")} je ezel`)
                             return;
@@ -75,12 +73,33 @@ export default function SubmitButton(props) {
                             console.log("ging goed")
                         }
                     }
+                    console.log(props.product.destination, props.product.category)
+                    createProduct(props.product.name,props.ingredientList,props.product.destination,props.product.category,props.product.details,props.product.price)
+                        .then(res=>{
+                            navigate(`/productdetails/${res.id}`)
+                            }
+
+                        ).catch(err=>{
+                            console.log(err)
+                    })
+                    props.setMode(false);
                 }else{
                     console.log("ging heel fout")
                     props.setFoutMelding(`Je hebt een of meer lege input velden je ezel`)
                     return;
                 }
-
+                break;
+            case Actions.UPDATE_PRODUCT:
+                console.log(props.product)
+                editProduct(props.product.id,props.product.name,props.product.destination,props.ingredientList,props.product.price,props.product.details,props.product.category).
+                then(res=>{
+                    props.setDisabled(true);
+                    navigate(`/productdetails/${res.id}`)
+                }).catch(err=>{
+                    console.log(err)
+                })
+                // navigate("/Orders")
+                break;
                  //createProduct(props.inputs.product-name,props.ingredientList,props.inputs.product-destination,props.productCategory,props.inputs.product-details,props.inputs.product-price)
         }
         console.log("Added");
@@ -88,7 +107,7 @@ export default function SubmitButton(props) {
 
     return (
         <div>
-            <button onClick={handleClick}>{props.buttonText}</button>
+            <button disabled={props.disabled} onClick={handleClick}>{props.buttonText}</button>
         </div>
     )
 }

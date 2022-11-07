@@ -3,6 +3,7 @@ import SubmitButton from "../submitData/SubmitButton";
 import {Actions} from "../submitData/Actions";
 import React, {useEffect, useRef, useState} from "react";
 import {getAllIngredients} from "../../urlMappings/MenuRequests";
+import {ProductFormModes} from "./ProductFormModes";
 
 
 export default function ProductForm(props){
@@ -12,7 +13,7 @@ export default function ProductForm(props){
 
 
     useEffect(() => {
-        console.log("rerender")
+        console.log("yoooo")
         getAllIngredients()
             .then(res => {
                 console.log(res)
@@ -30,12 +31,12 @@ export default function ProductForm(props){
             <h1>Title</h1>
             <span>
                 <div>
-                    <label htmlFor="product-name">Product name:</label>
-                    <input name={"product-name"} placeholder={""} onChange={(event)=>props.handleChange(event)}/>
+                    <label htmlFor="name">Product name:</label>
+                    <input name={"name"} placeholder={""} onChange={(event)=>props.handleChange(event)}/>
                 </div>
                 <div>
-                    <label htmlFor="product-category">Product category</label>
-                     <select name={"product-category"} onChange={(event)=>props.handleChange(event)}>
+                    <label htmlFor="category">Product category</label>
+                     <select name={"category"} onChange={(event)=>props.handleChange(event)}>
                         <option value={"DRINKS"} >Drinks</option>
                         <option value={"EXTRA"} >Extra</option>
                          <option value={"DESSERT"} >Dessert</option>
@@ -45,8 +46,8 @@ export default function ProductForm(props){
                     </select>
                 </div>
                 <div>
-                    <label htmlFor="product-price">Product prize</label>
-                    <input type={"number"} name={"product-price"} min={0} placeholder={"yoooo"}  onChange={(event)=>props.handleChange(event)}/>
+                    <label htmlFor="price">Product prize</label>
+                    <input type={"number"} name={"price"} min={0} placeholder={"yoooo"}  onChange={(event)=>props.handleChange(event)}/>
                 </div>
 
 
@@ -70,13 +71,13 @@ export default function ProductForm(props){
                 <button onClick={()=>props.addIngredient(ref.current.value)}>Add ingredient</button>
                 <ErrormeldingLabel text={props.errorMeldingText}/>
                     <div>
-                        <label htmlFor="product-details">Product details:</label>
-                        <textarea name={"product-details"} placeholder={"ohmmmm"}  onChange={(event)=>props.handleChange(event)}/>
+                        <label htmlFor="details">Product details:</label>
+                        <textarea name={"details"} placeholder={"ohmmmm"}  onChange={(event)=>props.handleChange(event)}/>
                     </div>
 
 
-                    <label htmlFor="product-destination">Product destinaion: </label>
-                    <select name={"product-destination"} onChange={(event)=>props.handleChange(event)}>
+                    <label htmlFor="destination">Product destinaion: </label>
+                    <select name={"destination"} onChange={(event)=>props.handleChange(event)}>
                         <option value={"BAR_PRODUCT"} >Bar</option>
                         <option value={"KITCHEN_PRODUCT"} >Kitchen</option>
                     </select>
@@ -134,7 +135,7 @@ export default function ProductForm(props){
 
 
                     <label htmlFor="productDestination">Product destinaion: </label>
-                    <select name={"productDestination"} disabled={props.disabled} value={props.product.destination} onChange={(event)=>props.handleChange(event)}>
+                    <select name={"productDestination"} disabled={props.disabled} value={props.product.productDestination} onChange={(event)=>props.handleChange(event)}>
                         <option value={"BAR_PRODUCT"} >Bar</option>
                         <option value={"KITCHEN_PRODUCT"} >Kitchen</option>
                     </select>

@@ -12,7 +12,7 @@ public class ProductRequest {
     public Integer amount;
     public ProductCategory productCategory;
     public double price;
-    public List<Ingredient> ingredients;
+    public List<String> ingredients;
     public String details;
     public ProductDestination productDestination;
 

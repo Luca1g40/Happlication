@@ -9,6 +9,8 @@ import Orders from "./pages/Orders";
 import ShoppingCart from "./components/shoppingcart/ShoppingCart";
 import Staff from "./pages/HomePageStaff";
 import PersonalModule from "./pages/PersonalModule";
+import ViewProductForm from "./components/menu/ViewProductForm";
+import SearchProduct from "./components/menu/SearchProduct";
 
 function App() {
     return (
@@ -20,6 +22,9 @@ function App() {
             <Route path="shoppingcart" element={<ShoppingCart/>}/>
             <Route path="staff" element={<Staff/>}/>
             <Route path="claims" element={<PersonalModule/>}/>
+            <Route path="productdetails/:id" element={<ViewProductForm/>}/>
+            <Route path="productdetails/" element={<ViewProductForm/>}/>
+            <Route path="searchproduct" element={<SearchProduct/>}/>
 
         </Routes>
     )

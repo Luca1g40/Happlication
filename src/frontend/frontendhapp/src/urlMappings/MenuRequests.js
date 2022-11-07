@@ -57,12 +57,39 @@ export function createProduct(productName,productIngredients,productDestination,
 }
 
 
-export function getProduct(id){
-    return axios.get(`http://localhost:8080/happ/product/${id}`, configuration)
+export function getAllProducts(){
+    return axios.get(`http://localhost:8080/happ/product/findall`, configuration)
         .then(res => {
             console.log(res)
             return res.data;
         })
+        .catch(err => {
+            console.log(err)
+        })
+}
+
+export function getProduct(id){
+    return axios.get(`http://localhost:8080/happ/product/${id}`, configuration)
+        .then(res => {
+            return res.data;
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+
+export function editProduct(id,name,destination,ingredienten,price,details,category){
+    return axios.put(`http://localhost:8080/happ/product/${id}`, {
+        "name":name,
+        "productCategory":category,
+        "price":price,
+        "ingredients":ingredienten,
+        "details":details,
+        "productDestination":destination
+    },configuration)
+    .then(res => {
+        return res.data;
+    })
         .catch(err => {
             console.log(err)
         })
