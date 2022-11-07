@@ -22,7 +22,7 @@ function Login() {
          const status = await loginRequest(password)
          console.log(status)
          if (status === 200) {
-             navigate("/Orders");
+             navigate("/staffmodule");
          }
      }
 
