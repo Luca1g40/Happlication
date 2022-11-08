@@ -118,4 +118,17 @@ public class StaffService {
         }
         return areaWithoutStaffDataList;
     }
+
+    public StaffData updateStaff(int password, String name, List<Rights> rights) {
+        staffExistsByPassword(password);
+        Staff staff = staffRepository.getByPassword(password);
+
+        staff.setName(name);
+        staff.setPassword(password);
+        staff.setRights(rights);
+
+        this.staffRepository.save(staff);
+
+        return createStaffData(staff);
+    }
 }

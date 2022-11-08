@@ -1,9 +1,10 @@
-import axios from "axios";
-import {configuration} from "../urlMappings/JwtHeader";
+import {CreateStaff} from "../urlMappings/StaffRequests";
+import {useNavigate} from "react-router-dom";
 
 function CreatingStaff(){
+    let navigate = useNavigate();
 
-    function create(){
+    async function create(){
         const firstname = document.getElementById("f").value;
         const password = document.getElementById("p").value;
         const rights = document.getElementById("r").value;
@@ -17,17 +18,12 @@ function CreatingStaff(){
             r = ["KITCHEN_RIGHTS", "BAR_RIGHTS"]
         }
 
-        axios.post(`http://localhost:8080/happ/staff`, {
-            "password" : password,
-            "name" : firstname,
-            "rights" : r
-        }, configuration)
-            .then(res => {
-                console.log(res)
-            })
-            .catch(err => {
-                console.log(err)
-            })
+        const status = await CreateStaff(firstname, password, r)
+
+        console.log("status " + status)
+        if (status === 200) {
+            navigate("/AllstaffMembers");
+        }
     }
 
 

@@ -58,6 +58,21 @@ public class StaffController {
                 staffRequest.rights);
     }
 
+    @PutMapping("/staff")
+    public StaffData updateStaff(@RequestBody StaffRequest staffRequest) {
+        try {
+            return this.staffService.updateStaff(
+                    staffRequest.password,
+                    staffRequest.name,
+                    staffRequest.rights
+            );
+        } catch (ItemNotFound e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @GetMapping("/staff/{staffId}")
     public StaffData getStaff(@PathVariable Long staffId) {
         try {

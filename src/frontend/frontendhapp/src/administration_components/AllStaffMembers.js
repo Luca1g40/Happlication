@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {getAllStaffMembers} from "../urlMappings/StaffRequests";
 import StaffMember from "../administration_components/StaffMember";
+import {Link} from "react-router-dom";
 
 function AllStaffMembers() {
     const [members, setMembers] = useState([])
@@ -25,6 +26,7 @@ function AllStaffMembers() {
                         <StaffMember key={member.id} member={member}/>
                     )
                 }
+                <Link to="/createStaff">Maak een nieuw staff-member aan</Link>
             </ul>
         </div>
     )

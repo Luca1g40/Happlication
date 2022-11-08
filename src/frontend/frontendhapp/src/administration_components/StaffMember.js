@@ -7,7 +7,6 @@ export default function MenuItem({member}) {
 
     function handleClick() {
         setButtonPopup(true);
-        console.log(buttonPopup)
     }
 //TODO css toevoegen...
     return (
