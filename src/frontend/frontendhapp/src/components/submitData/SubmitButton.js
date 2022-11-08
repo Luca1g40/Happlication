@@ -64,9 +64,9 @@ export default function SubmitButton(props) {
     }
 
     return (
-        <div className={"submit-button-div"}>
+        <>
             <button className={"submit-button"} onClick={handleClick}>{props.buttonText}</button>
-        </div>
+        </>
     )
 }
 
