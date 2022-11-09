@@ -13,9 +13,7 @@ function UnclaimedOrdersComponent(props) {
     useEffect(() => {
         getAllUnclaimedOrders()
             .then(res => {
-
                 setOrders(res)
-
             })
             .catch(err => {
                 console.log(err)

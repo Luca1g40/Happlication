@@ -4,5 +4,7 @@ export const Actions = {
     REMOVE_FROM_SHOPPING_CART:"Remove a product from the shopping cart.",
     REMOVE_ALL_OCCURANCES_OF_A_PRODUCT:"Remove all occurances of a product from the shopping cart.",
     CREATE_PRODUCT:"Create a product.",
-    UPDATE_PRODUCT:"Update a product."
+    UPDATE_PRODUCT:"Update a product.",
+    CREATE_INGREDIENT:"Create a ingredient",
+    UPDATE_INGREDIENT: "Update a ingredient."
 }

@@ -8,7 +8,7 @@ import {
     RemoveProductFromShoppingCart
 } from "../../urlMappings/TableRequests";
 import {Actions} from "./Actions"
-import {createProduct, editProduct} from "../../urlMappings/MenuRequests";
+import {createIngredient, createProduct, editIngredient, editProduct} from "../../urlMappings/MenuRequests";
 
 
 export default function SubmitButton(props) {
@@ -90,7 +90,6 @@ export default function SubmitButton(props) {
                 }
                 break;
             case Actions.UPDATE_PRODUCT:
-                console.log(props.product)
                 editProduct(props.product.id,props.product.name,props.product.destination,props.ingredientList,props.product.price,props.product.details,props.product.category).
                 then(res=>{
                     props.setDisabled(true);
@@ -100,7 +99,27 @@ export default function SubmitButton(props) {
                 })
                 // navigate("/Orders")
                 break;
-                 //createProduct(props.inputs.product-name,props.ingredientList,props.inputs.product-destination,props.productCategory,props.inputs.product-details,props.inputs.product-price)
+            case Actions.CREATE_INGREDIENT:
+                createIngredient(props.ingredient.name)
+                    .then(res=>{
+                            props.setDisabled(true);
+                            navigate(`/ingredientdetails/${res.id}`)
+                        }
+                    ).catch(err=>{
+
+                })
+                break;
+            case Actions.UPDATE_INGREDIENT:
+                editIngredient(props.ingredient.id,props.ingredient.name)
+                    .then(res=>{
+                            props.setDisabled(true);
+                            navigate(`/ingredientdetails/${res.id}`)
+                        }
+                    ).catch(err=>{
+
+                })
+                break;
+
         }
         console.log("Added");
     }

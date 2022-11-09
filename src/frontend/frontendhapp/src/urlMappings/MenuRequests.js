@@ -34,7 +34,43 @@ export function getAllIngredients(){
         .catch(err => {
             console.log(err)
         })
+}
+export function getIngredient(id){
+    return axios.get(`http://localhost:8080/happ/ingredient/${id}`, configuration)
+        .then(res => {
+            console.log(res)
+            return res.data;
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+export function createIngredient(name){
+    return axios.post("http://localhost:8080/happ/ingredient",{
+        "name":name,
+        "amount": 1
+    }, configuration)
+        .then(res => {
+            console.log(res)
+            return res.data;
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
 
+export function editIngredient(id,name){
+    return axios.post(`http://localhost:8080/happ/ingredient/${id}`,{
+        "name":name,
+        "amount": 1
+    }, configuration)
+        .then(res => {
+            console.log(res)
+            return res.data;
+        })
+        .catch(err => {
+        console.log(err)
+    })
 }
 
 
