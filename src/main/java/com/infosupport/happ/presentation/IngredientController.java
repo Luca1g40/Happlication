@@ -54,6 +54,9 @@ public class IngredientController {
     @PutMapping("/ingredient/{id}")
     public IngredientData upgradeIngredient(@PathVariable Long id, @RequestBody IngredientRequest ingredientRequest) {
         try {
+            System.out.println(id);
+            System.out.println(ingredientRequest.name);
+            System.out.println(ingredientRequest.amount);
             return ingredientService.updateIngredient(id, ingredientRequest.name, ingredientRequest.amount);
         } catch (ItemNotFound itemNotFound) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, itemNotFound.getMessage());

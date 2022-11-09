@@ -13,6 +13,14 @@ import {createIngredient, createProduct, editIngredient, editProduct} from "../.
 
 export default function SubmitButton(props) {
     let navigate = useNavigate();
+
+    function validateFormInformation(){
+
+    }
+
+
+
+
     function handleClick() {
         switch (props.action) {
             case Actions.PLACE_ORDER:
@@ -62,7 +70,6 @@ export default function SubmitButton(props) {
                 console.log("removed all")
                 break;
             case Actions.CREATE_PRODUCT:
-                console.log(Object.keys(props.product))
                 if (Object.keys(props.product).length===5 && props.ingredientList.length>0){
                     for (const key in props.product) {
                         if (!(props.product[key].trim().length>0)){
@@ -73,7 +80,7 @@ export default function SubmitButton(props) {
                             console.log("ging goed")
                         }
                     }
-                    console.log(props.product.destination, props.product.category)
+
                     createProduct(props.product.name,props.ingredientList,props.product.destination,props.product.category,props.product.details,props.product.price)
                         .then(res=>{
                             navigate(`/productdetails/${res.id}`)
@@ -100,24 +107,60 @@ export default function SubmitButton(props) {
                 // navigate("/Orders")
                 break;
             case Actions.CREATE_INGREDIENT:
-                createIngredient(props.ingredient.name)
-                    .then(res=>{
-                            props.setDisabled(true);
-                            navigate(`/ingredientdetails/${res.id}`)
+                if (Object.keys(props.ingredient).length===1){
+                    for (const key in props.ingredient) {
+                        console.log(props.ingredient[key].trim().length)
+                        if (!(props.ingredient[key].trim().length>0)){
+                            console.log("ging fout")
+                            props.setFoutMelding(`Je hebt een lege input gegeven bij ${key.replace("-", " ")} je ezel`)
+                            return;
+                        }else{
+                            console.log("ging goed")
                         }
-                    ).catch(err=>{
+                    }
 
-                })
+                    createIngredient(props.ingredient.name)
+                        .then(res=>{
+                                props.setDisabled(true);
+                                navigate(`/ingredientdetails/${res.id}`)
+                            }
+                        ).catch(err=>{
+
+                    })
+                }else{
+                    console.log("ging heel fout")
+                    props.setFoutMelding(`Je hebt een of meer lege input velden je ezel`)
+                    return;
+                }
                 break;
             case Actions.UPDATE_INGREDIENT:
-                editIngredient(props.ingredient.id,props.ingredient.name)
-                    .then(res=>{
-                            props.setDisabled(true);
-                            navigate(`/ingredientdetails/${res.id}`)
-                        }
-                    ).catch(err=>{
+                console.log(props.ingredient.id,props.ingredient.name)
 
-                })
+                if (Object.keys(props.ingredient).length===1){
+                    for (const key in props.ingredient) {
+                        console.log(props.ingredient[key].trim().length)
+                        if (!(props.ingredient[key].trim().length>0)){
+                            console.log("ging fout")
+                            props.setFoutMelding(`Je hebt een lege input gegeven bij ${key.replace("-", " ")} je ezel`)
+                            return;
+                        }else{
+                            console.log("ging goed")
+                        }
+                    }
+
+                    editIngredient(props.ingredient.id,props.ingredient.name)
+                        .then(res=>{
+                                props.setDisabled(true);
+                                navigate(`/ingredientdetails/${res.id}`)
+                            }
+                        ).catch(err=>{
+
+                    })
+                }else{
+                    console.log("ging heel fout")
+                    props.setFoutMelding(`Je hebt een of meer lege input velden je ezel`)
+                    return;
+                }
                 break;
 
         }
@@ -126,7 +169,7 @@ export default function SubmitButton(props) {
 
     return (
         <div>
-            <button disabled={props.disabled} onClick={handleClick}>{props.buttonText}</button>
+            <button className={props.className} disabled={props.disabled} onClick={handleClick}>{props.buttonText}</button>
         </div>
     )
 }

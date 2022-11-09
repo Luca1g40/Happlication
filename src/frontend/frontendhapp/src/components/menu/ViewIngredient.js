@@ -16,6 +16,7 @@ export default function ViewIngredient(props){
             getIngredient(params.id)
                 .then(res => {
                     setIngredient(res);
+                    console.log(res)
                     setDisabled(true);
                 })
                 .catch(err => {
@@ -32,14 +33,15 @@ export default function ViewIngredient(props){
     }
 
 
-    return (params.id === undefined) ? (<div>
+    return (params.id === undefined) ? (
+        <div>
             <h1>Create ingredient</h1>
             <IngredientForm handleChange={event=>handleChange(event)}/>
             <SubmitButton disabled={disabled} setDisabled={disabled=>setDisabled(disabled)} action={Actions.CREATE_INGREDIENT} buttonText={"Create ingredient"} ingredient={ingredient}/>
         </div>
 ) : (
         <div>
-            <IngredientForm ingredient={ingredient} handleChange={event=>handleChange(event)}/>
+            <IngredientForm disabled={disabled} ingredient={ingredient} handleChange={event=>handleChange(event)}/>
             <SubmitButton disabled={disabled} setDisabled={disabled=>setDisabled(disabled)} action={Actions.UPDATE_INGREDIENT} buttonText={"Update"}  ingredient={ingredient}/>
             <button onClick={()=>setDisabled(false)} disabled={!disabled}>Edit</button>
             <button onClick={()=>setDisabled(true)} disabled={disabled}>Cancel</button>

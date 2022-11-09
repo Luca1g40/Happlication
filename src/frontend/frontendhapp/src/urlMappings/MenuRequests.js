@@ -60,7 +60,7 @@ export function createIngredient(name){
 }
 
 export function editIngredient(id,name){
-    return axios.post(`http://localhost:8080/happ/ingredient/${id}`,{
+    return axios.put(`http://localhost:8080/happ/ingredient/${id}`,{
         "name":name,
         "amount": 1
     }, configuration)
