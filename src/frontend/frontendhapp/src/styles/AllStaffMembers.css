@@ -1,0 +1,17 @@
+.createStaffLink {
+    position: absolute;
+    bottom: 2%;
+    left: 40%;
+}
+
+.memberNameSpan {
+    margin-right: auto;
+}
+
+/*.memberPasswordSpan{*/
+/*    margin-inside: auto;*/
+/*}*/
+
+.memberRightsSpan {
+    margin-left: auto;
+}

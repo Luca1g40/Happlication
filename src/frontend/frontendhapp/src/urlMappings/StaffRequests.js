@@ -49,6 +49,7 @@ export function CreateStaff(firstname, password, rights){
         })
         .catch(err => {
             console.log(err)
+            return err.response.status
         })
 }
 

@@ -6,6 +6,7 @@ import com.infosupport.happ.application.dto.OrderData;
 import com.infosupport.happ.application.dto.StaffData;
 import com.infosupport.happ.domain.Staff;
 import com.infosupport.happ.domain.Table;
+import com.infosupport.happ.domain.exceptions.InvalidValueException;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import com.infosupport.happ.presentation.dto.OrderRequest;
 import com.infosupport.happ.presentation.dto.StaffRequest;
@@ -52,10 +53,14 @@ public class StaffController {
 
     @PostMapping("/staff")
     public StaffData createStaff(@RequestBody StaffRequest staffRequest) {
-        return this.staffService.createStaff(
-                staffRequest.password,
-                staffRequest.name,
-                staffRequest.rights);
+        try {
+            return this.staffService.createStaff(
+                    staffRequest.password,
+                    staffRequest.name,
+                    staffRequest.rights);
+        }catch (InvalidValueException e){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
     }
 
     @PutMapping("/staff")

@@ -14,9 +14,8 @@ function ProductDetailsPopup(props) {
         DeleteStaff(staffId)
     }
 
-    function updateStaffMember(){
+    function updateStaffMember(password){
         const firstname = document.getElementById("f").value;
-        const password = document.getElementById("p").value;
         const rights = document.getElementById("r").value;
         let r;
 
@@ -30,25 +29,39 @@ function ProductDetailsPopup(props) {
         UpdateStaff(password, firstname, r)
     }
 
+    function checkRights(rightOne, rightTwo){
+        if(rightTwo !== undefined){
+            return "Keuken & Bar"
+        }
+        if(rightOne !== undefined){
+            if(rightOne === "KITCHEN_RIGHTS") {
+                return "Keuken"
+            }else if(rightOne === "BAR_RIGHTS"){
+                return "Bar"
+            }
+        }
+    }
+
+//TODO bij keuken en bar recht geeft select "geen recht" aan. Moet zijn "Keuken & Bar"
     return (props.trigger) ? (
         <div className="popup">
             <div className="popup-inner">
                 <button onClick={() => closePopUp()}> Close </button>
                 <form>
                     <h4>Voornaam</h4>
-                    <input type="text" value={props.member.name} id="f"/>
+                    <input type="text" id="f" defaultValue={props.member.name}/>
                     <h4>Wachtwoord</h4>
-                    <input type="text" value={props.member.password} maxLength="4" minLength="4" id="p"/>
+                    <label>{props.member.password}</label>
                     <h4>Rechten</h4>
-                    <select id="r" name="Rechten">
-                        <option hidden disabled selected value> -- selecteer een recht -- </option>
+                    <select id="r" name="Rechten" defaultValue={checkRights(props.member.rights[0], props.member.rights[1])}>
+                        <option value="">Geen recht</option>
                         <option value="Keuken">Keuken</option>
                         <option value="Bar">Bar</option>
                         <option value="Keuken & bar">Keuken & bar</option>
                     </select><br/><br/>
-                    <input type="button" value="Update" onClick={() => updateStaffMember() + closePopUp()}/>
+                    <input type="button" value="Update" onClick={() => updateStaffMember(props.member.password) + closePopUp() + window.location.reload(false)}/>
                 </form>
-                <button onClick={() => deleteStaffMember(props.member.id) + closePopUp()}> Delete {props.member.name} </button>
+                <button onClick={() => deleteStaffMember(props.member.id) + closePopUp() + window.location.reload(false)}> Delete {props.member.name} </button>
             </div>
         </div>
     ) : "";

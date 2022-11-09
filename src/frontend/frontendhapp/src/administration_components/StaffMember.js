@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import StaffMemberDetailsPopup from "./StaffMemberDetailsPopup";
+import "../styles/AllStaffMembers.css"
 
 
 export default function MenuItem({member}) {
@@ -8,14 +9,29 @@ export default function MenuItem({member}) {
     function handleClick() {
         setButtonPopup(true);
     }
+
+    function checkRights(rightOne, rightTwo){
+        if(rightTwo !== undefined){
+            return "Keuken & Bar"
+        }
+        if(rightOne !== undefined){
+            if(rightOne === "KITCHEN_RIGHTS") {
+                return "Keuken"
+            }else if(rightOne === "BAR_RIGHTS"){
+                return "Bar"
+            }
+        }
+        return ""
+    }
+
 //TODO css toevoegen...
     return (
         <div className="listItemDiv">
             <StaffMemberDetailsPopup trigger={buttonPopup} setTrigger={setButtonPopup} member={member}/>
             <li key={member.id} className={"listItem"} onClick={handleClick}>
-                <span className={"memberSpan"}>naam: {member.name}&emsp;&emsp;</span>
-                <span>wachtwoord: {member.password}&emsp;&emsp;</span>
-                <span>{member.rights[0]}&emsp;&emsp;{member.rights[1]}</span>
+                <span className={"memberNameSpan"}>naam: {member.name}&emsp;&emsp;</span>
+                <span className={"memberPasswordSpan"}>wachtwoord: {member.password}&emsp;&emsp;</span>
+                <span className={"memberRightsSpan"}>{checkRights(member.rights[0], member.rights[1])}</span>
             </li>
         </div>
 

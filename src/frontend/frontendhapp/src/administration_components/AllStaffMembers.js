@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {getAllStaffMembers} from "../urlMappings/StaffRequests";
 import StaffMember from "../administration_components/StaffMember";
 import {Link} from "react-router-dom";
+import "../styles/AllStaffMembers.css"
 
 function AllStaffMembers() {
     const [members, setMembers] = useState([])
@@ -18,17 +19,19 @@ function AllStaffMembers() {
     }, [])
 
     return (
-        <div className={"listDiv"}>
-            <ul className={"list"}>
+        <>
+            <div className={"listDiv"}>
                 <h1>Staff members</h1>
-                {
-                    members.map((member, i) =>
-                        <StaffMember key={member.id} member={member}/>
-                    )
-                }
-                <Link to="/createStaff">Maak een nieuw staff-member aan</Link>
-            </ul>
-        </div>
-    )
+                <ul className={"list"}>
+                    {
+                        members.map((member, i) =>
+                            <StaffMember key={member.id} member={member}/>
+                        )
+                    }
+                </ul>
+            </div>
+            <Link className={"button createStaffLink"} to="/createStaff">Maak een nieuw staff-member aan</Link>
+        </>
+            )
 }
 export default AllStaffMembers
