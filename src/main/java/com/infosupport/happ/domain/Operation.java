@@ -23,6 +23,10 @@ public class Operation {
         this.details = details;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public LocalDateTime getTimeOfOperation() {
         return timeOfOperation;
     }

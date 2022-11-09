@@ -15,17 +15,18 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-@SpringBootTest
 public class StaffServiceTest {
     private StaffService staffService;
     private StaffRepository staffRepository;
     private OrderService orderService;
+    private AreaService areaService;
+
 
     @BeforeEach
     void beforeEach() {
         this.staffRepository = mock(StaffRepository.class);
         this.orderService = mock(OrderService.class);
-        this.staffService = new StaffService(staffRepository, orderService);
+        this.staffService = new StaffService(staffRepository, orderService, areaService);
 
         Staff staff = new Staff(1234, "Geber", new ArrayList<>());
 

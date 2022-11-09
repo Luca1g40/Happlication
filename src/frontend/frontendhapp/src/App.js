@@ -12,6 +12,8 @@ import PersonalModule from "./pages/PersonalModule";
 import ViewProductForm from "./components/menu/ViewProductForm";
 import SearchProduct from "./components/menu/SearchProduct";
 import ViewIngredient from "./components/menu/ViewIngredient";
+import StaffDashboard from "./pages/StaffDashboard";
+import StaffModuleHomePagina from "./pages/StaffModuleHomePagina";
 
 function App() {
     return (
@@ -23,12 +25,13 @@ function App() {
             <Route path="shoppingcart" element={<ShoppingCart/>}/>
             <Route path="staff" element={<Staff/>}/>
             <Route path="claims" element={<PersonalModule/>}/>
+            <Route path="staffDashboard" element={<StaffDashboard/>}/>
+            <Route path="staffmodule" element={<StaffModuleHomePagina/>}/>
             <Route path="productdetails/:id" element={<ViewProductForm/>}/>
             <Route path="createproduct/" element={<ViewProductForm/>}/>
             <Route path="ingredientdetails/:id" element={<ViewIngredient/>}/>
             <Route path="createingredient" element={<ViewIngredient/>}/>
             <Route path="searchproduct" element={<SearchProduct/>}/>
-
         </Routes>
     )
 

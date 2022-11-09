@@ -10,15 +10,14 @@ public class TableData {
     public final int tableNumber;
     public final LocalTime elapsedTimeSinceOrder;
     public final LocalTime timeLeftToOrder;
-
     public final TableStatus tableStatus;
     public final ShoppingCartData shoppingCart;
     public final List<OrderData> kitchenOrders;
     public final List<OrderData> barOrders;
+    public final boolean isHulpNodig;
 
 
-
-    public TableData(int amountOfPeople, int tableNumber, LocalTime elapsedTimeSinceOrder, LocalTime timeLeftToOrder,  TableStatus tableStatus, ShoppingCartData shoppingCartData, List<OrderData> kitchenOrders, List<OrderData> barOrders) {
+    public TableData(int amountOfPeople, int tableNumber, LocalTime elapsedTimeSinceOrder, LocalTime timeLeftToOrder,  TableStatus tableStatus, ShoppingCartData shoppingCartData, List<OrderData> kitchenOrders, List<OrderData> barOrders, boolean isHulpNodig) {
         this.amountOfPeople = amountOfPeople;
         this.tableNumber = tableNumber;
         this.elapsedTimeSinceOrder = elapsedTimeSinceOrder;
@@ -28,6 +27,9 @@ public class TableData {
         this.shoppingCart = shoppingCartData;
         this.kitchenOrders = kitchenOrders;
         this.barOrders = barOrders;
+        this.isHulpNodig = isHulpNodig;
 
     }
+
+
 }

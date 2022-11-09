@@ -1,6 +1,8 @@
 import {Link} from "react-router-dom";
 import ProductCRUD from "../components/menu/ProductCRUD";
 import SearchProduct from "../components/menu/SearchProduct";
+import Notifications from "../staff_components/Notifications";
+import React from "react";
 
 export default function Home() {
     return <>
@@ -22,6 +24,11 @@ export default function Home() {
             <div>
                 <Link className="button gerechten" to="Foods">Gerechten</Link>
             </div>
+
+            <div>
+                <Notifications/>
+            </div>
+
         </div>
     </>
 }

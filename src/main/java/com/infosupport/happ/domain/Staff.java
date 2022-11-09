@@ -1,6 +1,5 @@
 package com.infosupport.happ.domain;
 
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -19,7 +18,6 @@ public class Staff implements Serializable {
     private String name;
     @OneToMany
     private List<Operation> operations;
-
     @OneToMany
     private List<KitchenOrder> claimedKitchenOrders;
 
@@ -104,5 +102,4 @@ public class Staff implements Serializable {
     public List<Order> getClaimedOrders() {
       return getOrderBasedOnStatus(CLAIMED);
     }
-
 }
