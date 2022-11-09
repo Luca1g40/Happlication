@@ -71,7 +71,7 @@ export default function ViewProductForm(props){
 
     return (params.id===undefined) ? (
         <div className="crud-menu-container">
-            <ProductForm toegevoegdeIngredienten={toegevoegdeIngredieten} disabled={disabled} handleChange={event=>handleChange(event)} removeFromIngredientsList={(target=>removeFromIngredientsList(target))} setAddedIngredients={(ingredient) => setToegevoegdeIngredienten(ingredient)} addIngredient={ingredient=>addIngredient(ingredient)} errorMeldingText={errorMeldingText}/>
+            <ProductForm toegevoegdeIngredienten={toegevoegdeIngredienten} disabled={disabled} handleChange={event=>handleChange(event)} removeFromIngredientsList={(target=>removeFromIngredientsList(target))} setAddedIngredients={(ingredient) => setToegevoegdeIngredienten(ingredient)} addIngredient={ingredient=>addIngredient(ingredient)} errorMeldingText={errorMeldingText}/>
             <div className={"create-button"}>
                 <SubmitButton className={"submit-button button"} action={Actions.CREATE_PRODUCT} buttonText={"Create product"} setProduct={product=>setProduct(product)} product={product} ingredientList={toegevoegdeIngredienten} setFoutMelding={error => setErrorMeldingText(error)} />
             </div>
