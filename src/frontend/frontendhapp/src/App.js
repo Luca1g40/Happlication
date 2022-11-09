@@ -24,7 +24,7 @@ function App() {
             <Route path="staff" element={<Staff/>}/>
             <Route path="claims" element={<PersonalModule/>}/>
             <Route path="productdetails/:id" element={<ViewProductForm/>}/>
-            <Route path="productdetails/" element={<ViewProductForm/>}/>
+            <Route path="createproduct/" element={<ViewProductForm/>}/>
             <Route path="ingredientdetails/:id" element={<ViewIngredient/>}/>
             <Route path="createingredient" element={<ViewIngredient/>}/>
             <Route path="searchproduct" element={<SearchProduct/>}/>
