@@ -12,6 +12,7 @@ import PersonalModule from "./pages/PersonalModule";
 import StaffDashboard from "./pages/StaffDashboard";
 import CreateStaff from "./pages/CreateStaff"
 import AllStaffMembers from "./administration_components/AllStaffMembers";
+import StaffModuleHomePagina from "./pages/StaffModuleHomePagina";
 
 function App() {
     return (
@@ -26,6 +27,7 @@ function App() {
             <Route path="staffDashboard" element={<StaffDashboard/>}/>
             <Route path="createStaff" element={<CreateStaff/>}/>
             <Route path="allStaffMembers" element={<AllStaffMembers/>}/>
+            <Route path="staffmodule" element={<StaffModuleHomePagina/>}/>
         </Routes>
     )
 
