@@ -10,6 +10,7 @@ import ShoppingCart from "./components/shoppingcart/ShoppingCart";
 import Staff from "./pages/HomePageStaff";
 import PersonalModule from "./pages/PersonalModule";
 import StaffDashboard from "./pages/StaffDashboard";
+import StaffModuleHomePagina from "./pages/StaffModuleHomePagina";
 
 function App() {
     return (
@@ -22,6 +23,7 @@ function App() {
             <Route path="staff" element={<Staff/>}/>
             <Route path="claims" element={<PersonalModule/>}/>
             <Route path="staffDashboard" element={<StaffDashboard/>}/>
+            <Route path="staffmodule" element={<StaffModuleHomePagina/>}/>
         </Routes>
     )
 
