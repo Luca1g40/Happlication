@@ -4,7 +4,7 @@ export default function CreateStaff() {
     return (
         <>
             <div className="staffContainer">
-                <h1>Create Staff-member</h1>
+                <h1>Nieuw staff-member aanmaken</h1>
                 <CreatingStaff/>
 
             </div>

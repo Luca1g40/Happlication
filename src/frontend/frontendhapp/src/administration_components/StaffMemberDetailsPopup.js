@@ -1,4 +1,5 @@
 import "../styles/Popup.css"
+import "../styles/AllStaffMembers.css"
 import React from "react";
 import {DeleteStaff, UpdateStaff} from "../urlMappings/StaffRequests";
 
@@ -31,7 +32,7 @@ function ProductDetailsPopup(props) {
 
     function checkRights(rightOne, rightTwo){
         if(rightTwo !== undefined){
-            return "Keuken & Bar"
+            return "Keuken & bar"
         }
         if(rightOne !== undefined){
             if(rightOne === "KITCHEN_RIGHTS") {
@@ -42,26 +43,25 @@ function ProductDetailsPopup(props) {
         }
     }
 
-//TODO bij keuken en bar recht geeft select "geen recht" aan. Moet zijn "Keuken & Bar"
     return (props.trigger) ? (
         <div className="popup">
             <div className="popup-inner">
-                <button onClick={() => closePopUp()}> Close </button>
+                <button className="close-btn close-memberpop" onClick={closePopUp}> X </button><br/>
                 <form>
-                    <h4>Voornaam</h4>
-                    <input type="text" id="f" defaultValue={props.member.name}/>
-                    <h4>Wachtwoord</h4>
-                    <label>{props.member.password}</label>
-                    <h4>Rechten</h4>
-                    <select id="r" name="Rechten" defaultValue={checkRights(props.member.rights[0], props.member.rights[1])}>
+                    <h4 className={"member-text"}>Voornaam:</h4>
+                    <input type="text" className={"member-data"} id="f" defaultValue={props.member.name}/><br/><br/>
+                    <h4 className={"member-text"}>Wachtwoord:</h4>
+                    <label className={"member-password"}>{props.member.password}</label><br/><br/>
+                    <h4 className={"member-text"}>Rechten:</h4>
+                    <select id="r" name="Rechten" className={"member-data"} defaultValue={checkRights(props.member.rights[0], props.member.rights[1])}>
                         <option value="">Geen recht</option>
                         <option value="Keuken">Keuken</option>
                         <option value="Bar">Bar</option>
                         <option value="Keuken & bar">Keuken & bar</option>
                     </select><br/><br/>
-                    <input type="button" value="Update" onClick={() => updateStaffMember(props.member.password) + closePopUp() + window.location.reload(false)}/>
+                    <button className={"update-btn"} onClick={() => updateStaffMember(props.member.password) + closePopUp() + window.location.reload(false)}>Updaten</button>
                 </form>
-                <button onClick={() => deleteStaffMember(props.member.id) + closePopUp() + window.location.reload(false)}> Delete {props.member.name} </button>
+                <button className={"delete-btn"} onClick={() => deleteStaffMember(props.member.id) + closePopUp() + window.location.reload(false)}>Verwijderen</button>
             </div>
         </div>
     ) : "";

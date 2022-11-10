@@ -8,10 +8,34 @@
     margin-right: auto;
 }
 
-/*.memberPasswordSpan{*/
-/*    margin-inside: auto;*/
-/*}*/
-
 .memberRightsSpan {
     margin-left: auto;
+}
+
+.close-memberpop {
+    float: right;
+}
+
+.update-btn {
+    float: left;
+    margin-left: 100px;
+    width: 150px;
+}
+
+.delete-btn {
+    float: right;
+    margin-right: 100px;
+    width: 150px;
+}
+
+.member-text {
+    float: left;
+}
+
+.member-data {
+    margin-right: 15%;
+}
+
+.member-password {
+    margin-right: 22%;
 }
