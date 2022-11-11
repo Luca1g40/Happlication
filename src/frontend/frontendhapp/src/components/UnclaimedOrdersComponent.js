@@ -43,7 +43,7 @@ function UnclaimedOrdersComponent(props) {
                     }}> Claim Orders
                     </button>
                     <button onClick={()=>navigate("/claims")}>Claims</button>
-                    <button onClick={()=>navigate("/staffDashboard")}>Staff dashboard</button>
+                    <button onClick={()=>navigate("/staffmodule")}>Staff module</button>
 
                 </div>
                 <span>
