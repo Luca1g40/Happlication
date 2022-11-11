@@ -96,13 +96,31 @@ export default function SubmitButton(props) {
                 }
                 break;
             case Actions.UPDATE_PRODUCT:
-                editProduct(props.product.id,props.product.name,props.product.destination,props.ingredientList,props.product.price,props.product.details,props.product.category).
-                then(res=>{
-                    props.setDisabled(true);
-                    navigate(`/productdetails/${res.id}`)
-                }).catch(err=>{
-                    console.log(err)
-                })
+
+
+                if (Object.keys(props.product).length===6 && props.ingredientList.length>0){
+                    for (const key in props.product) {
+                        if (!(props.product[key].trim().length>0)){
+                            console.log("ging fout")
+                            props.setFoutMelding(`Je hebt een lege input gegeven bij ${key.replace("-", " ")} je ezel`)
+                            return;
+                        }else{
+                            console.log("ging goed")
+                        }
+                    }
+
+                    editProduct(props.product.id,props.product.name,props.product.destination,props.ingredientList,props.product.price,props.product.details,props.product.category).
+                    then(res=>{
+                        props.setDisabled(true);
+                        navigate(`/productdetails/${res.id}`)
+                    }).catch(err=>{
+                        console.log(err)
+                    })
+                }else{
+                    console.log("ging heel fout")
+                    props.setFoutMelding(`Je hebt een of meer lege input velden je ezel`)
+                    return;
+                }
 
                 break;
             case Actions.CREATE_INGREDIENT:

@@ -81,7 +81,7 @@ export default function ViewProductForm(props){
                          setToegevoegdeIngredienten={(ingredient)=>setToegevoegdeIngredienten(ingredient)}
                          addIngredient={ingredient=>addIngredient(ingredient)} errorMeldingText={errorMeldingText}/>
             <div className={"edit-buttons"}>
-                <SubmitButton  className={"submit-button button"} disabled={disabled} setDisabled={disabled=>setDisabled(disabled)} action={Actions.UPDATE_PRODUCT} buttonText={"Update"} product={product} ingredientList={toegevoegdeIngredienten}/>
+                <SubmitButton  className={"submit-button button"} setFoutMelding={foutMelding=>setErrorMeldingText(foutMelding)} disabled={disabled} setDisabled={disabled=>setDisabled(disabled)} action={Actions.UPDATE_PRODUCT} buttonText={"Update"} product={product} ingredientList={toegevoegdeIngredienten}/>
                 <div className={"left-buttons"}>
                     <button className={"edit-button button"} onClick={()=>setDisabled(false)} disabled={!disabled}>Edit</button>
                     <button className={"cancel-button button"} onClick={()=>setDisabled(true)} disabled={disabled}>Cancel</button>
