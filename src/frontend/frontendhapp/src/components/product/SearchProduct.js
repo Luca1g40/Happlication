@@ -75,28 +75,38 @@ export default function SearchProduct(){
     return(
 
     <div>
-    <Link to="/administration" className="createProductButton" >Home</Link>
-    <input ref={ref} placeholder={"Search"} name={"search"} onChange={handleChange}/>
-    <Link to="/createproduct" className="createProductButton" >Create product</Link>
+        <h1>Product overview</h1>
+        <h2>Filters</h2>
+        <div className={"navigation-buttons"}>
+            <Link to="/administration" className="createProductButton" >Home</Link>
+            <Link to="/createproduct" className="createProductButton" >Create product</Link>
+        </div>
+        <input className={"search-bar"} ref={ref} placeholder={"Search"} name={"search"} onChange={handleChange}/>
 
-    <DropdownFilter setOptionSelected={(selected)=>setOptionSelected(selected)} optionSelected={optionSelected}/>
-        <table id="searchTable">
-        <tr>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Category</th>
-            <th>Details</th>
-        </tr>
+        <div className={"search-table"}>
+        <span className={"select-filters"}>
+            <DropdownFilter setOptionSelected={(selected)=>setOptionSelected(selected)} optionSelected={optionSelected}/>
+        </span>
+        <span className={"product-tables"}>
+            <table id="searchTable">
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Category</th>
+                <th>Details</th>
+            </tr>
 
-            {filteredProducts.map(product=>{
-                return <tr key={product.id} onClick={()=>navigate(`/productdetails/${product.id}`)}>
-                    <td>{product.name}</td>
-                    <td>{product.price}</td>
-                    <td>{showCategory(product.productCategory)}</td>
-                    <td>{product.details}</td>
-                </tr>
-            })}
-    </table>
+                {filteredProducts.map(product=>{
+                    return <tr key={product.id} onClick={()=>navigate(`/productdetails/${product.id}`)}>
+                        <td>{product.name}</td>
+                        <td>{product.price}</td>
+                        <td>{showCategory(product.productCategory)}</td>
+                        <td>{product.details}</td>
+                    </tr>
+                })}
+        </table>
+            </span>
+    </div>
         <Logout className="logoutSelect"/>
 </div>
     )

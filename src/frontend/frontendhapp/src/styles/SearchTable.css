@@ -17,14 +17,14 @@
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
-    background-color: orange;
+    background-color: #e38d33;
     color: white;
 }
 
 .createProductButton {
     align-items: center;
     background-clip: padding-box;
-    background-color: orange;
+    background-color: #e38d33;
     border: 1px solid transparent;
     border-radius: .25rem;
     box-sizing: border-box;
@@ -44,4 +44,44 @@
 .logoutSelect {
     background-color: red !important;
     width: 100px !important;
+}
+
+.select-options{
+    width: 15%;
+}
+
+.css-b62m3t-container{
+    width: 15%;
+}
+
+.search-table{
+    width: 100%;
+    position: absolute;
+}
+
+.select-filters{
+    width: 100%;
+    position: absolute;
+    margin-left: 5px;
+
+}
+
+.css-1s2u09g-control{
+    margin-right: 5px;
+}
+
+.product-tables{
+    width: 85%;
+    position: absolute;
+    right: 0;
+}
+
+.search-bar{
+    margin: 5px;
+    width: 14.75%;
+    border-color: hsl(0, 0%, 80%);
+    border-style: solid;
+    border-width: 1px;
+    min-height: 38px;
+
 }

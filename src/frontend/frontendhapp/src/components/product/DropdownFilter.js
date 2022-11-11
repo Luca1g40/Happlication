@@ -14,7 +14,7 @@ export default function DropdownFilter(props){
     const Option = (props) => {
         return (
             <div>
-                <components.Option {...props}>
+                <components.Option {...props} className={"select-options"}>
                     <input
                         type="checkbox"
                         checked={props.isSelected}
@@ -26,9 +26,6 @@ export default function DropdownFilter(props){
         );
     };
     const handleChange = (selected) => {
-        console.log("change")
-        console.log(selected)
-        console.log(props.optionSelected)
         if (!(selected.value.localeCompare(props.optionSelected.value))){
             console.log("same shi")
             props.setOptionSelected([])

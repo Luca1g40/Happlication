@@ -21,6 +21,10 @@
     display: none;
 }
 
+.product-text{
+    margin-left: 5px;
+}
+
 .productSpanPrice {
     width: 50px;
 }
