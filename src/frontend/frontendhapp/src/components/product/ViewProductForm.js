@@ -6,8 +6,6 @@ import {getProduct} from "../../urlMappings/MenuRequests";
 import {useParams} from "react-router";
 import  "../../styles/MenuCrudForm.css"
 import {Link} from "react-router-dom";
-import Logout from "../Logout"
-
 
 export default function ViewProductForm(props){
     const [disabled,setDisabled] = useState(true)
@@ -63,21 +61,26 @@ export default function ViewProductForm(props){
         setErrorMeldingText("");
     }
 
+    function cleardata() {
+        sessionStorage.clear();
+    }
+
     return (params.id===undefined) ? (
         <div>
             <Link to="/administration" className="createProductButton" >Home</Link>
             <Link to="/searchproduct" className="createProductButton" >Search a product</Link>
+            <Link to="/staff" className="createProductButton" onClick={() => {cleardata()}}>Logout</Link>
 
             <ProductForm toegevoegdeIngredienten={toegevoegdeIngredienten} disabled={disabled} handleChange={event=>handleChange(event)} removeFromIngredientsList={(target=>removeFromIngredientsList(target))} setAddedIngredients={(ingredient) => setToegevoegdeIngredienten(ingredient)} addIngredient={ingredient=>addIngredient(ingredient)} errorMeldingText={errorMeldingText}/>
             <div className={"create-button"}>
                 <SubmitButton className={"submit-button button"} action={Actions.CREATE_PRODUCT} buttonText={"Create product"} setProduct={product=>setProduct(product)} product={product} ingredientList={toegevoegdeIngredienten} setFoutMelding={error => setErrorMeldingText(error)} />
             </div>
-            <Logout/>
         </div>
     ) :(
         <div>
             <Link to="/administration" className="createProductButton" >Home</Link>
             <Link to="/searchproduct" className="createProductButton" >Search a product</Link>
+            <Link to="/staff" className="createProductButton" onClick={() => {cleardata()}}>Logout</Link>
             <ProductForm product={product} toegevoegdeIngredienten={toegevoegdeIngredienten} disabled={disabled} handleChange={event=>handleChange(event)}
                          removeFromIngredientsList={(target=>removeFromIngredientsList(target))}
                          setToegevoegdeIngredienten={(ingredient)=>setToegevoegdeIngredienten(ingredient)}
@@ -89,7 +92,6 @@ export default function ViewProductForm(props){
                     <button className={"cancel-button button"} onClick={()=>setDisabled(true)} disabled={disabled}>Cancel</button>
                 </div>
             </div>
-            <Logout/>
         </div>
     )
 }

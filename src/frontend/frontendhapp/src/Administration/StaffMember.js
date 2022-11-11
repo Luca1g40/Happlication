@@ -29,8 +29,8 @@ export default function MenuItem({member}) {
         <div className="listItemDiv">
             <StaffMemberDetailsPopup trigger={buttonPopup} setTrigger={setButtonPopup} member={member}/>
             <li key={member.id} className={"listItem"} onClick={handleClick}>
-                <span className={"memberNameSpan"}>naam: {member.name}&emsp;&emsp;</span>
-                <span className={"memberPasswordSpan"}>wachtwoord: {member.password}&emsp;&emsp;</span>
+                <span className={"memberNameSpan"}>naam: {member.name}</span>
+                <span className={"memberPasswordSpan"}>wachtwoord: {member.password}</span>
                 <span className={"memberRightsSpan"}>{checkRights(member.rights[0], member.rights[1])}</span>
             </li>
         </div>
