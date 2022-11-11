@@ -39,3 +39,7 @@
 .member-password {
     margin-right: 22%;
 }
+
+.error-message {
+    visibility: hidden;
+}

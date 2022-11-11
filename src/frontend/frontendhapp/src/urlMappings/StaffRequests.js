@@ -61,9 +61,10 @@ export function UpdateStaff(password, name, rights) {
     }, configuration)
         .then(res => {
             console.log(res)
-            return res.data
+            return res.status
         })
         .catch(err => {
             console.log(err)
+            return err.response.status
         })
 }

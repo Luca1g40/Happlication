@@ -124,6 +124,9 @@ public class StaffService {
     }
 
     public StaffData updateStaff(int password, String name, List<Rights> rights) {
+        if(name.equals("")){
+            throw new InvalidValueException("name");
+        }
         staffExistsByPassword(password);
         Staff staff = staffRepository.getByPassword(password);
 
