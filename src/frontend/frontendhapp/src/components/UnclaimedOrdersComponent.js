@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {getAllUnclaimedOrders} from "../urlMappings/OrderRequests";
 import {claimSelectedOrders} from "../urlMappings/StaffRequests";
 import OrdersOverview from "./OrdersOverview";
+import {Link} from "react-router-dom";
 
 
 function UnclaimedOrdersComponent(props) {
@@ -12,9 +13,7 @@ function UnclaimedOrdersComponent(props) {
     useEffect(() => {
         getAllUnclaimedOrders()
             .then(res => {
-
                 setOrders(res)
-
             })
             .catch(err => {
                 console.log(err)
@@ -45,8 +44,9 @@ function UnclaimedOrdersComponent(props) {
                     </button>
                 </div>
                 <span>
-                <p>Signed in as: {sessionStorage.getItem("name")}</p>
-            </span>
+                    <p>Signed in as: {sessionStorage.getItem("name")}</p>
+                    <Link to={"/claims"} >Claims</Link>
+                </span>
             </div>
         </div>
     )

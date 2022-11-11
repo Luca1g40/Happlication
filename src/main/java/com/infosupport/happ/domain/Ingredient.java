@@ -22,7 +22,6 @@ public class Ingredient {
     }
 
     public Ingredient() {
-
     }
 
     public String getName() {

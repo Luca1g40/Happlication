@@ -11,7 +11,7 @@ public class Product {
     private Long id;
     private String name;
 
-    @OneToMany
+    @ManyToMany
     private List<Ingredient> ingredients;
 
     private ProductCategory productCategory;

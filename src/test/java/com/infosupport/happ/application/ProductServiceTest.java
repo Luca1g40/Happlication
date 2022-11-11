@@ -1,6 +1,7 @@
 package com.infosupport.happ.application;
 
 import com.infosupport.happ.application.dto.ProductData;
+import com.infosupport.happ.data.IngredientRepository;
 import com.infosupport.happ.data.ProductRepository;
 import com.infosupport.happ.domain.Ingredient;
 import com.infosupport.happ.domain.Product;
@@ -26,6 +27,7 @@ public class ProductServiceTest {
     Ingredient ingredient;
     ProductService productService;
     ProductRepository productRepository;
+    IngredientRepository ingredientRepository;
 
     @BeforeEach
     void beforeEach() {
@@ -38,12 +40,12 @@ public class ProductServiceTest {
         when(productRepository.getById(1L)).thenReturn(product);
         when(productRepository.existsById(1L)).thenReturn(true);
 
-        productService = new ProductService(productRepository);
+        productService = new ProductService(productRepository,ingredientRepository);
     }
 
     @Test
     void createProduct() {
-        ProductData productData = productService.createProduct(product.getName(), product.getProductCategory(), product.getPrice(), product.getIngredients(), product.getDetails(), product.getProductDestination());
+        ProductData productData = productService.createProduct(product.getName(), product.getProductCategory(), product.getPrice(), new ArrayList<>(), product.getDetails(), product.getProductDestination());
 
         assertNotNull(productData);
 

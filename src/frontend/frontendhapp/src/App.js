@@ -9,6 +9,9 @@ import Orders from "./pages/Orders";
 import ShoppingCart from "./components/shoppingcart/ShoppingCart";
 import Staff from "./pages/HomePageStaff";
 import PersonalModule from "./pages/PersonalModule";
+import ViewProductForm from "./components/product/ViewProductForm";
+import SearchProduct from "./components/product/SearchProduct";
+import ViewIngredient from "./components/ingredient/ViewIngredient";
 import StaffDashboard from "./pages/StaffDashboard";
 import CreateStaff from "./pages/CreateStaff"
 import AllStaffMembers from "./administration_components/AllStaffMembers";
@@ -28,6 +31,11 @@ function App() {
             <Route path="createStaff" element={<CreateStaff/>}/>
             <Route path="allStaffMembers" element={<AllStaffMembers/>}/>
             <Route path="staffmodule" element={<StaffModuleHomePagina/>}/>
+            <Route path="productdetails/:id" element={<ViewProductForm/>}/>
+            <Route path="createproduct/" element={<ViewProductForm/>}/>
+            <Route path="ingredientdetails/:id" element={<ViewIngredient/>}/>
+            <Route path="createingredient" element={<ViewIngredient/>}/>
+            <Route path="searchproduct" element={<SearchProduct/>}/>
         </Routes>
     )
 
