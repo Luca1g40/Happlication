@@ -6,6 +6,7 @@ import {Actions} from "../submitData/Actions";
 import getOccuranceProducts from "../Util";
 import OrderPlacedPopup from "../OrderPlacedPopup";
 import "../../styles/Shoppingcart.css";
+import {Link} from "react-router-dom";
 
 
 
@@ -14,7 +15,7 @@ export default function ShoppingCart() {
     const [buttonPopUp,setButtonPopup] = useState(false);
 
     useEffect(() => {
-        GetShoppingCart(547)
+        GetShoppingCart(562)
             .then(res => {
                 setShoppingCart(res)
             })
@@ -34,7 +35,9 @@ export default function ShoppingCart() {
                     <ShoppingCartItem key={item.id} productName={item.name} productId={item.id} amount={Array.from(getOccuranceProducts(shoppingCart).values())[index]} updateShoppingCart={shoppingcart => setShoppingCart(shoppingcart)}/>
                 );
             })}
-            <SubmitButton buttonText={"Order"} tableId={547} action={Actions.PLACE_ORDER} emptyShoppingcart={()=>setShoppingCart([])} triggerPopUp={()=>setButtonPopup(true)}/>
+            <div className={"submit-button"}>
+                <SubmitButton className={"button"} buttonText={"Order"} tableId={562} action={Actions.PLACE_ORDER} emptyShoppingcart={()=>setShoppingCart([])} triggerPopUp={()=>setButtonPopup(true)}/>
+            </div>
         </div>
 
     ) : <div>

@@ -27,7 +27,7 @@ export default function Counter(props) {
             </div>
 
             <div className={"grid-item-2"} >
-                <p>{count}</p>
+                <label>{count}</label>
             </div>
 
             <div className={"grid-item-3"}>
