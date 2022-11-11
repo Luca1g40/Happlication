@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {getAllStaffMembers} from "../urlMappings/StaffRequests";
-import StaffMember from "../administration_components/StaffMember";
+import StaffMember from ".//StaffMember";
 import {Link} from "react-router-dom";
 import "../styles/AllStaffMembers.css"
 import Logout from "../components/Logout"

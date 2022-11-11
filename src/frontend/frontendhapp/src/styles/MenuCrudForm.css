@@ -61,6 +61,21 @@
     right: 5%;
 }
 
+.remove-ingredient-button{
+    background-color: #e3a768;
+    background-repeat: no-repeat;
+    border-style: dashed;
+    border-radius: 7px;
+    border-width: 1px;
+    border-color: gray;
+    margin-left: 4px;
+    margin-top: 4px;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    box-shadow: rgb(0 0 0 / 19%) 0px 10px 20px, rgb(0 0 0 / 23%) 0px 6px 6px;
+}
+
 .left-buttons{
     position: absolute;
     bottom: 5%;

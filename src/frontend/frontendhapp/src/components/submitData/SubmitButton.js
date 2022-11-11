@@ -1,5 +1,4 @@
 import React from "react";
-import "./SubmitButton.css";
 import { useNavigate } from "react-router-dom";
 import {
     AddProductToShoppingCart,

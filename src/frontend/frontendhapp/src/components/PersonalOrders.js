@@ -28,8 +28,7 @@ function OrdersDataFetching() {
             </div>
             <div className={"bottom-bar"}>
                 <span>
-                    <p>Signed in as: {sessionStorage.getItem("name")}</p>
-                    <Link to={"/Orders"} >All orders</Link>
+                    <p>Signed in as: {sessionStorage.getItem("staffId")}</p>
                 </span>
             </div>
         </>

@@ -1,5 +1,5 @@
 import React from "react";
-import AllStaffMembers from "../administration_components/AllStaffMembers";
+import AllStaffMembers from "../Administration/AllStaffMembers";
 import Logout from "../components/Logout"
 
 export default function AllStaffmembers() {

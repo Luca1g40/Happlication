@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import "./submitData/SubmitButton.css"
+import "../styles/Counter.css"
 import SubmitButton from "./submitData/SubmitButton";
 
 
@@ -21,26 +21,29 @@ export default function Counter(props) {
 
 
     return (props.submitMode) ? (
-        <div>
+        <div className={"counter-grid"}>
             <div>
-                <SubmitButton className="add-up" action={props.addUpAction} buttonText={"+"} tableId={props.tableId} productId={props.productId} productAmount={1} updateCount={()=>increment()} />
+                <SubmitButton className="subtract grid-item-2 counter-button" action={props.subtractAction} buttonText={"-"} tableId={props.tableId} productId={props.productId} updateCount={()=>decrement()}/>
             </div>
-             <div>
-                 <p>{count}</p>
+
+            <div className={"grid-item-2"} >
+                <label>{count}</label>
             </div>
-             <div>
-                 <SubmitButton className="subtract" action={props.subtractAction} buttonText={"-"} tableId={props.tableId} productId={props.productId} updateCount={()=>decrement()}/>
+
+            <div className={"grid-item-3"}>
+                <SubmitButton className="add-up counter-button" action={props.addUpAction} buttonText={"+"} tableId={props.tableId} productId={props.productId} productAmount={1} updateCount={()=>increment()} />
             </div>
         </div>
+
     ) : <div className={"counter-grid"}>
             <div className={"grid-item-3"}>
-                <button className="add-up" onClick={increment}>+</button>
+                    <button className="add-up counter-button" onClick={increment}>+</button>
             </div>
             <div className={"grid-item-2"} >
-                <p>{count}</p>
+                <label>{count}</label>
             </div>
             <div className={"grid-item-4"}>
-                <button className="subtract grid-item-2" onClick={decrement}>-</button>
+                <button className="subtract grid-item-2 counter-button" onClick={decrement}>-</button>
             </div>
         </div>;
 }

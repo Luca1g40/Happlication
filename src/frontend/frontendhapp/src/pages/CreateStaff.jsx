@@ -1,5 +1,5 @@
 import React from "react";
-import CreatingStaff from "../administration_components/CreatingStaff";
+import CreatingStaff from "../Administration/CreatingStaff";
 import "../styles/AllStaffMembers.css"
 import Logout from "../components/Logout"
 

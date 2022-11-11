@@ -29,11 +29,11 @@ export function getAllUnclaimedOrders() {
 
     return axios.get(`http://localhost:8080/happ/staff/${staffId}/orders`, configuration)
         .then(res => {
-            console.log(res.data)
+            console.log(staffId)
             return res.data
         })
         .catch(err => {
-            console.log("catch")
+            console.log(staffId)
             console.log(err)
         })
 }
