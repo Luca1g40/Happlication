@@ -38,13 +38,13 @@ export default function ViewIngredient(props){
     return (params.id === undefined) ? (
         <div>
             <h1>Create ingredient</h1>
-            <Link to="/staffmodule" className="createProductButton" >Home</Link>
+            <Link to="/administration" className="createProductButton" >Home</Link>
             <IngredientForm errorMeldingText={foutMelding} handleChange={event=>handleChange(event)}/>
             <SubmitButton setFoutMelding={foutMelding=>setFoutMelding(foutMelding)} disabled={disabled} setDisabled={disabled=>setDisabled(disabled)} action={Actions.CREATE_INGREDIENT} buttonText={"Create ingredient"} ingredient={ingredient}/>
         </div>
 ) : (
         <div>
-            <Link to="/staffmodule" className="createProductButton" >Home</Link>
+            <Link to="/administration" className="createProductButton" >Home</Link>
             <IngredientForm errorMeldingText={foutMelding} disabled={disabled} ingredient={ingredient} handleChange={event=>handleChange(event)}/>
             <SubmitButton setFoutMelding={foutMelding=>setFoutMelding(foutMelding)} disabled={disabled} setDisabled={disabled=>setDisabled(disabled)} action={Actions.UPDATE_INGREDIENT} buttonText={"Update"}  ingredient={ingredient}/>
             <button onClick={()=>setDisabled(false)} disabled={!disabled}>Edit</button>

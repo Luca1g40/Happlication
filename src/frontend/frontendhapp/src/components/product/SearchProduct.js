@@ -74,7 +74,7 @@ export default function SearchProduct(){
     return(
 
     <div>
-    <Link to="/staffmodule" className="createProductButton" >Home</Link>
+    <Link to="/administration" className="createProductButton" >Home</Link>
     <input ref={ref} placeholder={"Search"} name={"search"} onChange={handleChange}/>
     <Link to="/createproduct" className="createProductButton" >Create product</Link>
 

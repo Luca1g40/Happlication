@@ -9,10 +9,12 @@ export default function AdministrationPage() {
             <div className="staffModuleHomePagina_container">
                 <h1>Administration</h1>
                 <div className="container2">
-                    <Link className="button homeModule_bt_space" to="">Create Product</Link>
+                    <Link className="button homeModule_bt_space" to="/createproduct">Create Product</Link>
                     <Link className="button homeModule_bt_space" to="">Delete Product</Link>
                     <Link className="button homeModule_bt_space" to="">Update Product</Link>
-                    <Link className="button homeModule_bt_space" to="">Get All Products</Link>
+                    <Link className="button homeModule_bt_space" to="/searchproduct">Get All Products</Link>
+                    <Link className="button homeModule_bt_space" to="/createingredient">Create ingredient</Link>
+
                     <hr/>
                     <Link className="button homeModule_bt_space" to="/createStaff">Create Staff</Link>
                     <Link className="button homeModule_bt_space" to="/allStaffMembers">Get All Staff</Link>
