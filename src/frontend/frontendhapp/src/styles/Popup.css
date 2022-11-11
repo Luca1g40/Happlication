@@ -12,7 +12,8 @@
 }
 
 .popup-inner {
-    position: relative;
+    position: absolute;
+    min-height: 50%;
     padding: 0.5%;
     border-radius: 10px;
     width: 100%;
@@ -39,6 +40,7 @@
     border-width: .5px;
     border-color: #ebc295;
     border-radius: 5px;
+
 }
 
 .close-btn:hover{
@@ -56,7 +58,22 @@
     align-items: center;
 }
 
-.submit-button {
-    margin: 4px;
+
+.border-div {
+    border-top-style: solid;
+    border-right-style: hidden;
+    border-bottom-style: solid;
+    border-left-style: hidden;
+    border-width: 1px;
+    margin: auto auto 15px;
+    width: 80%;
 }
 
+.add-to-cart-div{
+    position: absolute;
+    bottom: 2%;
+    right: 25%;
+    left: 50%;
+    margin-left: -150px;
+
+}
