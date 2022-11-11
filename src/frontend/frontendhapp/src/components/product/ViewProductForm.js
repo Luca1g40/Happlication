@@ -63,7 +63,7 @@ export default function ViewProductForm(props){
 
     return (params.id===undefined) ? (
         <div className="crud-menu-container">
-            <Link to="/staffDashboard" className="createProductButton" >Home</Link>
+            <Link to="/staffmodule" className="createProductButton" >Home</Link>
             <Link to="/searchproduct" className="createProductButton" >Search a product</Link>
 
             <ProductForm toegevoegdeIngredienten={toegevoegdeIngredienten} disabled={disabled} handleChange={event=>handleChange(event)} removeFromIngredientsList={(target=>removeFromIngredientsList(target))} setAddedIngredients={(ingredient) => setToegevoegdeIngredienten(ingredient)} addIngredient={ingredient=>addIngredient(ingredient)} errorMeldingText={errorMeldingText}/>
@@ -74,7 +74,7 @@ export default function ViewProductForm(props){
         </div>
     ) :(
         <div className="crud-menu-container">
-            <Link to="/staffDashboard" className="createProductButton" >Home</Link>
+            <Link to="/staffmodule" className="createProductButton" >Home</Link>
             <Link to="/searchproduct" className="createProductButton" >Search a product</Link>
             <ProductForm product={product} toegevoegdeIngredienten={toegevoegdeIngredienten} disabled={disabled} handleChange={event=>handleChange(event)}
                          removeFromIngredientsList={(target=>removeFromIngredientsList(target))}

@@ -5,3 +5,10 @@
     margin: 2% 3% auto auto;
     width: 190px;
 }
+
+.shoppingcart-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+}
+

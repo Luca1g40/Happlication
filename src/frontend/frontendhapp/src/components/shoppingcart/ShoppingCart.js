@@ -5,6 +5,7 @@ import {GetShoppingCart} from "../../urlMappings/TableRequests";
 import {Actions} from "../submitData/Actions";
 import getOccuranceProducts from "../Util";
 import OrderPlacedPopup from "../OrderPlacedPopup";
+import "../../styles/Shoppingcart.css";
 
 
 
@@ -23,17 +24,14 @@ export default function ShoppingCart() {
     }, [])
 
     return (shoppingCart.length > 0) ? (
-        <div className={"listDiv"}>
-            <div>
+        <div className={"foodContainer"}>
+            <div className={"screen-title"}>
                 <h1 align="center">Shopping cart</h1>
             </div>
 
             {Array.from(getOccuranceProducts(shoppingCart).keys()).map((item, index) =>{
                 return (
-                    <span key={item.id}>
-                            <ShoppingCartItem productName={item.name} productId={item.id} amount={Array.from(getOccuranceProducts(shoppingCart).values())[index]} updateShoppingCart={shoppingcart => setShoppingCart(shoppingcart)}/>
-                            <hr/>
-                        </span>
+                    <ShoppingCartItem key={item.id} productName={item.name} productId={item.id} amount={Array.from(getOccuranceProducts(shoppingCart).values())[index]} updateShoppingCart={shoppingcart => setShoppingCart(shoppingcart)}/>
                 );
             })}
             <SubmitButton buttonText={"Order"} tableId={547} action={Actions.PLACE_ORDER} emptyShoppingcart={()=>setShoppingCart([])} triggerPopUp={()=>setButtonPopup(true)}/>

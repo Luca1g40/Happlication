@@ -8,9 +8,9 @@ export default function ShoppingCartItem(props) {
 
 
     return (
-        <div>
-            <p>{props.productName}</p>
-            <Counter submitMode={true} tableId={547} addUpAction={Actions.ADD_TO_SHOPPING_CART} subtractAction={Actions.REMOVE_FROM_SHOPPING_CART} initialValue={productAmount} updateCount={count => setProductAmount(count)} productId={props.productId}/>
+        <div className={"shoppingcart-grid"}>
+            <p className={"grid-item-1"}>{props.productName}</p>
+            <Counter className={"grid-item-2"} submitMode={true} tableId={547} addUpAction={Actions.ADD_TO_SHOPPING_CART} subtractAction={Actions.REMOVE_FROM_SHOPPING_CART} initialValue={productAmount} updateCount={count => setProductAmount(count)} productId={props.productId}/>
             <SubmitButton tableId={547} action={Actions.REMOVE_ALL_OCCURANCES_OF_A_PRODUCT} productId={props.productId} buttonText={"x"} updateShoppingCart={shoppingcart => props.updateShoppingCart(shoppingcart)}/>
         </div>
     )
