@@ -37,7 +37,7 @@ export default function ShoppingCart() {
                         </span>
                 );
             })}
-            <SubmitButton buttonText={"Order"} tableId={69} action={Actions.PLACE_ORDER} emptyShoppingcart={()=>setShoppingCart([])} triggerPopUp={()=>setButtonPopup(true)}/>
+            <SubmitButton buttonText={"Order"} tableId={138} action={Actions.PLACE_ORDER} emptyShoppingcart={()=>setShoppingCart([])} triggerPopUp={()=>setButtonPopup(true)}/>
         </div>
 
     ) : <div>

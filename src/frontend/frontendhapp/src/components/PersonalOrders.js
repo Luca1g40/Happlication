@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from "react";
 import SingleOrder from "./SingleOrder";
 import {getPersonallyClaimedOrders} from "../urlMappings/OrderRequests";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 function OrdersDataFetching() {
     const [orders, setOrders] = useState([])
     const [orderDone, setOrderDone] = useState(false)
+    let navigate = useNavigate()
 
     useEffect(() => {
         getPersonallyClaimedOrders()
@@ -29,8 +30,8 @@ function OrdersDataFetching() {
             <div className={"bottom-bar"}>
                 <span>
                     <p>Signed in as: {sessionStorage.getItem("name")}</p>
-                    <Link to={"/Orders"} >All orders</Link>
                 </span>
+                <button onClick={()=>navigate("/orders")} >All orders</button>
             </div>
         </>
     )

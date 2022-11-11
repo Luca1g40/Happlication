@@ -8,7 +8,13 @@ import {
     RemoveProductFromShoppingCart
 } from "../../urlMappings/TableRequests";
 import {Actions} from "./Actions"
-import {createIngredient, createProduct, editIngredient, editProduct} from "../../urlMappings/MenuRequests";
+import {
+    createIngredient,
+    createProduct,
+    deleteProduct,
+    editIngredient,
+    editProduct
+} from "../../urlMappings/MenuRequests";
 
 
 export default function SubmitButton(props) {
@@ -121,8 +127,8 @@ export default function SubmitButton(props) {
                     props.setFoutMelding(`Je hebt een of meer lege input velden je ezel`)
                     return;
                 }
-
                 break;
+
             case Actions.CREATE_INGREDIENT:
                 if (!(props.ingredient===undefined)){
                     for (const key in props.ingredient) {
@@ -150,9 +156,8 @@ export default function SubmitButton(props) {
                     return;
                 }
                 break;
-            case Actions.UPDATE_INGREDIENT:
-                console.log()
 
+            case Actions.UPDATE_INGREDIENT:
                 if (props.ingredient.name.trim().length>0){
                     editIngredient(props.ingredient.id,props.ingredient.name)
                         .then(res=>{
@@ -165,9 +170,16 @@ export default function SubmitButton(props) {
                 }else{
                     props.setFoutMelding(`Je hebt een lege input gegeven  je ezel`)
                 }
-
-
                 break;
+
+            case Actions.DELETE_PRODUCT:
+                deleteProduct(props.product.id)
+                    .then(res=>{
+                            navigate(`/searchproduct`)
+                        }
+                    ).catch(err=>{
+
+                })
 
         }
         console.log("Added");

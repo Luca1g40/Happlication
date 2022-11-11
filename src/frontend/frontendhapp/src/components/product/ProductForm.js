@@ -30,7 +30,7 @@ export default function ProductForm(props){
                 <label className={"left-column"} htmlFor="destination">Product destination: </label>
                 <select className={"right-column"} name={"destination"} onChange={(event)=>props.handleChange(event)}>
                     <option value={"BAR_PRODUCT"} >Bar</option>
-                    <option value={"BAR_PRODUCT"} >Kitchen</option>
+                    <option value={"KITCHEN_PRODUCT"} >Kitchen</option>
                 </select>
 
                 <div>
