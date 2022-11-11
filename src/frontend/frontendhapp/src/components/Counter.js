@@ -40,7 +40,7 @@ export default function Counter(props) {
                     <button className="add-up counter-button" onClick={increment}>+</button>
             </div>
             <div className={"grid-item-2"} >
-                <p>{count}</p>
+                <label>{count}</label>
             </div>
             <div className={"grid-item-4"}>
                 <button className="subtract grid-item-2 counter-button" onClick={decrement}>-</button>
