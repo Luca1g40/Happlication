@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useRef} from "react";
 import {getAllProducts, getProduct} from "../../urlMappings/MenuRequests";
 import {Link, useNavigate} from 'react-router-dom';
+import "../../styles/SearchTable.css"
 
 import { default as ReactSelect } from "react-select";
 import { components } from "react-select";
@@ -12,15 +13,10 @@ export default function SearchProduct(){
     const [filteredProducts,setFilteredProducts] = useState([])
     const [filers,setFilters] = useState([])
     const ref = useRef();
+    let navigate = useNavigate()
 
     const [optionSelected, setOptionSelected] = useState([])
 
-
-    // const handleChange = (event) => {
-    //     const name = event.target.name;
-    //     const value = event.target.value;
-    //     setInputs(values => ({...values, [name]: value}))
-    // }
 
     useEffect(() => {
 
@@ -37,8 +33,6 @@ export default function SearchProduct(){
 
     useEffect(() => {
         handleChange()
-        console.log(optionSelected)
-        console.log(filteredProducts)
     },[optionSelected])
 
 
@@ -59,43 +53,41 @@ export default function SearchProduct(){
             filterProduct = allProducts;
         }
 
-        // setFilters(values => ({...values, "category": optionSelected}))
-        // if (!(optionSelected===undefined)){
-        //     Object.keys(optionSelected).map(select=>{
-        //         console.log(optionSelected[select])
-        //         filterProduct=filterProduct.filter(product=>{
-        //             return product.productCategory === optionSelected[select].value
-        //         })
-        //     })}
-        // console.log(filteredProducts)
-        //     setFilteredProducts(filteredProducts.filter(product=>{
-        //         return product.productCategory === optionSelected.value
-        //     }))
-        // }
-        console.log(optionSelected.value)
-        filterProduct=filterProduct.filter(product=>{
-                        return product.productCategory === optionSelected.value
-                    })
+
+        if (!(optionSelected.value===undefined)){
+            filterProduct = filterProduct.filter(product=>{
+                return product.productCategory === optionSelected.value
+            })
+        }
+
         setFilteredProducts(filterProduct)
     }
 
 
     return(
-        <div>
-            <input ref={ref} placeholder={"Search"} name={"search"} onChange={handleChange}/>
-            <Link to="/productdetails" >Create product</Link>
-            <div>
-                {filteredProducts.map((product,i)=>{
-                    return  <div key={i}>
-                                <Link to={`/productdetails/${product.id}`} >{product.name}</Link>
-                            </div>
-                })
-                }
-                <DropdownFilter setOptionSelected={(selected)=>setOptionSelected(selected)} optionSelected={optionSelected}/>
 
+    <div>
+    <input ref={ref} placeholder={"Search"} name={"search"} onChange={handleChange}/>
+    <Link to="/createproduct" className="createProductButton" >Create product</Link>
 
+    <DropdownFilter setOptionSelected={(selected)=>setOptionSelected(selected)} optionSelected={optionSelected}/>
+        <table id="searchTable">
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Details</th>
+        </tr>
 
-            </div>
-        </div>
+            {filteredProducts.map(product=>{
+                return <tr key={product.id} onClick={()=>navigate(`/productdetails/${product.id}`)}>
+                    <td>{product.name}</td>
+                    <td>{product.price}</td>
+                    <td>{product.productCategory}</td>
+                    <td>{product.details}</td>
+                </tr>
+            })}
+    </table>
+</div>
     )
 }

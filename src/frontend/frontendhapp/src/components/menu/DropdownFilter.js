@@ -18,7 +18,7 @@ export default function DropdownFilter(props){
                     <input
                         type="checkbox"
                         checked={props.isSelected}
-                        onChange={() => null}
+                        onChange={(change) => {console.log(change.target.name)}}
                     />{" "}
                     <label>{props.label}</label>
                 </components.Option>
@@ -26,7 +26,16 @@ export default function DropdownFilter(props){
         );
     };
     const handleChange = (selected) => {
-        props.setOptionSelected(selected);
+        console.log("change")
+        console.log(selected)
+        console.log(props.optionSelected)
+        if (!(selected.value.localeCompare(props.optionSelected.value))){
+            console.log("same shi")
+            props.setOptionSelected([])
+        }else {
+            props.setOptionSelected(selected);
+        }
+
     };
 
     return(
