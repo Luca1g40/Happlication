@@ -1,7 +1,5 @@
 import React from "react";
 import Logout from "../components/Logout"
-import "../styles/StaffDashboard.css"
-
 import FetchTablesSettedOnTrue from "../staff_components/FetchTablesSettedOnTrue";
 
 
