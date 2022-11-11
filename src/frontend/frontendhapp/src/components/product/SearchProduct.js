@@ -3,6 +3,7 @@ import {getAllProducts} from "../../urlMappings/MenuRequests";
 import {Link, useNavigate} from 'react-router-dom';
 import "../../styles/SearchTable.css"
 import DropdownFilter from "./DropdownFilter";
+import Logout from "../Logout";
 
 
 export default function SearchProduct(){
@@ -96,6 +97,7 @@ export default function SearchProduct(){
                 </tr>
             })}
     </table>
+        <Logout className="logoutSelect"/>
 </div>
     )
 }

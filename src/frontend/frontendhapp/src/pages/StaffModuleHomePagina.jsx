@@ -1,6 +1,7 @@
 import React from "react";
 import "../styles/StaffModuleHomePagina.css"
 import {Link} from "react-router-dom";
+import Logout from "../components/Logout"
 
 
 export default function StaffModuleHomePagina() {
@@ -12,7 +13,7 @@ export default function StaffModuleHomePagina() {
                 <Link className="button homeModule_bt_space" to="/orders">Keuken</Link>
                 <Link className="button homeModule_bt_space" to="/orders">Bar</Link>
                 <Link className="button homeModule_bt_space" to="/administration">Voorraad Beheer</Link>
-                <Link className="button position-absolute bottom-0 end-0 m-4" to="/staff">Log out</Link>
+                <Logout/>
             </div>
         </>
     );

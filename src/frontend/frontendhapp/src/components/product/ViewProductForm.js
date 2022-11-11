@@ -6,6 +6,7 @@ import {getProduct} from "../../urlMappings/MenuRequests";
 import {useParams} from "react-router";
 import  "../../styles/MenuCrudForm.css"
 import {Link} from "react-router-dom";
+import Logout from "../Logout"
 
 
 export default function ViewProductForm(props){
@@ -62,7 +63,7 @@ export default function ViewProductForm(props){
     }
 
     return (params.id===undefined) ? (
-        <div className="crud-menu-container">
+        <div>
             <Link to="/administration" className="createProductButton" >Home</Link>
             <Link to="/searchproduct" className="createProductButton" >Search a product</Link>
 
@@ -70,10 +71,10 @@ export default function ViewProductForm(props){
             <div className={"create-button"}>
                 <SubmitButton className={"submit-button button"} action={Actions.CREATE_PRODUCT} buttonText={"Create product"} setProduct={product=>setProduct(product)} product={product} ingredientList={toegevoegdeIngredienten} setFoutMelding={error => setErrorMeldingText(error)} />
             </div>
-
+            <Logout/>
         </div>
     ) :(
-        <div className="crud-menu-container">
+        <div>
             <Link to="/administration" className="createProductButton" >Home</Link>
             <Link to="/searchproduct" className="createProductButton" >Search a product</Link>
             <ProductForm product={product} toegevoegdeIngredienten={toegevoegdeIngredienten} disabled={disabled} handleChange={event=>handleChange(event)}
@@ -87,6 +88,7 @@ export default function ViewProductForm(props){
                     <button className={"cancel-button button"} onClick={()=>setDisabled(true)} disabled={disabled}>Cancel</button>
                 </div>
             </div>
+            <Logout/>
         </div>
     )
 }
