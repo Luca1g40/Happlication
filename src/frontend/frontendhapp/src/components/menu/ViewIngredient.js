@@ -10,6 +10,7 @@ export default function ViewIngredient(props){
     const params = useParams();
     const [ingredient,setIngredient] = useState()
     const [disabled, setDisabled] = useState(false)
+    const [foutMelding,setFoutMelding] = useState();
 
     useEffect(() => {
         if (!(params.id===undefined)){
@@ -20,7 +21,7 @@ export default function ViewIngredient(props){
                     setDisabled(true);
                 })
                 .catch(err => {
-                    // setProduct(undefined)
+
                 })
         }
     },[])
@@ -36,13 +37,13 @@ export default function ViewIngredient(props){
     return (params.id === undefined) ? (
         <div>
             <h1>Create ingredient</h1>
-            <IngredientForm handleChange={event=>handleChange(event)}/>
-            <SubmitButton disabled={disabled} setDisabled={disabled=>setDisabled(disabled)} action={Actions.CREATE_INGREDIENT} buttonText={"Create ingredient"} ingredient={ingredient}/>
+            <IngredientForm errorMeldingText={foutMelding} handleChange={event=>handleChange(event)}/>
+            <SubmitButton setFoutMelding={foutMelding=>setFoutMelding(foutMelding)} disabled={disabled} setDisabled={disabled=>setDisabled(disabled)} action={Actions.CREATE_INGREDIENT} buttonText={"Create ingredient"} ingredient={ingredient}/>
         </div>
 ) : (
         <div>
-            <IngredientForm disabled={disabled} ingredient={ingredient} handleChange={event=>handleChange(event)}/>
-            <SubmitButton disabled={disabled} setDisabled={disabled=>setDisabled(disabled)} action={Actions.UPDATE_INGREDIENT} buttonText={"Update"}  ingredient={ingredient}/>
+            <IngredientForm errorMeldingText={foutMelding} disabled={disabled} ingredient={ingredient} handleChange={event=>handleChange(event)}/>
+            <SubmitButton setFoutMelding={foutMelding=>setFoutMelding(foutMelding)} disabled={disabled} setDisabled={disabled=>setDisabled(disabled)} action={Actions.UPDATE_INGREDIENT} buttonText={"Update"}  ingredient={ingredient}/>
             <button onClick={()=>setDisabled(false)} disabled={!disabled}>Edit</button>
             <button onClick={()=>setDisabled(true)} disabled={disabled}>Cancel</button>
         </div>

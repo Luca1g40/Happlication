@@ -89,7 +89,6 @@ export default function SubmitButton(props) {
                         ).catch(err=>{
                             console.log(err)
                     })
-                    props.setMode(false);
                 }else{
                     console.log("ging heel fout")
                     props.setFoutMelding(`Je hebt een of meer lege input velden je ezel`)
@@ -104,10 +103,10 @@ export default function SubmitButton(props) {
                 }).catch(err=>{
                     console.log(err)
                 })
-                // navigate("/Orders")
+
                 break;
             case Actions.CREATE_INGREDIENT:
-                if (Object.keys(props.ingredient).length===1){
+                if (!(props.ingredient===undefined)){
                     for (const key in props.ingredient) {
                         console.log(props.ingredient[key].trim().length)
                         if (!(props.ingredient[key].trim().length>0)){
@@ -134,20 +133,9 @@ export default function SubmitButton(props) {
                 }
                 break;
             case Actions.UPDATE_INGREDIENT:
-                console.log(props.ingredient.id,props.ingredient.name)
+                console.log()
 
-                if (Object.keys(props.ingredient).length===1){
-                    for (const key in props.ingredient) {
-                        console.log(props.ingredient[key].trim().length)
-                        if (!(props.ingredient[key].trim().length>0)){
-                            console.log("ging fout")
-                            props.setFoutMelding(`Je hebt een lege input gegeven bij ${key.replace("-", " ")} je ezel`)
-                            return;
-                        }else{
-                            console.log("ging goed")
-                        }
-                    }
-
+                if (props.ingredient.name.trim().length>0){
                     editIngredient(props.ingredient.id,props.ingredient.name)
                         .then(res=>{
                                 props.setDisabled(true);
@@ -157,10 +145,10 @@ export default function SubmitButton(props) {
 
                     })
                 }else{
-                    console.log("ging heel fout")
-                    props.setFoutMelding(`Je hebt een of meer lege input velden je ezel`)
-                    return;
+                    props.setFoutMelding(`Je hebt een lege input gegeven  je ezel`)
                 }
+
+
                 break;
 
         }
