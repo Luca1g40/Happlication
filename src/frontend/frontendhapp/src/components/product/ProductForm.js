@@ -1,10 +1,7 @@
 import ErrormeldingLabel from "../ErrormeldingLabel";
-import SubmitButton from "../submitData/SubmitButton";
-import {Actions} from "../submitData/Actions";
-
 import React, {useEffect, useRef, useState} from "react";
 import {getAllIngredients} from "../../urlMappings/MenuRequests";
-import {ProductFormModes} from "./ProductFormModes";
+
 
 
 export default function ProductForm(props){

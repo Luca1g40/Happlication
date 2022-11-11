@@ -1,5 +1,5 @@
 import React from "react";
-import ViewProductForm from "../components/menu/ViewProductForm";
+import ViewProductForm from "../components/product/ViewProductForm";
 
 export default function ProductDetailsPage(){
     return (

@@ -1,6 +1,4 @@
 import {Link} from "react-router-dom";
-import ProductCRUD from "../components/menu/ProductCRUD";
-import SearchProduct from "../components/menu/SearchProduct";
 import Notifications from "../staff_components/Notifications";
 import React from "react";
 

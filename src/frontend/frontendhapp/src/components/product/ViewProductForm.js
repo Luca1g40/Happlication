@@ -2,23 +2,18 @@ import ProductForm from "./ProductForm";
 import SubmitButton from "../submitData/SubmitButton";
 import {Actions} from "../submitData/Actions";
 import React, {useEffect, useState} from "react";
-import {getAllIngredients, getProduct} from "../../urlMappings/MenuRequests";
+import {getProduct} from "../../urlMappings/MenuRequests";
 import {useParams} from "react-router";
-import {ProductFormModes} from "./ProductFormModes";
 import  "../../styles/MenuCrudForm.css"
+import {Link} from "react-router-dom";
 
 
 export default function ViewProductForm(props){
     const [disabled,setDisabled] = useState(true)
 
-    const [inputs, setInputs] = useState({
-        "product-category":"DRINKS",
-        "productDestination":"BAR_PRODUCT"
-    })
     const [errorMeldingText,setErrorMeldingText] = useState("");
     const [product,setProduct] = useState();
     const [toegevoegdeIngredienten,setToegevoegdeIngredienten] = useState([])
-    const [formMode,setFormMode] = useState(true);
     const params = useParams();
 
 
@@ -29,9 +24,6 @@ export default function ViewProductForm(props){
                     console.log(res.id)
                     setProduct(res);
                     setToegevoegdeIngredienten(res.ingredientList.map((ingredient)=>{return ingredient.name}))
-                })
-                .catch(err => {
-                    // setProduct(undefined)
                 })
         }else{
             setProduct({
@@ -71,6 +63,9 @@ export default function ViewProductForm(props){
 
     return (params.id===undefined) ? (
         <div className="crud-menu-container">
+            <Link to="/staffDashboard" className="createProductButton" >Home</Link>
+            <Link to="/searchproduct" className="createProductButton" >Search a product</Link>
+
             <ProductForm toegevoegdeIngredienten={toegevoegdeIngredienten} disabled={disabled} handleChange={event=>handleChange(event)} removeFromIngredientsList={(target=>removeFromIngredientsList(target))} setAddedIngredients={(ingredient) => setToegevoegdeIngredienten(ingredient)} addIngredient={ingredient=>addIngredient(ingredient)} errorMeldingText={errorMeldingText}/>
             <div className={"create-button"}>
                 <SubmitButton className={"submit-button button"} action={Actions.CREATE_PRODUCT} buttonText={"Create product"} setProduct={product=>setProduct(product)} product={product} ingredientList={toegevoegdeIngredienten} setFoutMelding={error => setErrorMeldingText(error)} />
@@ -79,7 +74,9 @@ export default function ViewProductForm(props){
         </div>
     ) :(
         <div className="crud-menu-container">
-            <ProductForm productFormMode={ProductFormModes.READING} product={product} toegevoegdeIngredienten={toegevoegdeIngredienten} disabled={disabled} handleChange={event=>handleChange(event)}
+            <Link to="/staffDashboard" className="createProductButton" >Home</Link>
+            <Link to="/searchproduct" className="createProductButton" >Search a product</Link>
+            <ProductForm product={product} toegevoegdeIngredienten={toegevoegdeIngredienten} disabled={disabled} handleChange={event=>handleChange(event)}
                          removeFromIngredientsList={(target=>removeFromIngredientsList(target))}
                          setToegevoegdeIngredienten={(ingredient)=>setToegevoegdeIngredienten(ingredient)}
                          addIngredient={ingredient=>addIngredient(ingredient)} errorMeldingText={errorMeldingText}/>

@@ -9,9 +9,9 @@ import Orders from "./pages/Orders";
 import ShoppingCart from "./components/shoppingcart/ShoppingCart";
 import Staff from "./pages/HomePageStaff";
 import PersonalModule from "./pages/PersonalModule";
-import ViewProductForm from "./components/menu/ViewProductForm";
-import SearchProduct from "./components/menu/SearchProduct";
-import ViewIngredient from "./components/menu/ViewIngredient";
+import ViewProductForm from "./components/product/ViewProductForm";
+import SearchProduct from "./components/product/SearchProduct";
+import ViewIngredient from "./components/ingredient/ViewIngredient";
 import StaffDashboard from "./pages/StaffDashboard";
 import StaffModuleHomePagina from "./pages/StaffModuleHomePagina";
 
