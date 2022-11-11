@@ -44,7 +44,7 @@ public class AreaConverter {
     }
 
     public ProductData createProductData(Product product) {
-        return new ProductData(product.getId(),product.getName(),product.getProductCategory(),product.getPrice(),product.getIngredients(),product.getDetails());
+        return new ProductData(product.getId(),product.getName(),product.getProductCategory(),product.getPrice(),product.getIngredients(),product.getDetails(),product.getProductDestination());
     }
 
     public List<OrderData> convertToBarOrderDataList(List<BarOrder> orders) {
