@@ -1,26 +1,4 @@
-.shoppingcartIcon {
-    background-image: url("../images/shoppingcart.png");
-    right: 0;
-    position: absolute;
-    margin: 2% 3% auto auto;
-    width: 190px;
-}
-
-.shoppingcart-grid{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    align-items: center;
-    margin: 1%;
-    border-bottom: 1px solid #b9b9b9;
-}
-
-.submit-button{
-    position: absolute;
-    bottom: 1%;
-    right: 1%;
-}
-
-.delete-button{
+.counter-button{
     text-align: center;
     background-clip: padding-box;
     background-color: #e3a768;
@@ -29,7 +7,9 @@
     box-sizing: border-box;
     color: #000000;
     cursor: pointer;
+    display: inline-flex;
     font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 600;
     min-width: 25px;
     min-height: 25px;
     box-shadow:
@@ -38,4 +18,3 @@
             rgb(0 0 0 / 23%)
             0 6px 6px;
 }
-

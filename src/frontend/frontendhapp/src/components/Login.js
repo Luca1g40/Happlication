@@ -22,13 +22,13 @@ function Login() {
          const status = await loginRequest(password)
          console.log(status)
          if (status === 200) {
-             navigate("/staffDashboard");
+             navigate("/staffmodule");
          }
      }
 
     return (
         <>
-            <div className={"homeStaffContainer"}>
+            <div>
                 <h1>MEDEWERKER MODULE</h1>
                 <div className={"loginDiv"}>
                     <div className={"labelDiv"}>

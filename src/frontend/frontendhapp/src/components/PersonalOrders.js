@@ -29,7 +29,7 @@ function OrdersDataFetching() {
             </div>
             <div className={"bottom-bar"}>
                 <span>
-                    <p>Signed in as: {sessionStorage.getItem("name")}</p>
+                    <p>Signed in as: {sessionStorage.getItem("staffId")}</p>
                 </span>
                 <button onClick={()=>navigate("/orders")} >All orders</button>
             </div>

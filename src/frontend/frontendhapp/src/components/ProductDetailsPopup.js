@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import "../styles/Popup.css"
 
+
 import Counter from "./Counter";
 import SubmitButton from "./submitData/SubmitButton";
 import {Actions} from "./submitData/Actions"
@@ -23,11 +24,14 @@ function ProductDetailsPopup(props) {
                     <button className="close-btn" onClick={closePopUp}> X </button>
                 </div>
                 <div className={"label-div"}>
-                    <label>{props.product.details}</label>
+                    <div className={"border-div"}>
+                        <label>{props.product.details}</label>
+                    </div>
                 </div>
-
-                <SubmitButton className="button foodsToDrinks" tableId={138} buttonText={"Add to Cart"} action={Actions.ADD_TO_SHOPPING_CART}
+                <div className={"add-to-cart-div"}>
+                <SubmitButton tableId={562} buttonText={"Add to Cart"} action={Actions.ADD_TO_SHOPPING_CART}
                               productAmount={productAmount} productId={props.product.id} trigger={() =>closePopUp()}/>
+                </div>
             </div>
         </div>
     ) : "";

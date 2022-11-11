@@ -14,7 +14,7 @@ import SearchProduct from "./components/product/SearchProduct";
 import ViewIngredient from "./components/ingredient/ViewIngredient";
 import StaffDashboard from "./pages/StaffDashboard";
 import CreateStaff from "./pages/CreateStaff"
-import AllStaffMembers from "./administration_components/AllStaffMembers";
+import AllStaffMembers from "./Administration/AllStaffMembers";
 import StaffModuleHomePagina from "./pages/StaffModuleHomePagina";
 import AdministrationPage from "./pages/AdministrationPage";
 

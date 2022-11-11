@@ -101,6 +101,11 @@
     right: 0;
 }
 
+.buttons-navbar{
+    border: none;
+    margin: 5px;
+}
+
 /*PERSONAL ORDER SCHERM CSS*/
 .order-done-button {
     position: absolute;

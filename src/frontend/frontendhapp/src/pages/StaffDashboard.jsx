@@ -1,7 +1,6 @@
 import React from "react";
 
 
-import "../styles/StaffDashboard.css"
 import FetchTablesSettedOnTrue from "../staff_components/FetchTablesSettedOnTrue";
 
 
