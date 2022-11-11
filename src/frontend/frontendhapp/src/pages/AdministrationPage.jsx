@@ -12,7 +12,7 @@ export default function AdministrationPage() {
                     <Link className="button homeModule_bt_space" to="/createproduct">Create Product</Link>
                     <Link className="button homeModule_bt_space" to="">Delete Product</Link>
                     <Link className="button homeModule_bt_space" to="">Update Product</Link>
-                    <Link className="button homeModule_bt_space" to="/searchproducts">Get All Products</Link>
+                    <Link className="button homeModule_bt_space" to="/searchproduct">Get All Products</Link>
                     <Link className="button homeModule_bt_space" to="/createingredient">Create ingredient</Link>
 
                     <hr/>
