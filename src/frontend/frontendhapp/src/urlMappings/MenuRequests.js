@@ -104,6 +104,17 @@ export function getAllProducts(){
         })
 }
 
+export function deleteProduct(id){
+    return axios.delete(`http://localhost:8080/happ/product/${id}`, configuration)
+        .then(res => {
+            console.log(res)
+            return res.data;
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+
 export function getProduct(id){
     return axios.get(`http://localhost:8080/happ/product/${id}`, configuration)
         .then(res => {
