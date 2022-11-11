@@ -28,7 +28,7 @@ function Login() {
 
     return (
         <>
-            <div className={"homeStaffContainer"}>
+            <div>
                 <h1>MEDEWERKER MODULE</h1>
                 <div className={"loginDiv"}>
                     <div className={"labelDiv"}>

@@ -26,7 +26,7 @@ function ProductDetailsPopup(props) {
                     <label>{props.product.details}</label>
                 </div>
 
-                <SubmitButton className="button foodsToDrinks" tableId={69} buttonText={"Add to Cart"} action={Actions.ADD_TO_SHOPPING_CART}
+                <SubmitButton className="button foodsToDrinks" tableId={547} buttonText={"Add to Cart"} action={Actions.ADD_TO_SHOPPING_CART}
                               productAmount={productAmount} productId={props.product.id} trigger={() =>closePopUp()}/>
             </div>
         </div>

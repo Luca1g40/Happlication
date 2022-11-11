@@ -44,7 +44,7 @@ function UnclaimedOrdersComponent(props) {
                     </button>
                 </div>
                 <span>
-                    <p>Signed in as: {sessionStorage.getItem("name")}</p>
+                    <p>Signed in as: {sessionStorage.getItem("staffId")}</p>
                     <Link to={"/claims"} >Claims</Link>
                 </span>
             </div>

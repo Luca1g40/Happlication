@@ -31,12 +31,6 @@ export default function SearchProduct(){
         handleChange()
     },[optionSelected])
 
-
-
-//TODO finish dropdown update filter
-
-
-
     function handleChange (){
         const value = ref.current.value
         let filterProduct=[]
