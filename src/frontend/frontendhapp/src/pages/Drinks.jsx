@@ -13,6 +13,7 @@ export default function Drinks() {
         <>
             <div className="drinksContainer">
                 <Link className="button terug" to="/">Terug</Link>
+                <Link to="/shoppingcart" className="button drinksToShoppingcart">Shopping cart</Link>
                 <Link className="button drinksToFood" to="/Foods">Gerechten</Link>
                 <DrinksMenu/>
             </div>

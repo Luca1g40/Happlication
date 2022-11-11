@@ -13,6 +13,7 @@ export default function Foods() {
         <>
             <div className="foodContainer">
                 <Link className="button foodsToHome" to="/"> Terug </Link>
+                <Link to="/shoppingcart" className="button foodsToShoppingcart">Shopping cart</Link>
                 <Link className="button foodsToDrinks" to="/Drinks">Dranken</Link>
                 <FoodMenu/>
             </div>

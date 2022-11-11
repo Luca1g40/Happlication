@@ -71,10 +71,8 @@ public class StaffController {
                     staffRequest.name,
                     staffRequest.rights
             );
-        } catch (ItemNotFound e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
-        } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+        }catch (InvalidValueException e){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 

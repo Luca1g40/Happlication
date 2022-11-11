@@ -15,7 +15,7 @@ function ProductDetailsPopup(props) {
         DeleteStaff(staffId)
     }
 
-    function updateStaffMember(password){
+    async function updateStaffMember(password){
         const firstname = document.getElementById("f").value;
         const rights = document.getElementById("r").value;
         let r;
@@ -27,7 +27,13 @@ function ProductDetailsPopup(props) {
         }else if(rights === "Keuken & bar"){
             r = ["KITCHEN_RIGHTS", "BAR_RIGHTS"]
         }
-        UpdateStaff(password, firstname, r)
+        const status = await UpdateStaff(password, firstname, r)
+
+        if (status === 200) {
+            window.location.reload();
+        }else if (status === 400){
+            document.getElementById("error").style.visibility = "visible";
+        }
     }
 
     function checkRights(rightOne, rightTwo){
@@ -59,9 +65,10 @@ function ProductDetailsPopup(props) {
                         <option value="Bar">Bar</option>
                         <option value="Keuken & bar">Keuken & bar</option>
                     </select><br/><br/>
-                    <button className={"update-btn"} onClick={() => updateStaffMember(props.member.password) + closePopUp() + window.location.reload(false)}>Updaten</button>
+                    <p className="error-message" id="error">Voer een geldig voornaam in</p>
                 </form>
-                <button className={"delete-btn"} onClick={() => deleteStaffMember(props.member.id) + closePopUp() + window.location.reload(false)}>Verwijderen</button>
+                <button className={"update-btn"} onClick={() => updateStaffMember(props.member.password)}>Updaten</button>
+                <button className={"delete-btn"} onClick={() => deleteStaffMember(props.member.id) + closePopUp() + window.location.reload()}>Verwijderen</button>
             </div>
         </div>
     ) : "";

@@ -38,6 +38,7 @@ export default function ShoppingCart() {
         </div>
 
     ) : <div>
+        <Link to="/" className="button" >Home</Link>
         <h1 align="center">Your shoppingcart is empty</h1>
         <OrderPlacedPopup trigger={buttonPopUp} setTrigger={value =>setButtonPopup(value)}/>
 

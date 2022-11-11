@@ -16,6 +16,7 @@ import StaffDashboard from "./pages/StaffDashboard";
 import CreateStaff from "./pages/CreateStaff"
 import AllStaffMembers from "./Administration/AllStaffMembers";
 import StaffModuleHomePagina from "./pages/StaffModuleHomePagina";
+import AdministrationPage from "./pages/AdministrationPage";
 
 function App() {
     return (
@@ -31,6 +32,7 @@ function App() {
             <Route path="createStaff" element={<CreateStaff/>}/>
             <Route path="allStaffMembers" element={<AllStaffMembers/>}/>
             <Route path="staffmodule" element={<StaffModuleHomePagina/>}/>
+            <Route path="administration" element={<AdministrationPage/>}/>
             <Route path="productdetails/:id" element={<ViewProductForm/>}/>
             <Route path="createproduct/" element={<ViewProductForm/>}/>
             <Route path="ingredientdetails/:id" element={<ViewIngredient/>}/>
