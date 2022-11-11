@@ -5,6 +5,7 @@ import com.infosupport.happ.application.dto.OrderData;
 import com.infosupport.happ.application.dto.StaffData;
 import com.infosupport.happ.data.StaffRepository;
 import com.infosupport.happ.domain.*;
+import com.infosupport.happ.domain.exceptions.InvalidValueException;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +30,10 @@ public class StaffService {
         return staffRepository.getById(id);
     }
 
+    public List<Staff> findAll() {
+        return staffRepository.findAll();
+    }
+
     public List<Table> getTableThatNeedHelp(Long staffId) {
         Staff staff = getStaff(staffId);
         List<Table> tableListWithHelp = new ArrayList<>();
@@ -45,6 +50,9 @@ public class StaffService {
     }
 
     public StaffData createStaff(int password, String name, List<Rights> rights) {
+        if(name.equals("") || password <= 0){
+            throw new InvalidValueException("name or password");
+        }
         Staff staff = new Staff(password, name, rights);
         staffRepository.save(staff);
         return createStaffData(staff);
@@ -113,5 +121,18 @@ public class StaffService {
             }
         }
         return areaWithoutStaffDataList;
+    }
+
+    public StaffData updateStaff(int password, String name, List<Rights> rights) {
+        staffExistsByPassword(password);
+        Staff staff = staffRepository.getByPassword(password);
+
+        staff.setName(name);
+        staff.setPassword(password);
+        staff.setRights(rights);
+
+        this.staffRepository.save(staff);
+
+        return createStaffData(staff);
     }
 }

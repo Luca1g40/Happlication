@@ -14,7 +14,7 @@ public class ShoppingCartData {
         productDataList = new ArrayList<>();
 
         for (Product product:productList) {
-             productDataList.add(new ProductData(product.getId(), product.getName(), product.getProductCategory(),product.getPrice(),product.getIngredients(),product.getDetails()));
+             productDataList.add(new ProductData(product.getId(), product.getName(), product.getProductCategory(),product.getPrice(),product.getIngredients(),product.getDetails(),product.getProductDestination()));
         }
     }
 }

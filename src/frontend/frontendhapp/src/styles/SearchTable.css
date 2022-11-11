@@ -1,0 +1,66 @@
+/*.search-table {*/
+/*    width: 100%;*/
+/*    height: 100vh;*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*}*/
+
+/*table {*/
+/*    border: 2px solid orange;*/
+/*    width: 800px;*/
+/*    height: 200px;*/
+/*}*/
+
+/*th {*/
+/*    border-bottom: 1px solid black;*/
+/*    text-align: center;*/
+/*}*/
+
+/*td {*/
+/*    text-align: center;*/
+
+/*}*/
+
+#searchTable {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#searchTable td, #searchTable th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#searchTable tr:nth-child(even){background-color: #f2f2f2;}
+
+#searchTable tr:hover {background-color: #ddd; cursor:pointer;}
+
+#searchTable th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: orange;
+    color: white;
+}
+
+.createProductButton {
+    align-items: center;
+    background-clip: padding-box;
+    background-color: orange;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    min-height: 3rem;
+    padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+    text-decoration: none;
+    height: 10px;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+
+}

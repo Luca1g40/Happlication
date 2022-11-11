@@ -48,6 +48,8 @@ public class Staff implements Serializable {
         return rights;
     }
 
+    public void setRights(List<Rights> rights) {this.rights = rights;}
+
     public Long getId() {
         return id;
     }
@@ -56,8 +58,16 @@ public class Staff implements Serializable {
         return password;
     }
 
+    public void setPassword(int password){
+        this.password = password;
+    }
+
     public String getName() {
         return name;
+    }
+
+    public void setName(String name){
+        this.name = name;
     }
 
     public List<Operation> getOperations() {
