@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from "react";
 import {getAllStaffMembers} from "../urlMappings/StaffRequests";
-import StaffMember from ".//StaffMember";
+import StaffMember from "./StaffMember";
 import {Link} from "react-router-dom";
 import "../styles/AllStaffMembers.css"
+import Logout from "../components/Logout"
+import HomeNav from "../components/Homebutton"
 
 function AllStaffMembers() {
     const [members, setMembers] = useState([])
@@ -30,7 +32,9 @@ function AllStaffMembers() {
                     }
                 </ul>
             </div>
-            <Link className={"button createStaffLink"} to="/createStaff">Maak een nieuw staff-member aan</Link>
+            <Link className={"button createStaffLink"} to="/createStaff" on>Maak een nieuw staff-member aan</Link>
+            <Logout/>
+            <HomeNav/>
         </>
             )
 }

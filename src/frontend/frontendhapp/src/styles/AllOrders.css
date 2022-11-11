@@ -2,18 +2,9 @@
     font-family: Helvetica, sans-serif;
 }
 
-.orderContainer {
-    position: relative;
-    height: 750px;
-    width: 1000px;
-    margin: auto;
-
-    box-shadow: rgba(0, 0, 0, 0.19) 0 10px 20px, rgba(0, 0, 0, 0.23) 0 6px 6px;
-}
-
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-columns: repeat(8, minmax(0, 1fr));
 
     grid-auto-rows: 340px;
     grid-row-gap: 10px;
@@ -47,10 +38,11 @@
 }
 
 .order-item {
+    margin-left: 1%;
     border-style: solid;
     border-width: 2px;
     border-color: #e9b986;
-    height: 80%;
+    height: 77%;
     width: 98%;
     overflow: hidden;
     overflow-y: scroll;

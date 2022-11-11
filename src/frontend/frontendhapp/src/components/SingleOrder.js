@@ -53,15 +53,16 @@ export default function SingleOrder(props) {
     return (
         <div key={props.order.id} className={"grid-item grid-item"}>
             <p className={"table-number"}>Tafel: {props.order.tableNr}</p>
+            <div className={"order-item"}>
             {Array.from(getOccuranceProducts(props.order.products).keys()).map((product,index) =>
                 <>
-                <span key={product.id} className={"order-products"} onClick={(event) => {
+                <div key={product.id} className={"order-products"} onClick={(event) => {
                     changeStyle(event)
-                }}>{product.name} </span>
-                    <span>{Array.from(getOccuranceProducts(props.order.products).values())[index]}</span>
+                }}>{product.name} {Array.from(getOccuranceProducts(props.order.products).values())[index]}</div>
                 </>
 
             )}
+            </div>
             <div className={"order-time"}>
                 <p className={"order-time-paragraph"}> {props.order.orderTime}  </p>
                 <p className={"order-date-paragraph"}> {props.order.orderDate} </p>

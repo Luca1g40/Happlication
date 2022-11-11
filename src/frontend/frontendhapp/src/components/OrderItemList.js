@@ -15,7 +15,7 @@ export default function OrderItemList(props) {
 
 
     return (
-        <div>
+        <div className={"product-text"}>
             {Array.from(getOccuranceProducts(props.order.products).keys()).map((product,index) => {
                 return <OrderItem key={product.id} product={product} amount={Array.from(getOccuranceProducts(props.order.products).values())[index]} className={"order-products"}/>
                 }

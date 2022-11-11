@@ -17,5 +17,19 @@
 
 }
 
+.logout-button{
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 5px;
+}
+
+.login-button{
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 5px;
+}
+
 
 

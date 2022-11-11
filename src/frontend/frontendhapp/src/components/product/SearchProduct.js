@@ -4,7 +4,6 @@ import {Link, useNavigate} from 'react-router-dom';
 import "../../styles/SearchTable.css"
 import DropdownFilter from "./DropdownFilter";
 
-
 export default function SearchProduct(){
     const [allProducts,setAllProducts] = useState([])
     const [filteredProducts,setFilteredProducts] = useState([])
@@ -70,32 +69,49 @@ export default function SearchProduct(){
         setFilteredProducts(filterProduct)
     }
 
+    function cleardata() {
+        sessionStorage.clear();
+    }
+
 
     return(
 
     <div>
-    <Link to="/administration" className="createProductButton" >Home</Link>
-    <input ref={ref} placeholder={"Search"} name={"search"} onChange={handleChange}/>
-    <Link to="/createproduct" className="createProductButton" >Create product</Link>
+        <h1>Product overview</h1>
+        <h2>Filters</h2>
+        <div className={"home-button"}>
+            <Link to="/administration" className="button search-products-navigation" >Home</Link>
+        </div>
+        <div className={"navigation-buttons"}>
+            <Link to="/createproduct" className="button search-products-navigation" >Create product</Link>
+            <Link to="/staff" className="button search-products-navigation" onClick={() => {cleardata()}}>Log out</Link>
+        </div>
+        <input className={"search-bar"} ref={ref} placeholder={"Search"} name={"search"} onChange={handleChange}/>
 
-    <DropdownFilter setOptionSelected={(selected)=>setOptionSelected(selected)} optionSelected={optionSelected}/>
-        <table id="searchTable">
-        <tr>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Category</th>
-            <th>Details</th>
-        </tr>
+        <div className={"search-table"}>
+        <span className={"select-filters"}>
+            <DropdownFilter setOptionSelected={(selected)=>setOptionSelected(selected)} optionSelected={optionSelected}/>
+        </span>
+        <span className={"product-tables"}>
+            <table id="searchTable">
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Category</th>
+                <th>Details</th>
+            </tr>
 
-            {filteredProducts.map(product=>{
-                return <tr key={product.id} onClick={()=>navigate(`/productdetails/${product.id}`)}>
-                    <td>{product.name}</td>
-                    <td>{product.price}</td>
-                    <td>{showCategory(product.productCategory)}</td>
-                    <td>{product.details}</td>
-                </tr>
-            })}
-    </table>
+                {filteredProducts.map(product=>{
+                    return <tr key={product.id} onClick={()=>navigate(`/productdetails/${product.id}`)}>
+                        <td>{product.name}</td>
+                        <td>{product.price}</td>
+                        <td>{showCategory(product.productCategory)}</td>
+                        <td>{product.details}</td>
+                    </tr>
+                })}
+            </table>
+        </span>
+    </div>
 </div>
     )
 }

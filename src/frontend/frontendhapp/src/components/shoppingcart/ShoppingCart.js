@@ -15,7 +15,7 @@ export default function ShoppingCart() {
     const [buttonPopUp,setButtonPopup] = useState(false);
 
     useEffect(() => {
-        GetShoppingCart(562)
+        GetShoppingCart(577)
             .then(res => {
                 setShoppingCart(res)
             })
@@ -36,7 +36,7 @@ export default function ShoppingCart() {
                 );
             })}
             <div className={"submit-button"}>
-                <SubmitButton className={"button"} buttonText={"Order"} tableId={562} action={Actions.PLACE_ORDER} emptyShoppingcart={()=>setShoppingCart([])} triggerPopUp={()=>setButtonPopup(true)}/>
+                <SubmitButton className={"button"} buttonText={"Order"} tableId={577} action={Actions.PLACE_ORDER} emptyShoppingcart={()=>setShoppingCart([])} triggerPopUp={()=>setButtonPopup(true)}/>
             </div>
         </div>
 

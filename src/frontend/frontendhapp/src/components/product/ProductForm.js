@@ -10,7 +10,6 @@ export default function ProductForm(props){
     const[ingredientList,setIngredientList] = useState([])
 
     useEffect(() => {
-        console.log("yoooo")
         getAllIngredients()
             .then(res => {
                 console.log(res)
