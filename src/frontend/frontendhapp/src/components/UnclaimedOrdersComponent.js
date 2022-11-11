@@ -45,7 +45,7 @@ function UnclaimedOrdersComponent(props) {
                     </button>
                 </div>
                 <span>
-                <p>Signed in as: {sessionStorage.getItem("name")}</p>
+                <p>Signed in as: {sessionStorage.getItem("staffId")}</p>
             </span>
             </div>
         </div>

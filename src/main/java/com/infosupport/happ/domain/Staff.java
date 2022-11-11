@@ -14,6 +14,7 @@ public class Staff implements Serializable {
     @Id
     @GeneratedValue
     private Long id;
+    @Column(unique = true)
     private int password;
     private String name;
     @OneToMany
