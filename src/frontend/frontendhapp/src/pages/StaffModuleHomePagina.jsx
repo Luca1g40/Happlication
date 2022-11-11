@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/StaffModuleHomePagina.css"
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 
 export default function StaffModuleHomePagina() {
@@ -13,6 +13,7 @@ export default function StaffModuleHomePagina() {
                     <Link className="button homeModule_bt_space" to="/orders">Keuken</Link>
                     <Link className="button homeModule_bt_space" to="/orders">Bar</Link>
                     <Link className="button homeModule_bt_space" to="">Voorraad Beheer</Link>
+                    <Link className="button position-absolute bottom-0 end-0 m-4" to="/staff">Log out</Link>
 
 
 
