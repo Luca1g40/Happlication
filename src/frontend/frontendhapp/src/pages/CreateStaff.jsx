@@ -1,5 +1,5 @@
 import React from "react";
-import CreatingStaff from "../administration_components/CreatingStaff";
+import CreatingStaff from "../Administration/CreatingStaff";
 export default function CreateStaff() {
     return (
         <>

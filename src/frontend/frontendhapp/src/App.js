@@ -11,7 +11,7 @@ import Staff from "./pages/HomePageStaff";
 import PersonalModule from "./pages/PersonalModule";
 import StaffDashboard from "./pages/StaffDashboard";
 import CreateStaff from "./pages/CreateStaff"
-import AllStaffMembers from "./administration_components/AllStaffMembers";
+import AllStaffMembers from "./Administration/AllStaffMembers";
 import StaffModuleHomePagina from "./pages/StaffModuleHomePagina";
 
 function App() {
