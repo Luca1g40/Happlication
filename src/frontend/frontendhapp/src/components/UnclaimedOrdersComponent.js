@@ -2,14 +2,14 @@ import React, {useEffect, useState} from "react";
 import {getAllUnclaimedOrders} from "../urlMappings/OrderRequests";
 import {claimSelectedOrders} from "../urlMappings/StaffRequests";
 import OrdersOverview from "./OrdersOverview";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 
 function UnclaimedOrdersComponent(props) {
     const [orders, setOrders] = useState([])
     const [selectedOrders, setSelectedOrders] = useState([])
     const [doneSelecting, setDoneSelecting] = useState(false)
-
+    let navigate = useNavigate()
     useEffect(() => {
         getAllUnclaimedOrders()
             .then(res => {
@@ -42,10 +42,14 @@ function UnclaimedOrdersComponent(props) {
                         setDoneSelecting(true)
                     }}> Claim Orders
                     </button>
+                    <button onClick={()=>navigate("/claims")}>Claims</button>
+                    <button onClick={()=>navigate("/staffDashboard")}>Staff dashboard</button>
+
                 </div>
                 <span>
-                    <p>Signed in as: {sessionStorage.getItem("name")}</p>
-                    <Link to={"/claims"} >Claims</Link>
+                    <p>Signed in as: {sessionStorage.getItem("staffId")}</p>
+
+
                 </span>
             </div>
         </div>

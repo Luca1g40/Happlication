@@ -5,6 +5,7 @@ import {GetShoppingCart} from "../../urlMappings/TableRequests";
 import {Actions} from "../submitData/Actions";
 import getOccuranceProducts from "../Util";
 import OrderPlacedPopup from "../OrderPlacedPopup";
+import {Link} from "react-router-dom";
 
 
 
@@ -13,7 +14,7 @@ export default function ShoppingCart() {
     const [buttonPopUp,setButtonPopup] = useState(false);
 
     useEffect(() => {
-        GetShoppingCart(69)
+        GetShoppingCart(138)
             .then(res => {
                 setShoppingCart(res)
             })
@@ -40,6 +41,7 @@ export default function ShoppingCart() {
         </div>
 
     ) : <div>
+        <Link to="/" className="button" >Home</Link>
         <h1 align="center">Your shoppingcart is empty</h1>
         <OrderPlacedPopup trigger={buttonPopUp} setTrigger={value =>setButtonPopup(value)}/>
 

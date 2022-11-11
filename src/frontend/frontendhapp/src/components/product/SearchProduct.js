@@ -32,10 +32,22 @@ export default function SearchProduct(){
     },[optionSelected])
 
 
-
-//TODO finish dropdown update filter
-
-
+    function showCategory(category){
+        switch (category){
+            case "MAIN_COURSE":
+                return "Main course"
+            case "SIDE":
+                return "Side";
+            case "EXTRA":
+                return "Extra";
+            case "DRINKS":
+                return "Drinks";
+            case "DESSERT":
+                return "Dessert";
+            case "STARTER":
+                return "Starter"
+        }
+    }
 
     function handleChange (){
         const value = ref.current.value
@@ -79,7 +91,7 @@ export default function SearchProduct(){
                 return <tr key={product.id} onClick={()=>navigate(`/productdetails/${product.id}`)}>
                     <td>{product.name}</td>
                     <td>{product.price}</td>
-                    <td>{product.productCategory}</td>
+                    <td>{showCategory(product.productCategory)}</td>
                     <td>{product.details}</td>
                 </tr>
             })}
