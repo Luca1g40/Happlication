@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import SingleOrder from "./SingleOrder";
 import {getPersonallyClaimedOrders} from "../urlMappings/OrderRequests";
+import {Link} from "react-router-dom";
 
 function OrdersDataFetching() {
     const [orders, setOrders] = useState([])
@@ -27,8 +28,9 @@ function OrdersDataFetching() {
             </div>
             <div className={"bottom-bar"}>
                 <span>
-                <p>Signed in as: {sessionStorage.getItem("name")}</p>
-            </span>
+                    <p>Signed in as: {sessionStorage.getItem("name")}</p>
+                    <Link to={"/Orders"} >All orders</Link>
+                </span>
             </div>
         </>
     )
