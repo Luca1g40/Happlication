@@ -3,8 +3,6 @@ import {getAllProducts} from "../../urlMappings/MenuRequests";
 import {Link, useNavigate} from 'react-router-dom';
 import "../../styles/SearchTable.css"
 import DropdownFilter from "./DropdownFilter";
-import Logout from "../Logout";
-
 
 export default function SearchProduct(){
     const [allProducts,setAllProducts] = useState([])
@@ -71,6 +69,10 @@ export default function SearchProduct(){
         setFilteredProducts(filterProduct)
     }
 
+    function cleardata() {
+        sessionStorage.clear();
+    }
+
 
     return(
 
@@ -78,6 +80,7 @@ export default function SearchProduct(){
     <Link to="/administration" className="createProductButton" >Home</Link>
     <input ref={ref} placeholder={"Search"} name={"search"} onChange={handleChange}/>
     <Link to="/createproduct" className="createProductButton" >Create product</Link>
+    <Link to="/staff" className="createProductButton" onClick={() => {cleardata()}}>Logout</Link>
 
     <DropdownFilter setOptionSelected={(selected)=>setOptionSelected(selected)} optionSelected={optionSelected}/>
         <table id="searchTable">
@@ -97,7 +100,6 @@ export default function SearchProduct(){
                 </tr>
             })}
     </table>
-        <Logout className="logoutSelect"/>
 </div>
     )
 }

@@ -4,7 +4,8 @@ import React, {useEffect, useState} from "react";
 import {getIngredient, getProduct} from "../../urlMappings/MenuRequests";
 import SubmitButton from "../submitData/SubmitButton";
 import {Actions} from "../submitData/Actions";
-import {Link} from "react-router-dom";
+import Logout from "../Logout"
+import HomeNav from "../Homebutton"
 
 
 export default function ViewIngredient(props){
@@ -38,13 +39,13 @@ export default function ViewIngredient(props){
     return (params.id === undefined) ? (
         <div>
             <h1>Create ingredient</h1>
-            <Link to="/administration" className="createProductButton" >Home</Link>
             <IngredientForm errorMeldingText={foutMelding} handleChange={event=>handleChange(event)}/>
             <SubmitButton setFoutMelding={foutMelding=>setFoutMelding(foutMelding)} disabled={disabled} setDisabled={disabled=>setDisabled(disabled)} action={Actions.CREATE_INGREDIENT} buttonText={"Create ingredient"} ingredient={ingredient}/>
+            <Logout/>
+            <HomeNav/>
         </div>
 ) : (
         <div>
-            <Link to="/administration" className="createProductButton" >Home</Link>
             <IngredientForm errorMeldingText={foutMelding} disabled={disabled} ingredient={ingredient} handleChange={event=>handleChange(event)}/>
             <SubmitButton setFoutMelding={foutMelding=>setFoutMelding(foutMelding)} disabled={disabled} setDisabled={disabled=>setDisabled(disabled)} action={Actions.UPDATE_INGREDIENT} buttonText={"Update"}  ingredient={ingredient}/>
             <button onClick={()=>setDisabled(false)} disabled={!disabled}>Edit</button>
