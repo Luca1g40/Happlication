@@ -23,7 +23,7 @@ function FetchTablesSettedOnTrue() {
         window.location.reload(false);
     }
 
-    let tafelId = 74;
+    let tafelId = 577;
     function klantIsGeholpen(){
         axios.put(`http://localhost:8080/happ/table/${tafelId}/helpNodig`, {//todo->tafelId moet zelf opgehaald worden
             "setHulpBool" : "false"
@@ -39,16 +39,14 @@ function FetchTablesSettedOnTrue() {
 
 
     return (
-        <div className="grid-container">
+        <div className="grid-container-notification-card">
             {
                 tafelsonTrue.map((tafel) =>
-                <div key={tafel.id} className={"grid-item grid-item"} >
-                    <span>Tafel Nummer : {tafel.tableNumber}</span>
-                    <br/>
-                    <span>Aantal Gasten : {tafel.amountOfPeople}</span>
-                    <br/>
-                    <span>Tijd over om te bestellen: {tafel.timeLeftToOrder} minuten</span>
-                    <button onClick={() => { klantIsGeholpen(); refreshPage();}} className="helpDoneBut">Klant is Geholpen</button>
+                <div key={tafel.id} className={"grid-item-notification-card"} >
+                    <div>Tafel Nummer : {tafel.tableNumber}</div>
+                    <div>Aantal Gasten : {tafel.amountOfPeople}</div>
+                    <div>Tijd over om te bestellen: {tafel.timeLeftToOrder} minuten</div>
+                    <button onClick={() => { klantIsGeholpen(); refreshPage();}} className="button help-button">Klant is Geholpen</button>
                 </div>
                 )
             }
