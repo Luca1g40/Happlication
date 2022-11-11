@@ -9,7 +9,7 @@ function HomeNav(){
     }
 
     return (
-        <button className="button position-absolute top-0 front-0 m-4" onClick={() => {navHome()}}>Home</button>
+        <button className="button login-button" onClick={() => {navHome()}}>Home</button>
     );
 }
 

@@ -10,7 +10,7 @@ function Logout(){
     }
 
     return (
-            <button className="button position-absolute top-0 end-0 m-4" onClick={() => {cleardata()}}>Log out</button>
+            <button className="button logout-button" onClick={() => {cleardata()}}>Log out</button>
     );
 }
 

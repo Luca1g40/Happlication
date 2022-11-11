@@ -48,7 +48,7 @@ export default function ViewProductForm(props){
             setToegevoegdeIngredienten(state => [...state, newIngredient])
             setErrorMeldingText("");
         }else{
-            setErrorMeldingText("kijk goed wat je doet ezel.")
+            setErrorMeldingText("Er is iets fout gegaan")
         }
 
     }
@@ -67,9 +67,14 @@ export default function ViewProductForm(props){
 
     return (params.id===undefined) ? (
         <div>
-            <Link to="/administration" className="createProductButton" >Home</Link>
-            <Link to="/searchproduct" className="createProductButton" >Search a product</Link>
-            <Link to="/staff" className="createProductButton" onClick={() => {cleardata()}}>Logout</Link>
+            <div className={"home-button"}>
+                <Link to="/administration" className="button search-products-navigation" >Home</Link>
+            </div>
+
+            <div className={"navigation-buttons"}>
+                <Link to="/searchproduct" className="button" >Search a product</Link>
+                <Link to="/staff" className="button search-products-navigation" onClick={() => {cleardata()}}>Log out</Link>
+            </div>
 
             <ProductForm toegevoegdeIngredienten={toegevoegdeIngredienten} disabled={disabled} handleChange={event=>handleChange(event)} removeFromIngredientsList={(target=>removeFromIngredientsList(target))} setAddedIngredients={(ingredient) => setToegevoegdeIngredienten(ingredient)} addIngredient={ingredient=>addIngredient(ingredient)} errorMeldingText={errorMeldingText}/>
             <div className={"create-button"}>

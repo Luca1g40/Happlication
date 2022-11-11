@@ -2,6 +2,7 @@ import React from "react";
 import "../styles/StaffModuleHomePagina.css"
 import {Link} from "react-router-dom";
 import Logout from "../components/Logout"
+import "../styles/SubmitButton.css"
 
 
 export default function AdministrationPage() {

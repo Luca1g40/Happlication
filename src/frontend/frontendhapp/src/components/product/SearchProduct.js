@@ -79,10 +79,12 @@ export default function SearchProduct(){
     <div>
         <h1>Product overview</h1>
         <h2>Filters</h2>
+        <div className={"home-button"}>
+            <Link to="/administration" className="button search-products-navigation" >Home</Link>
+        </div>
         <div className={"navigation-buttons"}>
-            <Link to="/administration" className="createProductButton" >Home</Link>
-            <Link to="/createproduct" className="createProductButton" >Create product</Link>
-            <Link to="/staff" className="createProductButton" onClick={() => {cleardata()}}>Logout</Link>
+            <Link to="/createproduct" className="button search-products-navigation" >Create product</Link>
+            <Link to="/staff" className="button search-products-navigation" onClick={() => {cleardata()}}>Log out</Link>
         </div>
         <input className={"search-bar"} ref={ref} placeholder={"Search"} name={"search"} onChange={handleChange}/>
 
