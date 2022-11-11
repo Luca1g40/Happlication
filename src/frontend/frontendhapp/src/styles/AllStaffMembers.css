@@ -43,3 +43,7 @@
 .error-message {
     visibility: hidden;
 }
+
+h1{
+    justify-content: center;
+}
