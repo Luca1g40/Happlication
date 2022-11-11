@@ -19,9 +19,31 @@ import {
 export default function SubmitButton(props) {
     let navigate = useNavigate();
 
-    function validateFormInformation(){
-
-    }
+    // function validateProductFormInformation(){
+    //     if (Object.keys(props.product).length===7 && props.ingredientList.length>0){
+    //         for (const key in props.product) {
+    //             if (!(String(props.product[key]).replace(/\s+/g, '').length>0)){
+    //                 console.log("ging fout")
+    //                 props.setFoutMelding(`Je hebt een lege input gegeven bij ${key.replace("-", " ")} je ezel`)
+    //                 return;
+    //             }else{
+    //                 console.log("ging goed")
+    //             }
+    //         }
+    //
+    //         editProduct(props.product.id,props.product.name,props.product.destination,props.ingredientList,props.product.price,props.product.details,props.product.category).
+    //         then(res=>{
+    //             props.setDisabled(true);
+    //             navigate(`/productdetails/${res.id}`)
+    //         }).catch(err=>{
+    //             console.log(err)
+    //         })
+    //     }else{
+    //         console.log("ging heel fout")
+    //         props.setFoutMelding(`Je hebt een of meer lege input velden je ezel`)
+    //         return;
+    //     }
+    // }
 
 
 
@@ -77,7 +99,7 @@ export default function SubmitButton(props) {
             case Actions.CREATE_PRODUCT:
                 if (Object.keys(props.product).length===5 && props.ingredientList.length>0){
                     for (const key in props.product) {
-                        if (!(props.product[key].trim().length>0)){
+                        if (!(String(props.product[key]).replace(/\s+/g, '').length>0)){
                             console.log("ging fout")
                             props.setFoutMelding(`Je hebt een lege input gegeven bij ${key.replace("-", " ")} je ezel`)
                             return;
@@ -103,9 +125,9 @@ export default function SubmitButton(props) {
             case Actions.UPDATE_PRODUCT:
 
 
-                if (Object.keys(props.product).length===6 && props.ingredientList.length>0){
+                if (Object.keys(props.product).length===7 && props.ingredientList.length>0){
                     for (const key in props.product) {
-                        if (!(props.product[key].trim().length>0)){
+                        if (!(String(props.product[key]).replace(/\s+/g, '').length>0)){
                             console.log("ging fout")
                             props.setFoutMelding(`Je hebt een lege input gegeven bij ${key.replace("-", " ")} je ezel`)
                             return;

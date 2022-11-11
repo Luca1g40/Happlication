@@ -40,7 +40,9 @@ export default function ViewProductForm(props){
     const handleChange = (event) => {
         const name = event.target.name;
         const value = event.target.value;
+        console.log(name,value)
         setProduct(values => ({...values, [name]: value}))
+        console.log(product)
     }
 
     const addIngredient = (newIngredient) => {
