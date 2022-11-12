@@ -17,14 +17,19 @@ export default function OverviewTable(props){
                     return <tr key={item.id} onClick={()=>props.navigate(item.id)}>
                         {Object.keys(item).map((itemKey,i)=>{
                             if (props.leaveOutList.indexOf(itemKey)===-1){
-                                if (Array.from(props.specialDisplays.keys()).indexOf(itemKey)===-1){
-                                    return <td>{item[itemKey]}</td>
+                                if (!(props.specialDisplays===undefined)){
+                                    if (Array.from(props.specialDisplays.keys()).indexOf(itemKey)===-1){
+                                        return <td>{item[itemKey]}</td>
+                                    }else{
+                                        const showCategory=props.specialDisplays.get(itemKey)
+
+                                        return <td>{showCategory(item[itemKey])}</td>
+
+                                    }
                                 }else{
-                                    const showCategory=props.specialDisplays.get(itemKey)
-
-                                    return <td>{showCategory(item[itemKey])}</td>
-
+                                    return <td>{item[itemKey]}</td>
                                 }
+
                             }
 
                         })}
