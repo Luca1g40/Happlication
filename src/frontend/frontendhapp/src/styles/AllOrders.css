@@ -76,6 +76,16 @@
     transform: translate(-50%, -50%);
 }
 
+.claim-orders-button{
+    padding: 10px 10px;
+
+}
+.claims-button {
+    position: absolute;
+    padding: 10px 10px;
+    right: 10px;
+    bottom: 4px;
+}
 .bottom-bar {
     bottom: 0;
     position: absolute;

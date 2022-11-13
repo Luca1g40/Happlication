@@ -37,18 +37,20 @@ function UnclaimedOrdersComponent(props) {
             <OrdersOverview orders={orders} selectedOrders={selectedOrders} setSelectedOrders={setSelectedOrders} staffRights={props.rights}/>
             <div className={"bottom-bar"}>
                 <div className={"claim-order-button"}>
-                    <button onClick={() => {
+                    <button className="button claim-orders-button" onClick={() => {
                         claimOrder(selectedOrders);
                         setDoneSelecting(true)
                     }}> Claim Orders
                     </button>
                 </div>
+
                 <span>
                     <p>Signed in as: {sessionStorage.getItem("name")}</p>
-                    <Link to={"/claims"} >Claims</Link>
                 </span>
+                <Link className="button claims-button" to={"/claims"}>Claims</Link>
             </div>
         </div>
+
     )
 }
 
