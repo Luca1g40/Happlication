@@ -110,7 +110,8 @@ export default function SubmitButton(props) {
 
                     createProduct(props.product.name,props.ingredientList,props.product.destination,props.product.category,props.product.details,props.product.price)
                         .then(res=>{
-                            navigate(`/productdetails/${res.id}`)
+                            window.location.reload()
+                            navigate(`/createproduct`)
                             }
 
                         ).catch(err=>{
@@ -124,6 +125,7 @@ export default function SubmitButton(props) {
                 break;
             case Actions.UPDATE_PRODUCT:
 
+                console.log(props.product.productCategory)
 
                 if (Object.keys(props.product).length===7 && props.ingredientList.length>0){
                     for (const key in props.product) {
@@ -136,7 +138,7 @@ export default function SubmitButton(props) {
                         }
                     }
 
-                    editProduct(props.product.id,props.product.name,props.product.destination,props.ingredientList,props.product.price,props.product.details,props.product.category).
+                    editProduct(props.product.id,props.product.name,props.product.productDestination,props.ingredientList,props.product.price,props.product.details,props.product.productCategory).
                     then(res=>{
                         props.setDisabled(true);
                         navigate(`/productdetails/${res.id}`)
@@ -165,8 +167,8 @@ export default function SubmitButton(props) {
 
                     createIngredient(props.ingredient.name)
                         .then(res=>{
-                                props.setDisabled(true);
-                                navigate(`/ingredientdetails/${res.id}`)
+                               window.location.reload()
+                                navigate(`/createingredient`)
                             }
                         ).catch(err=>{
 
