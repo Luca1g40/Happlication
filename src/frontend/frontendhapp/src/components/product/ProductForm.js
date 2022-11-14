@@ -90,8 +90,8 @@ export default function ProductForm(props){
         <>
             <h1>Edit product</h1>
             <div className={"crud-form"} ref={ref}>
-                <label className={"left-column"} htmlFor="destination">Product destination: </label>
-                <select className={"right-column"} name={"destination"}
+                <label className={"left-column"} htmlFor="productDestination">Product destination: </label>
+                <select className={"right-column"} name={"productDestination"}
                         disabled={props.disabled} value={props.product.productDestination}
                         onChange={(event)=>props.handleChange(event)}>
                     <option value={"BAR_PRODUCT"} >Bar</option>
@@ -104,8 +104,8 @@ export default function ProductForm(props){
                 </div>
 
                 <div>
-                    <label className={"left-column"} htmlFor="category">Product category</label>
-                    <select className={"right-column"} name={"category"} disabled={props.disabled}
+                    <label className={"left-column"} htmlFor="productCategory">Product category</label>
+                    <select className={"right-column"} name={"productCategory"} disabled={props.disabled}
                             value={props.product.productCategory} onChange={(event)=>props.handleChange(event)}>
                         <option value={"DRINKS"} >Drinks</option>
                         <option value={"EXTRA"} >Extra</option>

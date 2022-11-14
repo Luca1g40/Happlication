@@ -7,15 +7,43 @@ import {
     RemoveProductFromShoppingCart
 } from "../../urlMappings/TableRequests";
 import {Actions} from "./Actions"
-import {createIngredient, createProduct, editIngredient, editProduct} from "../../urlMappings/MenuRequests";
+import {
+    createIngredient,
+    createProduct,
+    deleteProduct,
+    editIngredient,
+    editProduct
+} from "../../urlMappings/MenuRequests";
 
 
 export default function SubmitButton(props) {
     let navigate = useNavigate();
 
-    function validateFormInformation(){
-
-    }
+    // function validateProductFormInformation(){
+    //     if (Object.keys(props.product).length===7 && props.ingredientList.length>0){
+    //         for (const key in props.product) {
+    //             if (!(String(props.product[key]).replace(/\s+/g, '').length>0)){
+    //                 console.log("ging fout")
+    //                 props.setFoutMelding(`Je hebt een lege input gegeven bij ${key.replace("-", " ")} je ezel`)
+    //                 return;
+    //             }else{
+    //                 console.log("ging goed")
+    //             }
+    //         }
+    //
+    //         editProduct(props.product.id,props.product.name,props.product.destination,props.ingredientList,props.product.price,props.product.details,props.product.category).
+    //         then(res=>{
+    //             props.setDisabled(true);
+    //             navigate(`/productdetails/${res.id}`)
+    //         }).catch(err=>{
+    //             console.log(err)
+    //         })
+    //     }else{
+    //         console.log("ging heel fout")
+    //         props.setFoutMelding(`Je hebt een of meer lege input velden je ezel`)
+    //         return;
+    //     }
+    // }
 
 
 
@@ -71,7 +99,7 @@ export default function SubmitButton(props) {
             case Actions.CREATE_PRODUCT:
                 if (Object.keys(props.product).length===5 && props.ingredientList.length>0){
                     for (const key in props.product) {
-                        if (!(props.product[key].trim().length>0)){
+                        if (!(String(props.product[key]).replace(/\s+/g, '').length>0)){
                             console.log("ging fout")
                             props.setFoutMelding(`Je hebt een lege input gegeven bij ${key.replace("-", " ")} je ezel`)
                             return;
@@ -97,9 +125,9 @@ export default function SubmitButton(props) {
             case Actions.UPDATE_PRODUCT:
 
 
-                if (Object.keys(props.product).length===6 && props.ingredientList.length>0){
+                if (Object.keys(props.product).length===7 && props.ingredientList.length>0){
                     for (const key in props.product) {
-                        if (!(props.product[key].trim().length>0)){
+                        if (!(String(props.product[key]).replace(/\s+/g, '').length>0)){
                             console.log("ging fout")
                             props.setFoutMelding(`Je hebt een lege input gegeven bij ${key.replace("-", " ")} je ezel`)
                             return;
@@ -120,8 +148,8 @@ export default function SubmitButton(props) {
                     props.setFoutMelding(`Je hebt een of meer lege input velden je ezel`)
                     return;
                 }
-
                 break;
+
             case Actions.CREATE_INGREDIENT:
                 if (!(props.ingredient===undefined)){
                     for (const key in props.ingredient) {
@@ -149,9 +177,8 @@ export default function SubmitButton(props) {
                     return;
                 }
                 break;
-            case Actions.UPDATE_INGREDIENT:
-                console.log()
 
+            case Actions.UPDATE_INGREDIENT:
                 if (props.ingredient.name.trim().length>0){
                     editIngredient(props.ingredient.id,props.ingredient.name)
                         .then(res=>{
@@ -164,9 +191,16 @@ export default function SubmitButton(props) {
                 }else{
                     props.setFoutMelding(`Je hebt een lege input gegeven  je ezel`)
                 }
-
-
                 break;
+
+            case Actions.DELETE_PRODUCT:
+                deleteProduct(props.product.id)
+                    .then(res=>{
+                            navigate(`/searchproduct`)
+                        }
+                    ).catch(err=>{
+
+                })
 
         }
         console.log("Added");

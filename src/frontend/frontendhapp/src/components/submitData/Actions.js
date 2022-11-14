@@ -6,5 +6,6 @@ export const Actions = {
     CREATE_PRODUCT:"Create a product.",
     UPDATE_PRODUCT:"Update a product.",
     CREATE_INGREDIENT:"Create a ingredient",
-    UPDATE_INGREDIENT: "Update a ingredient."
+    UPDATE_INGREDIENT: "Update a ingredient.",
+    DELETE_PRODUCT: "Delete a product"
 }
