@@ -83,10 +83,16 @@ export default function ViewProductForm(props){
         </div>
     ) :(
         <div>
-            <Link to="/administration" className="createProductButton" >Home</Link>
-            <Link to="/searchproduct" className="createProductButton" >Search a product</Link>
-            <Link to="/staff" className="createProductButton" onClick={() => {cleardata()}}>Logout</Link>
-            <ProductForm product={product} toegevoegdeIngredienten={toegevoegdeIngredienten} disabled={disabled} handleChange={event=>handleChange(event)}
+            <div className={"home-button"}>
+                <Link to="/administration" className="button search-products-navigation" >Home</Link>
+            </div>
+
+            <div className={"navigation-buttons"}>
+                <Link to="/searchproduct" className="button search-products-navigation" >Search a product</Link>
+                <Link to="/staff" className="button search-products-navigation" onClick={() => {cleardata()}}>Logout</Link>
+            </div>
+
+    <ProductForm product={product} toegevoegdeIngredienten={toegevoegdeIngredienten} disabled={disabled} handleChange={event=>handleChange(event)}
                          removeFromIngredientsList={(target=>removeFromIngredientsList(target))}
                          setToegevoegdeIngredienten={(ingredient)=>setToegevoegdeIngredienten(ingredient)}
                          addIngredient={ingredient=>addIngredient(ingredient)} errorMeldingText={errorMeldingText}/>
