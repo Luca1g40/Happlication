@@ -6,9 +6,13 @@ import "../styles/AllStaffMembers.css"
 import Logout from "../components/Logout"
 import HomeNav from "../components/Homebutton"
 import OverviewTable from "../components/product/OverviewTable";
+import StaffMemberDetailsPopup from "./StaffMemberDetailsPopup";
 
 function AllStaffMembers() {
     const [members, setMembers] = useState([])
+    const [buttonPopup, setButtonPopup] = useState(false)
+    const [selectedMember, setSelectedMember] = useState();
+
 
     useEffect(() => {
         getAllStaffMembers()
@@ -47,6 +51,14 @@ function AllStaffMembers() {
         return string;
     }
 
+    function handleClick(id) {
+        let member =members.filter(member=>{
+            return member.id===id;
+        })
+        setSelectedMember(member[0])
+        setButtonPopup(true);
+    }
+
     return (
         <>
             <div className={"listDiv"}>
@@ -58,10 +70,13 @@ function AllStaffMembers() {
                 {/*        )*/}
                 {/*    }*/}
                 {/*</ul>*/}
+
                 <OverviewTable tableHeads={["name", "Rights"]} items={members}
                                leaveOutList={["operations", "claimedOrders", "claimedAndFinishedOrders", "areas", "password", "id"]}
-                               specialDisplays={new Map([["rights", (rights)=>showRights(rights)]])}/>
+                               specialDisplays={new Map([["rights", (rights)=>showRights(rights)]])} handleClick={(id)=>handleClick(id)}/>
             </div>
+            <StaffMemberDetailsPopup trigger={buttonPopup} setTrigger={setButtonPopup} member={selectedMember} unselectMember={()=>setSelectedMember(null)}/>
+
 
             <Link className={"button createStaffLink"} to="/createStaff" on>Maak een nieuw staff-member aan</Link>
             <Logout/>

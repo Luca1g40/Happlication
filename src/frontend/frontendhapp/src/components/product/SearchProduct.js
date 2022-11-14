@@ -113,7 +113,7 @@ export default function SearchProduct(){
         {/*    </table>*/}
         {/*</span>*/}
 
-        <OverviewTable tableHeads={["name","category","price","details"]} items={filteredProducts} navigate={id=>navigate(`/productdetails/${id}`)} leaveOutList={["ingredients","productDestination","id"]}
+        <OverviewTable tableHeads={["name","category","price","details"]} items={filteredProducts} handleClick={id=>navigate(`/productdetails/${id}`)} leaveOutList={["ingredients","productDestination","id"]}
                        specialDisplays={ new Map([["productCategory", (category)=>showCategory(category)]])
                        }/>
     </div>

@@ -14,7 +14,7 @@ export default function OverviewTable(props){
                 </tr>
 
                 {props.items.map(item=>{
-                    return <tr key={item.id} onClick={()=>props.navigate(item.id)}>
+                    return <tr key={item.id} onClick={()=>props.handleClick(item.id)}>
                         {Object.keys(item).map((itemKey,i)=>{
                             if (props.leaveOutList.indexOf(itemKey)===-1){
                                 if (!(props.specialDisplays===undefined)){
