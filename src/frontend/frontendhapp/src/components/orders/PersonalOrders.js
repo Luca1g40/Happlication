@@ -37,7 +37,6 @@ function OrdersDataFetching() {
                 <span>
                     <p>Signed in as: {sessionStorage.getItem("staffId")}</p>
                 </span>
-                <button onClick={()=>navigate("/orders")} >All orders</button>
             </div>
         </>
     )

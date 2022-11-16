@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/Drinks.css"
+import "../styles/Menu.css"
 import "../styles/Home.css"
 import "../styles/Lists.css"
 
@@ -11,10 +11,12 @@ export default function Drinks() {
 
     return (
         <>
-            <div className="drinksContainer">
-                <Link className="button terug" to="/">Terug</Link>
-                <Link to="/shoppingcart" className="button drinksToShoppingcart">Shopping cart</Link>
-                <Link className="button drinksToFood" to="/Foods">Gerechten</Link>
+            <div className="menu-container">
+                <Link className="button toHome" to="/"> Terug </Link>
+                <div className={"top-right-navigation"}>
+                    <Link to="/shoppingcart" className="button toShoppingcart">Shopping cart</Link>
+                    <Link className="button toFoods" to="/Foods">Gerechten</Link>
+                </div>
                 <DrinksMenu/>
             </div>
 

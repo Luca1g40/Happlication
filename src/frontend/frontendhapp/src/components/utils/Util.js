@@ -1,4 +1,4 @@
-export default function getOccuranceProducts(list) {
+export default function getOccurrenceProducts(list) {
     let productOccurances = new Map();
 
     list.map(product =>{
