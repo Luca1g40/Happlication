@@ -1,10 +1,10 @@
 import React, {useState} from 'react'
-import "../styles/Popup.css"
+import "../../styles/Popup.css"
 
 
-import Counter from "./Counter";
-import SubmitButton from "./submitData/SubmitButton";
-import {Actions} from "./submitData/Actions"
+import Counter from "../utils/Counter";
+import SubmitButton from "../submitData/SubmitButton";
+import {Actions} from "../submitData/Actions"
 
 
 function ProductDetailsPopup(props) {

@@ -1,8 +1,9 @@
 import React from "react";
 import "../styles/StaffModuleHomePagina.css"
 import {Link} from "react-router-dom";
-import Logout from "../components/Logout"
+import Logout from "../components/utils/Logout"
 import "../styles/SubmitButton.css"
+import HomeNav from "../components/utils/Homebutton";
 
 
 export default function AdministrationPage() {
@@ -18,6 +19,7 @@ export default function AdministrationPage() {
                 <hr/>
                 <Link className="button homeModule_bt_space" to="/createStaff">Create Staff</Link>
                 <Link className="button homeModule_bt_space" to="/allStaffMembers">Get All Staff</Link>
+                <Link to="/staffmodule" className="button login-button" >Home</Link>
                 <Logout/>
 
             </div>

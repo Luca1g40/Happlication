@@ -1,5 +1,5 @@
 import React , {useState}from "react";
-import Counter from "../Counter";
+import Counter from "../utils/Counter";
 import {Actions} from "../submitData/Actions";
 import SubmitButton from "../submitData/SubmitButton";
 

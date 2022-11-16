@@ -1,8 +1,6 @@
-import ErrormeldingLabel from "../ErrormeldingLabel";
+import ErrormeldingLabel from "../utils/ErrormeldingLabel";
 import React, {useEffect, useRef, useState} from "react";
 import {getAllIngredients} from "../../urlMappings/MenuRequests";
-
-
 
 export default function ProductForm(props){
 

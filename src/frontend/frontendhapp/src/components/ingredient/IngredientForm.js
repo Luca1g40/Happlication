@@ -1,4 +1,4 @@
-import ErrormeldingLabel from "../ErrormeldingLabel";
+import ErrormeldingLabel from "../utils/ErrormeldingLabel";
 import React from "react";
 
 

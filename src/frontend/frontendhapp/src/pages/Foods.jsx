@@ -1,6 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import FoodMenu from "../components/FoodMenu"
+import FoodMenu from "../components/menu/FoodMenu"
 
 
 import "../styles/Foods.css"

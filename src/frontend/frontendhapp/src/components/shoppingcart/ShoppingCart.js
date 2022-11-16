@@ -3,8 +3,8 @@ import ShoppingCartItem from "./ShoppingCartItem";
 import SubmitButton from "../submitData/SubmitButton";
 import {GetShoppingCart} from "../../urlMappings/TableRequests";
 import {Actions} from "../submitData/Actions";
-import getOccuranceProducts from "../Util";
-import OrderPlacedPopup from "../OrderPlacedPopup";
+import getOccuranceProducts from "../utils/Util";
+import OrderPlacedPopup from "../orders/OrderPlacedPopup";
 import "../../styles/Shoppingcart.css";
 import {Link} from "react-router-dom";
 

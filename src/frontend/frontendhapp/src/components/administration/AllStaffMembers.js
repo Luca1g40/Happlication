@@ -1,11 +1,10 @@
 import React, {useEffect, useState} from "react";
-import {getAllStaffMembers} from "../urlMappings/StaffRequests";
-import StaffMember from "./StaffMember";
+import {getAllStaffMembers} from "../../urlMappings/StaffRequests";
 import {Link} from "react-router-dom";
-import "../styles/AllStaffMembers.css"
-import Logout from "../components/Logout"
-import HomeNav from "../components/Homebutton"
-import OverviewTable from "../components/product/OverviewTable";
+import "../../styles/AllStaffMembers.css"
+import Logout from "../utils/Logout"
+import HomeNav from "../utils/Homebutton"
+import OverviewTable from "../product/OverviewTable";
 import StaffMemberDetailsPopup from "./StaffMemberDetailsPopup";
 
 function AllStaffMembers() {

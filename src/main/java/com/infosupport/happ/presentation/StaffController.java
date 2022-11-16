@@ -3,6 +3,7 @@ package com.infosupport.happ.presentation;
 import com.infosupport.happ.application.OrderService;
 import com.infosupport.happ.application.StaffService;
 import com.infosupport.happ.application.dto.OrderData;
+import com.infosupport.happ.application.dto.SimpleStaffData;
 import com.infosupport.happ.application.dto.StaffData;
 import com.infosupport.happ.domain.Staff;
 import com.infosupport.happ.domain.Table;
@@ -119,7 +120,7 @@ public class StaffController {
     }
 
     @GetMapping("/staff/findallstaff")
-    public List<Staff> getAllStaff() {
-            return this.staffService.findAll();
+    public List<SimpleStaffData> getAllStaff() {
+            return this.staffService.getAllStaffInfo();
     }
 }

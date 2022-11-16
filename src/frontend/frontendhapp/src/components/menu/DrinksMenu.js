@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import MenuItem from "./MenuItem";
-import {getMenuDrinkItems} from "../urlMappings/MenuRequests";
+import {getMenuDrinkItems} from "../../urlMappings/MenuRequests";
 
 
 function DrinksMenu() {

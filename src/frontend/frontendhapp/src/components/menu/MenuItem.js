@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import ProductDetailsPopup from "./ProductDetailsPopup";
+import ProductDetailsPopup from "../product/ProductDetailsPopup";
 
 
 export default function MenuItem({product}) {

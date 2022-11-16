@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react"
 import OrderItem from "./OrderItem";
-import getOccuranceProducts from "./Util";
+import getOccuranceProducts from "../utils/Util";
 
 
 export default function OrderItemList(props) {

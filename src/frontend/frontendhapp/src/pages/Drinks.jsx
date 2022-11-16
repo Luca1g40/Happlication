@@ -4,7 +4,7 @@ import "../styles/Home.css"
 import "../styles/Lists.css"
 
 import {Link} from "react-router-dom";
-import DrinksMenu from "../components/DrinksMenu"
+import DrinksMenu from "../components/menu/DrinksMenu"
 
 
 export default function Drinks() {

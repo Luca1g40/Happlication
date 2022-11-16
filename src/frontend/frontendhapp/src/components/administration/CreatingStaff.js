@@ -1,4 +1,4 @@
-import {CreateStaff} from "../urlMappings/StaffRequests";
+import {CreateStaff} from "../../urlMappings/StaffRequests";
 import {useNavigate} from "react-router-dom";
 import React, {useState} from "react";
 import { ToastContainer, toast } from 'react-toastify';

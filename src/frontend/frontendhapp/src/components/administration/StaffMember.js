@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import StaffMemberDetailsPopup from "./StaffMemberDetailsPopup";
-import "../styles/AllStaffMembers.css"
+import "../../styles/AllStaffMembers.css"
 
 
 export default function MenuItem({member}) {
