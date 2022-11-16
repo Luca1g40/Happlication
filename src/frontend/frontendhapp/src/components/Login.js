@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import React, {useState} from "react";
 import {loginRequest} from "../urlMappings/Login";
+import {configuration} from "../urlMappings/JwtHeader";
 
 function Login() {
     let navigate = useNavigate();
@@ -23,6 +24,34 @@ function Login() {
          console.log(status)
          if (status === 200) {
              navigate("/staffmodule");
+             let rights = sessionStorage.getItem("rights");
+             showRights(rights);
+
+         }
+
+         function showRights(rights){
+             let string=""
+             rights.map(right=>{
+                 switch (right){
+                     case "KITCHEN_RIGHTS":
+                         if (rights.indexOf(right)===0){
+                             string=string+"kitchen rights"
+                         }else{
+                             string=string+", kitchen rights"
+                         }
+                         break;
+                     case "BAR_RIGHTS":
+                         if (rights.indexOf(right)===0){
+                             string=string+"bar rights"
+                         }else{
+                             string=string+", bar rights"
+                         }
+
+                         break;
+                 }
+
+             })
+             return string;
          }
      }
 
