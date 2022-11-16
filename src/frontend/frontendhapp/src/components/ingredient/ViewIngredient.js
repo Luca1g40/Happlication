@@ -44,7 +44,7 @@ export default function ViewIngredient(props){
                 <Link to="/administration" className="button search-products-navigation" >Home</Link>
             </div>
             <IngredientForm errorMeldingText={foutMelding} handleChange={event=>handleChange(event)}/>
-            <SubmitButton setFoutMelding={foutMelding=>setFoutMelding(foutMelding)} disabled={disabled} setDisabled={disabled=>setDisabled(disabled)} action={Actions.CREATE_INGREDIENT} buttonText={"Create ingredient"} ingredient={ingredient}/>
+            <SubmitButton className={"button submit-button"} setFoutMelding={foutMelding=>setFoutMelding(foutMelding)} disabled={disabled} setDisabled={disabled=>setDisabled(disabled)} action={Actions.CREATE_INGREDIENT} buttonText={"Create ingredient"} ingredient={ingredient}/>
             <Logout/>
             <HomeNav/>
         </div>
