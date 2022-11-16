@@ -1,6 +1,6 @@
 import React from "react";
 import Logout from "../components/utils/Logout"
-import FetchTablesSetTrue from "../components/Administration/FetchTablesSetTrue";
+import FetchTablesSetTrue from "../components/administration/FetchTablesSetTrue";
 
 
 export default function StaffDashboard() {

@@ -1,5 +1,5 @@
 import {Link} from "react-router-dom";
-import Notifications from "../components/Administration/Notifications";
+import Notifications from "../components/administration/Notifications";
 import React from "react";
 
 export default function Home() {
