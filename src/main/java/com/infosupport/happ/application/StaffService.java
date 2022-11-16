@@ -103,6 +103,22 @@ public class StaffService {
         return orderData;
     }
 
+    public StaffData updateStaff(int password, String name, List<Rights> rights) {
+        if(name.equals("")){
+            throw new InvalidValueException("name");
+        }
+        staffExistsByPassword(password);
+        Staff staff = staffRepository.getByPassword(password);
+
+        staff.setName(name);
+        staff.setPassword(password);
+        staff.setRights(rights);
+
+        this.staffRepository.save(staff);
+
+        return createStaffData(staff);
+    }
+
 
     public StaffData createStaffData(Staff staff) {
         return new StaffData(
@@ -134,21 +150,5 @@ public class StaffService {
             }
         }
         return areaWithoutStaffDataList;
-    }
-
-    public StaffData updateStaff(int password, String name, List<Rights> rights) {
-        if(name.equals("")){
-            throw new InvalidValueException("name");
-        }
-        staffExistsByPassword(password);
-        Staff staff = staffRepository.getByPassword(password);
-
-        staff.setName(name);
-        staff.setPassword(password);
-        staff.setRights(rights);
-
-        this.staffRepository.save(staff);
-
-        return createStaffData(staff);
     }
 }

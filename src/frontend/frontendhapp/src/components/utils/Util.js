@@ -35,4 +35,21 @@ function productCompare(obj1, obj2){
     return obj1.name === obj2.name;
 }
 
+export function showCategory(category){
+    switch (category){
+        case "MAIN_COURSE":
+            return "Hoofdgerechten"
+        case "SIDE":
+            return "Bijgerechten";
+        case "EXTRA":
+            return "Extra";
+        case "DRINKS":
+            return "Drinks";
+        case "DESSERT":
+            return "Dessert";
+        case "STARTER":
+            return "Voorgerechten"
+    }
+}
+
 
