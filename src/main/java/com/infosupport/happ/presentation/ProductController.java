@@ -26,7 +26,7 @@ public final class ProductController {
         try {
             return this.productService.createProduct(
                     productRequest.name,
-                    productRequest.productCategory,
+                    productRequest.productCategoryName,
                     productRequest.price,
                     productRequest.ingredients,
                     productRequest.details,
@@ -52,15 +52,21 @@ public final class ProductController {
         return productService.findAll();
     }
 
-    @GetMapping("/product/drinks")
-    private List<Product> findAllDrinks() {
-        return productService.findAllDrinks();
-    }
+//    @GetMapping("/product/drinks")
+//    private List<Product> findAllDrinks() {
+//        return productService.findAllDrinks();
+//    }
+//
+//    @GetMapping("/product/food")
+//    private List<Product> findAllFood() {
+//        return productService.findAllFood();
+//    }
 
-    @GetMapping("/product/food")
-    private List<Product> findAllFood() {
-        return productService.findAllFood();
-    }
+    //TODO IMPLEMENTEER
+//    @GetMapping("/product/weetnoggeennaam")
+//    private List<Product> getProductsBasedOnSubCategory(){
+//
+//    }
 
     @PutMapping("/product/{productid}/prepstatus")
     private ProductData changePrepStatus(@PathVariable("productid") Long productId) {
@@ -78,7 +84,7 @@ public final class ProductController {
         try {
             return this.productService.updateProduct(
                     productRequest.name,
-                    productRequest.productCategory,
+                    productRequest.productCategoryName,
                     productRequest.price,
                     productId,
                     productRequest.ingredients,

@@ -14,7 +14,9 @@ public class Product {
     @ManyToMany
     private List<Ingredient> ingredients;
 
+    @ManyToOne
     private ProductCategory productCategory;
+
     private double price;
 
     private String details;

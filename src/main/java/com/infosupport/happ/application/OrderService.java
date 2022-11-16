@@ -1,6 +1,7 @@
 package com.infosupport.happ.application;
 
 import com.infosupport.happ.application.dto.OrderData;
+import com.infosupport.happ.application.dto.ProductCategoryData;
 import com.infosupport.happ.application.dto.ProductData;
 import com.infosupport.happ.data.BarOrderRepository;
 import com.infosupport.happ.data.KitchenOrderRepository;
@@ -146,7 +147,7 @@ public class OrderService {
         return productDataList;
     }
     public ProductData createProductData(Product product) {
-        return new ProductData(product.getId(),product.getName(),product.getProductCategory(),product.getPrice(),product.getIngredients(),product.getDetails(),product.getProductDestination());
+        return new ProductData(product.getId(),product.getName(),new ProductCategoryData(product.getProductCategory().getId(),product.getProductCategory().getName()),product.getPrice(),product.getIngredients(),product.getDetails(),product.getProductDestination());
     }
 
 

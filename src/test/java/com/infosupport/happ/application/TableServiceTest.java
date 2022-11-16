@@ -41,8 +41,8 @@ public class TableServiceTest {
         this.productService = mock(ProductService.class);
         this.orderRepository = mock(OrderRepository.class);
         this.tableService = new TableService(tableRepository, productService);
-        this.productStarter = new Product("kip", new ArrayList<>(), STARTER, 12.50, "lekker vis",ProductDestination.KITCHEN_PRODUCT);
-        this.productMain = new Product("vis", new ArrayList<>(), MAIN_COURSE, 7.50, "lekker kip", ProductDestination.KITCHEN_PRODUCT);
+//        this.productStarter = new Product("kip", new ArrayList<>(), STARTER, 12.50, "lekker vis",ProductDestination.KITCHEN_PRODUCT);
+//        this.productMain = new Product("vis", new ArrayList<>(), MAIN_COURSE, 7.50, "lekker kip", ProductDestination.KITCHEN_PRODUCT);
 
 
         this.table = new Table(LocalTime.now(), LocalTime.parse("02:00:00"),
