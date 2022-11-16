@@ -30,7 +30,7 @@ export default function OrdersOverview(props) {
         <div className={"grid-container"}>
             {
                 props.orders.map((order, i) =>
-                    <div key={order.id} className={"grid-item grid-item" + i} onClick={(event) => {
+                    <div key={order.id} className={"grid-item"} onClick={(event) => {
                         addOrders(order.id);
                         changeStyle(event)
                     }}>

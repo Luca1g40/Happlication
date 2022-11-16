@@ -5,7 +5,7 @@ import {configuration} from "./JwtHeader";
 export function getMenuFoodItems() {
     return axios.get("http://localhost:8080/happ/product/food", configuration)
         .then(res => {
-            console.log(res)
+            console.log(res.data)
             return res.data
         })
         .catch(err => {

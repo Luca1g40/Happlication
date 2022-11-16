@@ -1,6 +1,8 @@
 import {Link} from "react-router-dom";
 import Notifications from "../components/administration/Notifications";
 import React from "react";
+import "../styles/Home.css"
+import "../styles/GlobalStyling.css"
 
 export default function Home() {
     return <>
@@ -16,16 +18,10 @@ export default function Home() {
                     Wij bieden de keuze uit meer dan 120 hoogstaande originele Fusion-, Wok- Sushi- en
                     Grill-gerechten.</p>
             </div>
-            <div>
                 <Link className="button drankjes" to="Drinks">Dranken</Link>
-            </div>
-            <div>
                 <Link className="button gerechten" to="Foods">Gerechten</Link>
-            </div>
+            <Notifications/>
 
-            <div>
-                <Notifications/>
-            </div>
 
         </div>
     </>

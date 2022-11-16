@@ -7,7 +7,6 @@
     box-shadow: rgba(0, 0, 0, 0.19) 0 10px 20px, rgba(0, 0, 0, 0.23) 0 6px 6px;
 }
 
-
 .left-column{
     position: relative;
     display: inline-block;
@@ -21,6 +20,8 @@
 .ingredient-dropdown {
     margin-left: 10px;
     margin-top: 0;
+    height: 30px;
+
 }
 
 .add-ingredient-button{
@@ -29,8 +30,8 @@
     float: left;
     margin-top: 0;
     margin-left: 10px;
-
-
+    border: 1px solid #333;
+    height: 30px;
 }
 
 .right-column{
@@ -38,6 +39,8 @@
     display: inline-block;
     float: left;
     margin: 10px;
+    height: 30px;
+    width: 20%;
 }
 
 .details-text{
@@ -55,11 +58,6 @@
     height: 85%;
 }
 
-.submit-button{
-    position:absolute;
-    bottom: 5%;
-    right: 5%;
-}
 
 .remove-ingredient-button{
     background-color: #e3a768;
@@ -114,4 +112,8 @@
 
 .details-text{
     resize: none;
+}
+
+.products-navigation{
+    margin: 5px;
 }

@@ -33,7 +33,7 @@ function UnclaimedOrdersComponent(props) {
     }
 
     return (
-        <div>
+        <>
             <OrdersOverview orders={orders} selectedOrders={selectedOrders} setSelectedOrders={setSelectedOrders} staffRights={props.rights}/>
             <div className={"bottom-bar"}>
                 <div className={"claim-order-button"}>
@@ -50,7 +50,7 @@ function UnclaimedOrdersComponent(props) {
                     <p>Signed in as: {sessionStorage.getItem("staffId")}</p>
                 </span>
             </div>
-        </div>
+        </>
     )
 }
 

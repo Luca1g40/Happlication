@@ -40,7 +40,7 @@
     margin-left: 0;
 }
 
-.listItem, h1 {
+.listItem{
     font-family: Helvetica, serif;
     padding: 15px;
     margin: 2px;

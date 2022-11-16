@@ -23,12 +23,10 @@ function Notifications(){
     const notify = () => toast(`U wordt zo snel mogelijk geholpen door een van onze Obers!`);
 
     return (
-        <div className="container">
-
+        <>
             <button  onClick={() => { tableHelp(); notify();}} className="button position-absolute bottom-0 end-0 m-4">Call Ober!</button>
             <ToastContainer />
-
-        </div>
+        </>
     );
 }
 

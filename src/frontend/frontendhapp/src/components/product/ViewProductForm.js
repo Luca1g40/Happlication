@@ -63,19 +63,19 @@ export default function ViewProductForm(props){
         setErrorMeldingText("");
     }
 
-    function cleardata() {
+    function clearData() {
         sessionStorage.clear();
     }
 
     return (params.id===undefined) ? (
         <div>
             <div className={"home-button"}>
-                <Link to="/administration" className="button search-products-navigation" >Home</Link>
+                <Link to="/administration" className="button products-navigation" >Home</Link>
             </div>
 
             <div className={"navigation-buttons"}>
                 <Link to="/searchproduct" className="button" >Search a product</Link>
-                <Link to="/staff" className="button search-products-navigation" onClick={() => {cleardata()}}>Log out</Link>
+                <Link to="/staff" className="button products-navigation" onClick={() => {clearData()}}>Log out</Link>
             </div>
 
             <ProductForm toegevoegdeIngredienten={toegevoegdeIngredienten} disabled={disabled} handleChange={event=>handleChange(event)} removeFromIngredientsList={(target=>removeFromIngredientsList(target))} setAddedIngredients={(ingredient) => setToegevoegdeIngredienten(ingredient)} addIngredient={ingredient=>addIngredient(ingredient)} errorMeldingText={errorMeldingText}/>
@@ -86,12 +86,12 @@ export default function ViewProductForm(props){
     ) :(
         <div>
             <div className={"home-button"}>
-                <Link to="/administration" className="button search-products-navigation" >Home</Link>
+                <Link to="/administration" className="button products-navigation" >Home</Link>
             </div>
 
             <div className={"navigation-buttons"}>
-                <Link to="/searchproduct" className="button search-products-navigation" >Search a product</Link>
-                <Link to="/staff" className="button search-products-navigation" onClick={() => {cleardata()}}>Logout</Link>
+                <Link to="/searchproduct" className="button products-navigation" >Search a product</Link>
+                <Link to="/staff" className="button products-navigation" onClick={() => {clearData()}}>Logout</Link>
             </div>
 
     <ProductForm product={product} toegevoegdeIngredienten={toegevoegdeIngredienten} disabled={disabled} handleChange={event=>handleChange(event)}

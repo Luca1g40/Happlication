@@ -2,9 +2,6 @@ import React from "react";
 import "../styles/StaffModuleHomePagina.css"
 import {Link} from "react-router-dom";
 import Logout from "../components/utils/Logout"
-import "../styles/SubmitButton.css"
-import HomeNav from "../components/utils/Homebutton";
-
 
 export default function AdministrationPage() {
     return (
