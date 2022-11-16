@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import "../styles/staffNotificationCard.css"
-import {configuration} from "../urlMappings/JwtHeader";
+import "../../styles/staffNotificationCard.css"
+import {configuration} from "../../urlMappings/JwtHeader";
 
-function FetchTablesSettedOnTrue() {
+function FetchTablesSetTrue() {
     const [tafelsonTrue, setTafelsOnTrue] = useState([])
     const staffId = sessionStorage.getItem("staffId");
 
@@ -54,4 +54,4 @@ function FetchTablesSettedOnTrue() {
     )
 }
 
-export default FetchTablesSettedOnTrue
+export default FetchTablesSetTrue

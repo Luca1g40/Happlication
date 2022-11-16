@@ -1,7 +1,7 @@
-import "../styles/Popup.css"
-import "../styles/AllStaffMembers.css"
+import "../../styles/Popup.css"
+import "../../styles/AllStaffMembers.css"
 import React, {useEffect} from "react";
-import {DeleteStaff, getAllStaffMembers, UpdateStaff} from "../urlMappings/StaffRequests";
+import {DeleteStaff, getAllStaffMembers, UpdateStaff} from "../../urlMappings/StaffRequests";
 
 function ProductDetailsPopup(props) {
 

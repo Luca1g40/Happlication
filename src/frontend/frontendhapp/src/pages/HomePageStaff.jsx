@@ -1,5 +1,5 @@
 import "../styles/HomePageStaff.css"
-import Login from "../components/Login";
+import Login from "../components/utils/Login";
 
 
 export default function Staff() {

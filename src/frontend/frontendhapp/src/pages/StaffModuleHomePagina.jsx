@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/StaffModuleHomePagina.css"
 import {Link} from "react-router-dom";
-import Logout from "../components/Logout"
+import Logout from "../components/utils/Logout"
 
 
 export default function StaffModuleHomePagina() {

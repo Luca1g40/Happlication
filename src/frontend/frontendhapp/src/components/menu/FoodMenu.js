@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import MenuItem from "./MenuItem";
-import {getMenuFoodItems} from "../urlMappings/MenuRequests";
+import {getMenuFoodItems} from "../../urlMappings/MenuRequests";
 import {Link} from "react-router-dom";
 
 

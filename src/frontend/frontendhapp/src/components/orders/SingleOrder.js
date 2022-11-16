@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
-import {setOrderToDone} from "../urlMappings/OrderRequests";
-import getOccuranceProducts from "./Util";
+import {setOrderToDone} from "../../urlMappings/OrderRequests";
+import getOccuranceProducts from "../utils/Util";
 
 export default function SingleOrder(props) {
 

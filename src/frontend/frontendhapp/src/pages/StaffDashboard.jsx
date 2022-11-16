@@ -1,6 +1,6 @@
 import React from "react";
-import Logout from "../components/Logout"
-import FetchTablesSettedOnTrue from "../staff_components/FetchTablesSettedOnTrue";
+import Logout from "../components/utils/Logout"
+import FetchTablesSetTrue from "../components/Administration/FetchTablesSetTrue";
 
 
 export default function StaffDashboard() {
@@ -8,7 +8,7 @@ export default function StaffDashboard() {
         <>
             <div className="staffContainer">
                 <h1>Staff Dashboard</h1>
-                <FetchTablesSettedOnTrue/>
+                <FetchTablesSetTrue/>
                 <Logout/>
             </div>
         </>
