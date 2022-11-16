@@ -37,15 +37,15 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().configurationSource(corsConfigurationSource());
-        http.csrf().disable()
+        http.cors().configurationSource(corsConfigurationSource()).and().
+                csrf().disable()
                 .authorizeRequests().antMatchers("/authenticate").permitAll()
-                .antMatchers("/happ/product/**").permitAll()
+                .antMatchers("/happ/product/**").hasAuthority("KITCHEN_RIGHTS")
                 .antMatchers("/happ/table/**").permitAll()
                 .anyRequest().authenticated() // Gives everybody acces to API "//authenticate" so then can login
                 .and().sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+                .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
     @Bean

@@ -23,6 +23,7 @@ function Login() {
          console.log(status)
          if (status === 200) {
              navigate("/staffmodule");
+             window.location.reload();
          }
      }
 
