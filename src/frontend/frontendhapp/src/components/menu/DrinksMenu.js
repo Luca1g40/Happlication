@@ -17,7 +17,7 @@ function DrinksMenu() {
     }, [])
 
     return (
-        <div className={"listDiv"}>
+        <div className={"list-wrapper"}>
             <ul className={"list"}>
                 <h1>Dranken</h1>
                 <SubCategory products={products} category={"DRINKS"}/>

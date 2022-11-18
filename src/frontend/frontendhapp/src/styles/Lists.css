@@ -29,10 +29,7 @@
     width: 50px;
 }
 
-.listDiv {
-    width: 50%;
-    max-width: 800px;
-    margin: auto;
+.list-wrapper {
 }
 
 .productSpan {
@@ -55,8 +52,5 @@ ul {
     padding: 0;
     overflow: hidden;
     overflow-y: scroll;
-    width: inherit;
-    position: absolute;
-    height: 80%;
 }
 

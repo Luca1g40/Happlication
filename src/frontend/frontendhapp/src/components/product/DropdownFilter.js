@@ -27,7 +27,6 @@ export default function DropdownFilter(props){
     };
     const handleChange = (selected) => {
         if (!(selected.value.localeCompare(props.optionSelected.value))){
-            console.log("same shi")
             props.setOptionSelected([])
         }else {
             props.setOptionSelected(selected);

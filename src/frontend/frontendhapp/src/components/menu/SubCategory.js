@@ -12,7 +12,7 @@ export default function SubCategory (props){
     }
 
     return (showProductBasedOnCategory(props.category).length > 0) ? (
-        <div className={"subcategory-div"}>
+        <div className={"subcategory-div"} ref={props.ref}>
             <h3>{showCategory(props.category)}</h3>
                 {
                     showProductBasedOnCategory(props.category).map(product => {
