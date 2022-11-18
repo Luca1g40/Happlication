@@ -12,8 +12,8 @@ export default function Foods() {
     return (
         <>
             <div className="menu-container">
-                <Link className="button toHome" to="/"> Terug </Link>
-                <div className={"top-right-navigation"}>
+                <div className={"navigation-buttons-menu space-around"}>
+                    <Link className="button toHome" to="/"> Terug </Link>
                     <Link to="/shoppingcart" className="button toShoppingcart">Shopping cart</Link>
                     <Link className="button toDrinks" to="/Drinks">Dranken</Link>
                 </div>

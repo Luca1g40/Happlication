@@ -60,16 +60,8 @@ function AllStaffMembers() {
 
     return (
         <>
-            <div className={"listDiv"}>
+            <div className={"list-wrapper"}>
                 <h1>Staff members</h1>
-                {/*<ul className={"list"}>*/}
-                {/*    {*/}
-                {/*        members.map((member, i) =>*/}
-                {/*            <StaffMember key={member.id} member={member}/>*/}
-                {/*        )*/}
-                {/*    }*/}
-                {/*</ul>*/}
-
                 <OverviewTable tableHeads={["name", "Rights"]} items={members}
                                leaveOutList={["operations", "claimedOrders", "claimedAndFinishedOrders", "areas", "password", "id"]}
                                specialDisplays={new Map([["rights", (rights)=>showRights(rights)]])} handleClick={(id)=>handleClick(id)}/>
