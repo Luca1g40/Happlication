@@ -6,9 +6,13 @@ import com.infosupport.happ.domain.Product;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import com.infosupport.happ.presentation.dto.ProductRequest;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -33,6 +37,18 @@ public final class ProductController {
                     productRequest.productDestination);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @RequestMapping(value = "/image", produces = {MediaType.IMAGE_PNG_VALUE, "application/json"})
+    public ResponseEntity<?> uploadImage(@RequestParam("imageFile") MultipartFile file,
+                                         @RequestParam("imageName") String name) {
+//        Path fileNamePath = Paths.get(imageDirectory,
+//                name.concat(".").concat(FilenameUtils.getExtension(file.getOriginalFilename())));
+        try {
+//            Files.write(fileNamePath, file.getBytes());
+            return new ResponseEntity<>(name, HttpStatus.CREATED);
+        } catch (Exception ex) {
+            return new ResponseEntity<>("Image is not uploaded", HttpStatus.BAD_REQUEST);
         }
     }
 

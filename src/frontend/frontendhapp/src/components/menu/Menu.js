@@ -14,7 +14,6 @@ export default function Menu (props){
                 {
                     props.subCategories.map(subCategorie =>{
                         return <SubCategory products={props.products} category={subCategorie}/>
-
                     })
                 }
 

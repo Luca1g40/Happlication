@@ -11,11 +11,17 @@ public class Product {
     private Long id;
     private String name;
 
+    @Enumerated(EnumType.STRING)
+    private ProductType productType;
+
     @ManyToMany
     private List<Ingredient> ingredients;
 
     @ManyToOne
     private ProductCategory productCategory;
+
+    @ManyToOne
+    private ProductSubCategory productSubCategory;
 
     private double price;
 
@@ -24,13 +30,15 @@ public class Product {
     @Enumerated(EnumType.STRING)
     private ProductDestination productDestination;
 
-    public Product(String name, List<Ingredient> ingredients, ProductCategory productCategory, double price, String details, ProductDestination productDestination) {
+    public Product(String name, List<Ingredient> ingredients, ProductCategory productCategory, double price, String details, ProductDestination productDestination,ProductSubCategory productSubCategory,ProductType productType) {
         this.name = name;
         this.ingredients = ingredients;
         this.productCategory = productCategory;
         this.price = price;
         this.details = details;
         this.productDestination = productDestination;
+        this.productType = productType;
+        this.productSubCategory = productSubCategory;
     }
 
     public String getDetails() {

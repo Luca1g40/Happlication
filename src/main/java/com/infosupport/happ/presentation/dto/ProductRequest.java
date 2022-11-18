@@ -13,5 +13,6 @@ public class ProductRequest {
     public List<String> ingredients;
     public String details;
     public ProductDestination productDestination;
+    public String image;
 
 }
