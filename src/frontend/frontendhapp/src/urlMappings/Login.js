@@ -23,6 +23,18 @@ export function loginRequest(password){
         })
 }
 
+//Checks if status of ALL responses is 403
+//If true then redirect user to proper error page
+(async () => {
+
+    axios.interceptors.response.use(response => response, error => {
+        if (error.response.status === 403) {
+            // redirect to 403 page
+            window.location = '/error403'
+        }
+    });
+})();
+
 function parseJwt(token) {
     if (!token) {
         return;

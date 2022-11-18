@@ -17,6 +17,8 @@ import CreateStaff from "./pages/CreateStaff"
 import AllStaffMembers from "./Administration/AllStaffMembers";
 import StaffModuleHomePagina from "./pages/StaffModuleHomePagina";
 import AdministrationPage from "./pages/AdministrationPage";
+import Error403Page from "./pages/Error403Page";
+
 
 function App() {
     return (
@@ -38,6 +40,7 @@ function App() {
             <Route path="ingredientdetails/:id" element={<ViewIngredient/>}/>
             <Route path="createingredient" element={<ViewIngredient/>}/>
             <Route path="searchproduct" element={<SearchProduct/>}/>
+            <Route path="error403" element={<Error403Page/>}/>
         </Routes>
     )
 
