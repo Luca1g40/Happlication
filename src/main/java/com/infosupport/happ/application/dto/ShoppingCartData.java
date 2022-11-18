@@ -12,7 +12,7 @@ public class ShoppingCartData {
         productDataList = new ArrayList<>();
 
         for (Product product:productList) {
-             productDataList.add(new ProductData(product.getId(), product.getName(),new ProductCategoryData(product.getProductCategory().getId(),product.getProductCategory().getName()) ,product.getPrice(),product.getIngredients(),product.getDetails(),product.getProductDestination()));
+             productDataList.add(new ProductData(product.getId(), product.getName(),new ProductCategoryData(product.getProductCategory().getId(),product.getProductCategory().getName()) ,product.getPrice(),product.getIngredients(),product.getDetails(),product.getProductDestination(),product.getProductType(),new ProductSubCategoryData(product.getProductSubCategory().getId(),product.getName())));
         }
     }
 }

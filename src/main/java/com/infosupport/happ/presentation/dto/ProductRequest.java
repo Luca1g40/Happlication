@@ -1,6 +1,7 @@
 package com.infosupport.happ.presentation.dto;
 
 import com.infosupport.happ.domain.ProductDestination;
+import com.infosupport.happ.domain.ProductType;
 
 import java.util.List;
 
@@ -14,5 +15,7 @@ public class ProductRequest {
     public String details;
     public ProductDestination productDestination;
     public String image;
+    public String productSubCategoryName;
+    public ProductType productType;
 
 }

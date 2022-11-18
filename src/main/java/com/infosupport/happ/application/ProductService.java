@@ -2,13 +2,11 @@ package com.infosupport.happ.application;
 
 import com.infosupport.happ.application.dto.ProductCategoryData;
 import com.infosupport.happ.application.dto.ProductData;
+import com.infosupport.happ.application.dto.ProductSubCategoryData;
 import com.infosupport.happ.data.IngredientRepository;
 import com.infosupport.happ.data.ProductCategoryRepository;
 import com.infosupport.happ.data.ProductRepository;
-import com.infosupport.happ.domain.Ingredient;
-import com.infosupport.happ.domain.Product;
-import com.infosupport.happ.domain.ProductCategory;
-import com.infosupport.happ.domain.ProductDestination;
+import com.infosupport.happ.domain.*;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import com.infosupport.happ.presentation.dto.ProductCategoryRequest;
 import org.springframework.stereotype.Service;
@@ -22,15 +20,17 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final IngredientRepository ingredientRepository;
     private final ProductCategoryService productCategoryService;
+    private final ProductSubCategoryService productSubCategoryService;
 
-    public ProductService(ProductRepository productRepository, IngredientRepository ingredientRepository, ProductCategoryService productCategoryService) {
+    public ProductService(ProductRepository productRepository, IngredientRepository ingredientRepository, ProductCategoryService productCategoryService, ProductSubCategoryService productSubCategoryService) {
         this.productRepository = productRepository;
         this.ingredientRepository = ingredientRepository;
         this.productCategoryService = productCategoryService;
+        this.productSubCategoryService = productSubCategoryService;
     }
 
-    public ProductData createProduct(String name, String productCategoryName, double price, List<String> ingredients, String details, ProductDestination productDestination) {
-        Product product = new Product(name, convertIngredientStringToIngredient(ingredients), productCategoryService.getProductCategoryByName(productCategoryName), price, details,productDestination);
+    public ProductData createProduct(String name, String productCategoryName, double price, List<String> ingredients, String details, ProductDestination productDestination, String productSubCategoryName,ProductType productType) {
+        Product product = new Product(name, convertIngredientStringToIngredient(ingredients), productCategoryService.getProductCategoryByName(productCategoryName), price, details,productDestination,productSubCategoryService.getByName(productSubCategoryName), productType);
         productRepository.save(product);
         return createProductData(product);
     }
@@ -77,7 +77,9 @@ public class ProductService {
                 product.getPrice(),
                 product.getIngredients(),
                 product.getDetails(),
-                product.getProductDestination()
+                product.getProductDestination(),
+                product.getProductType(),
+                createProductSubCategoryData(product.getProductSubCategory())
         );
     }
 
@@ -96,6 +98,10 @@ public class ProductService {
     }
     public ProductCategoryData createProductCategoryData(ProductCategory productCategory){
         return new ProductCategoryData(productCategory.getId(), productCategory.getName());
+    }
+
+    public ProductSubCategoryData createProductSubCategoryData(ProductSubCategory productSubCategory){
+        return new ProductSubCategoryData(productSubCategory.getId(), productSubCategory.getName());
     }
     public List<Product> findAll() {
         return productRepository.findAll();

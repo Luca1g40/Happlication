@@ -93,6 +93,14 @@ public class Product {
         return productDestination;
     }
 
+    public ProductType getProductType() {
+        return productType;
+    }
+
+    public ProductSubCategory getProductSubCategory() {
+        return productSubCategory;
+    }
+
     @Override
     public String toString() {
         return "Product{" +

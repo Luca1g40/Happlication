@@ -34,7 +34,9 @@ public final class ProductController {
                     productRequest.price,
                     productRequest.ingredients,
                     productRequest.details,
-                    productRequest.productDestination);
+                    productRequest.productDestination,
+                    productRequest.productSubCategoryName,
+                    productRequest.productType);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
         }
