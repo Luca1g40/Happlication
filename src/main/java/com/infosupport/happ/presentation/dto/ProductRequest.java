@@ -15,7 +15,6 @@ public class ProductRequest {
     public String details;
     public ProductDestination productDestination;
     public String image;
-    public String productSubCategoryName;
     public ProductType productType;
 
 }

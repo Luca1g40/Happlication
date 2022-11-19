@@ -8,6 +8,7 @@ import {
 } from "../../urlMappings/TableRequests";
 import {Actions} from "./Actions"
 import {
+    createCategory,
     createIngredient,
     createProduct,
     deleteProduct,
@@ -18,6 +19,26 @@ import {
 
 export default function SubmitButton(props) {
     let navigate = useNavigate();
+
+    function validateProductObject(product,ingredientList){
+        //dit is bij niet genoeg input velden ingevuld
+        console.log(product)
+        if (Object.keys(product).length===6 && ingredientList.length>0){
+            for (const key in product) {
+                if (!(String(product[key]).replace(/\s+/g, '').length>0)){
+                    // dit is bj een iput veld met aleen spaties erin
+                    props.setFoutMelding(`Je hebt een lege input gegeven bij ${key.replace("-", " ")} `)
+                    return false;
+                }else{
+                }
+            }
+            return true;
+        }else{
+            props.setFoutMelding(`Je hebt een of meer lege input velden `)
+            return false;
+        }
+
+    }
 
     function handleClick() {
         switch (props.action) {
@@ -67,28 +88,19 @@ export default function SubmitButton(props) {
                     });
                 break;
             case Actions.CREATE_PRODUCT:
-                if (Object.keys(props.product).length===5 && props.ingredientList.length>0){
-                    for (const key in props.product) {
-                        if (!(String(props.product[key]).replace(/\s+/g, '').length>0)){
-                            props.setFoutMelding(`Je hebt een lege input gegeven bij ${key.replace("-", " ")} `)
-                            return;
-                        }else{
-                        }
-                    }
-
-                    createProduct(props.product.name,props.ingredientList,props.product.destination,props.product.category,props.product.details,props.product.price)
+                if (validateProductObject(props.product,props.ingredientList)){
+                    createProduct(props.product.name,props.ingredientList,props.product.destination,props.product.subcategory,props.product.details,props.product.price,props.product.type)
                         .then(res=>{
-                            window.location.reload()
-                            navigate(`/createproduct`)
+                                // window.location.reload()
+                                // navigate(`/createproduct`)
+                            console.log(res)
                             }
 
                         ).catch(err=>{
-                            console.log(err)
+                        console.log(err)
                     })
-                }else{
-                    props.setFoutMelding(`Je hebt een of meer lege input velden `)
-                    return;
                 }
+
                 break;
             case Actions.UPDATE_PRODUCT:
 
@@ -159,6 +171,16 @@ export default function SubmitButton(props) {
                             navigate(`/searchproduct`)
                         }
                     )
+                break;
+            case Actions.CREATE_CATEGORY:
+                createCategory(props.category.name)
+                    .then(res=>{
+                        window.location.reload()
+                        navigate(`/createcategory`)
+                        console.log(res)
+                    }).catch(err=>{
+                        console.log(err)
+                })
         }
     }
 

@@ -6,7 +6,7 @@ import {configuration} from "../../urlMappings/JwtHeader";
 function FetchTablesSetTrue() {
     const [tafelsonTrue, setTafelsOnTrue] = useState([])
     const staffId = sessionStorage.getItem("staffId");
-
+//TODO WEG ERMEE -> urlmappings
     useEffect(() => {
         axios.get(`http://localhost:8080/happ/staff/${staffId}/tablethatneedhelp`, configuration)
             .then(res => {

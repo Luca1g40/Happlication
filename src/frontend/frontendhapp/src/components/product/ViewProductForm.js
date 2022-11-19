@@ -26,7 +26,7 @@ export default function ViewProductForm(props){
                 })
         }else{
             setProduct({
-                "category":"DRINKS",
+                "type":"DRINKS",
                 "destination":"BAR_PRODUCT"
             })
         }

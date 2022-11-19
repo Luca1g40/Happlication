@@ -20,9 +20,6 @@ public class Product {
     @ManyToOne
     private ProductCategory productCategory;
 
-    @ManyToOne
-    private ProductSubCategory productSubCategory;
-
     private double price;
 
     private String details;
@@ -30,7 +27,7 @@ public class Product {
     @Enumerated(EnumType.STRING)
     private ProductDestination productDestination;
 
-    public Product(String name, List<Ingredient> ingredients, ProductCategory productCategory, double price, String details, ProductDestination productDestination,ProductSubCategory productSubCategory,ProductType productType) {
+    public Product(String name, List<Ingredient> ingredients, ProductCategory productCategory, double price, String details, ProductDestination productDestination,ProductType productType) {
         this.name = name;
         this.ingredients = ingredients;
         this.productCategory = productCategory;
@@ -38,7 +35,6 @@ public class Product {
         this.details = details;
         this.productDestination = productDestination;
         this.productType = productType;
-        this.productSubCategory = productSubCategory;
     }
 
     public String getDetails() {
@@ -97,9 +93,6 @@ public class Product {
         return productType;
     }
 
-    public ProductSubCategory getProductSubCategory() {
-        return productSubCategory;
-    }
 
     @Override
     public String toString() {

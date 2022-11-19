@@ -17,6 +17,8 @@ import CreateStaff from "./pages/CreateStaff"
 import AllStaffMembers from "./components/administration/AllStaffMembers";
 import StaffModuleHomePagina from "./pages/StaffModuleHomePagina";
 import AdministrationPage from "./pages/AdministrationPage";
+import ViewProductCategory from "./components/productcategory/ViewProductCategory";
+import Menu from "./components/menu/Menu";
 
 function App() {
     return (
@@ -24,6 +26,7 @@ function App() {
             <Route path="/" element={<Home/>}/>
             <Route path="Drinks" element={<Drinks/>}/>
             <Route path="Foods" element={<Foods/>}/>
+            <Route path="/menu/:type" element={<Menu/>}/>
             <Route path="orders" element={<Orders/>}/>
             <Route path="shoppingcart" element={<ShoppingCart/>}/>
             <Route path="login" element={<Staff/>}/>
@@ -38,6 +41,10 @@ function App() {
             <Route path="ingredientdetails/:id" element={<ViewIngredient/>}/>
             <Route path="createingredient" element={<ViewIngredient/>}/>
             <Route path="searchproduct" element={<SearchProduct/>}/>
+            <Route path="createcategory/" element={<ViewProductCategory/>}/>
+            <Route path="categorydetails/:id" element={<ViewProductCategory/>}/>
+
+
         </Routes>
     )
 

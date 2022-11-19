@@ -24,11 +24,11 @@ function FoodMenu() {
 
 
     function getUniqueProductCategories(products){
-        let productCategories = products.map(product => {return product.productCategory})
+        let productCategories = products.map(product => {return product.productCategoryData.name})
         const uniqueProductCategories = productCategories.filter((x, i, a) => a.indexOf(x) === i)
-        let sortedUniqueProductCategories = uniqueProductCategories.map(category => {return showCategory(category)})
+        let sortedUniqueProductCategories = uniqueProductCategories.map(category => {return category})
+        console.log(sortedUniqueProductCategories)
         return sortedUniqueProductCategories.sort()
-
     }
 
     function scrollToElement(ref){
@@ -49,15 +49,8 @@ function FoodMenu() {
             <div className={"list-wrapper"}>
                 <ul className={"list"}>
                     <h1>Gerechten</h1>
-                    <div ref={Voorgerechten}>
-                        <SubCategory products={products} category={"STARTER"}/>
-                    </div>
-                    <div  ref={Hoofdgerechten}>
-                    <SubCategory products={products} category={"MAIN_COURSE"}/>
-                    </div>
-                    <div ref={Bijgerechten}>
-                    <SubCategory products={products} category={"SIDE"} />
-                    </div>
+
+                    <Menu products={products} subCategories={getUniqueProductCategories(products)}/>
 
                 </ul>
             </div>

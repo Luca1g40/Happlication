@@ -14,9 +14,8 @@ public class ProductData {
     public final String details;
     public final ProductDestination productDestination;
     public final ProductType productType;
-    public final ProductSubCategoryData productSubCategoryData;
 
-    public ProductData(Long id, String name, ProductCategoryData productCategoryData, double price, List<Ingredient> ingredientList, String details, ProductDestination productDestination, ProductType productType,ProductSubCategoryData productSubCategoryData) {
+    public ProductData(Long id, String name, ProductCategoryData productCategoryData, double price, List<Ingredient> ingredientList, String details, ProductDestination productDestination, ProductType productType) {
         this.id = id;
         this.name = name;
         this.productCategoryData = productCategoryData;
@@ -24,7 +23,6 @@ public class ProductData {
         this.ingredientList = ingredientList;
         this.details = details;
         this.productDestination = productDestination;
-        this.productSubCategoryData = productSubCategoryData;
         this.productType = productType;
     }
 }

@@ -41,7 +41,7 @@ public class AreaConverter {
     }
 
     public ProductData createProductData(Product product) {
-        return new ProductData(product.getId(),product.getName(), new ProductCategoryData(product.getProductCategory().getId(),product.getProductCategory().getName()),product.getPrice(),product.getIngredients(),product.getDetails(),product.getProductDestination(),product.getProductType(),new ProductSubCategoryData(product.getProductSubCategory().getId(),product.getProductSubCategory().getName()));
+        return new ProductData(product.getId(),product.getName(), new ProductCategoryData(product.getProductCategory().getId(),product.getProductCategory().getName()),product.getPrice(),product.getIngredients(),product.getDetails(),product.getProductDestination(),product.getProductType());
 
     }
 

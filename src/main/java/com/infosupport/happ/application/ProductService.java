@@ -29,8 +29,8 @@ public class ProductService {
         this.productSubCategoryService = productSubCategoryService;
     }
 
-    public ProductData createProduct(String name, String productCategoryName, double price, List<String> ingredients, String details, ProductDestination productDestination, String productSubCategoryName,ProductType productType) {
-        Product product = new Product(name, convertIngredientStringToIngredient(ingredients), productCategoryService.getProductCategoryByName(productCategoryName), price, details,productDestination,productSubCategoryService.getByName(productSubCategoryName), productType);
+    public ProductData createProduct(String name, String productCategoryName, double price, List<String> ingredients, String details, ProductDestination productDestination, ProductType productType) {
+        Product product = new Product(name, convertIngredientStringToIngredient(ingredients), productCategoryService.getProductCategoryByName(productCategoryName), price, details,productDestination, productType);
         productRepository.save(product);
         return createProductData(product);
     }
@@ -78,9 +78,15 @@ public class ProductService {
                 product.getIngredients(),
                 product.getDetails(),
                 product.getProductDestination(),
-                product.getProductType(),
-                createProductSubCategoryData(product.getProductSubCategory())
-        );
+                product.getProductType());
+    }
+
+    public List<ProductData> createProductDataList(List<Product> products){
+        List<ProductData> productDataList = new ArrayList<>();
+        for (Product product:products) {
+             productDataList.add(createProductData(product));
+        }
+        return productDataList;
     }
 
     private void productExists(Long id) {
@@ -107,23 +113,14 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-//    public List<Product> findAllDrinks() {
-//        List<Product> drinks = new ArrayList<>();
-//        for (Product product : productRepository.findAll()) {
-//            if (product.getProductCategory() == DRINKS) {
-//                drinks.add(product);
-//            }
-//        }
-//        return drinks;
-//    }
-//
-//    public List<Product> findAllFood() {
-//        List<Product> foods = new ArrayList<>();
-//        for (Product product : productRepository.findAll()) {
-//            if (product.getProductCategory() != DRINKS) {
-//                foods.add(product);
-//            }
-//        }
-//        return foods;
-//    }
+    public List<ProductData> findAlDrink() {
+        return createProductDataList(productRepository.getAllByProductType(ProductType.DRINK));
+    }
+
+    public List<ProductData> findAllFood() {
+        System.out.println("in regel 121");
+        System.out.println(productRepository.getAllByProductType(ProductType.FOOD));
+        return createProductDataList(productRepository.getAllByProductType(ProductType.FOOD));
+
+    }
 }

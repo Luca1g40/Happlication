@@ -35,7 +35,6 @@ public final class ProductController {
                     productRequest.ingredients,
                     productRequest.details,
                     productRequest.productDestination,
-                    productRequest.productSubCategoryName,
                     productRequest.productType);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -65,26 +64,20 @@ public final class ProductController {
         }
     }
 
+    @GetMapping("/products/drinks")
+    private List<ProductData> getAllDrinks(){
+        return productService.findAlDrink();
+    }
+
+    @GetMapping("/products/foods")
+    private List<ProductData> getAllFood(){
+        return productService.findAllFood();
+    }
+
     @GetMapping("/product/findall")
     private List<Product> findAll() {
         return productService.findAll();
     }
-
-//    @GetMapping("/product/drinks")
-//    private List<Product> findAllDrinks() {
-//        return productService.findAllDrinks();
-//    }
-//
-//    @GetMapping("/product/food")
-//    private List<Product> findAllFood() {
-//        return productService.findAllFood();
-//    }
-
-    //TODO IMPLEMENTEER
-//    @GetMapping("/product/weetnoggeennaam")
-//    private List<Product> getProductsBasedOnSubCategory(){
-//
-//    }
 
     @PutMapping("/product/{productid}/prepstatus")
     private ProductData changePrepStatus(@PathVariable("productid") Long productId) {
