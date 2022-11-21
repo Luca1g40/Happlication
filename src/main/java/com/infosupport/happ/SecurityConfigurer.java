@@ -42,7 +42,9 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
     public final static String ORDER_PATH = "/happ/order/**";
 
     //Customer
-    public final static String PRODUCT_PATH_CUST = "/happ/product/findall";
+    public final static String FOOD_PATH_CUST = "/happ/product/food";
+    public final static String DRINKS_PATH_CUST = "/happ/product/drinks";
+    public final static String SHOPPINGCART_PATH_CUST = "/happ/table/**";
 
     public SecurityConfigurer(JwtRequestFilter jwtRequestFilter, MyUserDetailsService myUserDetailsService) {
         this.jwtRequestFilter = jwtRequestFilter;
@@ -55,13 +57,13 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 
     }
 
+    //TODO foreach URL rolls allowed instead of example "/product/**"
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().configurationSource(corsConfigurationSource()).and().
                 csrf().disable()
                 .authorizeRequests().antMatchers("/authenticate").permitAll()
-                .antMatchers(PRODUCT_PATH_CUST).permitAll()
-                .antMatchers("/happ/product/drinks").permitAll()
+                .antMatchers(FOOD_PATH_CUST, DRINKS_PATH_CUST, SHOPPINGCART_PATH_CUST).permitAll()
                 .antMatchers(ORDER_PATH).hasAnyAuthority("KITCHEN_RIGHTS", "BAR_RIGHTS", "ADMIN_RIGHTS")
                 .antMatchers(PRODUCT_PATH).hasAnyAuthority("ADMINISTRATION_RIGHTS","ADMIN_RIGHTS")
                 .antMatchers(STOCK_PATH).hasAnyAuthority("ADMINISTRATION_RIGHTS","ADMIN_RIGHTS")
@@ -69,7 +71,7 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .antMatchers(INGREDIENTS_PATH).hasAnyAuthority("ADMINISTRATION_RIGHTS","ADMIN_RIGHTS")
                 .antMatchers(INGREDIENT_PATH).hasAnyAuthority("ADMINISTRATION_RIGHTS","ADMIN_RIGHTS")
                 .antMatchers(STAFF_PATH).hasAnyAuthority("ADMINISTRATION_RIGHTS","ADMIN_RIGHTS")
-                .antMatchers(TABLE_PATH).hasAnyAuthority("SERVICE_RIGHTS","ADMIN_RIGHTS")
+//                .antMatchers(TABLE_PATH).hasAnyAuthority("SERVICE_RIGHTS","ADMIN_RIGHTS")
                 .antMatchers(OPERATION_PATH).hasAnyAuthority("SERVICE_RIGHTS","ADMINISTRATION_RIGHTS","KITCHEN_RIGHTS", "BAR_RIGHTS","ADMIN_RIGHTS")
                 .anyRequest().authenticated()
                 .and().sessionManagement()
