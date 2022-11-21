@@ -65,7 +65,7 @@ export default function SearchProduct(){
     <>
         <h1>Product overview</h1>
         <div className={"wrapper"}>
-            <div className={"test"}>
+            <div className={"filter-div"}>
 
             <h2>Filters</h2>
             <input className={"search-bar"} ref={ref} placeholder={"Search"} name={"search"} onChange={handleChange}/>

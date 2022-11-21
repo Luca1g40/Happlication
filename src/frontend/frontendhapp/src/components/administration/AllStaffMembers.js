@@ -110,7 +110,7 @@ function AllStaffMembers() {
         <>
             <h1>Staff members</h1>
             <div className={"wrapper"}>
-                <div className={"test"}>
+                <div className={"filter-div"}>
                     <h2>Filters</h2>
                     <input className={"search-bar"} ref={ref} placeholder={"Search"} name={"search"} onChange={handleChange}/>
                     <DropdownFilter options={getUniqueRights(members)} setOptionSelected={(selected) => setOptionSelected(selected)} optionSelected={optionSelected}/>
