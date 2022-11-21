@@ -12,7 +12,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 @RestController
@@ -40,16 +45,21 @@ public final class ProductController {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @RequestMapping(value = "/image", produces = {MediaType.IMAGE_PNG_VALUE, "application/json"})
-    public ResponseEntity<?> uploadImage(@RequestParam("imageFile") MultipartFile file,
-                                         @RequestParam("imageName") String name) {
+    @PostMapping(value = "/image")
+    public String uploadImage(@RequestParam MultipartFile file) {
 //        Path fileNamePath = Paths.get(imageDirectory,
 //                name.concat(".").concat(FilenameUtils.getExtension(file.getOriginalFilename())));
+        System.out.println(file);
         try {
 //            Files.write(fileNamePath, file.getBytes());
-            return new ResponseEntity<>(name, HttpStatus.CREATED);
+            System.out.println(file);
+//            System.out.println(file);
+            String path = System.getProperty("user.dir").concat("\\src\\frontend\\frontendhapp\\images");
+            Files.copy(file.getInputStream(), Paths.get(path+ File.separator+file.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
+
+            return "created";
         } catch (Exception ex) {
-            return new ResponseEntity<>("Image is not uploaded", HttpStatus.BAD_REQUEST);
+            return"Image is not uploaded";
         }
     }
 
