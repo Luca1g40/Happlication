@@ -86,6 +86,12 @@ export default function Menu (props){
             {/*</div>*/}
             <div className="menu-container">
                 <div className={"navigation-buttons-menu space-around"}>
+                    <div className={"test"}> {
+                        getUniqueProductCategories(products).map((category, i) => {
+                            return <button key={i} className={"button menu-nav"} >{category}</button>
+                        })
+                    }
+                    </div>
                     <Link className="button toHome" to="/"> Terug </Link>
                     <Link to="/shoppingcart" className="button toShoppingcart">Shopping cart</Link>
                     { selectedProductType === "foods" ? (
