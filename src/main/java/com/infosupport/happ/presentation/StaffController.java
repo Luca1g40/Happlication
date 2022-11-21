@@ -4,7 +4,7 @@ import com.infosupport.happ.application.OrderService;
 import com.infosupport.happ.application.StaffService;
 import com.infosupport.happ.application.dto.OrderData;
 import com.infosupport.happ.application.dto.StaffData;
-import com.infosupport.happ.domain.Staff;
+import com.infosupport.happ.application.dto.StaffWithoutAreasData;
 import com.infosupport.happ.domain.Table;
 import com.infosupport.happ.domain.exceptions.InvalidValueException;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
@@ -119,7 +119,7 @@ public class StaffController {
     }
 
     @GetMapping("/staff/findallstaff")
-    public List<Staff> getAllStaff() {
-            return this.staffService.findAll();
+    public List<StaffWithoutAreasData> getAllStaff() {
+        return this.staffService.findAll();
     }
 }
