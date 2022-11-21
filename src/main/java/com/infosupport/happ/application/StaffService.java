@@ -2,6 +2,7 @@ package com.infosupport.happ.application;
 
 import com.infosupport.happ.application.dto.AreaWithoutStaffData;
 import com.infosupport.happ.application.dto.OrderData;
+import com.infosupport.happ.application.dto.SimpleStaffData;
 import com.infosupport.happ.application.dto.StaffData;
 import com.infosupport.happ.data.StaffRepository;
 import com.infosupport.happ.domain.*;
@@ -30,8 +31,12 @@ public class StaffService {
         return staffRepository.getById(id);
     }
 
-    public List<Staff> findAll() {
-        return staffRepository.findAll();
+    public List<SimpleStaffData> getAllStaffInfo() {
+        List<SimpleStaffData> simpleStaffData = new ArrayList<>();
+        for(Staff staff :staffRepository.findAll()){
+            simpleStaffData.add(createSimpleStaffData(staff));
+        }
+        return simpleStaffData;
     }
 
     public List<Table> getTableThatNeedHelp(Long staffId) {
@@ -98,31 +103,6 @@ public class StaffService {
         return orderData;
     }
 
-
-    public StaffData createStaffData(Staff staff) {
-        return new StaffData(
-                staff.getId(),
-                staff.getName(),
-                staff.getOperations(),
-                staff.getClaimedOrders(),
-                createAreaWithoutStaff(staff),
-                staff.getRights());
-    }
-
-    public List<AreaWithoutStaffData> createAreaWithoutStaff(Staff staff) {
-        List<AreaWithoutStaffData> areaWithoutStaffDataList = new ArrayList<>();
-        if (staff.getAreas() != null) {
-            for (Area area : staff.getAreas()) {
-                areaWithoutStaffDataList.add(new AreaWithoutStaffData(
-                        area.getId(),
-                        area.getName(),
-                        area.getTables()
-                ));
-            }
-        }
-        return areaWithoutStaffDataList;
-    }
-
     public StaffData updateStaff(int password, String name, List<Rights> rights) {
         if(name.equals("")){
             throw new InvalidValueException("name");
@@ -137,5 +117,38 @@ public class StaffService {
         this.staffRepository.save(staff);
 
         return createStaffData(staff);
+    }
+
+
+    public StaffData createStaffData(Staff staff) {
+        return new StaffData(
+                staff.getId(),
+                staff.getName(),
+                staff.getOperations(),
+                staff.getClaimedOrders(),
+                createAreaWithoutStaff(staff),
+                staff.getRights());
+    }
+
+    public SimpleStaffData createSimpleStaffData(Staff staff){
+        return new SimpleStaffData(
+                staff.getId(),
+                staff.getName(),
+                staff.getRights()
+        );
+    }
+
+    public List<AreaWithoutStaffData> createAreaWithoutStaff(Staff staff) {
+        List<AreaWithoutStaffData> areaWithoutStaffDataList = new ArrayList<>();
+        if (staff.getAreas() != null) {
+            for (Area area : staff.getAreas()) {
+                areaWithoutStaffDataList.add(new AreaWithoutStaffData(
+                        area.getId(),
+                        area.getName(),
+                        area.getTables()
+                ));
+            }
+        }
+        return areaWithoutStaffDataList;
     }
 }

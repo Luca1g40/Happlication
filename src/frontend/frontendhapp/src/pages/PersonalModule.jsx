@@ -1,5 +1,5 @@
 import React from "react";
-import PersonalOrdersFetching from "../components/PersonalOrders";
+import PersonalOrdersFetching from "../components/orders/PersonalOrders";
 import "../styles/AllOrders.css"
 
 

@@ -1,6 +1,3 @@
-import Counter from "./Counter";
-import SubmitButton from "./submitData/SubmitButton";
-import {Actions} from "./submitData/Actions";
 import React from "react";
 
 

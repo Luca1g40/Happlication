@@ -1,10 +1,10 @@
 import React, {useState} from 'react'
-import "../styles/Popup.css"
+import "../../styles/Popup.css"
 
 
-import Counter from "./Counter";
-import SubmitButton from "./submitData/SubmitButton";
-import {Actions} from "./submitData/Actions"
+import Counter from "../utils/Counter";
+import SubmitButton from "../submitData/SubmitButton";
+import {Actions} from "../submitData/Actions"
 
 
 function ProductDetailsPopup(props) {
@@ -29,7 +29,7 @@ function ProductDetailsPopup(props) {
                     </div>
                 </div>
                 <div className={"add-to-cart-div"}>
-                <SubmitButton tableId={577} buttonText={"Add to Cart"} action={Actions.ADD_TO_SHOPPING_CART}
+                <SubmitButton className={"button"} tableId={577} buttonText={"Add to Cart"} action={Actions.ADD_TO_SHOPPING_CART}
                               productAmount={productAmount} productId={props.product.id} trigger={() =>closePopUp()}/>
                 </div>
             </div>

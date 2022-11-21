@@ -1,11 +1,11 @@
 import IngredientForm from "./IngredientForm";
 import {useParams} from "react-router";
 import React, {useEffect, useState} from "react";
-import {getIngredient, getProduct} from "../../urlMappings/MenuRequests";
+import {getIngredient} from "../../urlMappings/MenuRequests";
 import SubmitButton from "../submitData/SubmitButton";
 import {Actions} from "../submitData/Actions";
-import Logout from "../Logout"
-import HomeNav from "../Homebutton"
+import Logout from "../utils/Logout"
+import HomeNav from "../utils/Homebutton"
 import {Link} from "react-router-dom";
 
 
@@ -44,7 +44,7 @@ export default function ViewIngredient(props){
                 <Link to="/administration" className="button search-products-navigation" >Home</Link>
             </div>
             <IngredientForm errorMeldingText={foutMelding} handleChange={event=>handleChange(event)}/>
-            <SubmitButton setFoutMelding={foutMelding=>setFoutMelding(foutMelding)} disabled={disabled} setDisabled={disabled=>setDisabled(disabled)} action={Actions.CREATE_INGREDIENT} buttonText={"Create ingredient"} ingredient={ingredient}/>
+            <SubmitButton className={"button submit-button"} setFoutMelding={foutMelding=>setFoutMelding(foutMelding)} disabled={disabled} setDisabled={disabled=>setDisabled(disabled)} action={Actions.CREATE_INGREDIENT} buttonText={"Create ingredient"} ingredient={ingredient}/>
             <Logout/>
             <HomeNav/>
         </div>

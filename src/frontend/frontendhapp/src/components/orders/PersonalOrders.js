@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import SingleOrder from "./SingleOrder";
-import {getPersonallyClaimedOrders} from "../urlMappings/OrderRequests";
+import {getPersonallyClaimedOrders} from "../../urlMappings/OrderRequests";
 import {Link, useNavigate} from "react-router-dom";
 
 function OrdersDataFetching() {
@@ -37,7 +37,6 @@ function OrdersDataFetching() {
                 <span>
                     <p>Signed in as: {sessionStorage.getItem("staffId")}</p>
                 </span>
-                <button onClick={()=>navigate("/orders")} >All orders</button>
             </div>
         </>
     )

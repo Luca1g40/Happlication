@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react"
 import OrderItem from "./OrderItem";
-import getOccuranceProducts from "./Util";
+import getOccurrenceProducts from "../utils/Util";
 
 
 export default function OrderItemList(props) {
@@ -16,8 +16,8 @@ export default function OrderItemList(props) {
 
     return (
         <div className={"product-text"}>
-            {Array.from(getOccuranceProducts(props.order.products).keys()).map((product,index) => {
-                return <OrderItem key={product.id} product={product} amount={Array.from(getOccuranceProducts(props.order.products).values())[index]} className={"order-products"}/>
+            {Array.from(getOccurrenceProducts(props.order.products).keys()).map((product, index) => {
+                return <OrderItem key={product.id} product={product} amount={Array.from(getOccurrenceProducts(props.order.products).values())[index]} className={"order-products"}/>
                 }
             )}
 

@@ -1,39 +1,9 @@
-.welkom {
-    border: 1px solid black;
-    text-align: center;
-    width: 500px;
-    left: 35%;
-    position: fixed;
-}
-
-.drankjes {
-    position: absolute;
-    bottom: 40%;
-    left: 56%;
-}
-
-.gerechten {
-    position: absolute;
-    bottom: 40%;
-    right: 10%;
-}
-
-.progres {
-    position: fixed;
-    top: 5%;
-    left: 45%;
-}
-
-.bg-model {
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    position: absolute;
-    top: 0;
+.navigation-buttons-menu {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    display: none;
+    margin: 1%;
+}
+.navigation-buttons-menu.space-around {
+    justify-content: space-around;
 }
 
 .model-content {
@@ -45,11 +15,6 @@
     position: relative;
 }
 
-.foto {
-    width: 50px;
-    height: 50px;
-}
-
 .close {
     position: absolute;
     top: 0;
@@ -59,57 +24,12 @@
     cursor: pointer;
 }
 
-.button {
-    align-items: center;
-    background-clip: padding-box;
-    background-color: #e3a768;
-    border: 1px solid transparent;
-    border-radius: .25rem;
-    box-sizing: border-box;
-    color: #fff;
-    cursor: pointer;
-    display: inline-flex;
-    font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-weight: 600;
-    min-height: 3rem;
-    padding: calc(.875rem - 1px) calc(1.5rem - 1px);
-    text-decoration: none;
-    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
-}
-
-.button:hover,
-.button:focus {
-    background-color: #e38d33;
-    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
-}
-
-.button:active {
-    background-color: #e38d33;
-    box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
-    transform: translateY(0);
-}
-
-.introText {
+.home-container {
     position: absolute;
-    right: 0;
-    text-align: left;
-    font-family: sans-serif;
-    margin: auto;
-    width: 50%;
-    padding: 10px;
-}
+    height: 100%;
+    width: 100%;
+    background-color: #61dafb;
 
-.homeContainer {
-    position: relative;
-    height: 750px;
-    width: 1000px;
-    margin: auto;
-    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
-
-    background-image: url("../../images/background.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
 
 
 }

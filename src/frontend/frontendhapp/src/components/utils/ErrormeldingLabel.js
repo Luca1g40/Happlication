@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/MenuCrudForm.css"
+import "../../styles/MenuCrudForm.css"
 
 
 export default function ErrormeldingLabel(props){

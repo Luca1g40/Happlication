@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
-import "../styles/Counter.css"
-import SubmitButton from "./submitData/SubmitButton";
+import "../../styles/Counter.css"
+import SubmitButton from "../submitData/SubmitButton";
 
 
 export default function Counter(props) {

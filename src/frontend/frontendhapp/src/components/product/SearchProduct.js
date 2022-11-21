@@ -4,6 +4,9 @@ import {Link, useNavigate} from 'react-router-dom';
 import "../../styles/SearchTable.css"
 import DropdownFilter from "./DropdownFilter";
 import OverviewTable from "./OverviewTable";
+import {showCategory} from "../utils/Util";
+import HomeNav from "../utils/Homebutton";
+import Logout from "../utils/Logout";
 
 export default function SearchProduct(){
     const [allProducts,setAllProducts] = useState([])
@@ -31,24 +34,6 @@ export default function SearchProduct(){
         handleChange()
     },[optionSelected])
 
-
-    function showCategory(category){
-        switch (category){
-            case "MAIN_COURSE":
-                return "Main course"
-            case "SIDE":
-                return "Side";
-            case "EXTRA":
-                return "Extra";
-            case "DRINKS":
-                return "Drinks";
-            case "DESSERT":
-                return "Dessert";
-            case "STARTER":
-                return "Starter"
-        }
-    }
-
     function handleChange (){
         const value = ref.current.value
         let filterProduct=[]
@@ -70,53 +55,41 @@ export default function SearchProduct(){
         setFilteredProducts(filterProduct)
     }
 
-    function cleardata() {
+    function clearData() {
         sessionStorage.clear();
     }
 
 
     return(
 
-    <div>
+    <>
         <h1>Product overview</h1>
-        <h2>Filters</h2>
-        <div className={"home-button"}>
-            <Link to="/administration" className="button search-products-navigation" >Home</Link>
+        <div className={"wrapper"}>
+            <div className={"filter-div"}>
+
+            <h2>Filters</h2>
+            <input className={"search-bar"} ref={ref} placeholder={"Search"} name={"search"} onChange={handleChange}/>
+            <DropdownFilter qsetOptionSelected={(selected)=>setOptionSelected(selected)} optionSelected={optionSelected}/>
+            </div>
+
+            <div className={"search-table"}>
+
+                <OverviewTable tableHeads={["name","category","price","details"]} items={filteredProducts} handleClick={id=>navigate(`/productdetails/${id}`)} leaveOutList={["ingredients","productDestination","id"]}
+                               specialDisplays={ new Map([["productCategory", (category)=>showCategory(category)]])
+                               }/>
+            </div>
         </div>
+
+        <HomeNav/>
+
+
         <div className={"navigation-buttons"}>
             <Link to="/createproduct" className="button search-products-navigation" >Create product</Link>
-            <Link to="/staff" className="button search-products-navigation" onClick={() => {cleardata()}}>Log out</Link>
+            <Link to="/staff" className="button search-products-navigation" onClick={() => {clearData()}}>Log out</Link>
         </div>
-        <input className={"search-bar"} ref={ref} placeholder={"Search"} name={"search"} onChange={handleChange}/>
 
-        <div className={"search-table"}>
-        <span className={"select-filters"}>
-            <DropdownFilter setOptionSelected={(selected)=>setOptionSelected(selected)} optionSelected={optionSelected}/>
-        </span>
-        {/*<span className={"product-tables"}>*/}
-        {/*    <table id="searchTable">*/}
-        {/*    <tr>*/}
-        {/*        <th>Name</th>*/}
-        {/*        <th>Price</th>*/}
-        {/*        <th>Category</th>*/}
-        {/*        <th>Details</th>*/}
-        {/*    </tr>*/}
 
-        {/*        {filteredProducts.map(product=>{*/}
-        {/*            return <tr key={product.id} onClick={()=>navigate(`/productdetails/${product.id}`)}>*/}
-        {/*                <td>{product.name}</td>*/}
-        {/*                <td>{product.price}</td>*/}
-        {/*                <td>{showCategory(product.productCategory)}</td>*/}
-        {/*                <td>{product.details}</td>*/}
-        {/*            </tr>*/}
-        {/*        })}*/}
-        {/*    </table>*/}
-        {/*</span>*/}
 
-        <OverviewTable tableHeads={["name","category","price","details"]} items={filteredProducts} handleClick={id=>navigate(`/productdetails/${id}`)} leaveOutList={["ingredients","productDestination","id"]}
-                       specialDisplays={ new Map([["productCategory", (category)=>showCategory(category)]])
-                       }/>
-    </div>
-</div>
+    </>
     )
 }

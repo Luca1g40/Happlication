@@ -19,35 +19,6 @@ import {
 export default function SubmitButton(props) {
     let navigate = useNavigate();
 
-    // function validateProductFormInformation(){
-    //     if (Object.keys(props.product).length===7 && props.ingredientList.length>0){
-    //         for (const key in props.product) {
-    //             if (!(String(props.product[key]).replace(/\s+/g, '').length>0)){
-    //                 console.log("ging fout")
-    //                 props.setFoutMelding(`Je hebt een lege input gegeven bij ${key.replace("-", " ")} je ezel`)
-    //                 return;
-    //             }else{
-    //                 console.log("ging goed")
-    //             }
-    //         }
-    //
-    //         editProduct(props.product.id,props.product.name,props.product.destination,props.ingredientList,props.product.price,props.product.details,props.product.category).
-    //         then(res=>{
-    //             props.setDisabled(true);
-    //             navigate(`/productdetails/${res.id}`)
-    //         }).catch(err=>{
-    //             console.log(err)
-    //         })
-    //     }else{
-    //         console.log("ging heel fout")
-    //         props.setFoutMelding(`Je hebt een of meer lege input velden je ezel`)
-    //         return;
-    //     }
-    // }
-
-
-
-
     function handleClick() {
         switch (props.action) {
             case Actions.PLACE_ORDER:
@@ -94,17 +65,14 @@ export default function SubmitButton(props) {
                     .catch(err => {
                         console.log(err)
                     });
-                console.log("removed all")
                 break;
             case Actions.CREATE_PRODUCT:
                 if (Object.keys(props.product).length===5 && props.ingredientList.length>0){
                     for (const key in props.product) {
                         if (!(String(props.product[key]).replace(/\s+/g, '').length>0)){
-                            console.log("ging fout")
-                            props.setFoutMelding(`Je hebt een lege input gegeven bij ${key.replace("-", " ")} je ezel`)
+                            props.setFoutMelding(`Je hebt een lege input gegeven bij ${key.replace("-", " ")} `)
                             return;
                         }else{
-                            console.log("ging goed")
                         }
                     }
 
@@ -118,8 +86,7 @@ export default function SubmitButton(props) {
                             console.log(err)
                     })
                 }else{
-                    console.log("ging heel fout")
-                    props.setFoutMelding(`Je hebt een of meer lege input velden je ezel`)
+                    props.setFoutMelding(`Je hebt een of meer lege input velden `)
                     return;
                 }
                 break;
@@ -130,11 +97,8 @@ export default function SubmitButton(props) {
                 if (Object.keys(props.product).length===7 && props.ingredientList.length>0){
                     for (const key in props.product) {
                         if (!(String(props.product[key]).replace(/\s+/g, '').length>0)){
-                            console.log("ging fout")
-                            props.setFoutMelding(`Je hebt een lege input gegeven bij ${key.replace("-", " ")} je ezel`)
+                            props.setFoutMelding(`Je hebt een lege input gegeven bij ${key.replace("-", " ")} `)
                             return;
-                        }else{
-                            console.log("ging goed")
                         }
                     }
 
@@ -147,7 +111,7 @@ export default function SubmitButton(props) {
                     })
                 }else{
                     console.log("ging heel fout")
-                    props.setFoutMelding(`Je hebt een of meer lege input velden je ezel`)
+                    props.setFoutMelding(`Je hebt een of meer lege input velden `)
                     return;
                 }
                 break;
@@ -157,11 +121,8 @@ export default function SubmitButton(props) {
                     for (const key in props.ingredient) {
                         console.log(props.ingredient[key].trim().length)
                         if (!(props.ingredient[key].trim().length>0)){
-                            console.log("ging fout")
-                            props.setFoutMelding(`Je hebt een lege input gegeven bij ${key.replace("-", " ")} je ezel`)
+                            props.setFoutMelding(`Je hebt een lege input gegeven bij ${key.replace("-", " ")} `)
                             return;
-                        }else{
-                            console.log("ging goed")
                         }
                     }
 
@@ -174,8 +135,7 @@ export default function SubmitButton(props) {
 
                     })
                 }else{
-                    console.log("ging heel fout")
-                    props.setFoutMelding(`Je hebt een of meer lege input velden je ezel`)
+                    props.setFoutMelding(`Je hebt een of meer lege input velden`)
                     return;
                 }
                 break;
@@ -187,11 +147,9 @@ export default function SubmitButton(props) {
                                 props.setDisabled(true);
                                 navigate(`/ingredientdetails/${res.id}`)
                             }
-                        ).catch(err=>{
-
-                    })
+                        )
                 }else{
-                    props.setFoutMelding(`Je hebt een lege input gegeven  je ezel`)
+                    props.setFoutMelding(`Je hebt een lege input gegeven  `)
                 }
                 break;
 
@@ -200,12 +158,8 @@ export default function SubmitButton(props) {
                     .then(res=>{
                             navigate(`/searchproduct`)
                         }
-                    ).catch(err=>{
-
-                })
-
+                    )
         }
-        console.log("Added");
     }
 
     return (

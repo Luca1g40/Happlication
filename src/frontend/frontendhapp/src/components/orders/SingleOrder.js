@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
-import {setOrderToDone} from "../urlMappings/OrderRequests";
-import getOccuranceProducts from "./Util";
+import {setOrderToDone} from "../../urlMappings/OrderRequests";
+import getOccurrenceProducts from "../utils/Util";
 
 export default function SingleOrder(props) {
 
@@ -31,7 +31,7 @@ export default function SingleOrder(props) {
     };
 
     function toggleButton() {
-        if (readyProduct === Array.from(getOccuranceProducts(props.order.products).keys()).length) {
+        if (readyProduct === Array.from(getOccurrenceProducts(props.order.products).keys()).length) {
             setDisableButton(false);
         } else {
             setDisableButton(true)
@@ -51,14 +51,14 @@ export default function SingleOrder(props) {
     }
 
     return (
-        <div key={props.order.id} className={"grid-item grid-item"}>
+        <div key={props.order.id} className={"grid-item"}>
             <p className={"table-number"}>Tafel: {props.order.tableNr}</p>
             <div className={"order-item"}>
-            {Array.from(getOccuranceProducts(props.order.products).keys()).map((product,index) =>
+            {Array.from(getOccurrenceProducts(props.order.products).keys()).map((product, index) =>
                 <>
                 <div key={product.id} className={"order-products"} onClick={(event) => {
                     changeStyle(event)
-                }}>{product.name} {Array.from(getOccuranceProducts(props.order.products).values())[index]}</div>
+                }}>{product.name} {Array.from(getOccurrenceProducts(props.order.products).values())[index]}</div>
                 </>
 
             )}

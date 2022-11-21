@@ -1,0 +1,28 @@
+.menu-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.toHome {
+}
+
+.menu-nav{
+    margin-top: 10px;
+    margin-bottom: 15px;
+    margin-right: 10px;
+}
+
+.subcategory-div{
+    margin-top: 20%;
+}
+
+.scrollable-buttons{
+    width: 100%;
+    overflow: hidden;
+    overflow-x: scroll;
+    white-space: nowrap;
+    margin-left: 1%;
+}
+
+

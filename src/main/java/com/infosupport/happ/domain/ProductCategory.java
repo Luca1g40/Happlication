@@ -6,6 +6,10 @@ public enum ProductCategory {
     STARTER,
     SIDE,
     DESSERT,
-    DRINKS,
     EXTRA,
+    DRINKS,
+    WARME_DRANKEN,
+    FRIS_DRANKEN,
+    BIER,
+    WIJNEN
 }

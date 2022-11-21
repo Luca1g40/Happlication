@@ -1,8 +1,8 @@
 import React from "react";
-import CreatingStaff from "../Administration/CreatingStaff";
+import CreatingStaff from "../components/administration/CreatingStaff";
 import "../styles/AllStaffMembers.css"
-import Logout from "../components/Logout"
-import HomeNav from "../components/Homebutton"
+import Logout from "../components/utils/Logout"
+import HomeNav from "../components/utils/Homebutton"
 
 export default function CreateStaff() {
     return (
