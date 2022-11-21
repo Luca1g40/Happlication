@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useRef} from "react";
-import {getAllProducts} from "../../urlMappings/MenuRequests";
+import {getAllCategories, getAllProducts} from "../../urlMappings/MenuRequests";
 import {Link, useNavigate} from 'react-router-dom';
 import "../../styles/SearchTable.css"
 import DropdownFilter from "./DropdownFilter";
@@ -7,10 +7,12 @@ import OverviewTable from "./OverviewTable";
 import {showCategory} from "../utils/Util";
 import HomeNav from "../utils/Homebutton";
 import Logout from "../utils/Logout";
+import Drinks from "../../pages/Drinks";
 
 export default function SearchProduct(){
     const [allProducts,setAllProducts] = useState([])
     const [filteredProducts,setFilteredProducts] = useState([])
+    const [allCategories,setCategories] = useState([]);
     const ref = useRef();
     let navigate = useNavigate()
 
@@ -28,11 +30,28 @@ export default function SearchProduct(){
             .catch(err => {
                 console.log(err)
             })
+
+        getAllCategories()
+            .then(res => {
+                setCategories(res)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+
     },[])
 
     useEffect(() => {
         handleChange()
     },[optionSelected])
+
+    function getAllCategorieOptions(){
+        let categoryOptions = [];
+        allCategories.map(category => {
+            categoryOptions.push({value: category.name , label: category.name})
+        })
+        return categoryOptions
+    }
 
     function handleChange (){
         const value = ref.current.value
@@ -48,7 +67,7 @@ export default function SearchProduct(){
 
         if (!(optionSelected.value===undefined)){
             filterProduct = filterProduct.filter(product=>{
-                return product.productCategory === optionSelected.value
+                return product.productCategory.name === optionSelected.value
             })
         }
 
@@ -59,6 +78,14 @@ export default function SearchProduct(){
         sessionStorage.clear();
     }
 
+    function showproductType(type){
+        switch (type){
+            case "FOOD":
+                return "Food";
+            case "DRINKS":
+                return "Drinks"
+        }
+    }
 
     return(
 
@@ -69,13 +96,13 @@ export default function SearchProduct(){
 
             <h2>Filters</h2>
             <input className={"search-bar"} ref={ref} placeholder={"Search"} name={"search"} onChange={handleChange}/>
-            <DropdownFilter qsetOptionSelected={(selected)=>setOptionSelected(selected)} optionSelected={optionSelected}/>
+            <DropdownFilter options={getAllCategorieOptions()}  setOptionSelected={(selected)=>setOptionSelected(selected)} optionSelected={optionSelected}/>
             </div>
 
             <div className={"search-table"}>
 
-                <OverviewTable tableHeads={["name","category","price","details"]} items={filteredProducts} handleClick={id=>navigate(`/productdetails/${id}`)} leaveOutList={["ingredients","productDestination","id"]}
-                               specialDisplays={ new Map([["productCategory", (category)=>showCategory(category)]])
+                <OverviewTable tableHeads={["name","type","category","price","details"]} items={filteredProducts} handleClick={id=>navigate(`/productdetails/${id}`)} leaveOutList={["ingredients","productDestination","id"]}
+                               specialDisplays={ new Map([["productCategory", (category)=>category.name],["productType", (type)=>showproductType(type)]])
                                }/>
             </div>
         </div>

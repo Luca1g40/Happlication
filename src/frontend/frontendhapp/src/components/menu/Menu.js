@@ -78,12 +78,6 @@ export default function Menu (props){
 
     return (
         <>
-            {/*<div className={"test"}> {*/}
-            {/*    getUniqueProductCategories(products).map((category, i) => {*/}
-            {/*        return <button key={i} className={"button menu-nav"} onClick={() => scrollToElement(Voorgerechten)}>{category}</button>*/}
-            {/*    })*/}
-            {/*}*/}
-            {/*</div>*/}
             <div className="menu-container">
                 <div className={"navigation-buttons-menu space-around"}>
                     <div className={"test"}> {
