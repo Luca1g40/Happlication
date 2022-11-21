@@ -30,9 +30,7 @@
     width: 15%;
 }
 
-.css-b62m3t-container{
-    width: 15%;
-}
+
 
 .search-table{
     width: 100%;
@@ -40,7 +38,7 @@
 }
 
 .select-filters{
-    width: 100%;
+    width: 97%;
     position: absolute;
     margin-left: 5px;
 
@@ -48,7 +46,13 @@
 
 .css-1s2u09g-control{
     margin-right: 5px;
+
 }
+
+.css-1s2u09g-control:focus{
+    margin-right: 5px;
+}
+
 
 .product-tables{
     width: 85%;
@@ -57,8 +61,8 @@
 }
 
 .search-bar{
-    margin: 5px;
-    width: 14.75%;
+    width: 100%;
+    margin-bottom: 5px;
     border-color: hsl(0, 0%, 80%);
     border-style: solid;
     border-width: 1px;
