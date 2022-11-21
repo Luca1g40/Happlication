@@ -1,30 +1,16 @@
 import "../../styles/Popup.css"
 import "../../styles/AllStaffMembers.css"
-import React, {useEffect} from "react";
-import {DeleteStaff, getAllStaffMembers, UpdateStaff} from "../../urlMappings/StaffRequests";
+import React from "react";
+import {DeleteStaff, UpdateStaff} from "../../urlMappings/StaffRequests";
 
 function ProductDetailsPopup(props) {
 
-    useEffect(() => {
-        getAllStaffMembers()
-            .then(res => {
-                    console.log(res)
-
-                }
-            )
-            .catch(err =>
-                console.log(err)
-            )
-    }, [])
-
     function closePopUp() {
-        console.log("closing popup")
         props.unselectMember();
         props.setTrigger(false);
     }
 
     function deleteStaffMember(staffId){
-        console.log("staffid? " + staffId)
         DeleteStaff(staffId)
     }
 

@@ -38,7 +38,7 @@ function productCompare(obj1, obj2){
 export function showCategory(category){
     switch (category){
         case "MAIN_COURSE":
-            return "Hoofdgerechten"
+            return "Hoofdgerechten";
         case "SIDE":
             return "Bijgerechten";
         case "EXTRA":
@@ -48,7 +48,7 @@ export function showCategory(category){
         case "DESSERT":
             return "Dessert";
         case "STARTER":
-            return "Voorgerechten"
+            return "Voorgerechten";
     }
 }
 

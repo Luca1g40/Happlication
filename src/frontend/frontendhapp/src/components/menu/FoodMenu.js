@@ -33,13 +33,12 @@ function FoodMenu() {
     function scrollToElement(ref){
         console.log(ref)
         ref.current.scrollIntoView({ behavior: 'smooth' })
-
     }
 
 
     return (
         <>
-            <div className={"test"}> {
+            <div className={"scrollable-buttons"}> {
                getUniqueProductCategories(products).map((category, i) => {
                     return <button key={i} className={"button menu-nav"} onClick={() => scrollToElement(Voorgerechten)}>{category}</button>
                 })
