@@ -78,6 +78,7 @@ export default function SearchProduct(){
         sessionStorage.clear();
     }
 
+    // TODO dynamic hoofdletter eerst
     function showproductType(type){
         switch (type){
             case "FOOD":

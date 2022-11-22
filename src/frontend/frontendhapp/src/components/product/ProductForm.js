@@ -18,7 +18,6 @@ export default function ProductForm(props){
         getAllCategories()
             .then(res => {
                setallCategories(res)
-                console.log(allCategories)
 
             })
             .catch(err => {
@@ -26,13 +25,13 @@ export default function ProductForm(props){
             })
         getAllIngredients()
             .then(res => {
-                console.log(res)
                 setIngredientList(res);
 
             })
             .catch(err => {
                 console.log(err)
             })
+       console.log(props.product)
 
     },[])
     // const handleUploadClick = event => {
@@ -156,6 +155,16 @@ export default function ProductForm(props){
                 <div>
                     <label className={"left-column"} htmlFor="name">Name:</label>
                     <input className={"right-column"} name={"name"} placeholder={""} disabled={props.disabled} value={props.product.name} onChange={(event)=>props.handleChange(event)}/>
+                </div>
+
+                <div>
+                    <label className={"left-column"} htmlFor={"productCategoryName"}>Sub category:</label>
+                    <select className={"right-column"} disabled={props.disabled} name={"productCategoryName"}
+                            value={props.product.productCategoryName} onChange={(event)=>props.handleChange(event)}>
+                        {allCategories.map((category,i)=>{
+                            return <option key={i} value={category.name}> {category.name}</option>
+                        })}
+                    </select>
                 </div>
 
                 <div>

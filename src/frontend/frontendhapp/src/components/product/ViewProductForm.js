@@ -20,7 +20,7 @@ export default function ViewProductForm(props){
         if (!(params.id===undefined)){
             getProduct(params.id)
                 .then(res => {
-                    console.log(res.id)
+                    console.log(res)
                     setProduct(res);
                     setToegevoegdeIngredienten(res.ingredientList.map((ingredient)=>{return ingredient.name}))
                 })
