@@ -78,7 +78,7 @@ export default function SearchProduct(){
         sessionStorage.clear();
     }
 
-    function showproductType(type){
+    function showProductType(type){
         switch (type){
             case "FOOD":
                 return "Food";
@@ -101,8 +101,8 @@ export default function SearchProduct(){
 
             <div className={"search-table"}>
 
-                <OverviewTable tableHeads={["name","type","category","price","details"]} items={filteredProducts} handleClick={id=>navigate(`/productdetails/${id}`)} leaveOutList={["ingredients","productDestination","id"]}
-                               specialDisplays={ new Map([["productCategory", (category)=>category.name],["productType", (type)=>showproductType(type)]])
+                <OverviewTable tableHeads={["name","type","category","price","details"]} items={filteredProducts} handleClick={ id => navigate(`/productdetails/${id}`)} leaveOutList={["ingredients","productDestination","id"]}
+                               specialDisplays={ new Map([["productCategory", (category)=>category.name],["productType", (type)=>showProductType(type)]])
                                }/>
             </div>
         </div>

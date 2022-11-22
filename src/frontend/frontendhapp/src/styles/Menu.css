@@ -3,10 +3,6 @@
     width: 100%;
     height: 100%;
 }
-
-.toHome {
-}
-
 .menu-nav{
     margin-top: 10px;
     margin-bottom: 15px;
@@ -23,6 +19,43 @@
     overflow-x: scroll;
     white-space: nowrap;
     margin-left: 1%;
+}
+
+.list {
+    text-align: center;
+}
+
+.list::-webkit-scrollbar {
+    display: none;
+}
+
+.product-text{
+    margin-left: 5px;
+}
+
+.product-price {
+    width: 50px;
+}
+
+.product-span {
+    margin-right: auto;
+    margin-left: 0;
+}
+
+.list-item{
+    font-family: Helvetica, serif;
+    padding: 15px;
+    margin: 2px;
+    border-bottom: 1px solid #e3a768;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+}
+
+ul {
+    padding: 0;
+    overflow: hidden;
+    overflow-y: scroll;
 }
 
 

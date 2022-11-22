@@ -17,18 +17,16 @@ function DrinksMenu() {
     }, [])
 
     return (
-        <div className={"list-wrapper"}>
+        <>
+            <h1>Dranken</h1>
             <ul className={"list"}>
-                <h1>Dranken</h1>
                 <SubCategory products={products} category={"DRINKS"}/>
                 <SubCategory products={products} category={"FRIS_DRANKEN"}/>
                 <SubCategory products={products} category={"WARME_DRANKEN"}/>
                 <SubCategory products={products} category={"WARME_DRANKEN"}/>
                 <SubCategory products={products} category={"WARME_DRANKEN"}/>
-
-
             </ul>
-        </div>
+        </>
     )
 }
 

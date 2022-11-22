@@ -1,12 +1,4 @@
-.shoppingcartIcon {
-    background-image: url("../images/shoppingcart.png");
-    right: 0;
-    position: absolute;
-    margin: 2% 3% auto auto;
-    width: 190px;
-}
-
-.shoppingcart-grid{
+.shopping-cart-grid{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     align-items: center;
