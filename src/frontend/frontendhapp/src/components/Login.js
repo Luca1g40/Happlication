@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import React, {useState} from "react";
-import {loginRequest} from "../urlMappings/Login";
+import {getRoles, loginRequest} from "../urlMappings/Login";
 
 function Login() {
     let navigate = useNavigate();
@@ -22,10 +22,19 @@ function Login() {
          const status = await loginRequest(password)
          console.log(status)
          if (status === 200) {
-             navigate("/staffmodule");
-             window.location.reload();
+             sessionStorage.setItem("reloading", "true");
+             document.location.reload();
          }
      }
+
+    window.onload = function() {
+        const reloading = sessionStorage.getItem("reloading");
+        if (reloading) {
+            sessionStorage.removeItem("reloading");
+            getRoles()
+            navigate("/staffmodule");
+        }
+    }
 
     return (
         <>
