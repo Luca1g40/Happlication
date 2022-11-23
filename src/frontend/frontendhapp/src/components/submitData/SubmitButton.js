@@ -13,7 +13,7 @@ import {
     createProduct,
     deleteProduct,
     editIngredient,
-    editProduct
+    editProduct, updateCategory
 } from "../../urlMappings/MenuRequests";
 
 
@@ -185,7 +185,14 @@ export default function SubmitButton(props) {
                 })
                 break;
             case Actions.UPDATE_CATEGORY:
-
+                console.log(props.category)
+                updateCategory(props.category.id,props.category.name)
+                    .then(res=>{
+                        console.log(res)
+                    }).catch(err=>{
+                    console.log(err)
+                })
+                break;
         }
     }
 

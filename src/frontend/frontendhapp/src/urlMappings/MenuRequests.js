@@ -46,7 +46,21 @@ export function createCategory(name) {
         .catch(err => {
             console.log(err)
         })
+
 }
+
+export function updateCategory(id,name) {
+    return axios.put(`http://localhost:8080/happ/productcategory/${id}`, {
+        "name":name
+    },configuration)
+        .then(res => {
+            console.log(res.data)
+            return res.data
+        })
+        .catch(err => {
+            console.log(err)
+        })
+        }
 
 export function getMenuDrinkItems() {
     return axios.get("http://localhost:8080/happ/products/drinks", configuration)
