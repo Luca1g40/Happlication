@@ -104,9 +104,10 @@ export default function SubmitButton(props) {
                 break;
             case Actions.UPDATE_PRODUCT:
 
-                console.log(props.product.productCategory)
+                console.log(Object.keys(props.product).length)
 
-                if (Object.keys(props.product).length===7 && props.ingredientList.length>0){
+
+                if (Object.keys(props.product).length === 8 && props.ingredientList.length>0){
                     for (const key in props.product) {
                         if (!(String(props.product[key]).replace(/\s+/g, '').length>0)){
                             props.setFoutMelding(`Je hebt een lege input gegeven bij ${key.replace("-", " ")} `)
@@ -114,9 +115,10 @@ export default function SubmitButton(props) {
                         }
                     }
 
-                    editProduct(props.product.id,props.product.name,props.product.productDestination,props.ingredientList,props.product.price,props.product.details,props.product.productCategory).
-                    then(res=>{
+                    editProduct(props.product.id,props.product.name,props.product.productDestination,props.ingredientList,props.product.price,props.product.details,props.product.productCategoryName,props.product.productType)
+                        .then(res=>{
                         props.setDisabled(true);
+                        console.log(res)
                         navigate(`/productdetails/${res.id}`)
                     }).catch(err=>{
                         console.log(err)
@@ -181,6 +183,9 @@ export default function SubmitButton(props) {
                     }).catch(err=>{
                         console.log(err)
                 })
+                break;
+            case Actions.UPDATE_CATEGORY:
+
         }
     }
 

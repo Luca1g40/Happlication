@@ -162,14 +162,15 @@ export function getProduct(id){
         })
 }
 
-export function editProduct(id,name,destination,ingredienten,price,details,category){
+export function editProduct(id,name,destination,ingredienten,price,details,category,type){
     return axios.put(`http://localhost:8080/happ/product/${id}`, {
         "name":name,
-        "productCategory":category,
+        "productCategoryName":category,
         "price":price,
         "ingredients":ingredienten,
         "details":details,
-        "productDestination":destination
+        "productDestination":destination,
+        "productType":type
     },configuration)
     .then(res => {
         return res.data;

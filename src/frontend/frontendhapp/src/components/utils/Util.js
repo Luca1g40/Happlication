@@ -52,4 +52,18 @@ export function showCategory(category){
     }
 }
 
+export function generateObjectWithEmptyValues(){
+    console.log("hierin")
+    let product = {
+        "name":"joo",
+        "productType":"",
+        "productCategoryName":"",
+        "price":0,
+        "details":"",
+        "productDestination":""
+    }
+    console.log(product)
+    return product
+}
+
 

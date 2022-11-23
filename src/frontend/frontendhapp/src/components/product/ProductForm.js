@@ -18,7 +18,6 @@ export default function ProductForm(props){
         getAllCategories()
             .then(res => {
                setallCategories(res)
-
             })
             .catch(err => {
                 console.log(err)
@@ -26,7 +25,6 @@ export default function ProductForm(props){
         getAllIngredients()
             .then(res => {
                 setIngredientList(res);
-
             })
             .catch(err => {
                 console.log(err)
@@ -61,12 +59,12 @@ export default function ProductForm(props){
     // };
 
 
-    return (props.product===undefined) ? (
+    return (props.product === undefined) ? (
         <>
             <h1>Create product</h1>
             <div className={"crud-form"} >
-                <label className={"left-column"} htmlFor="destination">Destination: </label>
-                <select className={"right-column"} name={"destination"} onChange={(event)=>props.handleChange(event)}>
+                <label className={"left-column"} htmlFor="productDestination">Destination: </label>
+                <select className={"right-column"} name={"productDestination"} onChange={(event)=>props.handleChange(event)}>
                     <option value={"BAR_PRODUCT"} >Bar</option>
                     <option value={"KITCHEN_PRODUCT"} >Kitchen</option>
                 </select>
@@ -77,18 +75,18 @@ export default function ProductForm(props){
                 </div>
 
                 <div>
-                    <label className={"left-column"} htmlFor="type">Category:</label>
-                    <select className={"right-column"} name={"type"} onChange={(event)=>props.handleChange(event)}>
+                    <label className={"left-column"} htmlFor="productType">Category:</label>
+                    <select className={"right-column"} name={"productType"} onChange={(event)=>props.handleChange(event)}>
                         <option value={"DRINKS"} >Drinks</option>
                         <option value={"FOOD"} >Food</option>
                     </select>
                 </div>
 
                 <div>
-                    <label className={"left-column"} htmlFor="subcategory">Sub category:</label>
-                    <select className={"right-column"} name={"subcategory"} onChange={(event)=>props.handleChange(event)}>
-                        {allCategories.map(category=>{
-                            return <option key={category.id.id} value={category.name}> {category.name}</option>
+                    <label className={"left-column"} htmlFor="productCategoryName">Sub category:</label>
+                    <select className={"right-column"} name={"productCategoryName"}  onChange={(event)=>props.handleChange(event)}>
+                        {allCategories.map((category,i)=>{
+                            return <option key={i} value={category.name}> {category.name}</option>
                         })}
                     </select>
                 </div>
@@ -168,15 +166,11 @@ export default function ProductForm(props){
                 </div>
 
                 <div>
-                    <label className={"left-column"} htmlFor="productCategory">Category:</label>
-                    <select className={"right-column"} name={"productCategory"} disabled={props.disabled}
-                            value={props.product.productCategory} onChange={(event)=>props.handleChange(event)}>
-                        <option value={"DRINKS"} >Drinks</option>
-                        <option value={"EXTRA"} >Extra</option>
-                        <option value={"DESSERT"} >Dessert</option>
-                        <option value={"SIDE"} >Side</option>
-                        <option value={"STARTER"} >Starter</option>
-                        <option value={"MAIN_COURSE"} >Main course</option>
+                    <label className={"left-column"} htmlFor="productType">Category:</label>
+                    <select className={"right-column"} name={"productType"} disabled={props.disabled}
+                            value={props.product.productType} onChange={(event)=>props.handleChange(event)}>
+                        <option value={"DRINK"}>Drinks</option>
+                        <option value={"FOOD"}>Foods</option>
                     </select>
                 </div>
 
@@ -205,7 +199,6 @@ export default function ProductForm(props){
                         return <button name={"ingredient"} key={i} className={"remove-ingredient-button"} disabled={props.disabled} onClick={()=>props.removeFromIngredientsList(ingredient)}>{ingredient} X</button>
                     })}
                 </div>
-
 
                 <div className={"error-label"}>
                     <ErrormeldingLabel text={props.errorMeldingText}/>

@@ -6,6 +6,7 @@ import {getProduct} from "../../urlMappings/MenuRequests";
 import {useParams} from "react-router";
 import  "../../styles/MenuCrudForm.css"
 import {Link} from "react-router-dom";
+import {generateObjectWithEmptyValues} from "../utils/Util.js"
 
 export default function ViewProductForm(props){
     const [disabled,setDisabled] = useState(true)
@@ -25,10 +26,8 @@ export default function ViewProductForm(props){
                     setToegevoegdeIngredienten(res.ingredientList.map((ingredient)=>{return ingredient.name}))
                 })
         }else{
-            setProduct({
-                "type":"DRINKS",
-                "destination":"BAR_PRODUCT"
-            })
+            setProduct(generateObjectWithEmptyValues())
+            console.log(generateObjectWithEmptyValues())
         }
     },[])
 
@@ -41,7 +40,7 @@ export default function ViewProductForm(props){
         const value = event.target.value;
         console.log(name,value)
         setProduct(values => ({...values, [name]: value}))
-        console.log(product)
+        console.log(product.name)
     }
 
     const addIngredient = (newIngredient) => {
@@ -78,7 +77,7 @@ export default function ViewProductForm(props){
                 <Link to="/staff" className="button products-navigation" onClick={() => {clearData()}}>Log out</Link>
             </div>
 
-            <ProductForm toegevoegdeIngredienten={toegevoegdeIngredienten} disabled={disabled} handleChange={event=>handleChange(event)} removeFromIngredientsList={(target=>removeFromIngredientsList(target))} setAddedIngredients={(ingredient) => setToegevoegdeIngredienten(ingredient)} addIngredient={ingredient=>addIngredient(ingredient)} errorMeldingText={errorMeldingText}/>
+            <ProductForm create={true} product={product} toegevoegdeIngredienten={toegevoegdeIngredienten} disabled={disabled} handleChange={event=>handleChange(event)} removeFromIngredientsList={(target=>removeFromIngredientsList(target))} setAddedIngredients={(ingredient) => setToegevoegdeIngredienten(ingredient)} addIngredient={ingredient=>addIngredient(ingredient)} errorMeldingText={errorMeldingText}/>
             <div className={"create-button"}>
                 <SubmitButton className={"submit-button button"} action={Actions.CREATE_PRODUCT} buttonText={"Create product"} setProduct={product=>setProduct(product)} product={product} ingredientList={toegevoegdeIngredienten} setFoutMelding={error => setErrorMeldingText(error)} />
             </div>
@@ -94,7 +93,7 @@ export default function ViewProductForm(props){
                 <Link to="/staff" className="button products-navigation" onClick={() => {clearData()}}>Logout</Link>
             </div>
 
-    <ProductForm product={product} toegevoegdeIngredienten={toegevoegdeIngredienten} disabled={disabled} handleChange={event=>handleChange(event)}
+    <ProductForm create={false} product={product} toegevoegdeIngredienten={toegevoegdeIngredienten} disabled={disabled} handleChange={event=>handleChange(event)}
                          removeFromIngredientsList={(target=>removeFromIngredientsList(target))}
                          setToegevoegdeIngredienten={(ingredient)=>setToegevoegdeIngredienten(ingredient)}
                          addIngredient={ingredient=>addIngredient(ingredient)} errorMeldingText={errorMeldingText}/>

@@ -99,7 +99,9 @@ public final class ProductController {
                     productRequest.price,
                     productId,
                     productRequest.ingredients,
-                    productRequest.details
+                    productRequest.details,
+                    productRequest.productType,
+                    productRequest.productDestination
             );
         } catch (ItemNotFound e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
