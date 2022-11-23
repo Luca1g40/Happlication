@@ -25,6 +25,7 @@ export default function ProductForm(props){
         getAllIngredients()
             .then(res => {
                 setIngredientList(res);
+                console.log(res)
             })
             .catch(err => {
                 console.log(err)
@@ -141,7 +142,7 @@ export default function ProductForm(props){
     ) : (
         <>
             <h1>Edit product</h1>
-            <div className={"crud-form"} ref={ref}>
+            <div className={"crud-form"} >
                 <label className={"left-column"} htmlFor="productDestination">Destination: </label>
                 <select className={"right-column"} name={"productDestination"}
                         disabled={props.disabled} value={props.product.productDestination}

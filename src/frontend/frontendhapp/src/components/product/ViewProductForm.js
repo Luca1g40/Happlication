@@ -44,7 +44,7 @@ export default function ViewProductForm(props){
     }
 
     const addIngredient = (newIngredient) => {
-
+        console.log(newIngredient)
         if (!(toegevoegdeIngredienten.includes(newIngredient))){
             setToegevoegdeIngredienten(state => [...state, newIngredient])
             setErrorMeldingText("");
