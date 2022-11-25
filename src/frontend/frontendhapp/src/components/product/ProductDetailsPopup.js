@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
 import "../../styles/Popup.css"
 
-
 import Counter from "../utils/Counter";
 import SubmitButton from "../submitData/SubmitButton";
 import {Actions} from "../submitData/Actions"
@@ -9,7 +8,7 @@ import {Actions} from "../submitData/Actions"
 
 function ProductDetailsPopup(props) {
     const [productAmount, setProductAmount] = useState(1)
-    // let image = require('frontendhapp/images/burger2.jpg');
+
 
 
     function closePopUp() {
@@ -32,7 +31,7 @@ function ProductDetailsPopup(props) {
                 </div>
 
                 <div>
-                    <img src={'../../images/burger2.jpg'} alt={"image"}/>
+                    <img src={require('../../images/burger2.jpg')} alt={"image not found"}/>
                 </div>
 
                 <div className={"add-to-cart-div"}>
