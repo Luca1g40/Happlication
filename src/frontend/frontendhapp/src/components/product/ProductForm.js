@@ -1,18 +1,22 @@
 import ErrormeldingLabel from "../utils/ErrormeldingLabel";
 import React, {useEffect, useRef, useState} from "react";
-import {getAllCategories, getAllIngredients} from "../../urlMappings/MenuRequests";
+import {createProduct, getAllCategories, getAllIngredients} from "../../urlMappings/MenuRequests";
+import axios from "axios";
+import {configuration} from "../../urlMappings/JwtHeader";
 
 export default function ProductForm(props){
 
     const ref = useRef(null);
     const[ingredientList,setIngredientList] = useState([])
     const[allCategories,setallCategories] = useState([])
+    const [selectedImage,setSelectedImage] = useState()
 
     // TODO give subcategory starting value
     useEffect(() => {
         getAllCategories()
             .then(res => {
                setallCategories(res)
+                console.log(allCategories)
 
             })
             .catch(err => {
@@ -27,8 +31,38 @@ export default function ProductForm(props){
             .catch(err => {
                 console.log(err)
             })
-
     },[])
+
+    const handleUploadClick = event => {
+        // let file = event.target.files[0];
+        // setSelectedImage(file)
+
+
+        const filee = new FormData();
+        filee.append('test_file', event.target.files[0]);
+        filee.append('test_json',{name:"yoo"})
+
+        let file;
+        let count = 0
+        for (const [key, value] of filee.entries()) {
+
+            if (count===0){
+                file = value
+            }
+
+
+            // console.log(key,value)
+            count ++;
+        }
+        props.setSelectedImage(file)
+        console.log(file)
+        //  const imageData = new FormData();
+        //  imageData.append('imageFile', file);
+        //  imageData.append('imageName', imageName);
+        //  console.log(imageData)
+        // setImageData(imageData);
+        //setImagePreview(URL.createObjectURL(file));
+    };
 
     return (props.product===undefined) ? (
         <>
@@ -40,14 +74,18 @@ export default function ProductForm(props){
                     <option value={"KITCHEN_PRODUCT"} >Kitchen</option>
                 </select>
 
+                <div>
                     <label className={"left-column"} htmlFor="name">Name:</label>
                     <input className={"right-column"} name={"name"} placeholder={""} onChange={(event)=>props.handleChange(event)}/>
+                </div>
 
+                <div>
                     <label className={"left-column"} htmlFor="type">Category:</label>
                     <select className={"right-column"} name={"type"} onChange={(event)=>props.handleChange(event)}>
                         <option value={"DRINKS"} >Drinks</option>
                         <option value={"FOOD"} >Food</option>
                     </select>
+                </div>
 
 
                     <label className={"left-column"} htmlFor="subcategory">Sub category:</label>
@@ -90,7 +128,14 @@ export default function ProductForm(props){
                     <textarea className={"right-column details-text"} name={"details"} placeholder={"enter text..."}  onChange={props.handleChange}/>
 
             </div>
+             <form>
+                 <div>
+                     <label htmlFor="image">Image:</label>
+                     <input  type={"file"} name={"image"} onChange={(event)=>handleUploadClick(event)}/>
+                 </div>
+             </form>
         </>
+
 
     ) : (
         <>

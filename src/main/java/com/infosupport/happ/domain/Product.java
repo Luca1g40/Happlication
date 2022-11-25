@@ -27,7 +27,9 @@ public class Product {
     @Enumerated(EnumType.STRING)
     private ProductDestination productDestination;
 
-    public Product(String name, List<Ingredient> ingredients, ProductCategory productCategory, double price, String details, ProductDestination productDestination,ProductType productType) {
+    private String imagePath;
+
+    public Product(String name, List<Ingredient> ingredients, ProductCategory productCategory, double price, String details, ProductDestination productDestination,ProductType productType,String imagePath) {
         this.name = name;
         this.ingredients = ingredients;
         this.productCategory = productCategory;
@@ -35,6 +37,11 @@ public class Product {
         this.details = details;
         this.productDestination = productDestination;
         this.productType = productType;
+        this.imagePath = imagePath;
+    }
+
+    public String getImagePath() {
+        return imagePath;
     }
 
     public String getDetails() {

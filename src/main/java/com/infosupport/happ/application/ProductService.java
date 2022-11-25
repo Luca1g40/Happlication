@@ -29,8 +29,8 @@ public class ProductService {
         this.productSubCategoryService = productSubCategoryService;
     }
 
-    public ProductData createProduct(String name, String productCategoryName, double price, List<String> ingredients, String details, ProductDestination productDestination, ProductType productType) {
-        Product product = new Product(name, convertIngredientStringToIngredient(ingredients), productCategoryService.getProductCategoryByName(productCategoryName), price, details,productDestination, productType);
+    public ProductData createProduct(String name, String productCategoryName, double price, List<String> ingredients, String details, ProductDestination productDestination, ProductType productType,String imagePath) {
+        Product product = new Product(name, convertIngredientStringToIngredient(ingredients), productCategoryService.getProductCategoryByName(productCategoryName), price, details,productDestination, productType, imagePath);
         productRepository.save(product);
         return createProductData(product);
     }
@@ -78,7 +78,8 @@ public class ProductService {
                 product.getIngredients(),
                 product.getDetails(),
                 product.getProductDestination(),
-                product.getProductType());
+                product.getProductType(),
+                product.getImagePath());
     }
 
     public List<ProductData> createProductDataList(List<Product> products){

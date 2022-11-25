@@ -20,7 +20,7 @@ import {
 export default function SubmitButton(props) {
     let navigate = useNavigate();
 
-    function validateProductObject(product,ingredientList){
+    function validateProductObject(product,ingredientList,selectedImage){
         //dit is bij niet genoeg input velden ingevuld
         console.log(product)
         if (Object.keys(product).length===6 && ingredientList.length>0){
@@ -32,11 +32,18 @@ export default function SubmitButton(props) {
                 }else{
                 }
             }
+            if (!(selectedImage.name.includes(".png") || selectedImage.includes(".jpeg"))){
+                props.setFoutMelding("Upload een image je domme ezel")
+                return false;
+            }
             return true;
         }else{
             props.setFoutMelding(`Je hebt een of meer lege input velden `)
             return false;
         }
+
+
+
 
     }
 
@@ -88,8 +95,8 @@ export default function SubmitButton(props) {
                     });
                 break;
             case Actions.CREATE_PRODUCT:
-                if (validateProductObject(props.product,props.ingredientList)){
-                    createProduct(props.product.name,props.ingredientList,props.product.destination,props.product.subcategory,props.product.details,props.product.price,props.product.type)
+                if (validateProductObject(props.product,props.ingredientList,props.selectedImage)){
+                    createProduct(props.product.name,props.ingredientList,props.product.destination,props.product.subcategory,props.product.details,props.product.price,props.product.type,props.selectedImage)
                         .then(res=>{
                             console.log(res)
                             }
