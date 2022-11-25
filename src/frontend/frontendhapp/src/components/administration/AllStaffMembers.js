@@ -126,7 +126,6 @@ function AllStaffMembers() {
             <Logout/>
             <HomeNav/>
             <StaffMemberDetailsPopup trigger={buttonPopup} setTrigger={setButtonPopup} member={selectedMember} unselectMember={() => setSelectedMember(null)}/>
-
         </>
     )
 }

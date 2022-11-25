@@ -18,16 +18,15 @@ export default function MenuItem({product}) {
 
     function handleClick() {
         setButtonPopup(true);
-        console.log(buttonPopup)
     }
 
     return (
         <div className="listItemDiv">
             <ProductDetailsPopup trigger={buttonPopup} setTrigger={setButtonPopup} product={product}/>
-            <li key={product.id} className={"listItem"} onClick={handleClick}>
-                <span className={"productSpan"}> {product.name}</span>
+            <li key={product.id} className={"list-item"} onClick={handleClick}>
+                <span className={"product-span"}> {product.name}</span>
                 <span>€</span>
-                <span className={"productSpanPrice"}> {displayPrice(product.price)}</span>
+                <span className={"product-price"}> {displayPrice(product.price)}</span>
             </li>
         </div>
 
