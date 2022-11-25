@@ -9,6 +9,7 @@ import {Actions} from "../submitData/Actions"
 
 function ProductDetailsPopup(props) {
     const [productAmount, setProductAmount] = useState(1)
+    // let image = require('frontendhapp/images/burger2.jpg');
 
     function closePopUp() {
         console.log("closing popup")
@@ -28,6 +29,11 @@ function ProductDetailsPopup(props) {
                         <label>{props.product.details}</label>
                     </div>
                 </div>
+
+                <div>
+                    <img src={"src/frontend/frontendhapp/images/burger2.jpg"} alt={"image"}/>
+                </div>
+
                 <div className={"add-to-cart-div"}>
                 <SubmitButton className={"button"} tableId={577} buttonText={"Add to Cart"} action={Actions.ADD_TO_SHOPPING_CART}
                               productAmount={productAmount} productId={props.product.id} trigger={() =>closePopUp()}/>

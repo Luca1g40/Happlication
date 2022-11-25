@@ -40,24 +40,27 @@ public final class ProductController {
                     productRequest.ingredients,
                     productRequest.details,
                     productRequest.productDestination,
-                    productRequest.productType);
+                    productRequest.productType,
+                    productRequest.imagePath);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     @PostMapping(value = "/image")
-    public String uploadImage(@RequestParam MultipartFile file) {
+    public String uploadImage(@RequestPart("test_file") MultipartFile file) {
 //        Path fileNamePath = Paths.get(imageDirectory,
 //                name.concat(".").concat(FilenameUtils.getExtension(file.getOriginalFilename())));
+//        System.out.println(productRequest.name);
         System.out.println(file);
         try {
 //            Files.write(fileNamePath, file.getBytes());
             System.out.println(file);
 //            System.out.println(file);
             String path = System.getProperty("user.dir").concat("\\src\\frontend\\frontendhapp\\images");
+
             Files.copy(file.getInputStream(), Paths.get(path+ File.separator+file.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
 
-            return "created";
+            return path.concat("\\".concat(file.getOriginalFilename()));
         } catch (Exception ex) {
             return"Image is not uploaded";
         }

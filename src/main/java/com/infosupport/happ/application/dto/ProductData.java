@@ -14,8 +14,9 @@ public class ProductData {
     public final String details;
     public final ProductDestination productDestination;
     public final ProductType productType;
+    public final String imagePath;
 
-    public ProductData(Long id, String name, ProductCategoryData productCategoryData, double price, List<Ingredient> ingredientList, String details, ProductDestination productDestination, ProductType productType) {
+    public ProductData(Long id, String name, ProductCategoryData productCategoryData, double price, List<Ingredient> ingredientList, String details, ProductDestination productDestination, ProductType productType,String imagePath) {
         this.id = id;
         this.name = name;
         this.productCategoryData = productCategoryData;
@@ -24,5 +25,6 @@ public class ProductData {
         this.details = details;
         this.productDestination = productDestination;
         this.productType = productType;
+        this.imagePath = imagePath;
     }
 }

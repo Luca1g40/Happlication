@@ -14,6 +14,8 @@ export default function ViewProductForm(props){
     const [product,setProduct] = useState();
     const [toegevoegdeIngredienten,setToegevoegdeIngredienten] = useState([])
     const params = useParams();
+    const [selectedImage,setSelectedImage] = useState()
+
 
 
     useEffect(() => {
@@ -78,9 +80,9 @@ export default function ViewProductForm(props){
                 <Link to="/staff" className="button products-navigation" onClick={() => {clearData()}}>Log out</Link>
             </div>
 
-            <ProductForm toegevoegdeIngredienten={toegevoegdeIngredienten} disabled={disabled} handleChange={event=>handleChange(event)} removeFromIngredientsList={(target=>removeFromIngredientsList(target))} setAddedIngredients={(ingredient) => setToegevoegdeIngredienten(ingredient)} addIngredient={ingredient=>addIngredient(ingredient)} errorMeldingText={errorMeldingText}/>
+            <ProductForm setSelectedImage={selectedImage=>setSelectedImage(selectedImage)} toegevoegdeIngredienten={toegevoegdeIngredienten} disabled={disabled} handleChange={event=>handleChange(event)} removeFromIngredientsList={(target=>removeFromIngredientsList(target))} setAddedIngredients={(ingredient) => setToegevoegdeIngredienten(ingredient)} addIngredient={ingredient=>addIngredient(ingredient)} errorMeldingText={errorMeldingText}/>
             <div className={"create-button"}>
-                <SubmitButton className={"submit-button button"} action={Actions.CREATE_PRODUCT} buttonText={"Create product"} setProduct={product=>setProduct(product)} product={product} ingredientList={toegevoegdeIngredienten} setFoutMelding={error => setErrorMeldingText(error)} />
+                <SubmitButton selectedImage={selectedImage} className={"submit-button button"} action={Actions.CREATE_PRODUCT} buttonText={"Create product"} setProduct={product=>setProduct(product)} product={product} ingredientList={toegevoegdeIngredienten} setFoutMelding={error => setErrorMeldingText(error)} />
             </div>
         </div>
     ) :(

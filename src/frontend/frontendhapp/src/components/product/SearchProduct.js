@@ -77,7 +77,7 @@ export default function SearchProduct(){
         <span className={"select-filters"}>
             <DropdownFilter setOptionSelected={(selected)=>setOptionSelected(selected)} optionSelected={optionSelected}/>
         </span>
-        <OverviewTable tableHeads={["name","category","price","details"]} items={filteredProducts} handleClick={id=>navigate(`/productdetails/${id}`)} leaveOutList={["ingredients","productDestination","id"]}
+        <OverviewTable tableHeads={["name","category","price","details"]} items={filteredProducts} handleClick={id=>navigate(`/productdetails/${id}`)} leaveOutList={["ingredients","productDestination","id","imagePath"]}
                        specialDisplays={ new Map([["productCategory", (category)=>showCategory(category)]])
                        }/>
     </div>
