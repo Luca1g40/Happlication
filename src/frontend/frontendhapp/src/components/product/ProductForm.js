@@ -131,7 +131,7 @@ export default function ProductForm(props){
              <form>
                  <div>
                      <label htmlFor="image">Image:</label>
-                     <input  type={"file"} name={"image"} onChange={(event)=>handleUploadClick(event)}/>
+                     <input  type={"file"}  name={"image"} onChange={(event)=>handleUploadClick(event)}/>
                  </div>
              </form>
         </>
