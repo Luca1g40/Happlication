@@ -1,14 +1,19 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import "../../styles/Popup.css"
 
 import Counter from "../utils/Counter";
 import SubmitButton from "../submitData/SubmitButton";
 import {Actions} from "../submitData/Actions"
+import {getAllCategories, getAllIngredients} from "../../urlMappings/MenuRequests";
 
 
 function ProductDetailsPopup(props) {
     const [productAmount, setProductAmount] = useState(1)
 
+    useEffect(() => {
+        console.log(props.product.imagePath)
+        console.log(props.product.imagePath==="../../images/burger2.jpg")
+    },[])
 
 
     function closePopUp() {
@@ -31,7 +36,7 @@ function ProductDetailsPopup(props) {
                 </div>
 
                 <div>
-                    <img src={require('../../images/burger2.jpg')} alt={"image not found"}/>
+                    <img src={require(`../../images/${props.product.imagePath}` )} alt={"image not found"}/>
                 </div>
 
                 <div className={"add-to-cart-div"}>

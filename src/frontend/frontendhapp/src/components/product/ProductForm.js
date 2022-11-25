@@ -11,10 +11,6 @@ export default function ProductForm(props){
     const[allCategories,setallCategories] = useState([])
     const [selectedImage,setSelectedImage] = useState()
 
-    // const [imagePreview, setImagePreview] = useState(null);
-    // const [imageData, setImageData] = useState(null);
-    // const [imageName, setImageName] = useState("");
-
     // TODO give subcategory starting value
     useEffect(() => {
         getAllCategories()
@@ -35,8 +31,38 @@ export default function ProductForm(props){
             .catch(err => {
                 console.log(err)
             })
-
     },[])
+
+    const handleUploadClick = event => {
+        // let file = event.target.files[0];
+        // setSelectedImage(file)
+
+
+        const filee = new FormData();
+        filee.append('test_file', event.target.files[0]);
+        filee.append('test_json',{name:"yoo"})
+
+        let file;
+        let count = 0
+        for (const [key, value] of filee.entries()) {
+
+            if (count===0){
+                file = value
+            }
+
+
+            // console.log(key,value)
+            count ++;
+        }
+        props.setSelectedImage(file)
+        console.log(file)
+        //  const imageData = new FormData();
+        //  imageData.append('imageFile', file);
+        //  imageData.append('imageName', imageName);
+        //  console.log(imageData)
+        // setImageData(imageData);
+        //setImagePreview(URL.createObjectURL(file));
+    };
 
     return (props.product===undefined) ? (
         <>

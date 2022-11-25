@@ -17,6 +17,7 @@ export default function MenuItem({product}) {
     }
 
     function handleClick() {
+        console.log(product.imagePath)
         setButtonPopup(true);
     }
 
