@@ -10,8 +10,6 @@ export default function StaffModuleHomePagina() {
             <h1>Staff module</h1>
             <div className="container2">
                 <Link className="button homeModule_bt_space" to="/">Home</Link>
-                <Link className="button homeModule_bt_space" to="/orders">Keuken</Link>
-                <Link className="button homeModule_bt_space" to="/orders">Bar</Link>
                 <Link className="button homeModule_bt_space" to="/administration">Voorraad Beheer</Link>
                 <Logout/>
             </div>

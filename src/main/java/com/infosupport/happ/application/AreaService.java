@@ -130,6 +130,7 @@ public class AreaService {
 
     public AreaData createAreaData(Area area) {
         return new AreaData(
+                area.getId(),
                 area.getName(),
                 area.getTables().stream().map(areaConverter::createTableData).collect(Collectors.toList()),
                 createStaffWithoutArea(area)
