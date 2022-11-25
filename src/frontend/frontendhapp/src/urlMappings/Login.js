@@ -20,7 +20,6 @@ export function getRoles(){
     const id = sessionStorage.getItem("staffId")
     axios.get(`http://localhost:8080/happ/staff/${id}`, configuration)
         .then(res => {
-            console.log("WORD AANGEROEPEN!")
             console.log(res)
             sessionStorage.setItem("rights", res.data.rights)
         })
@@ -29,15 +28,15 @@ export function getRoles(){
 
 //Checks if status of ALL responses is 403
 //If true then redirect user to proper error page
-// (async () => {
-//
-//     axios.interceptors.response.use(response => response, error => {
-//         if (error.response.status === 403) {
-//             // redirect to 403 page
-//             window.location = '/error403'
-//         }
-//     });
-// })();
+(async () => {
+
+    axios.interceptors.response.use(response => response, error => {
+        if (error.response.status === 403) {
+            // redirect to 403 page
+            window.location = '/error403'
+        }
+    });
+})();
 
 function parseJwt(token) {
     if (!token) {
