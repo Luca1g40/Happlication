@@ -44,7 +44,7 @@ public class ProductService {
     }
 
 
-    public ProductData updateProduct(String name, String productCategoryName, double price, Long id, List<String> ingredients, String details) {
+    public ProductData updateProduct(String name, String productCategoryName, double price, Long id, List<String> ingredients, String details,ProductType productType, String imagePath, ProductDestination productDestination) {
         productExists(id);
         Product product = productRepository.getById(id);
 
@@ -53,6 +53,9 @@ public class ProductService {
         product.setPrice(price);
         product.setIngredients(convertIngredientStringToIngredient(ingredients));
         product.setDetails(details);
+        product.setProductDestination(productDestination);
+        product.setProductType(productType);
+        product.setImagePath(imagePath);
 
         this.productRepository.save(product);
 

@@ -94,7 +94,7 @@ export default function ViewProductForm(){
                 <Link to="/staff" className="button products-navigation" onClick={() => {clearData()}}>Logout</Link>
             </div>
 
-            <ProductForm product={product} toegevoegdeIngredienten={toegevoegdeIngredienten} disabled={disabled} handleChange={event=>handleChange(event)}
+            <ProductForm setSelectedImage={selectedImage=>setSelectedImage(selectedImage)} product={product} toegevoegdeIngredienten={toegevoegdeIngredienten} disabled={disabled} handleChange={event=>handleChange(event)}
                          removeFromIngredientsList={(target=>removeFromIngredientsList(target))}
                          setToegevoegdeIngredienten={(ingredient)=>setToegevoegdeIngredienten(ingredient)}
                          addIngredient={ingredient=>addIngredient(ingredient)} errorMeldingText={errorMeldingText}/>

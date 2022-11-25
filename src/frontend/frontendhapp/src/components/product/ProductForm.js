@@ -152,6 +152,14 @@ export default function ProductForm(props){
                 <label className={"left-column"} htmlFor="name">Name:</label>
                 <input className={"right-column"} name={"name"} placeholder={""} disabled={props.disabled} value={props.product.name} onChange={(event)=>props.handleChange(event)}/>
 
+                <div>
+                    <label className={"left-column"} htmlFor="productType">Category:</label>
+                    <select className={"right-column"} name={"productType"} disabled={props.disabled} value={props.product.productType} onChange={(event)=>props.handleChange(event)}>
+                        <option value={"DRINKS"} >Drinks</option>
+                        <option value={"FOOD"} >Food</option>
+                    </select>
+                </div>
+
                 <label className={"left-column"} htmlFor="subcategory">Sub category:</label>
                 <select className={"right-column"} name={"subcategory"} onChange={(event)=>props.handleChange(event)}>
                     {allCategories.map(category=>{
@@ -191,6 +199,12 @@ export default function ProductForm(props){
                 <label className={"left-column"} htmlFor="details">Product details:</label>
                 <textarea className={"right-column details-text"} name={"details"} placeholder={"enter text..."} value={props.product.details} disabled={props.disabled}  onChange={props.handleChange}/>
 
+                <form>
+                    <div>
+                        <label className={"left-column"} htmlFor="image">Image:</label>
+                        <input className={"right-column"}  type={"file"}  name={"image"} onChange={(event)=>handleUploadClick(event)}/>
+                    </div>
+                </form>
             </div>
 
         </>

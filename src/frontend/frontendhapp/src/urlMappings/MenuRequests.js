@@ -187,18 +187,31 @@ export function getProduct(id){
         })
 }
 
-export function editProduct(id,name,destination,ingredienten,price,details,category){
-    return axios.put(`http://localhost:8080/happ/product/${id}`, {
-        "name":name,
-        "productCategory":category,
-        "price":price,
-        "ingredients":ingredienten,
-        "details":details,
-        "productDestination":destination
-    },configuration)
-    .then(res => {
-        return res.data;
+export async function editProduct(id, name, destination, ingredienten, price, details, category, type, imageFile) {
+
+    var fftesten = 0
+
+    await saveImage(imageFile).then(res => {
+        fftesten = res
     })
+
+    let imagePath = fftesten
+    console.log(imagePath)
+
+    console.log(type)
+    return axios.put(`http://localhost:8080/happ/product/${id}`, {
+        "name": name,
+        "productCategoryName": category,
+        "price": price,
+        "ingredients": ingredienten,
+        "details": details,
+        "productDestination": destination,
+        "productType": type,
+        "imagePath":imagePath
+    }, configuration)
+        .then(res => {
+            return res.data;
+        })
         .catch(err => {
             console.log(err)
         })

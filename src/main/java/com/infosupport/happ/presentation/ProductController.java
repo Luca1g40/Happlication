@@ -52,7 +52,7 @@ public final class ProductController {
 
 
         try {
-            String path = System.getProperty("user.dir").concat("\\src\\frontend\\frontendhapp\\images");
+            String path = System.getProperty("user.dir").concat("\\src\\frontend\\frontendhapp\\src\\images");
             Files.copy(file.getInputStream(), Paths.get(path+ File.separator+file.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
             return file.getOriginalFilename();
         } catch (Exception ex) {
@@ -106,7 +106,10 @@ public final class ProductController {
                     productRequest.price,
                     productId,
                     productRequest.ingredients,
-                    productRequest.details
+                    productRequest.details,
+                    productRequest.productType,
+                    productRequest.imagePath,
+                    productRequest.productDestination
             );
         } catch (ItemNotFound e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());

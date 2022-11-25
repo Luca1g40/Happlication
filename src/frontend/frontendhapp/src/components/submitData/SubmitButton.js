@@ -109,25 +109,20 @@ export default function SubmitButton(props) {
                 break;
             case Actions.UPDATE_PRODUCT:
 
-                if (Object.keys(props.product).length===7 && props.ingredientList.length>0){
-                    for (const key in props.product) {
-                        if (!(String(props.product[key]).replace(/\s+/g, '').length>0)){
-                            props.setFoutMelding(`Je hebt een lege input gegeven bij ${key.replace("-", " ")} `)
-                            return;
-                        }
-                    }
 
-                    editProduct(props.product.id,props.product.name,props.product.productDestination,props.ingredientList,props.product.price,props.product.details,props.product.type, props.product.subcategory).
+                console.log(Object.keys(props.product).length)
+                for (const key in props.product) {
+                    console.log(key)
+                }
+                console.log(props.product)
+                    editProduct(props.product.id,props.product.name,props.product.productDestination,props.ingredientList,props.product.price,props.product.details, props.product.productCategoryData.name,props.product.type , props.selectedImage).
                     then(res=>{
                         props.setDisabled(true);
-                        navigate(`/productdetails/${res.id}`)
+                        // navigate(`/productdetails/${res.id}`)
                     }).catch(err=>{
                         console.log(err)
                     })
-                }else{
-                    props.setFoutMelding(`Je hebt een of meer lege input velden `)
-                    return;
-                }
+
                 break;
 
             case Actions.CREATE_INGREDIENT:
