@@ -98,11 +98,8 @@ export default function SubmitButton(props) {
                 if (validateProductObject(props.product,props.ingredientList,props.selectedImage)){
                     createProduct(props.product.name,props.ingredientList,props.product.destination,props.product.subcategory,props.product.details,props.product.price,props.product.type,props.selectedImage)
                         .then(res=>{
-                                // window.location.reload()
-                                // navigate(`/createproduct`)
                             console.log(res)
                             }
-
                         ).catch(err=>{
                         console.log(err)
                     })
@@ -110,8 +107,6 @@ export default function SubmitButton(props) {
 
                 break;
             case Actions.UPDATE_PRODUCT:
-
-                console.log(props.product.productCategory)
 
                 if (Object.keys(props.product).length===7 && props.ingredientList.length>0){
                     for (const key in props.product) {
@@ -121,7 +116,7 @@ export default function SubmitButton(props) {
                         }
                     }
 
-                    editProduct(props.product.id,props.product.name,props.product.productDestination,props.ingredientList,props.product.price,props.product.details,props.product.productCategory).
+                    editProduct(props.product.id,props.product.name,props.product.productDestination,props.ingredientList,props.product.price,props.product.details,props.product.type, props.product.subcategory).
                     then(res=>{
                         props.setDisabled(true);
                         navigate(`/productdetails/${res.id}`)
@@ -129,7 +124,6 @@ export default function SubmitButton(props) {
                         console.log(err)
                     })
                 }else{
-                    console.log("ging heel fout")
                     props.setFoutMelding(`Je hebt een of meer lege input velden `)
                     return;
                 }

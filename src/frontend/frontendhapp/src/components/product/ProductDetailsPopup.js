@@ -22,7 +22,7 @@ function ProductDetailsPopup(props) {
                 <div className={"gerecht-aantal"}>
                     <p className={"grid-item-1"}>{props.product.name} </p>
                     <Counter initialValue={productAmount} updateCount={count => setProductAmount(count)} submitMode={false}/>
-                    <button className="close-btn" onClick={closePopUp}> X </button>
+                    <button className="close-btn button" onClick={closePopUp}> X </button>
                 </div>
                 <div className={"label-div"}>
                     <div className={"border-div"}>

@@ -38,76 +38,8 @@ export default function ProductForm(props){
 
     },[])
 
-    const handleUploadClick = event => {
-        // let file = event.target.files[0];
-        // setSelectedImage(file)
-
-
-        const filee = new FormData();
-        filee.append('test_file', event.target.files[0]);
-        filee.append('test_json',{name:"yoo"})
-
-        let file;
-        let count = 0
-        for (const [key, value] of filee.entries()) {
-
-            if (count===0){
-                file = value
-            }
-
-
-            // console.log(key,value)
-            count ++;
-        }
-        props.setSelectedImage(file)
-        console.log(file)
-       //  const imageData = new FormData();
-       //  imageData.append('imageFile', file);
-       //  imageData.append('imageName', imageName);
-       //  console.log(imageData)
-       // setImageData(imageData);
-        //setImagePreview(URL.createObjectURL(file));
-    };
-    // const uploadImage = (imageData) => {
-    //     if (imageData.entries().next().value[1] !== null) {
-    //         const response = axios.post(axios.defaults.baseURL + `/api/upload/image`, imageData, {
-    //             onUploadProgress:progressEvent => {
-    //                 console.log("Uploading : " + ((progressEvent.loaded / progressEvent.total) * 100).toString() + "%")
-    //             }
-    //         });
-    //         console.log(response.data)
-    //     }
-    // };
-    // function fileUploadHandler(){
-    //      const filee = new FormData();
-    //      filee.append('test_file', selectedImage);
-    //      filee.append('test_json',{name:"yoo"})
-    //
-    //     let file;
-    //     let count = 0
-    //     for (const [key, value] of filee.entries()) {
-    //
-    //         if (count===0){
-    //             file = value
-    //         }
-    //
-    //
-    //         // console.log(key,value)
-    //         count ++;
-    //     }
-    //
-    //     console.log(file)
-    //     createProduct("","","","","","","",file)
-    // }
-
-    // const uploadImageWithAdditionalData = () => {
-    //     imageData.append('imageName', imageName);
-    //     uploadImage(imageData)
-    // };
-
-
     return (props.product===undefined) ? (
-         <>
+        <>
             <h1>Create product</h1>
             <div className={"crud-form"} >
                 <label className={"left-column"} htmlFor="destination">Destination: </label>
@@ -129,20 +61,17 @@ export default function ProductForm(props){
                     </select>
                 </div>
 
-                <div>
+
                     <label className={"left-column"} htmlFor="subcategory">Sub category:</label>
                     <select className={"right-column"} name={"subcategory"} onChange={(event)=>props.handleChange(event)}>
-                        {allCategories.map(category=>{
+                        {allCategories.map(category => {
                             return <option key={category.id.id} value={category.name}> {category.name}</option>
                         })}
                     </select>
-                </div>
 
-
-                <div>
                     <label className={"left-column"} htmlFor="price">Prize:</label>
                     <input className={"right-column"} type={"number"} name={"price"} min={0}  onChange={(event)=>props.handleChange(event)}/>
-                </div>
+
 
 
                 <div className={"add-ingredient-div"}>
@@ -169,12 +98,9 @@ export default function ProductForm(props){
                     <ErrormeldingLabel text={props.errorMeldingText}/>
                 </div>
 
-
-
-                <div>
                     <label className={"left-column"} htmlFor="details">Product details:</label>
                     <textarea className={"right-column details-text"} name={"details"} placeholder={"enter text..."}  onChange={props.handleChange}/>
-                </div>
+
             </div>
              <form>
                  <div>
@@ -197,29 +123,19 @@ export default function ProductForm(props){
                     <option value={"KITCHEN_PRODUCT"} >Kitchen</option>
                 </select>
 
-                <div>
-                    <label className={"left-column"} htmlFor="name">Name:</label>
-                    <input className={"right-column"} name={"name"} placeholder={""} disabled={props.disabled} value={props.product.name} onChange={(event)=>props.handleChange(event)}/>
-                </div>
+                <label className={"left-column"} htmlFor="name">Name:</label>
+                <input className={"right-column"} name={"name"} placeholder={""} disabled={props.disabled} value={props.product.name} onChange={(event)=>props.handleChange(event)}/>
 
-                <div>
-                    <label className={"left-column"} htmlFor="productCategory">Category:</label>
-                    <select className={"right-column"} name={"productCategory"} disabled={props.disabled}
-                            value={props.product.productCategory} onChange={(event)=>props.handleChange(event)}>
-                        <option value={"DRINKS"} >Drinks</option>
-                        <option value={"EXTRA"} >Extra</option>
-                        <option value={"DESSERT"} >Dessert</option>
-                        <option value={"SIDE"} >Side</option>
-                        <option value={"STARTER"} >Starter</option>
-                        <option value={"MAIN_COURSE"} >Main course</option>
-                    </select>
-                </div>
+                <label className={"left-column"} htmlFor="subcategory">Sub category:</label>
+                <select className={"right-column"} name={"subcategory"} onChange={(event)=>props.handleChange(event)}>
+                    {allCategories.map(category=>{
+                        return <option key={category.id.id} value={category.name}> {category.name}</option>
+                    })}
+                </select>
 
 
-                <div>
-                    <label className={"left-column"} htmlFor="price">Prize:</label>
-                    <input className={"right-column"} type={"number"} name={"price"} min={0} disabled={props.disabled} value={props.product.price} onChange={(event)=>props.handleChange(event)}/>
-                </div>
+                <label className={"left-column"} htmlFor="price">Prize:</label>
+                <input className={"right-column"} type={"number"} name={"price"} min={0} disabled={props.disabled} value={props.product.price} onChange={(event)=>props.handleChange(event)}/>
 
 
                 <div className={"add-ingredient-div"}>
@@ -246,10 +162,9 @@ export default function ProductForm(props){
                     <ErrormeldingLabel text={props.errorMeldingText}/>
                 </div>
 
-                <div>
-                    <label className={"left-column"} htmlFor="details">Product details:</label>
-                    <textarea className={"right-column details-text"} name={"details"} placeholder={"enter text..."} value={props.product.details} disabled={props.disabled}  onChange={props.handleChange}/>
-                </div>
+                <label className={"left-column"} htmlFor="details">Product details:</label>
+                <textarea className={"right-column details-text"} name={"details"} placeholder={"enter text..."} value={props.product.details} disabled={props.disabled}  onChange={props.handleChange}/>
+
             </div>
 
         </>

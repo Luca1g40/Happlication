@@ -7,7 +7,7 @@ import {useParams} from "react-router";
 import  "../../styles/MenuCrudForm.css"
 import {Link} from "react-router-dom";
 
-export default function ViewProductForm(props){
+export default function ViewProductForm(){
     const [disabled,setDisabled] = useState(true)
 
     const [errorMeldingText,setErrorMeldingText] = useState("");
@@ -35,8 +35,6 @@ export default function ViewProductForm(props){
     },[])
 
 
-
-    //TODO remove border
     //TODO edit product backend
     const handleChange = (event) => {
         const name = event.target.name;
@@ -69,8 +67,8 @@ export default function ViewProductForm(props){
         sessionStorage.clear();
     }
 
-    return (params.id===undefined) ? (
-        <div>
+    return (params.id === undefined) ? (
+        <>
             <div className={"home-button"}>
                 <Link to="/administration" className="button products-navigation" >Home</Link>
             </div>
@@ -84,9 +82,9 @@ export default function ViewProductForm(props){
             <div className={"create-button"}>
                 <SubmitButton selectedImage={selectedImage} className={"submit-button button"} action={Actions.CREATE_PRODUCT} buttonText={"Create product"} setProduct={product=>setProduct(product)} product={product} ingredientList={toegevoegdeIngredienten} setFoutMelding={error => setErrorMeldingText(error)} />
             </div>
-        </div>
+        </>
     ) :(
-        <div>
+        <>
             <div className={"home-button"}>
                 <Link to="/administration" className="button products-navigation" >Home</Link>
             </div>
@@ -96,7 +94,7 @@ export default function ViewProductForm(props){
                 <Link to="/staff" className="button products-navigation" onClick={() => {clearData()}}>Logout</Link>
             </div>
 
-    <ProductForm product={product} toegevoegdeIngredienten={toegevoegdeIngredienten} disabled={disabled} handleChange={event=>handleChange(event)}
+            <ProductForm product={product} toegevoegdeIngredienten={toegevoegdeIngredienten} disabled={disabled} handleChange={event=>handleChange(event)}
                          removeFromIngredientsList={(target=>removeFromIngredientsList(target))}
                          setToegevoegdeIngredienten={(ingredient)=>setToegevoegdeIngredienten(ingredient)}
                          addIngredient={ingredient=>addIngredient(ingredient)} errorMeldingText={errorMeldingText}/>
@@ -107,6 +105,6 @@ export default function ViewProductForm(props){
                     <button className={"cancel-button button"} onClick={()=>setDisabled(true)} disabled={disabled}>Cancel</button>
                 </div>
             </div>
-        </div>
+        </>
     )
 }
