@@ -11,6 +11,7 @@ function ProductDetailsPopup(props) {
     const [productAmount, setProductAmount] = useState(1)
     // let image = require('frontendhapp/images/burger2.jpg');
 
+
     function closePopUp() {
         console.log("closing popup")
         props.setTrigger(false);
@@ -31,7 +32,7 @@ function ProductDetailsPopup(props) {
                 </div>
 
                 <div>
-                    <img src={"src/frontend/frontendhapp/images/burger2.jpg"} alt={"image"}/>
+                    <img src={'../../images/burger2.jpg'} alt={"image"}/>
                 </div>
 
                 <div className={"add-to-cart-div"}>
