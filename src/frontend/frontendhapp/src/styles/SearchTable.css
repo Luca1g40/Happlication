@@ -1,19 +1,19 @@
-#searchTable {
+.search-table {
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
 }
 
-#searchTable td, #searchTable th {
+.search-table td, .search-table th {
     border: 1px solid #ddd;
     padding: 8px;
 }
 
-#searchTable tr:nth-child(even){background-color: #f2f2f2;}
+.search-table tr:nth-child(even){background-color: #f2f2f2;}
 
-#searchTable tr:hover {background-color: #ddd; cursor:pointer;}
+.search-table tr:hover {background-color: #ddd; cursor:pointer;}
 
-#searchTable th {
+.search-table th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
@@ -21,16 +21,9 @@
     color: white;
 }
 
-.logoutSelect {
-    background-color: red !important;
-    width: 100px !important;
-}
-
 .select-options{
     width: 15%;
 }
-
-
 
 .search-table{
     width: 100%;

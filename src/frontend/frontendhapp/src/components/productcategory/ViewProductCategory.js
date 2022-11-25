@@ -36,7 +36,7 @@ export default function ViewProductCategory(props){
     }
 
     return (params.id === undefined) ? (
-        <div>
+        <>
             <h1>Create Menu category</h1>
             <div className={"home-button"}>
                 <Link to="/administration" className="button search-products-navigation" >Home</Link>
@@ -45,9 +45,10 @@ export default function ViewProductCategory(props){
             <SubmitButton className={"button submit-button"} setFoutMelding={foutMelding=>setFoutMelding(foutMelding)} disabled={disabled} setDisabled={disabled=>setDisabled(disabled)} action={Actions.CREATE_CATEGORY} buttonText={"Create category"} category={category}/>
             <Logout/>
             <HomeNav/>
-        </div>
+        </>
     ) : (
-        <div>
+        <>
+
             <h1>Edit Menu category</h1>
             <div className={"home-button"}>
                 <Link to="/administration" className="button search-products-navigation" >Home</Link>
@@ -58,7 +59,9 @@ export default function ViewProductCategory(props){
             <button onClick={()=>setDisabled(true)} disabled={disabled}>Cancel</button>
             <Logout/>
             <HomeNav/>
-        </div>
+        </>
+
+
 
 
     )

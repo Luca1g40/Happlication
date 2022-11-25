@@ -39,10 +39,8 @@ export default function SingleOrder(props) {
     }
 
     function orderIsDone() {
-        console.log(props.order.id)
         setOrderToDone(props.order.id)
             .then(res => {
-                console.log(res)
                 props.orderIsDone(true)
             })
             .catch(err => {

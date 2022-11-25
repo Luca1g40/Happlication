@@ -91,11 +91,8 @@ export default function SubmitButton(props) {
                 if (validateProductObject(props.product,props.ingredientList)){
                     createProduct(props.product.name,props.ingredientList,props.product.destination,props.product.subcategory,props.product.details,props.product.price,props.product.type)
                         .then(res=>{
-                                // window.location.reload()
-                                // navigate(`/createproduct`)
                             console.log(res)
                             }
-
                         ).catch(err=>{
                         console.log(err)
                     })
@@ -118,13 +115,11 @@ export default function SubmitButton(props) {
                     editProduct(props.product.id,props.product.name,props.product.productDestination,props.ingredientList,props.product.price,props.product.details,props.product.productCategoryName,props.product.productType)
                         .then(res=>{
                         props.setDisabled(true);
-                        console.log(res)
                         navigate(`/productdetails/${res.id}`)
                     }).catch(err=>{
                         console.log(err)
                     })
                 }else{
-                    console.log("ging heel fout")
                     props.setFoutMelding(`Je hebt een of meer lege input velden `)
                     return;
                 }

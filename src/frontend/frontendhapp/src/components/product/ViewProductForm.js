@@ -8,7 +8,7 @@ import  "../../styles/MenuCrudForm.css"
 import {Link} from "react-router-dom";
 import {generateObjectWithEmptyValues} from "../utils/Util.js"
 
-export default function ViewProductForm(props){
+export default function ViewProductForm(){
     const [disabled,setDisabled] = useState(true)
 
     const [errorMeldingText,setErrorMeldingText] = useState("");
@@ -21,30 +21,26 @@ export default function ViewProductForm(props){
         if (!(params.id===undefined)){
             getProduct(params.id)
                 .then(res => {
-                    console.log(res)
+
                     setProduct(res);
                     setToegevoegdeIngredienten(res.ingredientList.map((ingredient)=>{return ingredient.name}))
                 })
         }else{
             setProduct(generateObjectWithEmptyValues())
-            console.log(generateObjectWithEmptyValues())
         }
     },[])
 
 
-
-    //TODO remove border
     //TODO edit product backend
     const handleChange = (event) => {
         const name = event.target.name;
         const value = event.target.value;
-        console.log(name,value)
         setProduct(values => ({...values, [name]: value}))
-        console.log(product.name)
+
     }
 
     const addIngredient = (newIngredient) => {
-        console.log(newIngredient)
+
         if (!(toegevoegdeIngredienten.includes(newIngredient))){
             setToegevoegdeIngredienten(state => [...state, newIngredient])
             setErrorMeldingText("");
@@ -66,8 +62,8 @@ export default function ViewProductForm(props){
         sessionStorage.clear();
     }
 
-    return (params.id===undefined) ? (
-        <div>
+    return (params.id === undefined) ? (
+        <>
             <div className={"home-button"}>
                 <Link to="/administration" className="button products-navigation" >Home</Link>
             </div>
@@ -81,9 +77,9 @@ export default function ViewProductForm(props){
             <div className={"create-button"}>
                 <SubmitButton className={"submit-button button"} action={Actions.CREATE_PRODUCT} buttonText={"Create product"} setProduct={product=>setProduct(product)} product={product} ingredientList={toegevoegdeIngredienten} setFoutMelding={error => setErrorMeldingText(error)} />
             </div>
-        </div>
+        </>
     ) :(
-        <div>
+        <>
             <div className={"home-button"}>
                 <Link to="/administration" className="button products-navigation" >Home</Link>
             </div>
@@ -104,6 +100,6 @@ export default function ViewProductForm(props){
                     <button className={"cancel-button button"} onClick={()=>setDisabled(true)} disabled={disabled}>Cancel</button>
                 </div>
             </div>
-        </div>
+        </>
     )
 }

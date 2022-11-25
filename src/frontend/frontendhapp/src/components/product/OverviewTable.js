@@ -4,7 +4,7 @@ import React from "react";
 export default function OverviewTable(props){
     return(
         <span className={"product-tables"}>
-            <table id="searchTable">
+            <table className="search-table">
                 <tbody key={"table-body"}>
                     <tr>
                         {props.tableHeads.map(head => {

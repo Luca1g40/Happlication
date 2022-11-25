@@ -36,22 +36,24 @@ function CreatingStaff(){
         setNum(event.target.value.slice(0, limit));
     };
 
-    return (
-           <form className={"list"}>
-               <h4>Voornaam</h4>
-               <input type="text" placeholder="Voer voornaam in" id="f"/><br/><br/>
-               <h4>Wachtwoord</h4>
-               <input type="number" onChange={handleNumChange} placeholder="Voer wachtwoord in" value={num} id="p"/><br/><br/>
-               <h4>Rechten</h4>
-               <select id="r" name="Rechten">
+    return (<>
+           <div className={"crud-form"}>
+               <p className={"left-column"}>Voornaam</p>
+               <input className={"right-column"} type="text" placeholder="Voornaam" id="f"/><br/><br/>
+               <p className={"left-column"}>Wachtwoord</p>
+               <input className={"right-column"} type="number" onChange={handleNumChange} placeholder="Wachtwoord" value={num} id="p"/><br/><br/>
+               <p className={"left-column"}>Rechten</p>
+               <select className={"right-column"} id="r" name="Rechten">
                    <option value="Keuken">Keuken</option>
                    <option value="Bar">Bar</option>
                    <option value="Keuken & bar">Keuken & bar</option>
-               </select><br/><br/>
-               <input type="button" value="Staff-member aanmaken"  onClick={() => {create()}} className={"button"}/>
+               </select>
                <ToastContainer />
-           </form>
-    )
+           </div>
+            <input className={"button create-staff-button"} type="button" value="Staff-member aanmaken" onClick={() => {create()}}/>
+        </>
+
+)
 }
 
 export default CreatingStaff

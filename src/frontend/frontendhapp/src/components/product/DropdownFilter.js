@@ -7,7 +7,7 @@ export default function DropdownFilter(props){
 
     const Option = (props) => {
         return (
-            <div>
+            <>
                 <components.Option {...props} className={"select-options"}>
                     <input
                         type="checkbox"
@@ -16,7 +16,7 @@ export default function DropdownFilter(props){
                     />{" "}
                     <label>{props.label}</label>
                 </components.Option>
-            </div>
+            </>
         );
     };
     const handleChange = (selected) => {
