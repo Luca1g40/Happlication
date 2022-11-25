@@ -108,7 +108,7 @@ export default function ProductForm(props){
                 <input className={"right-column"} name={"name"} placeholder={""} disabled={props.disabled} value={props.product.name} onChange={(event)=>props.handleChange(event)}/>
 
                 <label className={"left-column"} htmlFor="subcategory">Sub category:</label>
-                <select className={"right-column"} name={"subcategory"} onChange={(event)=>props.handleChange(event)}>
+                <select className={"right-column"} name={"subcategory"} onChange={(event)=>props.handleChange(event)} disabled={props.disabled}>
                     {allCategories.map(category=>{
                         return <option key={category.id.id} value={category.name}> {category.name}</option>
                     })}

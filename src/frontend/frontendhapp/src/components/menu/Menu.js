@@ -88,7 +88,7 @@ export default function Menu (props){
 
             <div className={"scrollable-buttons"}> {
                 getUniqueProductCategories(products).map((category, i) => {
-                    return <button key={i} className={"button menu-nav"} onClick={() => scrollToElement(category)}>{category}</button>
+                    return <button key={i} className={"button menu-nav"} onClick={() => scrollToElement(category.replace(/\s+/g, ''))}>{category}</button>
                 })
             }
             </div>
@@ -98,7 +98,7 @@ export default function Menu (props){
                     <ul className={"list"}>
                     {
                         getUniqueProductCategories(products).map((subCategorie, i) =>{
-                            return <SubCategory key={subCategorie + i} products={showProductBasedOnCategory(subCategorie)} id={subCategorie} category={subCategorie}/>
+                            return <SubCategory key={subCategorie + i} products={showProductBasedOnCategory(subCategorie)} id={subCategorie.replace(/\s+/g, '')} category={subCategorie}/>
                         })
                     }
                     </ul>
