@@ -48,13 +48,6 @@ public class Product {
         return details;
     }
 
-    public void setProductType(ProductType productType) {
-        this.productType = productType;
-    }
-
-    public void setProductDestination(ProductDestination productDestination) {
-        this.productDestination = productDestination;
-    }
 
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
