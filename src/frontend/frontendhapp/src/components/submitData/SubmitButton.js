@@ -13,7 +13,7 @@ import {
     createProduct,
     deleteProduct,
     editIngredient,
-    editProduct
+    editProduct, updateCategory
 } from "../../urlMappings/MenuRequests";
 
 
@@ -118,7 +118,7 @@ export default function SubmitButton(props) {
                     editProduct(props.product.id,props.product.name,props.product.productDestination,props.ingredientList,props.product.price,props.product.details, props.product.productCategoryData.name,props.product.type , props.selectedImage).
                     then(res=>{
                         props.setDisabled(true);
-                        // navigate(`/productdetails/${res.id}`)
+                        navigate(`/productdetails/${res.id}`)
                     }).catch(err=>{
                         console.log(err)
                     })
@@ -178,6 +178,17 @@ export default function SubmitButton(props) {
                     }).catch(err=>{
                         console.log(err)
                 })
+                break;
+            case Actions.UPDATE_CATEGORY:
+                console.log(props.category)
+                console.log("hierin")
+                updateCategory(props.category.id,props.category.name)
+                    .then(res=>{
+                        console.log(res)
+                    }).catch(err=>{
+                    console.log(err)
+                })
+                break;
         }
     }
 

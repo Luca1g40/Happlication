@@ -76,7 +76,7 @@ public class ProductService {
         return new ProductData(
                 product.getId(),
                 product.getName(),
-                createProductCategoryData(product.getProductCategory()),
+                product.getProductCategory().getName(),
                 product.getPrice(),
                 product.getIngredients(),
                 product.getDetails(),

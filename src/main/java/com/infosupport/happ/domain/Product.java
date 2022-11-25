@@ -112,6 +112,13 @@ public class Product {
         return productType;
     }
 
+    public void setProductType(ProductType productType) {
+        this.productType = productType;
+    }
+
+    public void setProductDestination(ProductDestination productDestination) {
+        this.productDestination = productDestination;
+    }
 
     @Override
     public String toString() {

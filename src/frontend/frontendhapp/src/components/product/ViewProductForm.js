@@ -6,6 +6,7 @@ import {getProduct} from "../../urlMappings/MenuRequests";
 import {useParams} from "react-router";
 import  "../../styles/MenuCrudForm.css"
 import {Link} from "react-router-dom";
+import {generateObjectWithEmptyValues} from "../utils/Util.js"
 
 export default function ViewProductForm(){
     const [disabled,setDisabled] = useState(true)
@@ -22,15 +23,12 @@ export default function ViewProductForm(){
         if (!(params.id===undefined)){
             getProduct(params.id)
                 .then(res => {
-                    console.log(res.id)
+
                     setProduct(res);
                     setToegevoegdeIngredienten(res.ingredientList.map((ingredient)=>{return ingredient.name}))
                 })
         }else{
-            setProduct({
-                "type":"DRINKS",
-                "destination":"BAR_PRODUCT"
-            })
+            setProduct(generateObjectWithEmptyValues())
         }
     },[])
 

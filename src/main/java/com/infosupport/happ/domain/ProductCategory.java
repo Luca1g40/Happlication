@@ -30,4 +30,8 @@ public class ProductCategory {
     public Long getId() {
         return id;
     }
+
+    public void updateCategory(String name){
+        setName(name);
+    }
 }

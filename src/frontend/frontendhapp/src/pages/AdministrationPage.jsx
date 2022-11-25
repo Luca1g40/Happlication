@@ -16,6 +16,9 @@ export default function AdministrationPage() {
                 <Link className="button homeModule_bt_space" to="/createingredient">Create ingredient</Link>
                 <Link className="button homeModule_bt_space" to="/createcategory">Create Menu Category</Link>
                 <hr/><hr/>
+                <Link className="button homeModule_bt_space" to="/searchcategory">Get all categories</Link>
+
+                <hr/>
                 <Link className="button homeModule_bt_space" to="/createStaff">Create Staff</Link>
                 <Link className="button homeModule_bt_space" to="/allStaffMembers">Get All Staff</Link>
 

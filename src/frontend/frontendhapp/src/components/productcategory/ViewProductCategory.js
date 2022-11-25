@@ -48,11 +48,20 @@ export default function ViewProductCategory(props){
         </>
     ) : (
         <>
+
+            <h1>Edit Menu category</h1>
+            <div className={"home-button"}>
+                <Link to="/administration" className="button search-products-navigation" >Home</Link>
+            </div>
             <ProductCategoryForm errorMeldingText={foutMelding} disabled={disabled} category={category} handleChange={event=>handleChange(event)}/>
-            <SubmitButton setFoutMelding={foutMelding=>setFoutMelding(foutMelding)} disabled={disabled} setDisabled={disabled=>setDisabled(disabled)} action={Actions.UPDATE_INGREDIENT} buttonText={"Update"}  category={category}/>
+            <SubmitButton className={"button submit-button"} setFoutMelding={foutMelding=>setFoutMelding(foutMelding)} disabled={disabled} setDisabled={disabled=>setDisabled(disabled)} action={Actions.UPDATE_CATEGORY} buttonText={"Update"}  category={category}/>
             <button onClick={()=>setDisabled(false)} disabled={!disabled}>Edit</button>
             <button onClick={()=>setDisabled(true)} disabled={disabled}>Cancel</button>
+            <Logout/>
+            <HomeNav/>
         </>
+
+
 
 
     )

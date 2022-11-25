@@ -16,7 +16,6 @@ export default function ProductForm(props){
         getAllCategories()
             .then(res => {
                setallCategories(res)
-                console.log(allCategories)
 
             })
             .catch(err => {
@@ -24,7 +23,6 @@ export default function ProductForm(props){
             })
         getAllIngredients()
             .then(res => {
-                console.log(res)
                 setIngredientList(res);
 
             })
@@ -32,7 +30,6 @@ export default function ProductForm(props){
                 console.log(err)
             })
     },[])
-
     const handleUploadClick = event => {
         // let file = event.target.files[0];
         // setSelectedImage(file)
@@ -63,8 +60,7 @@ export default function ProductForm(props){
         // setImageData(imageData);
         //setImagePreview(URL.createObjectURL(file));
     };
-
-    return (props.product===undefined) ? (
+    return (props.product === undefined) ? (
         <>
             <h1>Create product</h1>
             <div className={"crud-form"} >
@@ -88,12 +84,12 @@ export default function ProductForm(props){
                 </div>
 
 
-                    <label className={"left-column"} htmlFor="subcategory">Sub category:</label>
-                    <select className={"right-column"} name={"subcategory"} onChange={(event)=>props.handleChange(event)}>
-                        {allCategories.map(category => {
-                            return <option key={category.id.id} value={category.name}> {category.name}</option>
-                        })}
-                    </select>
+                <label className={"left-column"} htmlFor="subcategory">Sub category:</label>
+                <select className={"right-column"} name={"subcategory"} onChange={(event)=>props.handleChange(event)}>
+                    {allCategories.map(category => {
+                        return <option key={category.id.id} value={category.name}> {category.name}</option>
+                    })}
+                </select>
 
                     <label className={"left-column"} htmlFor="price">Prize:</label>
                     <input className={"right-column"} type={"number"} name={"price"} min={0}  onChange={(event)=>props.handleChange(event)}/>
@@ -209,5 +205,6 @@ export default function ProductForm(props){
 
         </>
     );
+
 
 }

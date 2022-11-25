@@ -19,6 +19,7 @@ import StaffModuleHomePagina from "./pages/StaffModuleHomePagina";
 import AdministrationPage from "./pages/AdministrationPage";
 import ViewProductCategory from "./components/productcategory/ViewProductCategory";
 import Menu from "./components/menu/Menu";
+import SearchCategory from "./components/productcategory/SearchCategory";
 
 function App() {
     return (
@@ -43,6 +44,8 @@ function App() {
             <Route path="searchproduct" element={<SearchProduct/>}/>
             <Route path="createcategory/" element={<ViewProductCategory/>}/>
             <Route path="categorydetails/:id" element={<ViewProductCategory/>}/>
+            <Route path="searchcategory" element={<SearchCategory/>}/>
+
 
 
         </Routes>
