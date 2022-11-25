@@ -19,6 +19,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/happ")
@@ -48,19 +49,12 @@ public final class ProductController {
     }
     @PostMapping(value = "/image")
     public String uploadImage(@RequestPart("test_file") MultipartFile file) {
-//        Path fileNamePath = Paths.get(imageDirectory,
-//                name.concat(".").concat(FilenameUtils.getExtension(file.getOriginalFilename())));
-//        System.out.println(productRequest.name);
-        System.out.println(file);
+
+
         try {
-//            Files.write(fileNamePath, file.getBytes());
-            System.out.println(file);
-//            System.out.println(file);
             String path = System.getProperty("user.dir").concat("\\src\\frontend\\frontendhapp\\images");
-
             Files.copy(file.getInputStream(), Paths.get(path+ File.separator+file.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
-
-            return path.concat("\\".concat(file.getOriginalFilename()));
+            return file.getOriginalFilename();
         } catch (Exception ex) {
             return"Image is not uploaded";
         }

@@ -32,10 +32,12 @@ export default function SubmitButton(props) {
                 }else{
                 }
             }
-            if (!(selectedImage.name.includes(".png") || selectedImage.includes(".jpeg"))){
-                props.setFoutMelding("Upload een image je domme ezel")
-                return false;
-            }
+            console.log(selectedImage.name)
+
+            // if (!(String(selectedImage.name).includes(".png") || String(selectedImage.name).includes(".jpg"))){
+            //     props.setFoutMelding("Upload een image je domme ezel")
+            //     return false;
+            // }
             return true;
         }else{
             props.setFoutMelding(`Je hebt een of meer lege input velden `)
@@ -97,10 +99,9 @@ export default function SubmitButton(props) {
             case Actions.CREATE_PRODUCT:
                 if (validateProductObject(props.product,props.ingredientList,props.selectedImage)){
                     createProduct(props.product.name,props.ingredientList,props.product.destination,props.product.subcategory,props.product.details,props.product.price,props.product.type,props.selectedImage)
-                        .then(res=>{
-                            console.log(res)
-                            }
-                        ).catch(err=>{
+                        .then(
+                            window.location.reload())
+                        .catch(err=>{
                         console.log(err)
                     })
                 }
