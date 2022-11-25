@@ -14,7 +14,6 @@
 }
 
 .scrollable-buttons{
-    width: 100%;
     overflow: hidden;
     overflow-x: scroll;
     white-space: nowrap;
