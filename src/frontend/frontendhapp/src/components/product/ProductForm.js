@@ -33,32 +33,35 @@ export default function ProductForm(props){
         <>
             <h1>Create product</h1>
             <div className={"crud-form"} >
-                <label className={"left-column"} htmlFor="productDestination">Destination: </label>
-                <select className={"right-column"} name={"productDestination"} onChange = {(event)=>props.handleChange(event)}>
+                <label className={"left-column"} htmlFor="destination">Destination: </label>
+                <select className={"right-column"} name={"destination"} onChange={(event)=>props.handleChange(event)}>
                     <option value={"BAR_PRODUCT"} >Bar</option>
                     <option value={"KITCHEN_PRODUCT"} >Kitchen</option>
                 </select>
 
+                <div>
                     <label className={"left-column"} htmlFor="name">Name:</label>
                     <input className={"right-column"} name={"name"} placeholder={""} onChange={(event)=>props.handleChange(event)}/>
+                </div>
 
                 <div>
-                    <label className={"left-column"} htmlFor="productType">Category:</label>
-                    <select className={"right-column"} name={"productType"} onChange={(event)=>props.handleChange(event)}>
+                    <label className={"left-column"} htmlFor="type">Category:</label>
+                    <select className={"right-column"} name={"type"} onChange={(event)=>props.handleChange(event)}>
                         <option value={"DRINKS"} >Drinks</option>
                         <option value={"FOOD"} >Food</option>
                     </select>
+                </div>
 
-                <div>
-                    <label className={"left-column"} htmlFor="productCategoryName">Sub category:</label>
-                    <select className={"right-column"} name={"productCategoryName"}  onChange={(event)=>props.handleChange(event)}>
-                        {allCategories.map((category,i)=>{
-                            return <option key={i} value={category.name}> {category.name}</option>
-                        })}
-                    </select>
 
-                    <label className={"left-column"} htmlFor="price">Prize:</label>
-                    <input className={"right-column"} type={"number"} name={"price"} min={0}  onChange={(event)=>props.handleChange(event)}/>
+                <label className={"left-column"} htmlFor="subcategory">Sub category:</label>
+                <select className={"right-column"} name={"subcategory"} onChange={(event)=>props.handleChange(event)}>
+                    {allCategories.map(category => {
+                        return <option key={category.id.id} value={category.name}> {category.name}</option>
+                    })}
+                </select>
+
+                <label className={"left-column"} htmlFor="price">Prize:</label>
+                <input className={"right-column"} type={"number"} name={"price"} min={0}  onChange={(event)=>props.handleChange(event)}/>
 
 
 
@@ -86,11 +89,18 @@ export default function ProductForm(props){
                     <ErrormeldingLabel text={props.errorMeldingText}/>
                 </div>
 
-                    <label className={"left-column"} htmlFor="details">Product details:</label>
-                    <textarea className={"right-column details-text"} name={"details"} placeholder={"enter text..."}  onChange={props.handleChange}/>
+                <label className={"left-column"} htmlFor="details">Product details:</label>
+                <textarea className={"right-column details-text"} name={"details"} placeholder={"enter text..."}  onChange={props.handleChange}/>
 
             </div>
+            <form>
+                <div>
+                    <label htmlFor="image">Image:</label>
+                    <input  type={"file"}  name={"image"} onChange={(event)=>handleUploadClick(event)}/>
+                </div>
+            </form>
         </>
+
 
     ) : (
         <>
@@ -108,23 +118,19 @@ export default function ProductForm(props){
                 <input className={"right-column"} name={"name"} placeholder={""} disabled={props.disabled} value={props.product.name} onChange={(event)=>props.handleChange(event)}/>
 
                 <div>
-                    <label className={"left-column"} htmlFor={"productCategoryName"}>Sub category:</label>
-                    <select className={"right-column"} disabled={props.disabled} name={"productCategoryName"}
-                            value={props.product.productCategoryName} onChange={(event)=>props.handleChange(event)}>
-                        {allCategories.map((category,i)=>{
-                            return <option key={i} value={category.name}> {category.name}</option>
-                        })}
+                    <label className={"left-column"} htmlFor="productType">Category:</label>
+                    <select className={"right-column"} name={"productType"} disabled={props.disabled} value={props.product.productType} onChange={(event)=>props.handleChange(event)}>
+                        <option value={"DRINKS"} >Drinks</option>
+                        <option value={"FOOD"} >Food</option>
                     </select>
                 </div>
 
-                <div>
-                    <label className={"left-column"} htmlFor="productType">Category:</label>
-                    <select className={"right-column"} name={"productType"} disabled={props.disabled}
-                            value={props.product.productType} onChange={(event)=>props.handleChange(event)}>
-                        <option value={"DRINK"}>Drinks</option>
-                        <option value={"FOOD"}>Foods</option>
-                    </select>
-                </div>
+                <label className={"left-column"} htmlFor="subcategory">Sub category:</label>
+                <select className={"right-column"} name={"subcategory"} onChange={(event)=>props.handleChange(event)}>
+                    {allCategories.map(category=>{
+                        return <option key={category.id.id} value={category.name}> {category.name}</option>
+                    })}
+                </select>
 
 
                 <label className={"left-column"} htmlFor="price">Prize:</label>
@@ -150,6 +156,7 @@ export default function ProductForm(props){
                     })}
                 </div>
 
+
                 <div className={"error-label"}>
                     <ErrormeldingLabel text={props.errorMeldingText}/>
                 </div>
@@ -157,9 +164,16 @@ export default function ProductForm(props){
                 <label className={"left-column"} htmlFor="details">Product details:</label>
                 <textarea className={"right-column details-text"} name={"details"} placeholder={"enter text..."} value={props.product.details} disabled={props.disabled}  onChange={props.handleChange}/>
 
+                <form>
+                    <div>
+                        <label className={"left-column"} htmlFor="image">Image:</label>
+                        <input className={"right-column"}  type={"file"}  name={"image"} onChange={(event)=>handleUploadClick(event)}/>
+                    </div>
+                </form>
             </div>
 
         </>
     );
+
 
 }
