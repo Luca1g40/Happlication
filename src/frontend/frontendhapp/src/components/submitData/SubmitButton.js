@@ -186,6 +186,7 @@ export default function SubmitButton(props) {
                 break;
             case Actions.UPDATE_CATEGORY:
                 console.log(props.category)
+                console.log("hierin")
                 updateCategory(props.category.id,props.category.name)
                     .then(res=>{
                         console.log(res)
