@@ -34,7 +34,7 @@ export default function ProductForm(props){
             <h1>Create product</h1>
             <div className={"crud-form"} >
                 <label className={"left-column"} htmlFor="productDestination">Destination: </label>
-                <select className={"right-column"} name={"productDestination"} onChange={(event)=>props.handleChange(event)}>
+                <select className={"right-column"} name={"productDestination"} onChange = {(event)=>props.handleChange(event)}>
                     <option value={"BAR_PRODUCT"} >Bar</option>
                     <option value={"KITCHEN_PRODUCT"} >Kitchen</option>
                 </select>
