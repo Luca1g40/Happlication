@@ -58,9 +58,8 @@ export default function ProductForm(props){
         //setImagePreview(URL.createObjectURL(file));
     };
 
-    return (props.creating) ? (
+    return (props.product === undefined) ? (
         <>
-            <h1>Create product</h1>
             <div className={"crud-form"} >
                 <label className={"left-column"} htmlFor="productDestination">Destination: </label>
                 <select className={"right-column"} name={"productDestination"} onChange={(event)=>props.handleChange(event)}>
@@ -133,7 +132,7 @@ export default function ProductForm(props){
 
     ) : (
         <>
-            <h1>Edit product</h1>
+
             <div className={"crud-form"}>
                 <label className={"left-column"} htmlFor="productDestination">Destination: </label>
                 <select className={"right-column"} name={"productDestination"}

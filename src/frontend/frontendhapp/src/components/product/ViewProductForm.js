@@ -33,12 +33,12 @@ export default function ViewProductForm(){
             .catch(err => {
                 console.log(err)
             })
-        console.log(productObject)
+        console.log(!(params.id===undefined))
         if (!(params.id===undefined)){
             getProduct(params.id)
                 .then(res => {
-
-                    setProduct(product)
+                    console.log("seee")
+                    setProduct(res)
 
                     setToegevoegdeIngredienten(res.ingredientList.map((ingredient)=>{return ingredient.name}))
                 })
@@ -109,7 +109,8 @@ export default function ViewProductForm(){
                 <Link to="/staff" className="button products-navigation" onClick={() => {clearData()}}>Log out</Link>
             </div>
 
-            <ProductForm allCategories={allCategories} product={product} creating={true} setSelectedImage={selectedImage=>setSelectedImage(selectedImage)} toegevoegdeIngredienten={toegevoegdeIngredienten} disabled={disabled} handleChange={event=>handleChange(event)} removeFromIngredientsList={(target=>removeFromIngredientsList(target))} setAddedIngredients={(ingredient) => setToegevoegdeIngredienten(ingredient)} addIngredient={ingredient=>addIngredient(ingredient)} errorMeldingText={errorMeldingText}/>
+            <h1>Create product</h1>
+            <ProductForm  allCategories={allCategories} product={product} creating={true} setSelectedImage={selectedImage=>setSelectedImage(selectedImage)} toegevoegdeIngredienten={toegevoegdeIngredienten} disabled={false} handleChange={event=>handleChange(event)} removeFromIngredientsList={(target=>removeFromIngredientsList(target))} setAddedIngredients={(ingredient) => setToegevoegdeIngredienten(ingredient)} addIngredient={ingredient=>addIngredient(ingredient)} errorMeldingText={errorMeldingText}/>
             <div className={"create-button"}>
                 <SubmitButton selectedImage={selectedImage} className={"submit-button button"} action={Actions.CREATE_PRODUCT} buttonText={"Create product"} setProduct={product=>setProduct(product)} product={product} ingredientList={toegevoegdeIngredienten} setFoutMelding={error => setErrorMeldingText(error)} />
             </div>
@@ -125,6 +126,7 @@ export default function ViewProductForm(){
                 <Link to="/staff" className="button products-navigation" onClick={() => {clearData()}}>Logout</Link>
             </div>
 
+            <h1>Edit product</h1>
             <ProductForm allCategories={allCategories} creating={false} setSelectedImage={selectedImage=>setSelectedImage(selectedImage)} product={product} toegevoegdeIngredienten={toegevoegdeIngredienten} disabled={disabled} handleChange={event=>handleChange(event)}
                          removeFromIngredientsList={(target=>removeFromIngredientsList(target))}
                          setToegevoegdeIngredienten={(ingredient)=>setToegevoegdeIngredienten(ingredient)}

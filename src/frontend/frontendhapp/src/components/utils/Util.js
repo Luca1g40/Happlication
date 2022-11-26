@@ -55,7 +55,7 @@ export function showCategory(category){
 export function generateObjectWithEmptyValues(){
     console.log("hierin")
     let product = {
-        "name":"joo",
+        "name":"",
         "productType":"DRINK",
         "productCategoryName":"",
         "price":0,
