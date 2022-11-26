@@ -7,13 +7,15 @@ import {useParams} from "react-router";
 import  "../../styles/MenuCrudForm.css"
 import {Link} from "react-router-dom";
 
-export default function ViewProductForm(props){
+export default function ViewProductForm(){
     const [disabled,setDisabled] = useState(true)
 
     const [errorMeldingText,setErrorMeldingText] = useState("");
     const [product,setProduct] = useState();
     const [toegevoegdeIngredienten,setToegevoegdeIngredienten] = useState([])
     const params = useParams();
+    const [selectedImage,setSelectedImage] = useState()
+
 
 
     useEffect(() => {
@@ -26,15 +28,13 @@ export default function ViewProductForm(props){
                 })
         }else{
             setProduct({
-                "category":"DRINKS",
+                "type":"DRINKS",
                 "destination":"BAR_PRODUCT"
             })
         }
     },[])
 
 
-
-    //TODO remove border
     //TODO edit product backend
     const handleChange = (event) => {
         const name = event.target.name;
@@ -63,38 +63,38 @@ export default function ViewProductForm(props){
         setErrorMeldingText("");
     }
 
-    function cleardata() {
+    function clearData() {
         sessionStorage.clear();
     }
 
-    return (params.id===undefined) ? (
-        <div>
+    return (params.id === undefined) ? (
+        <>
             <div className={"home-button"}>
-                <Link to="/administration" className="button search-products-navigation" >Home</Link>
+                <Link to="/administration" className="button products-navigation" >Home</Link>
             </div>
 
             <div className={"navigation-buttons"}>
                 <Link to="/searchproduct" className="button" >Search a product</Link>
-                <Link to="/staff" className="button search-products-navigation" onClick={() => {cleardata()}}>Log out</Link>
+                <Link to="/staff" className="button products-navigation" onClick={() => {clearData()}}>Log out</Link>
             </div>
 
-            <ProductForm toegevoegdeIngredienten={toegevoegdeIngredienten} disabled={disabled} handleChange={event=>handleChange(event)} removeFromIngredientsList={(target=>removeFromIngredientsList(target))} setAddedIngredients={(ingredient) => setToegevoegdeIngredienten(ingredient)} addIngredient={ingredient=>addIngredient(ingredient)} errorMeldingText={errorMeldingText}/>
+            <ProductForm setSelectedImage={selectedImage=>setSelectedImage(selectedImage)} toegevoegdeIngredienten={toegevoegdeIngredienten} disabled={disabled} handleChange={event=>handleChange(event)} removeFromIngredientsList={(target=>removeFromIngredientsList(target))} setAddedIngredients={(ingredient) => setToegevoegdeIngredienten(ingredient)} addIngredient={ingredient=>addIngredient(ingredient)} errorMeldingText={errorMeldingText}/>
             <div className={"create-button"}>
-                <SubmitButton className={"submit-button button"} action={Actions.CREATE_PRODUCT} buttonText={"Create product"} setProduct={product=>setProduct(product)} product={product} ingredientList={toegevoegdeIngredienten} setFoutMelding={error => setErrorMeldingText(error)} />
+                <SubmitButton selectedImage={selectedImage} className={"submit-button button"} action={Actions.CREATE_PRODUCT} buttonText={"Create product"} setProduct={product=>setProduct(product)} product={product} ingredientList={toegevoegdeIngredienten} setFoutMelding={error => setErrorMeldingText(error)} />
             </div>
-        </div>
+        </>
     ) :(
-        <div>
+        <>
             <div className={"home-button"}>
-                <Link to="/administration" className="button search-products-navigation" >Home</Link>
+                <Link to="/administration" className="button products-navigation" >Home</Link>
             </div>
 
             <div className={"navigation-buttons"}>
-                <Link to="/searchproduct" className="button search-products-navigation" >Search a product</Link>
-                <Link to="/staff" className="button search-products-navigation" onClick={() => {cleardata()}}>Logout</Link>
+                <Link to="/searchproduct" className="button products-navigation" >Search a product</Link>
+                <Link to="/staff" className="button products-navigation" onClick={() => {clearData()}}>Logout</Link>
             </div>
 
-    <ProductForm product={product} toegevoegdeIngredienten={toegevoegdeIngredienten} disabled={disabled} handleChange={event=>handleChange(event)}
+            <ProductForm product={product} toegevoegdeIngredienten={toegevoegdeIngredienten} disabled={disabled} handleChange={event=>handleChange(event)}
                          removeFromIngredientsList={(target=>removeFromIngredientsList(target))}
                          setToegevoegdeIngredienten={(ingredient)=>setToegevoegdeIngredienten(ingredient)}
                          addIngredient={ingredient=>addIngredient(ingredient)} errorMeldingText={errorMeldingText}/>
@@ -105,6 +105,6 @@ export default function ViewProductForm(props){
                     <button className={"cancel-button button"} onClick={()=>setDisabled(true)} disabled={disabled}>Cancel</button>
                 </div>
             </div>
-        </div>
+        </>
     )
 }
