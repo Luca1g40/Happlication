@@ -78,12 +78,13 @@ export default function SearchProduct(){
         sessionStorage.clear();
     }
 
+    // TODO dynamic hoofdletter eerst
     function showProductType(type){
         switch (type){
             case "FOOD":
                 return "Food";
-            case "DRINKS":
-                return "Drinks"
+            case "DRINK":
+                return "Drink"
         }
     }
 
@@ -101,7 +102,7 @@ export default function SearchProduct(){
 
             <div className={"search-table"}>
 
-                <OverviewTable tableHeads={["name","type","category","price","details"]} items={filteredProducts} handleClick={ id => navigate(`/productdetails/${id}`)} leaveOutList={["ingredients","productDestination","id"]}
+                <OverviewTable tableHeads={["name","type","category","price","details"]} items={filteredProducts} handleClick={ id => navigate(`/productdetails/${id}`)} leaveOutList={["ingredients","productDestination","id","imagePath"]}
                                specialDisplays={ new Map([["productCategory", (category)=>category.name],["productType", (type)=>showProductType(type)]])
                                }/>
             </div>

@@ -52,4 +52,17 @@ export function showCategory(category){
     }
 }
 
+export function generateObjectWithEmptyValues(){
+
+    let product = {
+        "name":"",
+        "productType":"DRINK",
+        "productCategoryName":"",
+        "price":0,
+        "details":"",
+        "productDestination":"BAR_PRODUCT"
+    }
+    return product
+}
+
 

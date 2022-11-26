@@ -19,6 +19,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/happ")
@@ -47,20 +48,13 @@ public final class ProductController {
         }
     }
     @PostMapping(value = "/image")
-    public String uploadImage(@RequestPart("test_file") MultipartFile file) {
-//        Path fileNamePath = Paths.get(imageDirectory,
-//                name.concat(".").concat(FilenameUtils.getExtension(file.getOriginalFilename())));
-//        System.out.println(productRequest.name);
-        System.out.println(file);
+    public String uploadImage(@RequestPart MultipartFile imageFile) {
+
+
         try {
-//            Files.write(fileNamePath, file.getBytes());
-            System.out.println(file);
-//            System.out.println(file);
-            String path = System.getProperty("user.dir").concat("\\src\\frontend\\frontendhapp\\images");
-
-            Files.copy(file.getInputStream(), Paths.get(path+ File.separator+file.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
-
-            return path.concat("\\".concat(file.getOriginalFilename()));
+            String path = System.getProperty("user.dir").concat("\\src\\frontend\\frontendhapp\\src\\images");
+            Files.copy(imageFile.getInputStream(), Paths.get(path+ File.separator+imageFile.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
+            return imageFile.getOriginalFilename();
         } catch (Exception ex) {
             return"Image is not uploaded";
         }
@@ -112,7 +106,10 @@ public final class ProductController {
                     productRequest.price,
                     productId,
                     productRequest.ingredients,
-                    productRequest.details
+                    productRequest.details,
+                    productRequest.productType,
+                    productRequest.imagePath,
+                    productRequest.productDestination
             );
         } catch (ItemNotFound e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());

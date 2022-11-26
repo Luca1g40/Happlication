@@ -21,7 +21,10 @@ public class ProductCategoryController {
     public ProductCategoryData getProductCategory(@PathVariable Long id){
         return productCategoryService.getProductCategory(id);
     }
-
+    @PutMapping("productcategory/{id}")
+    public ProductCategoryData updateProductCategory(@PathVariable Long id,@RequestBody ProductCategoryRequest productCategoryRequest){
+        return productCategoryService.updateProductCategory(id,productCategoryRequest.name);
+    }
     @PostMapping("productcategory")
     public ProductCategoryData createProductCategory(@RequestBody ProductCategoryRequest productCategoryRequest){
         return productCategoryService.createProductCategory(productCategoryRequest.name);

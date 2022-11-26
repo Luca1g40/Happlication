@@ -46,7 +46,21 @@ export function createCategory(name) {
         .catch(err => {
             console.log(err)
         })
+
 }
+
+export function updateCategory(id,name) {
+    return axios.put(`http://localhost:8080/happ/productcategory/${id}`, {
+        "name":name
+    },configuration)
+        .then(res => {
+            console.log(res.data)
+            return res.data
+        })
+        .catch(err => {
+            console.log(err)
+        })
+        }
 
 export function getMenuDrinkItems() {
     return axios.get("http://localhost:8080/happ/products/drinks", configuration)
@@ -107,16 +121,15 @@ export function editIngredient(id,name){
         console.log(err)
     })
 }
-
 function saveImage(imageFile){
-   return  axios.post(`http://localhost:8080/happ/image`, {
-        test_file:imageFile
+    return  axios.post(`http://localhost:8080/happ/image`, {
+        imageFile:imageFile
     },{
         headers: {
             "Content-Type": "multipart/form-data", Authorization: sessionStorage.getItem("Authorization")
         }})
         .then(res => {
-           console.log(res.data)
+            console.log(res.data)
             // imagePath.concat(res.data)
             return res.data
         })
@@ -124,7 +137,8 @@ function saveImage(imageFile){
             console.log(err)
         })
 }
-export async function createProduct(productName, productIngredients, productDestination, productCategory, details, price, productType, imageFile) {
+
+export async function createProduct(productName, productIngredients, productDestination, productCategory, details, price, productType, imageFile){
     console.log(productCategory)
     var fftesten = 0
 
@@ -135,6 +149,7 @@ export async function createProduct(productName, productIngredients, productDest
     let imagePath = fftesten
     console.log(imagePath)
 
+    console.log(productCategory)
     return axios.post(`http://localhost:8080/happ/product`, {
         "name":productName,
         "productCategoryName":productCategory,
@@ -187,18 +202,31 @@ export function getProduct(id){
         })
 }
 
-export function editProduct(id,name,destination,ingredienten,price,details,category){
+export async function editProduct(id, name, destination, ingredienten, price, details, category, type, imageFile, imageChanged) {
+    console.log(id, name, destination, ingredienten, price, details, category, type, imageFile,imageChanged)
+    let imagePath = imageFile
+    if (imageChanged){
+        await saveImage(imageFile).then(res => {
+            imagePath = res
+        })
+    }
+
+
+    console.log(imagePath)
+
     return axios.put(`http://localhost:8080/happ/product/${id}`, {
-        "name":name,
-        "productCategory":category,
-        "price":price,
-        "ingredients":ingredienten,
-        "details":details,
-        "productDestination":destination
-    },configuration)
-    .then(res => {
-        return res.data;
-    })
+        "name": name,
+        "productCategoryName": category,
+        "price": price,
+        "ingredients": ingredienten,
+        "details": details,
+        "productDestination": destination,
+        "productType": type,
+        "imagePath":imagePath
+    }, configuration)
+        .then(res => {
+            return res.data;
+        })
         .catch(err => {
             console.log(err)
         })

@@ -1,6 +1,7 @@
 import React from "react";
 import {Route, Routes} from "react-router-dom"
 import "./styles/Home.css";
+
 import Drinks from "./pages/Drinks";
 import Foods from "./pages/Foods";
 import Home from "./pages/Home";
@@ -19,6 +20,7 @@ import AdministrationPage from "./pages/AdministrationPage";
 import ViewProductCategory from "./components/productcategory/ViewProductCategory";
 import Menu from "./components/menu/Menu";
 import Error403Page from "./pages/Error403Page";
+import SearchCategory from "./components/productcategory/SearchCategory";
 
 function App() {
     return (
@@ -44,6 +46,9 @@ function App() {
             <Route path="createcategory/" element={<ViewProductCategory/>}/>
             <Route path="categorydetails/:id" element={<ViewProductCategory/>}/>
                 <Route path="error403" element={<Error403Page/>}/>
+            <Route path="searchcategory" element={<SearchCategory/>}/>
+
+
 
         </Routes>
     )

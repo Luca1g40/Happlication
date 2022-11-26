@@ -12,7 +12,6 @@ function ProductDetailsPopup(props) {
 
     useEffect(() => {
         console.log(props.product.imagePath)
-        console.log(props.product.imagePath==="../../images/burger2.jpg")
     },[])
 
 

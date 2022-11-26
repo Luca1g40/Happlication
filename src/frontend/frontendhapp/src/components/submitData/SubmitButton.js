@@ -13,7 +13,7 @@ import {
     createProduct,
     deleteProduct,
     editIngredient,
-    editProduct
+    editProduct, updateCategory
 } from "../../urlMappings/MenuRequests";
 
 
@@ -32,11 +32,56 @@ export default function SubmitButton(props) {
                 }else{
                 }
             }
-            if (!(selectedImage.name.includes(".png") || selectedImage.includes(".jpeg"))){
-                props.setFoutMelding("Upload een image je domme ezel")
-                return false;
+
+            if (!(selectedImage === undefined)){
+                if (!(String(selectedImage.name).includes(".png") || String(selectedImage.name).includes(".jpg"))){
+                    props.setFoutMelding("Upload een image file met de extensie .png of .jpg")
+                    return false;
+                }
+                return true;
+            }else{
+                props.setFoutMelding("Je hebt geen image file meegegeven")
             }
-            return true;
+
+
+        }else{
+            props.setFoutMelding(`Je hebt een of meer lege input velden `)
+            return false;
+        }
+
+
+
+
+    }
+
+    function validateProductObjectByUpdate(product,ingredientList,selectedImage){
+        //dit is bij niet genoeg input velden ingevuld
+        if (Object.keys(product).length===9 && ingredientList.length>0){
+            for (const key in product) {
+                if (!(String(product[key]).replace(/\s+/g, '').length>0)){
+                    // dit is bj een iput veld met aleen spaties erin
+                    props.setFoutMelding(`Je hebt een lege input gegeven bij ${key.replace("-", " ")} `)
+                    return false;
+                }else{
+                }
+            }
+
+            if (product.imagePath === undefined){
+                if (!(selectedImage === undefined)){
+                    if (!(String(selectedImage.name).includes(".png") || String(selectedImage.name).includes(".jpg"))){
+                        props.setFoutMelding("Upload een image file met de extensie .png of .jpg")
+                        return false;
+                    }
+                    return true;
+                }else{
+                    props.setFoutMelding("Je hebrt geen image file meegegeven")
+                }
+            }else{
+                return true
+            }
+
+
+
         }else{
             props.setFoutMelding(`Je hebt een of meer lege input velden `)
             return false;
@@ -96,11 +141,13 @@ export default function SubmitButton(props) {
                 break;
             case Actions.CREATE_PRODUCT:
                 if (validateProductObject(props.product,props.ingredientList,props.selectedImage)){
-                    createProduct(props.product.name,props.ingredientList,props.product.destination,props.product.subcategory,props.product.details,props.product.price,props.product.type,props.selectedImage)
-                        .then(res=>{
+                    createProduct(props.product.name,props.ingredientList,props.product.productDestination,props.product.productCategoryName,props.product.details,props.product.price,props.product.productType,props.selectedImage)
+                        .then(res =>{
                             console.log(res)
-                            }
-                        ).catch(err=>{
+                            window.location.reload()
+                        }
+                            )
+                        .catch(err=>{
                         console.log(err)
                     })
                 }
@@ -108,24 +155,25 @@ export default function SubmitButton(props) {
                 break;
             case Actions.UPDATE_PRODUCT:
 
-                if (Object.keys(props.product).length===7 && props.ingredientList.length>0){
-                    for (const key in props.product) {
-                        if (!(String(props.product[key]).replace(/\s+/g, '').length>0)){
-                            props.setFoutMelding(`Je hebt een lege input gegeven bij ${key.replace("-", " ")} `)
-                            return;
-                        }
+
+                if (validateProductObjectByUpdate(props.product,props.ingredientList,props.selectedImage)){
+                    let imageChanged = true;
+                    let image = props.selectedImage
+                    if (image === undefined){
+                        console.log("undefined if")
+                        image = props.product.imagePath
+                        imageChanged = false
                     }
 
-                    editProduct(props.product.id,props.product.name,props.product.productDestination,props.ingredientList,props.product.price,props.product.details,props.product.type, props.product.subcategory).
+                    console.log(image)
+                    editProduct(props.product.id,props.product.name,props.product.productDestination,props.ingredientList,props.product.price,props.product.details, props.product.productCategoryName,props.product.productType , image, imageChanged).
                     then(res=>{
                         props.setDisabled(true);
                         navigate(`/productdetails/${res.id}`)
                     }).catch(err=>{
                         console.log(err)
                     })
-                }else{
-                    props.setFoutMelding(`Je hebt een of meer lege input velden `)
-                    return;
+
                 }
                 break;
 
@@ -182,6 +230,17 @@ export default function SubmitButton(props) {
                     }).catch(err=>{
                         console.log(err)
                 })
+                break;
+            case Actions.UPDATE_CATEGORY:
+                console.log(props.category)
+                console.log("hierin")
+                updateCategory(props.category.id,props.category.name)
+                    .then(res=>{
+                        console.log(res)
+                    }).catch(err=>{
+                    console.log(err)
+                })
+                break;
         }
     }
 

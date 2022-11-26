@@ -132,7 +132,7 @@ public class TableService {
         return productDataList;
     }
     public ProductData createProductData(Product product) {
-        return new ProductData(product.getId(),product.getName(),new ProductCategoryData(product.getProductCategory().getId(),product.getProductCategory().getName()),product.getPrice(),product.getIngredients(),product.getDetails(),product.getProductDestination(),product.getProductType(),product.getImagePath());
+        return new ProductData(product.getId(),product.getName(),product.getProductCategory().getName(),product.getPrice(),product.getIngredients(),product.getDetails(),product.getProductDestination(),product.getProductType(),product.getImagePath());
     }
 
     public List<OrderData> convertToBarOrderDataList(List<BarOrder> orders) {
