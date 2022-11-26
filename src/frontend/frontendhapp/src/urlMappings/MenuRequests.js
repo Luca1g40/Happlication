@@ -123,7 +123,7 @@ export function editIngredient(id,name){
 }
 function saveImage(imageFile){
     return  axios.post(`http://localhost:8080/happ/image`, {
-        test_file:imageFile
+        imageFile:imageFile
     },{
         headers: {
             "Content-Type": "multipart/form-data", Authorization: sessionStorage.getItem("Authorization")
@@ -202,18 +202,18 @@ export function getProduct(id){
         })
 }
 
-export async function editProduct(id, name, destination, ingredienten, price, details, category, type, imageFile) {
+export async function editProduct(id, name, destination, ingredienten, price, details, category, type, imageFile, imageChanged) {
+    console.log(id, name, destination, ingredienten, price, details, category, type, imageFile,imageChanged)
+    let imagePath = imageFile
+    if (imageChanged){
+        await saveImage(imageFile).then(res => {
+            imagePath = res
+        })
+    }
 
-    var fftesten = 0
 
-    await saveImage(imageFile).then(res => {
-        fftesten = res
-    })
-
-    let imagePath = fftesten
     console.log(imagePath)
 
-    console.log(type)
     return axios.put(`http://localhost:8080/happ/product/${id}`, {
         "name": name,
         "productCategoryName": category,

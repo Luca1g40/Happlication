@@ -32,13 +32,18 @@ export default function SubmitButton(props) {
                 }else{
                 }
             }
-            console.log(selectedImage.name)
 
-            // if (!(String(selectedImage.name).includes(".png") || String(selectedImage.name).includes(".jpg"))){
-            //     props.setFoutMelding("Upload een image je domme ezel")
-            //     return false;
-            // }
-            return true;
+            if (!(selectedImage === undefined)){
+                if (!(String(selectedImage.name).includes(".png") || String(selectedImage.name).includes(".jpg"))){
+                    props.setFoutMelding("Upload een image file met de extensie .png of .jpg")
+                    return false;
+                }
+                return true;
+            }else{
+                props.setFoutMelding("Je hebrt geen image file meegegeven")
+            }
+
+
         }else{
             props.setFoutMelding(`Je hebt een of meer lege input velden `)
             return false;
@@ -98,9 +103,12 @@ export default function SubmitButton(props) {
                 break;
             case Actions.CREATE_PRODUCT:
                 if (validateProductObject(props.product,props.ingredientList,props.selectedImage)){
-                    createProduct(props.product.name,props.ingredientList,props.product.destination,props.product.subcategory,props.product.details,props.product.price,props.product.type,props.selectedImage)
-                        .then(
-                            window.location.reload())
+                    createProduct(props.product.name,props.ingredientList,props.product.productDestination,props.product.productCategoryName,props.product.details,props.product.price,props.product.productType,props.selectedImage)
+                        .then(res =>{
+                            console.log(res)
+                            // window.location.reload()
+                        }
+                            )
                         .catch(err=>{
                         console.log(err)
                     })
@@ -114,8 +122,16 @@ export default function SubmitButton(props) {
                 for (const key in props.product) {
                     console.log(key)
                 }
-                console.log(props.product)
-                    editProduct(props.product.id,props.product.name,props.product.productDestination,props.ingredientList,props.product.price,props.product.details, props.product.productCategoryData.name,props.product.type , props.selectedImage).
+                let imageChanged = true;
+                let image = props.selectedImage
+                if (image === undefined){
+                    console.log("undefined if")
+                    image = props.product.imagePath
+                    imageChanged = false
+                }
+
+                console.log(image)
+                    editProduct(props.product.id,props.product.name,props.product.productDestination,props.ingredientList,props.product.price,props.product.details, props.product.productCategoryName,props.product.productType , image, imageChanged).
                     then(res=>{
                         props.setDisabled(true);
                         navigate(`/productdetails/${res.id}`)

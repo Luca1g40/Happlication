@@ -56,13 +56,12 @@ export function generateObjectWithEmptyValues(){
     console.log("hierin")
     let product = {
         "name":"joo",
-        "productType":"",
+        "productType":"DRINK",
         "productCategoryName":"",
         "price":0,
         "details":"",
-        "productDestination":""
+        "productDestination":"BAR_PRODUCT"
     }
-    console.log(product)
     return product
 }
 

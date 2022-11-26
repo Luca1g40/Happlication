@@ -13,14 +13,7 @@ export default function ProductForm(props){
 
     // TODO give subcategory starting value
     useEffect(() => {
-        getAllCategories()
-            .then(res => {
-               setallCategories(res)
 
-            })
-            .catch(err => {
-                console.log(err)
-            })
         getAllIngredients()
             .then(res => {
                 setIngredientList(res);
@@ -29,7 +22,11 @@ export default function ProductForm(props){
             .catch(err => {
                 console.log(err)
             })
+        console.log(props.product,props.creating)
+        // setSelectedImage()
     },[])
+
+
     const handleUploadClick = event => {
         // let file = event.target.files[0];
         // setSelectedImage(file)
@@ -60,12 +57,13 @@ export default function ProductForm(props){
         // setImageData(imageData);
         //setImagePreview(URL.createObjectURL(file));
     };
-    return (props.product === undefined) ? (
+
+    return (props.creating) ? (
         <>
             <h1>Create product</h1>
             <div className={"crud-form"} >
-                <label className={"left-column"} htmlFor="destination">Destination: </label>
-                <select className={"right-column"} name={"destination"} onChange={(event)=>props.handleChange(event)}>
+                <label className={"left-column"} htmlFor="productDestination">Destination: </label>
+                <select className={"right-column"} name={"productDestination"} onChange={(event)=>props.handleChange(event)}>
                     <option value={"BAR_PRODUCT"} >Bar</option>
                     <option value={"KITCHEN_PRODUCT"} >Kitchen</option>
                 </select>
@@ -76,17 +74,17 @@ export default function ProductForm(props){
                 </div>
 
                 <div>
-                    <label className={"left-column"} htmlFor="type">Category:</label>
-                    <select className={"right-column"} name={"type"} onChange={(event)=>props.handleChange(event)}>
-                        <option value={"DRINKS"} >Drinks</option>
+                    <label className={"left-column"} htmlFor="productType">Category:</label>
+                    <select className={"right-column"} name={"productType"} onChange={(event)=>props.handleChange(event)}>
+                        <option value={"DRINK"} >Drink</option>
                         <option value={"FOOD"} >Food</option>
                     </select>
                 </div>
 
 
-                <label className={"left-column"} htmlFor="subcategory">Sub category:</label>
-                <select className={"right-column"} name={"subcategory"} onChange={(event)=>props.handleChange(event)}>
-                    {allCategories.map(category => {
+                <label className={"left-column"} htmlFor="productCategoryName">Sub category:</label>
+                <select className={"right-column"} name={"productCategoryName"} onChange={(event)=>props.handleChange(event)}>
+                    {props.allCategories.map(category => {
                         return <option key={category.id.id} value={category.name}> {category.name}</option>
                     })}
                 </select>
@@ -136,7 +134,7 @@ export default function ProductForm(props){
     ) : (
         <>
             <h1>Edit product</h1>
-            <div className={"crud-form"} ref={ref}>
+            <div className={"crud-form"}>
                 <label className={"left-column"} htmlFor="productDestination">Destination: </label>
                 <select className={"right-column"} name={"productDestination"}
                         disabled={props.disabled} value={props.product.productDestination}
@@ -151,14 +149,14 @@ export default function ProductForm(props){
                 <div>
                     <label className={"left-column"} htmlFor="productType">Category:</label>
                     <select className={"right-column"} name={"productType"} disabled={props.disabled} value={props.product.productType} onChange={(event)=>props.handleChange(event)}>
-                        <option value={"DRINKS"} >Drinks</option>
+                        <option value={"DRINK"} >Drink</option>
                         <option value={"FOOD"} >Food</option>
                     </select>
                 </div>
 
-                <label className={"left-column"} htmlFor="subcategory">Sub category:</label>
-                <select className={"right-column"} name={"subcategory"} onChange={(event)=>props.handleChange(event)}>
-                    {allCategories.map(category=>{
+                <label className={"left-column"} htmlFor="productCategoryName">Sub category:</label>
+                <select className={"right-column"} name={"productCategoryName"} value={props.product.productCategoryName}  disabled={props.disabled} onChange={(event)=>props.handleChange(event)}>
+                    {props.allCategories.map(category=>{
                         return <option key={category.id.id} value={category.name}> {category.name}</option>
                     })}
                 </select>
@@ -197,8 +195,8 @@ export default function ProductForm(props){
 
                 <form>
                     <div>
-                        <label className={"left-column"} htmlFor="image">Image:</label>
-                        <input className={"right-column"}  type={"file"}  name={"image"} onChange={(event)=>handleUploadClick(event)}/>
+                        <label className={"left-column"} htmlFor="imageFile">Image:</label>
+                        <input className={"right-column"} type={"file"}  name={"imageFile"} onChange={(event)=>handleUploadClick(event)}/>
                     </div>
                 </form>
             </div>
