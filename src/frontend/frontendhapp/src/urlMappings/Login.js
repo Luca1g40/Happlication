@@ -32,7 +32,6 @@ export function getRoles(){
 //Checks if status of ALL responses is 403
 //If true then redirect user to proper error page
 (async () => {
-
     axios.interceptors.response.use(response => response, error => {
         if (error.response.status === 403) {
             // redirect to 403 page
