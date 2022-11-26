@@ -4,6 +4,7 @@ import com.infosupport.happ.application.dto.AreaWithoutStaffData;
 import com.infosupport.happ.application.dto.OrderData;
 import com.infosupport.happ.application.dto.SimpleStaffData;
 import com.infosupport.happ.application.dto.StaffData;
+import com.infosupport.happ.application.dto.StaffWithoutAreasData;
 import com.infosupport.happ.data.StaffRepository;
 import com.infosupport.happ.domain.*;
 import com.infosupport.happ.domain.exceptions.InvalidValueException;
@@ -38,6 +39,16 @@ public class StaffService {
         }
         return simpleStaffData;
     }
+
+    public StaffWithoutAreasData createStaffWithoutArea(Staff staff){
+        return new StaffWithoutAreasData(
+                staff.getId(),
+                staff.getName(),
+                staff.getOperations(),
+                staff.getClaimedOrders(),
+                staff.getRights());
+    }
+
 
     public List<Table> getTableThatNeedHelp(Long staffId) {
         Staff staff = getStaff(staffId);
