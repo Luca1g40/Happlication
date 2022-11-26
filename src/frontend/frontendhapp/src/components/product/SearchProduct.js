@@ -83,8 +83,8 @@ export default function SearchProduct(){
         switch (type){
             case "FOOD":
                 return "Food";
-            case "DRINKS":
-                return "Drinks"
+            case "DRINK":
+                return "Drink"
         }
     }
 

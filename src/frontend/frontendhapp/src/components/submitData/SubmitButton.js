@@ -54,6 +54,44 @@ export default function SubmitButton(props) {
 
     }
 
+    function validateProductObjectByUpdate(product,ingredientList,selectedImage){
+        //dit is bij niet genoeg input velden ingevuld
+        if (Object.keys(product).length===9 && ingredientList.length>0){
+            for (const key in product) {
+                if (!(String(product[key]).replace(/\s+/g, '').length>0)){
+                    // dit is bj een iput veld met aleen spaties erin
+                    props.setFoutMelding(`Je hebt een lege input gegeven bij ${key.replace("-", " ")} `)
+                    return false;
+                }else{
+                }
+            }
+
+            if (product.imagePath === undefined){
+                if (!(selectedImage === undefined)){
+                    if (!(String(selectedImage.name).includes(".png") || String(selectedImage.name).includes(".jpg"))){
+                        props.setFoutMelding("Upload een image file met de extensie .png of .jpg")
+                        return false;
+                    }
+                    return true;
+                }else{
+                    props.setFoutMelding("Je hebrt geen image file meegegeven")
+                }
+            }else{
+                return true
+            }
+
+
+
+        }else{
+            props.setFoutMelding(`Je hebt een of meer lege input velden `)
+            return false;
+        }
+
+
+
+
+    }
+
     function handleClick() {
         switch (props.action) {
             case Actions.PLACE_ORDER:
@@ -118,19 +156,16 @@ export default function SubmitButton(props) {
             case Actions.UPDATE_PRODUCT:
 
 
-                console.log(Object.keys(props.product).length)
-                for (const key in props.product) {
-                    console.log(key)
-                }
-                let imageChanged = true;
-                let image = props.selectedImage
-                if (image === undefined){
-                    console.log("undefined if")
-                    image = props.product.imagePath
-                    imageChanged = false
-                }
+                if (validateProductObjectByUpdate(props.product,props.ingredientList,props.selectedImage)){
+                    let imageChanged = true;
+                    let image = props.selectedImage
+                    if (image === undefined){
+                        console.log("undefined if")
+                        image = props.product.imagePath
+                        imageChanged = false
+                    }
 
-                console.log(image)
+                    console.log(image)
                     editProduct(props.product.id,props.product.name,props.product.productDestination,props.ingredientList,props.product.price,props.product.details, props.product.productCategoryName,props.product.productType , image, imageChanged).
                     then(res=>{
                         props.setDisabled(true);
@@ -139,6 +174,7 @@ export default function SubmitButton(props) {
                         console.log(err)
                     })
 
+                }
                 break;
 
             case Actions.CREATE_INGREDIENT:

@@ -53,7 +53,7 @@ export function showCategory(category){
 }
 
 export function generateObjectWithEmptyValues(){
-    console.log("hierin")
+
     let product = {
         "name":"",
         "productType":"DRINK",
