@@ -40,7 +40,7 @@ export default function SubmitButton(props) {
                 }
                 return true;
             }else{
-                props.setFoutMelding("Je hebrt geen image file meegegeven")
+                props.setFoutMelding("Je hebt geen image file meegegeven")
             }
 
 
@@ -144,7 +144,7 @@ export default function SubmitButton(props) {
                     createProduct(props.product.name,props.ingredientList,props.product.productDestination,props.product.productCategoryName,props.product.details,props.product.price,props.product.productType,props.selectedImage)
                         .then(res =>{
                             console.log(res)
-                            // window.location.reload()
+                            window.location.reload()
                         }
                             )
                         .catch(err=>{
