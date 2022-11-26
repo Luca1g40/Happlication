@@ -22,21 +22,10 @@ function Login() {
          const status = await loginRequest(password)
          console.log(status)
          if (status === 200) {
-             sessionStorage.setItem("reloading", "true");
-             document.location.reload();
-             // window.onload = getRoles() + navigate("/staffmodule")
+             getRoles()
+             navigate("/staffmodule");
          }
      }
-
-    window.onload = function() {
-        console.log("WORD AANGEROEPEN")
-        const reloading = sessionStorage.getItem("reloading");
-        if (reloading) {
-            sessionStorage.removeItem("reloading");
-            getRoles()
-            navigate("/staffmodule");
-        }
-    }
 
     return (
         <>

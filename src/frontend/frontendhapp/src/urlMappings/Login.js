@@ -1,5 +1,4 @@
 import axios from "axios";
-import {configuration} from "./JwtHeader";
 
 export function loginRequest(password){
     return axios.post(`http://localhost:8080/authenticate`, {
@@ -17,8 +16,12 @@ export function loginRequest(password){
 }
 
 export function getRoles(){
+    const JWT = sessionStorage.getItem("Authorization")
     const id = sessionStorage.getItem("staffId")
-    axios.get(`http://localhost:8080/happ/staff/${id}`, configuration)
+    axios.get(`http://localhost:8080/happ/staff/${id}`,{
+        headers: {
+        Authorization: JWT
+    }})
         .then(res => {
             console.log(res)
             sessionStorage.setItem("rights", res.data.rights)
