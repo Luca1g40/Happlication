@@ -34,6 +34,13 @@ public class ProductCategoryService {
         return productCategoryRepository.getProductCategoryByName(name);
     }
 
+    public ProductCategoryData updateProductCategory(Long id,String name){
+        ProductCategory productCategory = productCategoryRepository.getById(id);
+        productCategory.updateCategory(name);
+        productCategoryRepository.save(productCategory);
+        return createProductCategoryData(productCategory);
+    }
+
     public List<ProductCategoryData> findAll(){
         return createProductDataList(productCategoryRepository.findAll());
     }

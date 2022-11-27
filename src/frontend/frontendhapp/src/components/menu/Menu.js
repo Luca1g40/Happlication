@@ -43,8 +43,10 @@ export default function Menu (props){
 
 
     function showProductBasedOnCategory(category){
+        console.log(category)
         return products.filter(product => {
-                return product.productCategoryData.name === category;
+            console.log(product)
+                return product.productCategoryName === category;
             }
         )
     }
@@ -62,9 +64,10 @@ export default function Menu (props){
     }
 
     function getUniqueProductCategories(products){
-        let productCategories = products.map(product => {return product.productCategoryData.name})
+        let productCategories = products.map(product => {return product.productCategoryName})
         const uniqueProductCategories = productCategories.filter((x, i, a) => a.indexOf(x) === i)
         let sortedUniqueProductCategories = uniqueProductCategories.map(category => {return category})
+        console.log(sortedUniqueProductCategories.sort())
         return sortedUniqueProductCategories.sort()
     }
 

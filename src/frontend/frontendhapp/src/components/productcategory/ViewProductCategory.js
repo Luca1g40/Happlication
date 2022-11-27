@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react";
-import {Actions} from "../submitData/Actions";
 import {Link} from "react-router-dom";
 import {useParams} from "react-router";
 import {getCategoryById} from "../../urlMappings/MenuRequests";
 import SubmitButton from "../submitData/SubmitButton";
+import {Actions} from "../submitData/Actions";
 import Logout from "../utils/Logout";
 import HomeNav from "../utils/Homebutton";
 import MenuCategoryForm from "./MenuCategoryForm";
@@ -47,11 +47,19 @@ export default function ViewProductCategory(){
         </>
     ) : (
         <>
+            <h1>Edit Menu category</h1>
+            <div className={"home-button"}>
+                <Link to="/administration" className="button search-products-navigation" >Home</Link>
+            </div>
             <MenuCategoryForm errorMeldingText={foutMelding} disabled={disabled} category={category} handleChange={event=>handleChange(event)}/>
-            <SubmitButton setFoutMelding={foutMelding=>setFoutMelding(foutMelding)} disabled={disabled} setDisabled={disabled=>setDisabled(disabled)} action={Actions.UPDATE_INGREDIENT} buttonText={"Update"}  category={category}/>
+            <SubmitButton setFoutMelding={foutMelding=>setFoutMelding(foutMelding)} disabled={disabled} setDisabled={disabled=>setDisabled(disabled)} action={Actions.UPDATE_CATEGORY} buttonText={"Update"}  category={category}/>
             <button onClick={()=>setDisabled(false)} disabled={!disabled}>Edit</button>
             <button onClick={()=>setDisabled(true)} disabled={disabled}>Cancel</button>
+            <Logout/>
+            <HomeNav/>
         </>
+
+
 
 
     )

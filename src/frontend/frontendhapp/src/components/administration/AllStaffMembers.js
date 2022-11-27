@@ -48,28 +48,41 @@ function AllStaffMembers() {
                 return "Kitchen right";
             case "BAR_RIGHTS":
                 return "Bar right";
+            case "ADMINISTRATION_RIGHTS":
+                return "Administration right";
+            case "SERVICE_RIGHTS":
+                return "Service right";
+            case "ADMIN_RIGHTS":
+                return "Admin right";
         }
     }
 
     function showRights(rights) {
         let string = ""
         rights.map(right => {
-            switch (right) {
-                case "KITCHEN_RIGHTS":
-                    if (rights.indexOf(right) === 0) {
-                        string += "kitchen rights"
-                    }else{
-                        string += ", kitchen rights"
-                    }
-                    break;
-                case "BAR_RIGHTS":
-                    if (rights.indexOf(right) === 0) {
-                        string += "bar rights"
-                    }else{
-                        string += ", bar rights"
-                    }
-                    break;
+            if (rights.indexOf(right) === 0) {
+                string += showRight(right)
+            }else{
+                string += `, ${showRight(right)}`
             }
+
+
+            // switch (right) {
+            //     case "KITCHEN_RIGHTS":
+            //         if (rights.indexOf(right) === 0) {
+            //             string += "kitchen rights"
+            //         }else{
+            //             string += ", kitchen rights"
+            //         }
+            //         break;
+            //     case "BAR_RIGHTS":
+            //         if (rights.indexOf(right) === 0) {
+            //             string += "bar rights"
+            //         }else{
+            //             string += ", bar rights"
+            //         }
+            //         break;
+            // }
         })
         return string;
     }

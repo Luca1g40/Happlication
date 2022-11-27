@@ -8,5 +8,6 @@ export const Actions = {
     CREATE_INGREDIENT:"Create a ingredient",
     UPDATE_INGREDIENT: "Update a ingredient.",
     DELETE_PRODUCT: "Delete a product",
-    CREATE_CATEGORY:"Create a product category"
+    CREATE_CATEGORY:"Create a product category",
+    UPDATE_CATEGORY:"Update a category."
 }

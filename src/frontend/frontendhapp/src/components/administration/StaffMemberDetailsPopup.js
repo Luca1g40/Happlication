@@ -23,6 +23,10 @@ function ProductDetailsPopup(props) {
             r = ["KITCHEN_RIGHTS"]
         }else if(rights === "Bar"){
             r = ["BAR_RIGHTS"]
+        }else if(rights === "Service"){
+            r = ["SERVICE_RIGHTS"]
+        }else if(rights === "Administratie"){
+            r = ["ADMINISTRATION_RIGHTS"]
         }else if(rights === "Keuken & bar"){
             r = ["KITCHEN_RIGHTS", "BAR_RIGHTS"]
         }
@@ -44,6 +48,10 @@ function ProductDetailsPopup(props) {
                 return "Keuken"
             }else if(rightOne === "BAR_RIGHTS"){
                 return "Bar"
+            }else if(rightOne === "ADMINISTRATION_RIGHTS"){
+                return "Administratie"
+            }else if(rightOne === "SERVICE_RIGHTS"){
+                return "Service"
             }
         }
     }
@@ -63,6 +71,8 @@ function ProductDetailsPopup(props) {
                         <option value="Keuken">Keuken</option>
                         <option value="Bar">Bar</option>
                         <option value="Keuken & bar">Keuken & bar</option>
+                        <option value="Service">Service</option>
+                        <option value="Administration">Administratie</option>
                     </select>
                     <p className="error-message" id="error">Voer een geldig voornaam in</p>
                 </form>
