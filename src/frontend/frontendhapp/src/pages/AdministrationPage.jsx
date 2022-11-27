@@ -2,6 +2,7 @@ import React from "react";
 import "../styles/StaffModuleHomePagina.css"
 import {Link} from "react-router-dom";
 import Logout from "../components/utils/Logout"
+import "../styles/SubmitButton.css"
 
 export default function AdministrationPage() {
     return (
@@ -21,6 +22,11 @@ export default function AdministrationPage() {
                 <hr/>
                 <Link className="button homeModule_bt_space" to="/createStaff">Create Staff</Link>
                 <Link className="button homeModule_bt_space" to="/allStaffMembers">Get All Staff</Link>
+                <hr/>
+                <Link className="button homeModule_bt_space" to="/createarea">Create Area</Link>
+                <Link className="button homeModule_bt_space" to="/areas">Get All Areas</Link>
+                <Link to="/staffmodule" className="button login-button" >Home</Link>
+                <Logout/>
 
             </div>
             <Link to="/staffmodule" className="button login-button" >Home</Link>

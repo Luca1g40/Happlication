@@ -22,7 +22,14 @@ function Login() {
          const status = await loginRequest(password)
          console.log(status)
          if (status === 200) {
-             navigate("/staffmodule");
+             let rights = sessionStorage.getItem("rights");
+             if (rights === "KITCHEN_RIGHTS" || rights === "BAR_RIGHTS" || rights === "KITCHEN_RIGHTS,BAR_RIGHTS") {
+                 navigate("/orders")
+             } else if (rights === "ADMINISTRATION") {
+                 navigate("/administration")
+             } else if (rights === "OBER") {
+                 navigate("/staffDashboard")
+             }
          }
      }
 
