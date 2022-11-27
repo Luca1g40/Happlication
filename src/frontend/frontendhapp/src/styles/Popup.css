@@ -45,6 +45,10 @@
     align-items: center;
 }
 
+.grid-item-1{
+    align-self: center;
+}
+
 
 .border-div {
     border-top-style: solid;
@@ -74,4 +78,27 @@
     position: absolute;
     bottom: 2%;
     left: 2%;
+}
+
+.description-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.descriptive-text{
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.photo{
+    max-width: 40%;
+    height: auto;
+    margin: 2%;
 }

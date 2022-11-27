@@ -46,7 +46,6 @@ export function createCategory(name) {
         .catch(err => {
             console.log(err)
         })
-
 }
 
 export function updateCategory(id,name) {
@@ -121,6 +120,7 @@ export function editIngredient(id,name){
         console.log(err)
     })
 }
+
 function saveImage(imageFile){
     return  axios.post(`http://localhost:8080/happ/image`, {
         imageFile:imageFile
@@ -149,7 +149,6 @@ export async function createProduct(productName, productIngredients, productDest
     let imagePath = fftesten
     console.log(imagePath)
 
-    console.log(productCategory)
     return axios.post(`http://localhost:8080/happ/product`, {
         "name":productName,
         "productCategoryName":productCategory,
