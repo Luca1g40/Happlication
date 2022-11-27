@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import React, {useState} from "react";
-import {loginRequest} from "../../urlMappings/Login";
+import {getRoles, loginRequest} from "../../urlMappings/Login";
 
 function Login() {
     let navigate = useNavigate();
@@ -20,12 +20,21 @@ function Login() {
 
      async function login() {
          const status = await loginRequest(password)
+             .then(res=>{
+             console.log(res)
+                 return res})
+
          console.log(status)
+         console.log(typeof 200,typeof status)
+
          if (status === 200) {
+             await getRoles()
              let rights = sessionStorage.getItem("rights");
+             console.log(rights)
              if (rights === "KITCHEN_RIGHTS" || rights === "BAR_RIGHTS" || rights === "KITCHEN_RIGHTS,BAR_RIGHTS") {
                  navigate("/orders")
-             } else if (rights === "ADMINISTRATION") {
+             } else if (rights === "ADMINISTRATION_RIGHTS") {
+                 console.log("if adm")
                  navigate("/administration")
              } else if (rights === "OBER") {
                  navigate("/staffDashboard")
