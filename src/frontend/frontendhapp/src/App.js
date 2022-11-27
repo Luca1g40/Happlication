@@ -19,6 +19,7 @@ import StaffModuleHomePagina from "./pages/StaffModuleHomePagina";
 import AdministrationPage from "./pages/AdministrationPage";
 import AllAreas from "./pages/AllAreas";
 import CreateArea from "./pages/CreateArea";
+import AddStaffToAreaPage from "./pages/AddStaffToAreaPage";
 
 function App() {
     return (
@@ -43,6 +44,8 @@ function App() {
 
             <Route path="areas" element={<AllAreas/>}/>
             <Route path="createArea" element={<CreateArea/>}/>
+            <Route path="staffarea" element={<AddStaffToAreaPage/>}/>
+
         </Routes>
     )
 
