@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
-import MenuItem from "./MenuItem";
 import {getMenuDrinkItems} from "../../urlMappings/MenuRequests";
+import SubCategory from "./SubCategory";
 
 
 function DrinksMenu() {
@@ -17,17 +17,16 @@ function DrinksMenu() {
     }, [])
 
     return (
-        <div className={"listDiv"}>
+        <>
+            <h1>Dranken</h1>
             <ul className={"list"}>
-                <h1>Frisdranken</h1>
-                {
-                    products.map(
-                        (product) =>
-                            <MenuItem key={product.id} product={product}/>
-                    )
-                }
+                <SubCategory products={products} category={"DRINKS"}/>
+                <SubCategory products={products} category={"FRIS_DRANKEN"}/>
+                <SubCategory products={products} category={"WARME_DRANKEN"}/>
+                <SubCategory products={products} category={"WARME_DRANKEN"}/>
+                <SubCategory products={products} category={"WARME_DRANKEN"}/>
             </ul>
-        </div>
+        </>
     )
 }
 

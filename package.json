@@ -2,5 +2,8 @@
   "dependencies": {
     "pg": "^8.8.0",
     "react-router-dom": "^6.4.2"
+  },
+  "devDependencies": {
+    "@material-ui/core": "^4.12.4"
   }
 }

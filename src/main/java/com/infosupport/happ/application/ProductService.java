@@ -1,35 +1,36 @@
 package com.infosupport.happ.application;
 
+import com.infosupport.happ.application.dto.ProductCategoryData;
 import com.infosupport.happ.application.dto.ProductData;
+import com.infosupport.happ.application.dto.ProductSubCategoryData;
 import com.infosupport.happ.data.IngredientRepository;
+import com.infosupport.happ.data.ProductCategoryRepository;
 import com.infosupport.happ.data.ProductRepository;
-import com.infosupport.happ.domain.Ingredient;
-import com.infosupport.happ.domain.Product;
-import com.infosupport.happ.domain.ProductCategory;
-import com.infosupport.happ.domain.ProductDestination;
+import com.infosupport.happ.domain.*;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
+import com.infosupport.happ.presentation.dto.ProductCategoryRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.infosupport.happ.domain.ProductCategory.DRINKS;
 
 @Service
 public class ProductService {
-
     private final ProductRepository productRepository;
     private final IngredientRepository ingredientRepository;
+    private final ProductCategoryService productCategoryService;
+    private final ProductSubCategoryService productSubCategoryService;
 
-    public ProductService(ProductRepository productRepository,IngredientRepository ingredientRepository) {
+    public ProductService(ProductRepository productRepository, IngredientRepository ingredientRepository, ProductCategoryService productCategoryService, ProductSubCategoryService productSubCategoryService) {
         this.productRepository = productRepository;
         this.ingredientRepository = ingredientRepository;
+        this.productCategoryService = productCategoryService;
+        this.productSubCategoryService = productSubCategoryService;
     }
 
-    //TODO give ingreedients id inplats van hele ingredient
-    public ProductData createProduct(String name, ProductCategory productCategory, double price, List<String> ingredients, String details, ProductDestination productDestination) {
-
-        Product product = new Product(name, convertIngredientStringToIngredient(ingredients), productCategory, price, details,productDestination);
+    public ProductData createProduct(String name, String productCategoryName, double price, List<String> ingredients, String details, ProductDestination productDestination, ProductType productType,String imagePath) {
+        Product product = new Product(name, convertIngredientStringToIngredient(ingredients), productCategoryService.getProductCategoryByName(productCategoryName), price, details,productDestination, productType, imagePath);
         productRepository.save(product);
         return createProductData(product);
     }
@@ -43,15 +44,18 @@ public class ProductService {
     }
 
 
-    public ProductData updateProduct(String name, ProductCategory productCategory, double price, Long id, List<String> ingredients, String details) {
+    public ProductData updateProduct(String name, String productCategoryName, double price, Long id, List<String> ingredients, String details,ProductType productType, String imagePath, ProductDestination productDestination) {
         productExists(id);
         Product product = productRepository.getById(id);
 
         product.setName(name);
-        product.setProductCategory(productCategory);
+        product.setProductCategory(productCategoryService.getProductCategoryByName(productCategoryName));
         product.setPrice(price);
         product.setIngredients(convertIngredientStringToIngredient(ingredients));
         product.setDetails(details);
+        product.setProductDestination(productDestination);
+        product.setProductType(productType);
+        product.setImagePath(imagePath);
 
         this.productRepository.save(product);
 
@@ -72,12 +76,21 @@ public class ProductService {
         return new ProductData(
                 product.getId(),
                 product.getName(),
-                product.getProductCategory(),
+                product.getProductCategory().getName(),
                 product.getPrice(),
                 product.getIngredients(),
                 product.getDetails(),
-                product.getProductDestination()
-        );
+                product.getProductDestination(),
+                product.getProductType(),
+                product.getImagePath());
+    }
+
+    public List<ProductData> createProductDataList(List<Product> products){
+        List<ProductData> productDataList = new ArrayList<>();
+        for (Product product:products) {
+             productDataList.add(createProductData(product));
+        }
+        return productDataList;
     }
 
     private void productExists(Long id) {
@@ -93,28 +106,25 @@ public class ProductService {
         }
         return ingredientList;
     }
+    public ProductCategoryData createProductCategoryData(ProductCategory productCategory){
+        return new ProductCategoryData(productCategory.getId(), productCategory.getName());
+    }
 
+    public ProductSubCategoryData createProductSubCategoryData(ProductSubCategory productSubCategory){
+        return new ProductSubCategoryData(productSubCategory.getId(), productSubCategory.getName());
+    }
     public List<Product> findAll() {
         return productRepository.findAll();
     }
 
-    public List<Product> findAllDrinks() {
-        List<Product> drinks = new ArrayList<>();
-        for (Product product : productRepository.findAll()) {
-            if (product.getProductCategory() == DRINKS) {
-                drinks.add(product);
-            }
-        }
-        return drinks;
+    public List<ProductData> findAlDrink() {
+        return createProductDataList(productRepository.getAllByProductType(ProductType.DRINK));
     }
 
-    public List<Product> findAllFood() {
-        List<Product> foods = new ArrayList<>();
-        for (Product product : productRepository.findAll()) {
-            if (product.getProductCategory() != DRINKS) {
-                foods.add(product);
-            }
-        }
-        return foods;
+    public List<ProductData> findAllFood() {
+        System.out.println("in regel 121");
+        System.out.println(productRepository.getAllByProductType(ProductType.FOOD));
+        return createProductDataList(productRepository.getAllByProductType(ProductType.FOOD));
+
     }
 }

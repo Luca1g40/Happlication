@@ -28,8 +28,8 @@ public class TableTest {
         order = new Order();
         productList = new ArrayList<>();
         shoppingCart = new ShoppingCart();
-        product = new Product("champagne", new ArrayList<>(), ProductCategory.DRINKS, 56.99, "product details", ProductDestination.BAR_PRODUCT);
-        product2 = new Product("Broodje frikandel", new ArrayList<>(), ProductCategory.STARTER, 25.50, "broodje frikandeel lekker hoor", ProductDestination.KITCHEN_PRODUCT);
+//        product = new Product("champagne", new ArrayList<>(), ProductCategory.DRINKS, 56.99, "product details", ProductDestination.BAR_PRODUCT);
+//        product2 = new Product("Broodje frikandel", new ArrayList<>(), ProductCategory.STARTER, 25.50, "broodje frikandeel lekker hoor", ProductDestination.KITCHEN_PRODUCT);
         table = new Table(LocalTime.now(), LocalTime.now(), 5, 1, OCCUPIED, shoppingCart, false);
     }
 

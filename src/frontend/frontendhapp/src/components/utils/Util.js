@@ -1,4 +1,4 @@
-export default function getOccuranceProducts(list) {
+export default function getOccurrenceProducts(list) {
     let productOccurances = new Map();
 
     list.map(product =>{
@@ -33,6 +33,36 @@ function isProductAlreadyInMap(map,product){
 
 function productCompare(obj1, obj2){
     return obj1.name === obj2.name;
+}
+
+export function showCategory(category){
+    switch (category){
+        case "MAIN_COURSE":
+            return "Hoofdgerechten";
+        case "SIDE":
+            return "Bijgerechten";
+        case "EXTRA":
+            return "Extra";
+        case "DRINKS":
+            return "Drinks";
+        case "DESSERT":
+            return "Dessert";
+        case "STARTER":
+            return "Voorgerechten";
+    }
+}
+
+export function generateObjectWithEmptyValues(){
+
+    let product = {
+        "name":"",
+        "productType":"DRINK",
+        "productCategoryName":"",
+        "price":0,
+        "details":"",
+        "productDestination":"BAR_PRODUCT"
+    }
+    return product
 }
 
 

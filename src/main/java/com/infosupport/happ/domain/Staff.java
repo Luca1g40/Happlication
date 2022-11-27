@@ -1,8 +1,12 @@
 package com.infosupport.happ.domain;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import static com.infosupport.happ.domain.PreperationStatus.CLAIMED;
@@ -113,4 +117,10 @@ public class Staff implements Serializable {
     public List<Order> getClaimedOrders() {
       return getOrderBasedOnStatus(CLAIMED);
     }
+
+
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(rights.get(0).toString()));
+    }
+
 }
