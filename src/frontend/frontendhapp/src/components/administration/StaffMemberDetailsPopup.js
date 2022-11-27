@@ -9,7 +9,6 @@ function ProductDetailsPopup(props) {
         getAllStaffMembers()
             .then(res => {
                     console.log(res)
-
                 }
             )
             .catch(err =>

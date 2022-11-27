@@ -61,3 +61,41 @@ export function RemoveAllProductOccurancesFromCart(tableId,productId){
             console.log(err)
         })
 }
+
+export function getAllTables() {
+    return axios.get("http://localhost:8080/happ/table", configuration)
+        .then(res => {
+            console.log(res)
+            return res.data
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+
+export function DeleteTable(tableIdForDelete) {
+    return axios.delete(`localhost:8080/happ/table/${tableIdForDelete}`, configuration)
+        .then(res => {
+            console.log(res)
+            return res.data
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+
+export function CreateTable(amountOfPeople, tableNr){
+    return axios.post(`localhost:8080/happ/table`, {
+        "amountOfPeople" : amountOfPeople,
+        "tableNr" : tableNr,
+    }, configuration)
+        .then(res => {
+            console.log(res)
+            return res.status
+        })
+        .catch(err => {
+            console.log(err)
+            console.log(err.return.status)
+            return err.response.status
+        })
+}
