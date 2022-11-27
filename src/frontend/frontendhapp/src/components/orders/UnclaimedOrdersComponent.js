@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {getAllUnclaimedOrders} from "../../urlMappings/OrderRequests";
 import {claimSelectedOrders} from "../../urlMappings/StaffRequests";
 import OrdersOverview from "./OrdersOverview";
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 
 function UnclaimedOrdersComponent(props) {
@@ -33,7 +33,7 @@ function UnclaimedOrdersComponent(props) {
     }
 
     return (
-        <div>
+        <>
             <OrdersOverview orders={orders} selectedOrders={selectedOrders} setSelectedOrders={setSelectedOrders} staffRights={props.rights}/>
             <div className={"bottom-bar"}>
                 <div className={"claim-order-button"}>
@@ -50,7 +50,7 @@ function UnclaimedOrdersComponent(props) {
                     <p>Signed in as: {sessionStorage.getItem("staffId")}</p>
                 </span>
             </div>
-        </div>
+        </>
     )
 }
 

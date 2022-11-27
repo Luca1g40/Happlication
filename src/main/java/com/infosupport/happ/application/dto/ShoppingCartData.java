@@ -1,8 +1,6 @@
 package com.infosupport.happ.application.dto;
 
-import com.infosupport.happ.domain.Ingredient;
 import com.infosupport.happ.domain.Product;
-import com.infosupport.happ.domain.ProductCategory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +12,7 @@ public class ShoppingCartData {
         productDataList = new ArrayList<>();
 
         for (Product product:productList) {
-             productDataList.add(new ProductData(product.getId(), product.getName(), product.getProductCategory(),product.getPrice(),product.getIngredients(),product.getDetails(),product.getProductDestination()));
+             productDataList.add(new ProductData(product.getId(), product.getName(),product.getProductCategory().getName() ,product.getPrice(),product.getIngredients(),product.getDetails(),product.getProductDestination(),product.getProductType(), product.getImagePath()));
         }
     }
 }

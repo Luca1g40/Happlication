@@ -8,45 +8,89 @@ import {
 } from "../../urlMappings/TableRequests";
 import {Actions} from "./Actions"
 import {
+    createCategory,
     createIngredient,
     createProduct,
     deleteProduct,
     editIngredient,
-    editProduct
+    editProduct, updateCategory
 } from "../../urlMappings/MenuRequests";
 
 
 export default function SubmitButton(props) {
     let navigate = useNavigate();
 
-    // function validateProductFormInformation(){
-    //     if (Object.keys(props.product).length===7 && props.ingredientList.length>0){
-    //         for (const key in props.product) {
-    //             if (!(String(props.product[key]).replace(/\s+/g, '').length>0)){
-    //                 console.log("ging fout")
-    //                 props.setFoutMelding(`Je hebt een lege input gegeven bij ${key.replace("-", " ")} je ezel`)
-    //                 return;
-    //             }else{
-    //                 console.log("ging goed")
-    //             }
-    //         }
-    //
-    //         editProduct(props.product.id,props.product.name,props.product.destination,props.ingredientList,props.product.price,props.product.details,props.product.category).
-    //         then(res=>{
-    //             props.setDisabled(true);
-    //             navigate(`/productdetails/${res.id}`)
-    //         }).catch(err=>{
-    //             console.log(err)
-    //         })
-    //     }else{
-    //         console.log("ging heel fout")
-    //         props.setFoutMelding(`Je hebt een of meer lege input velden je ezel`)
-    //         return;
-    //     }
-    // }
+    function validateProductObject(product,ingredientList,selectedImage){
+        //dit is bij niet genoeg input velden ingevuld
+        console.log(product)
+        if (Object.keys(product).length===6 && ingredientList.length>0){
+            for (const key in product) {
+                if (!(String(product[key]).replace(/\s+/g, '').length>0)){
+                    // dit is bj een iput veld met aleen spaties erin
+                    props.setFoutMelding(`Je hebt een lege input gegeven bij ${key.replace("-", " ")} `)
+                    return false;
+                }else{
+                }
+            }
+
+            if (!(selectedImage === undefined)){
+                if (!(String(selectedImage.name).includes(".png") || String(selectedImage.name).includes(".jpg"))){
+                    props.setFoutMelding("Upload een image file met de extensie .png of .jpg")
+                    return false;
+                }
+                return true;
+            }else{
+                props.setFoutMelding("Je hebt geen image file meegegeven")
+            }
+
+
+        }else{
+            props.setFoutMelding(`Je hebt een of meer lege input velden `)
+            return false;
+        }
 
 
 
+
+    }
+
+    function validateProductObjectByUpdate(product,ingredientList,selectedImage){
+        //dit is bij niet genoeg input velden ingevuld
+        if (Object.keys(product).length===9 && ingredientList.length>0){
+            for (const key in product) {
+                if (!(String(product[key]).replace(/\s+/g, '').length>0)){
+                    // dit is bj een iput veld met aleen spaties erin
+                    props.setFoutMelding(`Je hebt een lege input gegeven bij ${key.replace("-", " ")} `)
+                    return false;
+                }else{
+                }
+            }
+
+            if (product.imagePath === undefined){
+                if (!(selectedImage === undefined)){
+                    if (!(String(selectedImage.name).includes(".png") || String(selectedImage.name).includes(".jpg"))){
+                        props.setFoutMelding("Upload een image file met de extensie .png of .jpg")
+                        return false;
+                    }
+                    return true;
+                }else{
+                    props.setFoutMelding("Je hebrt geen image file meegegeven")
+                }
+            }else{
+                return true
+            }
+
+
+
+        }else{
+            props.setFoutMelding(`Je hebt een of meer lege input velden `)
+            return false;
+        }
+
+
+
+
+    }
 
     function handleClick() {
         switch (props.action) {
@@ -94,61 +138,42 @@ export default function SubmitButton(props) {
                     .catch(err => {
                         console.log(err)
                     });
-                console.log("removed all")
                 break;
             case Actions.CREATE_PRODUCT:
-                if (Object.keys(props.product).length===5 && props.ingredientList.length>0){
-                    for (const key in props.product) {
-                        if (!(String(props.product[key]).replace(/\s+/g, '').length>0)){
-                            console.log("ging fout")
-                            props.setFoutMelding(`Je hebt een lege input gegeven bij ${key.replace("-", " ")} je ezel`)
-                            return;
-                        }else{
-                            console.log("ging goed")
-                        }
-                    }
-
-                    createProduct(props.product.name,props.ingredientList,props.product.destination,props.product.category,props.product.details,props.product.price)
-                        .then(res=>{
+                if (validateProductObject(props.product,props.ingredientList,props.selectedImage)){
+                    createProduct(props.product.name,props.ingredientList,props.product.productDestination,props.product.productCategoryName,props.product.details,props.product.price,props.product.productType,props.selectedImage)
+                        .then(res =>{
+                            console.log(res)
                             window.location.reload()
-                            navigate(`/createproduct`)
-                            }
-
-                        ).catch(err=>{
-                            console.log(err)
+                        }
+                            )
+                        .catch(err=>{
+                        console.log(err)
                     })
-                }else{
-                    console.log("ging heel fout")
-                    props.setFoutMelding(`Je hebt een of meer lege input velden je ezel`)
-                    return;
                 }
+
                 break;
             case Actions.UPDATE_PRODUCT:
 
-                console.log(props.product.productCategory)
 
-                if (Object.keys(props.product).length===7 && props.ingredientList.length>0){
-                    for (const key in props.product) {
-                        if (!(String(props.product[key]).replace(/\s+/g, '').length>0)){
-                            console.log("ging fout")
-                            props.setFoutMelding(`Je hebt een lege input gegeven bij ${key.replace("-", " ")} je ezel`)
-                            return;
-                        }else{
-                            console.log("ging goed")
-                        }
+                if (validateProductObjectByUpdate(props.product,props.ingredientList,props.selectedImage)){
+                    let imageChanged = true;
+                    let image = props.selectedImage
+                    if (image === undefined){
+                        console.log("undefined if")
+                        image = props.product.imagePath
+                        imageChanged = false
                     }
 
-                    editProduct(props.product.id,props.product.name,props.product.productDestination,props.ingredientList,props.product.price,props.product.details,props.product.productCategory).
+                    console.log(image)
+                    editProduct(props.product.id,props.product.name,props.product.productDestination,props.ingredientList,props.product.price,props.product.details, props.product.productCategoryName,props.product.productType , image, imageChanged).
                     then(res=>{
                         props.setDisabled(true);
                         navigate(`/productdetails/${res.id}`)
                     }).catch(err=>{
                         console.log(err)
                     })
-                }else{
-                    console.log("ging heel fout")
-                    props.setFoutMelding(`Je hebt een of meer lege input velden je ezel`)
-                    return;
+
                 }
                 break;
 
@@ -157,11 +182,8 @@ export default function SubmitButton(props) {
                     for (const key in props.ingredient) {
                         console.log(props.ingredient[key].trim().length)
                         if (!(props.ingredient[key].trim().length>0)){
-                            console.log("ging fout")
-                            props.setFoutMelding(`Je hebt een lege input gegeven bij ${key.replace("-", " ")} je ezel`)
+                            props.setFoutMelding(`Je hebt een lege input gegeven bij ${key.replace("-", " ")} `)
                             return;
-                        }else{
-                            console.log("ging goed")
                         }
                     }
 
@@ -174,8 +196,7 @@ export default function SubmitButton(props) {
 
                     })
                 }else{
-                    console.log("ging heel fout")
-                    props.setFoutMelding(`Je hebt een of meer lege input velden je ezel`)
+                    props.setFoutMelding(`Je hebt een of meer lege input velden`)
                     return;
                 }
                 break;
@@ -185,13 +206,11 @@ export default function SubmitButton(props) {
                     editIngredient(props.ingredient.id,props.ingredient.name)
                         .then(res=>{
                                 props.setDisabled(true);
-                                navigate(`/ingredientdetails/${res.id}`)
+                                // navigate(`/ingredientdetails/${res.id}`)
                             }
-                        ).catch(err=>{
-
-                    })
+                        )
                 }else{
-                    props.setFoutMelding(`Je hebt een lege input gegeven  je ezel`)
+                    props.setFoutMelding(`Je hebt een lege input gegeven  `)
                 }
                 break;
 
@@ -200,12 +219,29 @@ export default function SubmitButton(props) {
                     .then(res=>{
                             navigate(`/searchproduct`)
                         }
-                    ).catch(err=>{
-
+                    )
+                break;
+            case Actions.CREATE_CATEGORY:
+                createCategory(props.category.name)
+                    .then(res=>{
+                        window.location.reload()
+                        navigate(`/createcategory`)
+                        console.log(res)
+                    }).catch(err=>{
+                        console.log(err)
                 })
-
+                break;
+            case Actions.UPDATE_CATEGORY:
+                console.log(props.category)
+                console.log("hierin")
+                updateCategory(props.category.id,props.category.name)
+                    .then(res=>{
+                        console.log(res)
+                    }).catch(err=>{
+                    console.log(err)
+                })
+                break;
         }
-        console.log("Added");
     }
 
     return (

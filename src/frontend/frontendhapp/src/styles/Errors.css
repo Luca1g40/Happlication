@@ -1,0 +1,20 @@
+.error-title {
+    font-size: 200px;
+    color: #e3a768;
+    text-shadow: 7px 7px 7px #000;
+    font-weight: bold;
+}
+
+.error-subtitle{
+    font-size: 30px;
+    color: #000;
+    font-weight: bold;
+}
+
+.error-login {
+    margin: 15px;
+}
+
+.error-login-button {
+    margin-left: 15px;
+}

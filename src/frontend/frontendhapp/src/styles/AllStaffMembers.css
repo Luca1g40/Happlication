@@ -13,7 +13,8 @@
 }
 
 .close-memberpop {
-    float: right;
+    position: absolute;
+    right: 2%;
 }
 
 .update-btn {
@@ -46,4 +47,21 @@
 
 h1{
     justify-content: center;
+}
+
+.filter-div{
+    width: 14%;
+    float: left;
+    margin-left: 0.5%;
+}
+
+.wrapper{
+    position: absolute;
+    width: 100%;
+    display: block;
+}
+
+.create-staff-button{
+    right: 50%;
+    position: absolute;
 }

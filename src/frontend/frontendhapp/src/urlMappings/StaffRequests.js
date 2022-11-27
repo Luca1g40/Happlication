@@ -27,10 +27,9 @@ export function getAllStaffMembers() {
 }
 
 export function DeleteStaff(staffIdForDelete) {
-    return axios.delete(`http://localhost:8080/happ/staff/${staffIdForDelete}`, configuration)
+    axios.delete(`http://localhost:8080/happ/staff/${staffIdForDelete}`, configuration)
         .then(res => {
             console.log(res)
-            return res.data
         })
         .catch(err => {
             console.log(err)
