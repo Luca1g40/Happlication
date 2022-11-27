@@ -124,8 +124,8 @@ function saveImage(imageFile){
             console.log(err)
         })
 }
+
 export async function createProduct(productName, productIngredients, productDestination, productCategory, details, price, productType, imageFile) {
-    console.log(productCategory)
     var fftesten = 0
 
     await saveImage(imageFile).then(res => {
