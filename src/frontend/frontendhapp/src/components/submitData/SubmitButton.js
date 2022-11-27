@@ -206,7 +206,7 @@ export default function SubmitButton(props) {
                     editIngredient(props.ingredient.id,props.ingredient.name)
                         .then(res=>{
                                 props.setDisabled(true);
-                                navigate(`/ingredientdetails/${res.id}`)
+                                // navigate(`/ingredientdetails/${res.id}`)
                             }
                         )
                 }else{
