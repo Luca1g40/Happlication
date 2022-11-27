@@ -19,8 +19,8 @@ function Login() {
     }
 
      async function login() {
-         const status = await loginRequest(password)
-         console.log(status)
+         const status = await loginRequest(password).then(res=>{console.log(res)})
+         console.log(typeof status,typeof 200)
          if (status === 200) {
              getRoles()
              navigate("/staffmodule");

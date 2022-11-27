@@ -237,6 +237,7 @@ export default function SubmitButton(props) {
                 updateCategory(props.category.id,props.category.name)
                     .then(res=>{
                         console.log(res)
+                        props.setDisabled(true);
                     }).catch(err=>{
                     console.log(err)
                 })

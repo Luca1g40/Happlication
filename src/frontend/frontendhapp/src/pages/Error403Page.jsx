@@ -15,7 +15,7 @@ export default function Error403Page() {
                 <div>Login of ga terug naar de vorige pagina.</div>
                 <div className={"error-login"}>
                     <button className="button" onClick={() => navigate(-2)}>Terug</button>
-                    <Link className="button error-login-button" to="/staff">Login</Link>
+                    <Link className="button error-login-button" to="/login">Login</Link>
                 </div>
             </div>
         </>

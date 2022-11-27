@@ -5,6 +5,7 @@ export function loginRequest(password){
         "password": password
     })
         .then(res => {
+            console.log(res.data)
             const id = res.data.staffId
             sessionStorage.setItem("Authorization", "Bearer " + res.data.jwt)
             sessionStorage.setItem("staffId", id)
@@ -23,6 +24,7 @@ export function getRoles(){
         Authorization: JWT
     }})
         .then(res => {
+            console.log("wait")
             console.log(res)
             sessionStorage.setItem("rights", res.data.rights)
         })

@@ -3,7 +3,7 @@ import {getAllAreas} from "../../urlMappings/AreaRequests";
 import AreaItemDetailPopup from "./AreaItemDetailPopup";
 import OverviewTable from "../product/OverviewTable";
 import {Link} from "react-router-dom";
-import "../../styles/AllArea.css"
+// import "../../styles/AllArea.css"
 
 function AllArea() {
 
