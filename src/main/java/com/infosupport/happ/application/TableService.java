@@ -47,6 +47,14 @@ public class TableService {
         return tableRepository.getById(tableId);
     }
 
+    public List<TableData> getAllTables() {
+        List<TableData> tableData = new ArrayList<>();
+        for (Table table : tableRepository.findAll()){
+            tableData.add(createTableData(table));
+        }
+        return tableData;
+    }
+
     public ShoppingCartData getTableShoppingCart(Long tableId) {
         tableExists(tableId);
         return new ShoppingCartData(tableRepository.getById(tableId).getShoppingCart().getProducts());
@@ -102,11 +110,13 @@ public class TableService {
     }
 
     public void deleteTable(Long id) {
+        tableExists(id);
         tableRepository.deleteById(id);
     }
 
     public TableData createTableData(Table table) {
-        return new TableData(table.getAmountOfPeople(),
+        return new TableData(table.getId(),
+                table.getAmountOfPeople(),
                 table.getTableNumber(),
                 table.getElapsedTimeSinceOrder(),
                 table.getTimeLeftToOrder(),

@@ -12,8 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
+
 @RestController
-@Transactional
 @RequestMapping("/happ")
 public class TableController {
     private final TableService tableService;
@@ -31,6 +33,12 @@ public class TableController {
     @PutMapping("/table/{id}/helpNodig")
     public TableData setBoolHelp(@PathVariable Long id, @RequestBody TableRequest tableRequest) {
          return this.tableService.setBoolHulp(id, tableRequest.setHulpBool);
+    }
+
+    @CrossOrigin
+    @GetMapping("/table")
+    public List<TableData> getAllTables() {
+        return this.tableService.getAllTables();
     }
 
     @CrossOrigin
@@ -111,7 +119,12 @@ public class TableController {
     }
 
     @DeleteMapping("/table/{tableid}")
-    private void deleteTable(@PathVariable("tableid") Long tableId) {
-        this.tableService.deleteTable(tableId);
+    private void deleteTable(@PathVariable("tableid") Long tableid) {
+        try {
+            this.tableService.deleteTable(tableid);
+        }
+        catch (ItemNotFound itemNotFound) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, itemNotFound.getMessage());
+        }
     }
 }
