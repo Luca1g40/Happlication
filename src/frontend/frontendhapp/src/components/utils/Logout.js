@@ -6,7 +6,7 @@ function Logout(){
 
     function cleardata() {
         sessionStorage.clear();
-        navigate("/staff");
+        navigate("/login");
     }
 
     return (

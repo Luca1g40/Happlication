@@ -31,8 +31,10 @@ function Login() {
                      navigate("/orders")
                  } else if (res.includes("ADMINISTRATION_RIGHTS")) {
                      navigate("/administration")
-                 } else if (res.includes("OBER")) {
+                 } else if (res.includes("SERVICE_RIGHTS")) {
                      navigate("/staffDashboard")
+                 } else if (res.includes("ADMIN_RIGHTS")) {
+                     navigate("/administration")
                  }
              })
          }
