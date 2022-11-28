@@ -4,7 +4,6 @@ import "../../styles/Popup.css"
 import Counter from "../utils/Counter";
 import SubmitButton from "../submitData/SubmitButton";
 import {Actions} from "../submitData/Actions"
-import {getAllCategories, getAllIngredients} from "../../urlMappings/MenuRequests";
 
 
 function ProductDetailsPopup(props) {
@@ -16,7 +15,6 @@ function ProductDetailsPopup(props) {
 
 
     function closePopUp() {
-        console.log("closing popup")
         props.setTrigger(false);
     }
 
@@ -24,18 +22,13 @@ function ProductDetailsPopup(props) {
         <div className="popup">
             <div className="popup-inner">
                 <div className={"gerecht-aantal"}>
-                    <p className={"grid-item-1"}>{props.product.name} </p>
+                    <label className={"grid-item-1"}>{props.product.name} </label>
                     <Counter initialValue={productAmount} updateCount={count => setProductAmount(count)} submitMode={false}/>
                     <button className="close-btn button" onClick={closePopUp}> X </button>
                 </div>
-                <div className={"label-div"}>
-                    <div className={"border-div"}>
-                        <label>{props.product.details}</label>
-                    </div>
-                </div>
-
-                <div>
-                    <img src={require(`../../images/${props.product.imagePath}` )} alt={"image not found"}/>
+                <div className={"description-wrapper"}>
+                    <p className={"descriptive-text"}>{props.product.details}</p>
+                    <img className={"photo"} src={require(`../../images/${props.product.imagePath}` )} alt={"image not found"}/>
                 </div>
 
                 <div className={"add-to-cart-div"}>

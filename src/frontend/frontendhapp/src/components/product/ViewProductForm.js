@@ -7,11 +7,9 @@ import {useParams} from "react-router";
 import  "../../styles/MenuCrudForm.css"
 import {Link} from "react-router-dom";
 import {generateObjectWithEmptyValues} from "../utils/Util.js"
-import useStateWithCallback from 'use-state-with-callback';
 
 export default function ViewProductForm(){
     const [disabled,setDisabled] = useState(true)
-
     const [errorMeldingText,setErrorMeldingText] = useState("");
     const [product,setProduct] = useState();
     const [toegevoegdeIngredienten,setToegevoegdeIngredienten] = useState([])
