@@ -24,21 +24,17 @@ function Login() {
              console.log(res)
                  return res})
 
-         console.log(status)
-         console.log(typeof 200,typeof status)
-
          if (status === 200) {
-             await getRoles()
-             let rights = sessionStorage.getItem("rights");
-             console.log(rights)
-             if (rights === "KITCHEN_RIGHTS" || rights === "BAR_RIGHTS" || rights === "KITCHEN_RIGHTS,BAR_RIGHTS") {
-                 navigate("/orders")
-             } else if (rights === "ADMINISTRATION_RIGHTS") {
-                 console.log("if adm")
-                 navigate("/administration")
-             } else if (rights === "OBER") {
-                 navigate("/staffDashboard")
-             }
+             getRoles().then(res=>{
+                console.log(res)
+                 if (res.includes("KITCHEN_RIGHTS")  || res.includes("BAR_RIGHTS")  || res.includes("KITCHEN_RIGHTS") && res.includes("BAR_RIGHTS")) {
+                     navigate("/orders")
+                 } else if (res.includes("ADMINISTRATION_RIGHTS")) {
+                     navigate("/administration")
+                 } else if (res.includes("OBER")) {
+                     navigate("/staffDashboard")
+                 }
+             })
          }
      }
 
