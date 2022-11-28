@@ -42,8 +42,8 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
     public final static String ORDER_PATH = "/happ/order/**";
 
     //Customer
-    public final static String FOOD_PATH_CUST = "/happ/product/food";
-    public final static String DRINKS_PATH_CUST = "/happ/product/drinks";
+    public final static String FOOD_PATH_CUST = "/happ/products/foods";
+    public final static String DRINKS_PATH_CUST = "/happ/products/drinks";
     public final static String SHOPPINGCART_PATH_CUST = "/happ/table/**";
 
     public SecurityConfigurer(JwtRequestFilter jwtRequestFilter, MyUserDetailsService myUserDetailsService) {
