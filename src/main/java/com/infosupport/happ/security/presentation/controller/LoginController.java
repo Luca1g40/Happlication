@@ -9,7 +9,6 @@ import com.infosupport.happ.security.util.JwtUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -34,12 +33,12 @@ public class LoginController {
             if(authenticationRequest.password != null) {
                 Staff staff = staffService.getStaffByPassword(Integer.parseInt(authenticationRequest.password));
 
-                List<String> roles = staff.getAuthorities()
+                List<String> right = staff.getAuthorities()
                         .stream()
                         .map(GrantedAuthority::getAuthority)
                         .collect(Collectors.toList());
 
-                final String jwt = jwtTokenUtil.generateToken(String.valueOf(staff.getPassword()), roles);
+                final String jwt = jwtTokenUtil.generateToken(String.valueOf(staff.getPassword()), right);
                 return ResponseEntity.ok().body(new AuthenticationResponse(jwt, staff.getId()));
             } throw new ItemNotFound("Staff");
         } catch (ItemNotFound e) {
