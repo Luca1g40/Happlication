@@ -1,10 +1,30 @@
 import "../../styles/Popup.css"
 import "../../styles/AllStaffMembers.css"
-import React, {useEffect} from "react";
+import "../../styles/AllArea.css"
+import React, {useEffect, useState} from "react";
 import {deleteAreaItem} from "../../urlMappings/AreaRequests";
+import {getAllStaffMembers} from "../../urlMappings/StaffRequests";
 
 
 function AreaItemDetailPopup(props) {
+    const [staff, setStaff] = useState(["Select a staff"]);
+
+    useEffect(() =>{
+        getAllStaffMembers()
+            .then(res=> {
+                console.log(res)
+                setStaff(res);
+            })
+            .catch(err=>{
+                console.log(err);
+            });
+    }, [])
+
+    let handleInputChange = (e) => {
+        console.log("handleInputChange", e.target.value)
+        return e.target.value;
+    }
+
 
     function closePopUp() {
         console.log("closing popup")
@@ -40,8 +60,18 @@ function AreaItemDetailPopup(props) {
                     })}
                 </form>
 
-                <button className={"update-btn"} >Update</button>
-                <button className={"delete-btn"} onClick={() => deleteArea(props.area.id) + closePopUp() + window.location.reload()}>Delete</button>
+
+                <select className="staff-dropdown" onChange={handleInputChange}>
+                    <option value="Select a staff"> -- Select a staff -- </option>
+                    {
+                        staff.map((staffMember) =>
+                            <option value={staffMember.id} > {staffMember.name}</option>
+                        )
+                    }
+                </select>
+
+                <button className={"update-bt"} >Update</button>
+                <button className={"delete-bt"} onClick={() => deleteArea(props.area.id) + closePopUp() + window.location.reload()}>Delete</button>
 
             </div>
         </div>

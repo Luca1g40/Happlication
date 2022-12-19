@@ -1,3 +1,14 @@
-.area-table {
+.staff-dropdown {
+    height: 30px;
 
+}
+
+.update-bt {
+    width: 150px;
+    float: right;
+}
+
+.delete-bt {
+    width: 150px;
+    float: right;
 }

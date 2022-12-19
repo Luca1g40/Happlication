@@ -23,7 +23,6 @@ import ViewProductCategory from "./components/productcategory/ViewProductCategor
 import Menu from "./components/menu/Menu";
 import Error403Page from "./pages/Error403Page";
 import SearchCategory from "./components/productcategory/SearchCategory";
-import AddStaffToAreaPage from "./pages/AddStaffToAreaPage";
 
 function App() {
     return (
@@ -52,11 +51,6 @@ function App() {
             <Route path="categorydetails/:id" element={<ViewProductCategory/>}/>
             <Route path="error403" element={<Error403Page/>}/>
             <Route path="searchcategory" element={<SearchCategory/>}/>
-
-
-
-            <Route path="staffarea" element={<AddStaffToAreaPage/>}/>
-
         </Routes>
     )
 
