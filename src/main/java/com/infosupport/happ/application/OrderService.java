@@ -42,7 +42,6 @@ public class OrderService {
 
 
     public OrderData claimOrder(Long staffId, Long orderId) {
-        System.out.println("here");
 
         Staff staff = orderAssistant.getStaff(staffId);
 
@@ -83,7 +82,6 @@ public class OrderService {
     }
 
     public OrderData getKitchenOrder(Long orderId) {
-        orderExists(orderId);
         KitchenOrder order = kitchenOrderRepository.getById(orderId);
         return createOrderData(order);
     }

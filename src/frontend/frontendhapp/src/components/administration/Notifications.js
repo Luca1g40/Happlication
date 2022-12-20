@@ -6,7 +6,7 @@ import axios from "axios";
 
 function Notifications(){
 
-    let tafelId = 74;
+    let tafelId = 6;
 
     //TODO RUIM DEZE DING OP -> URL mappings
     function tableHelp(){
