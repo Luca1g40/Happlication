@@ -23,7 +23,6 @@ export function RemoveProductFromShoppingCart(tableId, productId) {
             return res.data.shoppingCart.productDataList;
         })
         .catch(err => {
-            console.log(productId)
             console.log(err)
         })
 }

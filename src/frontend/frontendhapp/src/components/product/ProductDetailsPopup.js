@@ -10,7 +10,7 @@ function ProductDetailsPopup(props) {
     const [productAmount, setProductAmount] = useState(1)
 
     useEffect(() => {
-        console.log(props.product.imagePath.length)
+        console.log(props.product.imagePath)
     },[])
 
 
@@ -27,18 +27,19 @@ function ProductDetailsPopup(props) {
                     <button className="close-btn button" onClick={closePopUp}> X </button>
                 </div>
                 <div className={"description-wrapper"}>
+                    <p className={"descriptive-text"}>{props.product.details}</p>
+
                     {  props.product.imagePath.length > 5 ? (
-                            <>
-                                <p className={"descriptive-text"}>{props.product.details}</p>
-                                <img className={"photo"} src={require(`../../images/${props.product.imagePath}` )} alt={"image not found"}/>
-                            </>
-                        ) : ""
+                        <>
+                            <img className={"photo"}src={require(`../../images/${props.product.imagePath}`)} alt={"image not found"}/>
+                        </>
+                    ) : ""
                     }
 
                 </div>
 
                 <div className={"add-to-cart-div"}>
-                <SubmitButton className={"button"} tableId={577} buttonText={"Add to Cart"} action={Actions.ADD_TO_SHOPPING_CART}
+                <SubmitButton className={"button"} tableId={6} buttonText={"Add to Cart"} action={Actions.ADD_TO_SHOPPING_CART}
                               productAmount={productAmount} productId={props.product.id} trigger={() =>closePopUp()}/>
                 </div>
             </div>

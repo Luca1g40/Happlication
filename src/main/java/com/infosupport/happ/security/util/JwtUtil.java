@@ -26,14 +26,14 @@ public class JwtUtil {
         return extractClaim(token, Claims::getExpiration);
     }
 
-    public List<SimpleGrantedAuthority> extractRole(String token) {
+    public List<SimpleGrantedAuthority> extractRight(String token) {
         JwtParser jwtParser = Jwts.parser().setSigningKey(SECRET_KEY);
 
         Jws<Claims> parsedToken = jwtParser
                 .parseClaimsJws(token.replace("Bearer ", ""));
 
         return ((List<?>) parsedToken.getBody()
-                .get("rol")).stream()
+                .get("right")).stream()
                 .map(authority -> new SimpleGrantedAuthority((String) authority))
                 .collect(Collectors.toList());
     }
@@ -51,16 +51,16 @@ public class JwtUtil {
         return extractExpiration(token).before(new Date());
     }
 
-    public String generateToken(String password, List<String>  roles) {
+    public String generateToken(String password, List<String>  right) {
         Map<String, Object> claims = new HashMap<>();
-        return createToken(claims, password, roles);
+        return createToken(claims, password, right);
     }
 
-    private String createToken(Map<String, Object> claims, String subject, List<String> roles) {
+    private String createToken(Map<String, Object> claims, String subject, List<String> right) {
         return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24))
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
-                .claim("rol", roles).compact();
+                .claim("right", right).compact();
     }
 
     public Boolean validateToken(String token, UserDetails userDetails) {

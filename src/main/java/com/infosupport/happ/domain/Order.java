@@ -2,6 +2,7 @@ package com.infosupport.happ.domain;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +27,7 @@ public class Order {
 
     public Order(Table table) {
         LocalDateTime now = LocalDateTime.now();
+        System.out.println(now);
 
         this.table = table;
         this.timeOfOrder = now;

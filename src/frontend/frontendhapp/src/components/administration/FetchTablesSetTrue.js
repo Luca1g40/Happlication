@@ -23,7 +23,7 @@ function FetchTablesSetTrue() {
         window.location.reload(false);
     }
 
-    let tafelId = 74;
+    let tafelId = 6;
     function klantIsGeholpen(){
         axios.put(`http://localhost:8080/happ/table/${tafelId}/helpNodig`, {//todo->tafelId moet zelf opgehaald worden
             "setHulpBool" : "false"
