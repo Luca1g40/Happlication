@@ -67,4 +67,15 @@ export function generateObjectWithEmptyValues(){
     return product
 }
 
+export function displayPrice(price) {
+    if (price.toString().includes(".")) {
+        if (price.toString().split(".")[1].length === 1) {
+            return price + "0";
+        }
+        return price;
+    } else {
+        return price + ".-";
+    }
+}
+
 

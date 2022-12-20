@@ -1,8 +1,10 @@
 import {useParams} from "react-router";
 import React, {useEffect, useState} from "react";
 import {GetTableOrders} from "../../urlMappings/TableRequests";
-import getOccurrenceProducts from "../utils/Util";
+import getOccurrenceProducts, {displayPrice} from "../utils/Util";
 import "../../styles/AllOrders.css";
+import Receipt from "./Receipt";
+import {Link} from "react-router-dom";
 
 
 export default function TableReceipt(props){
@@ -34,21 +36,33 @@ export default function TableReceipt(props){
     }
 
     return(
-        <div>
-
+        <>
+            <Link to="/" className="login-button button" >Home</Link>
+            <h1 className={"order-header"}>Bestellingen</h1>
             { Array.from(getOccurrenceProducts(fillProductList(orders)).keys()).map((product, index) => {
                     price = price + (product.price * Array.from(getOccurrenceProducts(fillProductList(orders)).values())[index]);
 
                     return (
-                            <>
-                                <span className={"product-name"}> {product.name} ${product.price}</span>
-                                <span className={"product-amount"}>{Array.from(getOccurrenceProducts(fillProductList(orders)).values())[index]}</span>
-                            </>
-                        )
+                        <>
+                            <div className={"list-item"} id={"bestelling-item"}>
+                                <span className={"product-span"}>{Array.from(getOccurrenceProducts(fillProductList(orders)).values())[index]} {product.name}</span>
+                                <span>€</span>
+                                <span className={"product-price"}> {displayPrice(product.price)}</span>
+                            </div>
+
+                        </>
+                    )
                 }
             )}
-            <p> Total : ${price}</p>
-        </div>
+
+            <div className={"list-item"} id={"total-price"}>
+                <span className={"product-span"} > Total </span>
+                <span>€</span>
+                <span className={"product-price"} >{displayPrice(price)}</span>
+
+            </div>
+            <button className={"button"}>Afrekenen</button>
+        </>
     )
 
 

@@ -15,7 +15,7 @@ export default function ShoppingCart() {
     const [buttonPopUp,setButtonPopup] = useState(false);
 
     useEffect(() => {
-        GetShoppingCart(6)
+        GetShoppingCart(208)
             .then(res => {
                 setShoppingCart(res)
             })
@@ -36,7 +36,7 @@ export default function ShoppingCart() {
                     <ShoppingCartItem key={item.id} productName={item.name} productId={item.id} amount={Array.from(getOccurrenceProducts(shoppingCart).values())[index]} updateShoppingCart={shoppingcart => setShoppingCart(shoppingcart)}/>
                 );
             })}
-                <SubmitButton className={"submit-button button"} buttonText={"Order"} tableId={6} action={Actions.PLACE_ORDER} emptyShoppingcart={()=>setShoppingCart([])} triggerPopUp={()=>setButtonPopup(true)}/>
+                <SubmitButton className={"submit-button button"} buttonText={"Order"} tableId={208} action={Actions.PLACE_ORDER} emptyShoppingcart={()=>setShoppingCart([])} triggerPopUp={()=>setButtonPopup(true)}/>
         </div>
 
     ) : <div className={"menu-container"}>
