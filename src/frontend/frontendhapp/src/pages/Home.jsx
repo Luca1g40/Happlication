@@ -9,6 +9,7 @@ export default function Home() {
         <div className="home-container">
                 <Link className="button navigation-buttons-menu space-around" to="menu/drinks">Dranken</Link>
                 <Link className="button navigation-buttons-menu space-around" to="menu/foods">Gerechten</Link>
+                <Link className="button navigation-buttons-menu space-around" to="allorders/208">Bestelling overzicht</Link>
             <Notifications/>
         </div>
     </>

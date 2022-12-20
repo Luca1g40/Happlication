@@ -6,7 +6,9 @@ export default function getOccurrenceProducts(list) {
             productOccurances.set(product,getTargetAmountInList(product,list))
         }
     })
+
     return productOccurances;
+
 }
 
 

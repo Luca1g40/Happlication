@@ -92,6 +92,11 @@ public class TableService {
         return createTableData(table);
     }
 
+    public List<OrderData> getAllOrdersFromTable(Long id){
+        Table table = tableRepository.getById(id);
+        return convertToOrderDataList(table.getAllOrders());
+    }
+
     private void tableExists(Long id) {
         if (!tableRepository.existsById(id)) {
             throw new ItemNotFound(Table.class.getSimpleName());
@@ -133,6 +138,17 @@ public class TableService {
     }
     public ProductData createProductData(Product product) {
         return new ProductData(product.getId(),product.getName(),product.getProductCategory().getName(),product.getPrice(),product.getIngredients(),product.getDetails(),product.getProductDestination(),product.getProductType(),product.getImagePath());
+    }
+
+
+    public List<OrderData> convertToOrderDataList(List<Order> orders) {
+        List<OrderData> ordersData = new ArrayList<>();
+
+        for (Order order : orders) {
+            ordersData.add(createOrderData(order));
+        }
+
+        return ordersData;
     }
 
     public List<OrderData> convertToBarOrderDataList(List<BarOrder> orders) {

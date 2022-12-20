@@ -77,6 +77,7 @@ export default function ViewProductForm(){
         console.log(newIngredient)
         if (!(toegevoegdeIngredienten.includes(newIngredient))){
             setToegevoegdeIngredienten(state => [...state, newIngredient])
+            console.log(true)
             setErrorMeldingText("");
         }else{
             setErrorMeldingText("Er is iets fout gegaan")

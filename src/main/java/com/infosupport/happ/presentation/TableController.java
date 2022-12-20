@@ -1,19 +1,19 @@
 package com.infosupport.happ.presentation;
 
 import com.infosupport.happ.application.TableService;
+import com.infosupport.happ.application.dto.OrderData;
 import com.infosupport.happ.application.dto.ShoppingCartData;
 import com.infosupport.happ.application.dto.TableData;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import com.infosupport.happ.presentation.dto.ProductRequest;
-import com.infosupport.happ.presentation.dto.ShoppingCartRequest;
 import com.infosupport.happ.presentation.dto.TableRequest;
 import org.springframework.http.HttpStatus;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
 @RestController
-@Transactional
 @RequestMapping("/happ")
 public class TableController {
     private final TableService tableService;
@@ -27,17 +27,26 @@ public class TableController {
         return tableService.createTable(tableRequest.amountOfPeople, tableRequest.tableNr, tableRequest.tableStatus);
     }
 
-    @CrossOrigin
     @PutMapping("/table/{id}/helpNodig")
     public TableData setBoolHelp(@PathVariable Long id, @RequestBody TableRequest tableRequest) {
          return this.tableService.setBoolHulp(id, tableRequest.setHulpBool);
     }
 
-    @CrossOrigin
     @GetMapping("/table/{id}")
     public TableData getTable(@PathVariable Long id) {
         try {
             return tableService.createTableData(tableService.getTable(id));
+        } catch (ItemNotFound exception) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, exception.getMessage());
+        } catch (Exception exception) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
+        }
+    }
+
+    @GetMapping("/table/{id}/allorders")
+    public List<OrderData> getTableOrders(@PathVariable Long id) {
+        try {
+            return tableService.getAllOrdersFromTable(id);
         } catch (ItemNotFound exception) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, exception.getMessage());
         } catch (Exception exception) {

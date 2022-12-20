@@ -10,20 +10,20 @@ public class Product {
     @GeneratedValue
     private Long id;
     private String name;
-
+    // FOOD OR DRINK
     @Enumerated(EnumType.STRING)
     private ProductType productType;
 
     @ManyToMany
     private List<Ingredient> ingredients;
-
+    // examples are Seafood, Grill, Steaks
     @ManyToOne
     private ProductCategory productCategory;
 
     private double price;
 
     private String details;
-
+    // BAR_ORDER or KITCHEN_ORDER
     @Enumerated(EnumType.STRING)
     private ProductDestination productDestination;
 

@@ -56,9 +56,11 @@ export default function SubmitButton(props) {
 
     function validateProductObjectByUpdate(product,ingredientList,selectedImage){
         //dit is bij niet genoeg input velden ingevuld
+        console.log(ingredientList.length)
         if (Object.keys(product).length===9 && ingredientList.length>0){
             for (const key in product) {
                 if (!(String(product[key]).replace(/\s+/g, '').length>0)){
+                    console.log(String(product[key]).replace(/\s+/g, ''),String(product[key]).replace(/\s+/g, '').length)
                     // dit is bj een iput veld met aleen spaties erin
                     props.setFoutMelding(`Je hebt een lege input gegeven bij ${key.replace("-", " ")} `)
                     return false;
@@ -154,7 +156,7 @@ export default function SubmitButton(props) {
 
                 break;
             case Actions.UPDATE_PRODUCT:
-
+                console.log(props.ingredientList)
 
                 if (validateProductObjectByUpdate(props.product,props.ingredientList,props.selectedImage)){
                     let imageChanged = true;

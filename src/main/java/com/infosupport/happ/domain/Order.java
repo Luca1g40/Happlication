@@ -68,6 +68,10 @@ public class Order {
         products.add(product);
     }
 
+    public double getTotalPrice(){
+        return products.stream().mapToDouble(Product::getPrice).sum();
+    }
+
 //    public List<Product> getBarOrders() {
 //
 //
