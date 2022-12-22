@@ -12,6 +12,7 @@ import com.infosupport.happ.domain.*;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -91,7 +92,12 @@ public class OrderService {
         orders.addAll(kitchenOrderRepository.findAll());
         orders.addAll(barOrderRepository.findAll());
         return convertToOrderDataList(orders);
+    }
 
+    public List<OrderData> getAllOrdersByDatePeriod(LocalDate firstdate, LocalDate secondDate) {
+        List<Order> orders = new ArrayList<>();
+        orders.addAll(kitchenOrderRepository.getOrderByDate(firstdate,secondDate));
+        return convertToOrderDataList(orders);
     }
 
     public List<Order> getAllUnclaimedOrders() {
@@ -102,6 +108,9 @@ public class OrderService {
 
         return unclaimedOrders;
     }
+
+
+
 
 
     private void orderExists(Long id) {

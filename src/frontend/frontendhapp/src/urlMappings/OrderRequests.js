@@ -37,3 +37,15 @@ export function getAllUnclaimedOrders() {
             console.log(err)
         })
 }
+
+export function getAllOrders() {
+
+    return axios.get(`http://localhost:8080/happ/order/all`, configuration)
+        .then(res => {
+            return res.data
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+

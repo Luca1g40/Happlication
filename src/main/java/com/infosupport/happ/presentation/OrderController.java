@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -64,5 +65,17 @@ public class OrderController {
     @DeleteMapping("/order/{orderid}/bar")
     private void deleteBarOrder(@PathVariable("orderid") Long orderId) {
         this.orderService.deleteBarOrder(orderId);
+    }
+
+    @GetMapping("/order/all")
+    private List<OrderData> getAllOrders(){
+        return this.orderService.getAllOrders();
+    }
+
+    @GetMapping("/order/bydate")
+    private List<OrderData> getOrdersByDate(@RequestBody OrderRequest orderRequest){
+        return
+
+            this.orderService.getAllOrdersByDatePeriod(orderRequest.firstDate,orderRequest.secondDate);
     }
 }
