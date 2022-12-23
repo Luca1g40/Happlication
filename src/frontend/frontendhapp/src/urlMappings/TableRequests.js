@@ -61,6 +61,11 @@ export function RemoveAllProductOccurancesFromCart(tableId,productId){
         })
 }
 
+export function getAllTables() {
+    return axios.get("http://localhost:8080/happ/table/findalltable", configuration)
+        .then(res => {
+            console.log(res)
+            return res.data
 export function klantIsGeholpen(tafelId){
     axios.put(`http://localhost:8080/happ/table/${tafelId}/helpNodig`, {//todo->tafelId moet zelf opgehaald worden
         "setHulpBool" : "false"
@@ -73,6 +78,17 @@ export function klantIsGeholpen(tafelId){
         })
 }
 
+export function addTableToArea(tableId, areaId) {
+    return axios.post(`http://localhost:8080/happ/table/${tableId}/area`, {
+        "id": areaId
+    }, configuration)
+        .then(res => {
+            console.log(res);
+            return res.data;
+        })
+        .catch(err => {
+            console.log(err);
+        });
 export function KlantHeeftHulpNodig(tafelId){
     axios.put(`http://localhost:8080/happ/table/${tafelId}/helpNodig`, {
         "setHulpBool" : "true"

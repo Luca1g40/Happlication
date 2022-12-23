@@ -2,6 +2,7 @@ package com.infosupport.happ.presentation;
 
 import com.infosupport.happ.application.TableService;
 import com.infosupport.happ.application.dto.ShoppingCartData;
+import com.infosupport.happ.application.dto.SimpleStaffData;
 import com.infosupport.happ.application.dto.TableData;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import com.infosupport.happ.presentation.dto.ProductRequest;
@@ -11,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.List;
 
 @RestController
 @Transactional
@@ -113,5 +116,10 @@ public class TableController {
     @DeleteMapping("/table/{tableid}")
     private void deleteTable(@PathVariable("tableid") Long tableId) {
         this.tableService.deleteTable(tableId);
+    }
+
+    @GetMapping("/table/findalltable")
+    public List<TableData> getAllTable() {
+        return this.tableService.getAllTables();
     }
 }

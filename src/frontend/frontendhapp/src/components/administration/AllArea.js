@@ -41,6 +41,7 @@ function AllArea() {
                 {
                     allAreas.map((area) =>{
                     return(
+                        <>
                             <div key={area.id}>
                                 <div>
                                     <OverviewTable tableHeads={["name"]} items={allAreas}
@@ -48,8 +49,10 @@ function AllArea() {
                                                    handleClick={(id)=>handleClick(id)}/>
                                 </div>
                                 <AreaItemDetailPopup trigger={buttonPopup} setTrigger={setButtonPopup} area={selectedArea} unselectArea={()=>setSelectedArea(null)}/>
-                                <Link className={"button createStaffLink"} to="/createArea" on>Maak een nieuw Area aan</Link>
                             </div>
+                            <Link className={"button createStaffLink"} to="/createArea" on>Maak een nieuw Area aan</Link>
+
+                        </>
                     )})}
             </div>
         </>

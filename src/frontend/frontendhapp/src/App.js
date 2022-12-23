@@ -51,9 +51,6 @@ function App() {
             <Route path="categorydetails/:id" element={<ViewProductCategory/>}/>
             <Route path="error403" element={<Error403Page/>}/>
             <Route path="searchcategory" element={<SearchCategory/>}/>
-
-
-
         </Routes>
     )
 
