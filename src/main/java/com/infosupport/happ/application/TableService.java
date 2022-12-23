@@ -92,6 +92,14 @@ public class TableService {
         return createTableData(table);
     }
 
+    public List<TableData> getAllTables() {
+        List<TableData> tableData = new ArrayList<>();
+        for (Table table : tableRepository.findAll()) {
+            tableData.add(createTableData(table));
+        }
+        return tableData;
+    }
+
     private void tableExists(Long id) {
         if (!tableRepository.existsById(id)) {
             throw new ItemNotFound(Table.class.getSimpleName());
@@ -103,7 +111,9 @@ public class TableService {
     }
 
     public TableData createTableData(Table table) {
-        return new TableData(table.getAmountOfPeople(),
+        return new TableData(
+                table.getId(),
+                table.getAmountOfPeople(),
                 table.getTableNumber(),
                 table.getElapsedTimeSinceOrder(),
                 table.getTimeLeftToOrder(),

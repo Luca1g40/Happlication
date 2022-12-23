@@ -61,3 +61,27 @@ export function RemoveAllProductOccurancesFromCart(tableId,productId){
             console.log(err)
         })
 }
+
+export function getAllTables() {
+    return axios.get("http://localhost:8080/happ/table/findalltable", configuration)
+        .then(res => {
+            console.log(res)
+            return res.data
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+
+export function addTableToArea(tableId, areaId) {
+    return axios.post(`http://localhost:8080/happ/table/${tableId}/area`, {
+        "id": areaId
+    }, configuration)
+        .then(res => {
+            console.log(res);
+            return res.data;
+        })
+        .catch(err => {
+            console.log(err);
+        });
+}
