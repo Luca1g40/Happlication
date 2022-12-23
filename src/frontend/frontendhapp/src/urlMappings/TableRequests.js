@@ -23,7 +23,6 @@ export function RemoveProductFromShoppingCart(tableId, productId) {
             return res.data.shoppingCart.productDataList;
         })
         .catch(err => {
-            console.log(productId)
             console.log(err)
         })
 }
@@ -67,6 +66,12 @@ export function getAllTables() {
         .then(res => {
             console.log(res)
             return res.data
+export function klantIsGeholpen(tafelId){
+    axios.put(`http://localhost:8080/happ/table/${tafelId}/helpNodig`, {//todo->tafelId moet zelf opgehaald worden
+        "setHulpBool" : "false"
+    })
+        .then(res => {
+            console.log(res)
         })
         .catch(err => {
             console.log(err)
@@ -84,4 +89,14 @@ export function addTableToArea(tableId, areaId) {
         .catch(err => {
             console.log(err);
         });
+export function KlantHeeftHulpNodig(tafelId){
+    axios.put(`http://localhost:8080/happ/table/${tafelId}/helpNodig`, {
+        "setHulpBool" : "true"
+    })
+        .then(res => {
+            console.log(res)
+        })
+        .catch(err => {
+            console.log(err)
+        })
 }

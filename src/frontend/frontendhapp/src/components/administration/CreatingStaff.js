@@ -16,11 +16,17 @@ function CreatingStaff(){
 
         if(rights === "Keuken"){
             r = ["KITCHEN_RIGHTS"]
-        }else if(rights === "Bar"){
+        } else if(rights === "Bar"){
             r = ["BAR_RIGHTS"]
-        }else if(rights === "Keuken & bar"){
+        } else if(rights === "Keuken & bar"){
             r = ["KITCHEN_RIGHTS", "BAR_RIGHTS"]
-        }
+        } else if(rights === "Service"){
+            r = ["SERVICE_RIGHTS"]
+        } else if(rights === "Admin") {
+            r = ["ADMIN_RIGHTS"]
+        } else if(rights === "Administratie"){
+            r = ["ADMINISTRATION_RIGHTS"]
+    }
 
         const status = await CreateStaff(firstname, password, r)
 
@@ -47,6 +53,9 @@ function CreatingStaff(){
                    <option value="Keuken">Keuken</option>
                    <option value="Bar">Bar</option>
                    <option value="Keuken & bar">Keuken & bar</option>
+                   <option value="Service">Service</option>
+                   <option value="Administratie">Administratie</option>
+                   <option value="Admin">Admin</option>
                </select>
                <ToastContainer />
            </div>
