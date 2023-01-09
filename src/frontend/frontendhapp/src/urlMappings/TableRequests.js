@@ -66,6 +66,12 @@ export function getAllTables() {
         .then(res => {
             console.log(res)
             return res.data
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+
 export function klantIsGeholpen(tafelId){
     axios.put(`http://localhost:8080/happ/table/${tafelId}/helpNodig`, {//todo->tafelId moet zelf opgehaald worden
         "setHulpBool" : "false"
@@ -89,6 +95,7 @@ export function addTableToArea(tableId, areaId) {
         .catch(err => {
             console.log(err);
         });
+}
 export function KlantHeeftHulpNodig(tafelId){
     axios.put(`http://localhost:8080/happ/table/${tafelId}/helpNodig`, {
         "setHulpBool" : "true"
