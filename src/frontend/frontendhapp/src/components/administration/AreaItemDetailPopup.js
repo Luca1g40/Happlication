@@ -67,8 +67,6 @@ function AreaItemDetailPopup(props) {
             <div className="popup-inner">
                 <button className="close-btn close-memberpop" onClick={closePopUp}> X </button><br/>
                 <form>
-                    {/*<label className={"member-text"}>Area naam:</label>*/}
-                    {/*<input type="text" className={"member-data"} id="f" defaultValue={props.area.name}/>*/}
                     <h1>{props.area.name}</h1>
                     <br/><br/>
                     {props.area.tables.map(table =>{
