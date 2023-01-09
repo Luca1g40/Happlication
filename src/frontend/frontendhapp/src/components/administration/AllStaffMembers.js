@@ -58,31 +58,46 @@ function AllStaffMembers() {
     }
 
     function showRights(rights) {
-        let string = ""
-        rights.map(right => {
-            if (rights.indexOf(right) === 0) {
-                string += showRight(right)
-            }else{
-                string += `, ${showRight(right)}`
+        let string=""
+        rights.map(right=> {
+            switch (right){
+                case "KITCHEN_RIGHTS":
+                    if (rights.indexOf(right) === 0){
+                        string += "Keuken recht"
+                    }else{
+                        string += ", Keuken recht"
+                    }
+                    break;
+                case "BAR_RIGHTS":
+                    if (rights.indexOf(right) === 0){
+                        string += "Bar recht"
+                    }else{
+                        string += ", Bar recht"
+                    }
+                    break;
+                case "SERVICE_RIGHTS":
+                    if (rights.indexOf(right) === 0){
+                        string += "Service recht"
+                    }else{
+                        string += ", Service recht"
+                    }
+                    break;
+                case "ADMIN_RIGHTS":
+                    if (rights.indexOf(right) === 0){
+                        string += "Admin recht"
+                    }else{
+                        string += ", Admin recht"
+                    }
+                    break;
+                case "ADMINISTRATION_RIGHTS":
+                    if (rights.indexOf(right) === 0){
+                        string += "Administratie recht"
+                    }else{
+                        string += ", Administratie recht"
+                    }
+                    break;
             }
 
-
-            // switch (right) {
-            //     case "KITCHEN_RIGHTS":
-            //         if (rights.indexOf(right) === 0) {
-            //             string += "kitchen rights"
-            //         }else{
-            //             string += ", kitchen rights"
-            //         }
-            //         break;
-            //     case "BAR_RIGHTS":
-            //         if (rights.indexOf(right) === 0) {
-            //             string += "bar rights"
-            //         }else{
-            //             string += ", bar rights"
-            //         }
-            //         break;
-            // }
         })
         return string;
     }

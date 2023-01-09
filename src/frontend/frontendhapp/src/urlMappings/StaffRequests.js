@@ -67,3 +67,15 @@ export function UpdateStaff(password, name, rights) {
             return err.response.status
         })
 }
+
+export function GetTableThatNeedHelp(staffId){
+    return axios.get(`http://localhost:8080/happ/staff/${staffId}/tablethatneedhelp`, configuration)
+        .then(res => {
+            console.log(res)
+            return res
+        })
+        .catch(err => {
+            console.log(err)
+            return err
+        })
+}
