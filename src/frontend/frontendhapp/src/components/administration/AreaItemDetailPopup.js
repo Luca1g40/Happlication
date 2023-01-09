@@ -96,7 +96,7 @@ function AreaItemDetailPopup(props) {
                     <option value="Select a staff"> -- Select a table -- </option>
                     {
                         table.map((tab) =>
-                            <option key={tab.id} value={tab.id} > {tab.id}</option>
+                            <option key={tab.id} value={tab.id} > {tab.tableNumber}</option>
                         )
                     }
                 </select>
