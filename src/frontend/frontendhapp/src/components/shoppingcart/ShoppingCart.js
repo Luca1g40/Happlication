@@ -13,9 +13,10 @@ import "../../styles/Shoppingcart.css";
 export default function ShoppingCart() {
     const [shoppingCart, setShoppingCart] = useState([]);
     const [buttonPopUp,setButtonPopup] = useState(false);
+    const tableid = sessionStorage.getItem("tafelid")
 
     useEffect(() => {
-        GetShoppingCart(6)
+        GetShoppingCart(tableid)
             .then(res => {
                 setShoppingCart(res)
             })
@@ -36,11 +37,11 @@ export default function ShoppingCart() {
                     <ShoppingCartItem key={item.id} productName={item.name} productId={item.id} amount={Array.from(getOccurrenceProducts(shoppingCart).values())[index]} updateShoppingCart={shoppingcart => setShoppingCart(shoppingcart)}/>
                 );
             })}
-                <SubmitButton className={"submit-button button"} buttonText={"Order"} tableId={6} action={Actions.PLACE_ORDER} emptyShoppingcart={()=>setShoppingCart([])} triggerPopUp={()=>setButtonPopup(true)}/>
+                <SubmitButton className={"submit-button button"} buttonText={"Order"} tableId={tableid} action={Actions.PLACE_ORDER} emptyShoppingcart={()=>setShoppingCart([])} triggerPopUp={()=>setButtonPopup(true)}/>
         </div>
 
     ) : <div className={"menu-container"}>
-            <Link to="/" className="button toHome" >Home</Link>
+            <Link to="/home" className="button toHome" >Home</Link>
             <h1 align="center">Your shoppingcart is empty</h1>
             <OrderPlacedPopup trigger={buttonPopUp} setTrigger={value =>setButtonPopup(value)}/>
         </div>

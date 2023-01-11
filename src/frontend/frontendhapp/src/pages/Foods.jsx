@@ -13,7 +13,7 @@ export default function Foods() {
         <>
             <div className="menu-container">
                 <div className={"navigation-buttons-menu space-around"}>
-                    <Link className="button toHome" to="/"> Terug </Link>
+                    <Link className="button toHome" to="/home"> Terug </Link>
                     <Link to="/shoppingcart" className="button">Shopping cart</Link>
                     <Link className="button" to="/Drinks">Dranken</Link>
                 </div>

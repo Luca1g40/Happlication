@@ -1,8 +1,6 @@
 package com.infosupport.happ.application;
 
-
 import com.infosupport.happ.application.dto.*;
-import com.infosupport.happ.data.OrderRepository;
 import com.infosupport.happ.data.TableRepository;
 import com.infosupport.happ.domain.*;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
@@ -33,8 +31,8 @@ public class TableService {
         return createTableData(table);
     }
 
-    public TableData setBoolHulp(Long tableId, boolean hulpNodig) {
-        Table table = getTable(tableId);
+    public TableData setBoolHulp(int tablenumber, boolean hulpNodig) {
+        Table table = getTableByTableNumber(tablenumber);
         table.setHulpNodig(hulpNodig);
         return createTableData(table);
     }
@@ -42,6 +40,18 @@ public class TableService {
     public Table getTable(Long tableId) {
         tableExists(tableId);
         return tableRepository.getById(tableId);
+    }
+
+    public Table getTableByTableNumber(int tableNumber){
+        return tableRepository.getTableByTableNumber(tableNumber);
+    }
+
+    public Long getTableNumberByNumber(int tableNumber){
+        if(tableRepository.getTableByTableNumber(tableNumber) != null){
+            Table table = tableRepository.getTableByTableNumber(tableNumber);
+            return table.getId();
+        }
+        return 0L;
     }
 
     public ShoppingCartData getTableShoppingCart(Long tableId) {

@@ -48,6 +48,17 @@ export function GetShoppingCart(tableId){
         })
 }
 
+export function GetTableByNumber(tableNumber){
+    return axios.get(`http://localhost:8080/happ/tablenumber/${tableNumber}`,configuration)
+        .then(res => {
+            console.log(res)
+            return res.data;
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+
 export function RemoveAllProductOccurancesFromCart(tableId,productId){
    return axios.post(`http://localhost:8080/happ/table/${tableId}/shoppingcart/remove/products`,{
         "id":productId
