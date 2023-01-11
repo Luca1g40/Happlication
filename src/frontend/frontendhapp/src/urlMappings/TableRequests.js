@@ -74,7 +74,7 @@ export function getAllTables() {
 }
 
 export function DeleteTable(tableIdForDelete) {
-    return axios.delete(`localhost:8080/happ/table/${tableIdForDelete}`, configuration)
+    return axios.delete(`http://localhost:8080/happ/table/${tableIdForDelete}`, configuration)
         .then(res => {
             console.log(res)
             return res.data
@@ -85,7 +85,7 @@ export function DeleteTable(tableIdForDelete) {
 }
 
 export function CreateTable(amountOfPeople, tableNr){
-    return axios.post(`localhost:8080/happ/table`, {
+    return axios.post(`http://localhost:8080/happ/table`, {
         "amountOfPeople" : amountOfPeople,
         "tableNr" : tableNr,
     }, configuration)

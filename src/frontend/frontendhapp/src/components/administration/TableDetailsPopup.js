@@ -32,9 +32,9 @@ function tableDetailsPopup(props) {
                 <button className="close-btn close-memberpop" onClick={closePopUp}> X </button><br/>
                 <form>
                     <h4 className={"member-text"}>Tafel Nummer</h4>
-                    <label className={"member-password"}>heyy</label><br/><br/>
+                    <label className={"member-password"}></label><br/><br/>
                     <h4 className={"member-text"}>Aantal mensen: </h4>
-                    <label className={"member-data"}>hoii</label><br/><br/>
+                    <label className={"member-data"}></label><br/><br/>
                     <h4 className={"member-text"}>Tafel status</h4>
 
                 </form>
