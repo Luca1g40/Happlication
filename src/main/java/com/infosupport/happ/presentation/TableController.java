@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalTime;
 import java.util.List;
 
 @RestController
@@ -28,10 +29,15 @@ public class TableController {
         return tableService.createTable(tableRequest.amountOfPeople, tableRequest.tableNr, tableRequest.tableStatus);
     }
 
+    @PutMapping("/table/{tableid}")
+    public void setTimeAndStatus(@PathVariable Long tableid, @RequestBody TableRequest tableRequest) {
+        this.tableService.setTimeAndStatus(tableid, tableRequest.timeOfLogin);
+    }
+
     @CrossOrigin
-    @PutMapping("/table/{tablenumber}/helpNodig")
-    public TableData setBoolHelp(@PathVariable int tablenumber, @RequestBody TableRequest tableRequest) {
-         return this.tableService.setBoolHulp(tablenumber, tableRequest.setHulpBool);
+    @PutMapping("/table/{tableid}/helpNodig")
+    public TableData setBoolHelp(@PathVariable Long tableid, @RequestBody TableRequest tableRequest) {
+         return this.tableService.setBoolHulp(tableid, tableRequest.setHulpBool);
     }
 
     @CrossOrigin
@@ -39,6 +45,17 @@ public class TableController {
     public TableData getTable(@PathVariable Long id) {
         try {
             return tableService.createTableData(tableService.getTable(id));
+        } catch (ItemNotFound exception) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, exception.getMessage());
+        } catch (Exception exception) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
+        }
+    }
+
+    @GetMapping("/table/logintime/{id}")
+    public LocalTime getTimeOfLogin(@PathVariable Long id) {
+        try {
+            return tableService.getTimeOfLogin(id);
         } catch (ItemNotFound exception) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, exception.getMessage());
         } catch (Exception exception) {

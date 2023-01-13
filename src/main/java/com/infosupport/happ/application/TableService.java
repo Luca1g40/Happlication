@@ -31,8 +31,9 @@ public class TableService {
         return createTableData(table);
     }
 
-    public TableData setBoolHulp(int tablenumber, boolean hulpNodig) {
-        Table table = getTableByTableNumber(tablenumber);
+    public TableData setBoolHulp(Long tableId, boolean hulpNodig) {
+        tableExists(tableId);
+        Table table = tableRepository.getById(tableId);
         table.setHulpNodig(hulpNodig);
         return createTableData(table);
     }
@@ -42,16 +43,26 @@ public class TableService {
         return tableRepository.getById(tableId);
     }
 
-    public Table getTableByTableNumber(int tableNumber){
-        return tableRepository.getTableByTableNumber(tableNumber);
-    }
-
     public Long getTableNumberByNumber(int tableNumber){
         if(tableRepository.getTableByTableNumber(tableNumber) != null){
             Table table = tableRepository.getTableByTableNumber(tableNumber);
             return table.getId();
         }
         return 0L;
+    }
+
+    public LocalTime getTimeOfLogin(Long tableId){
+        tableExists(tableId);
+        Table table = tableRepository.getById(tableId);
+        return table.getLoginTime();
+    }
+
+    public void setTimeAndStatus(Long tableId, LocalTime timeOfLogin){
+        tableExists(tableId);
+        Table table = tableRepository.getById(tableId);
+        table.setTableStatus(TableStatus.OCCUPIED);
+        table.setLoginTime(timeOfLogin);
+        tableRepository.save(table);
     }
 
     public ShoppingCartData getTableShoppingCart(Long tableId) {
@@ -126,7 +137,7 @@ public class TableService {
                 table.getAmountOfPeople(),
                 table.getTableNumber(),
                 table.getElapsedTimeSinceOrder(),
-                table.getTimeLeftToOrder(),
+                table.getLoginTime(),
                 table.getTableStatus(),
                 new ShoppingCartData(table.getShoppingCart().getProducts()),
                 convertToKitchenOrderDataList(table.getKitchenOrders()),
@@ -173,7 +184,5 @@ public class TableService {
 
         return ordersData;
     }
-
-
 }
 

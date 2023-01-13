@@ -118,3 +118,22 @@ export function KlantHeeftHulpNodig(tafelId){
             console.log(err)
         })
 }
+
+export function setTimeAndStatus(tafelId, timeOfLogin){
+    axios.put(`http://localhost:8080/happ/table/${tafelId}`, {
+        "timeOfLogin" : timeOfLogin
+    })
+        .then(res => {
+            console.log(res)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+
+export function GetTimeOfLogin(tafelId){
+    return axios.get(`http://localhost:8080/happ/table/logintime/${tafelId}`)
+        .then(res => {
+            return res.data;
+        })
+}

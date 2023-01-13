@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import React, {useState} from "react";
 import {toast, ToastContainer} from "react-toastify";
-import {GetTableByNumber} from "../../urlMappings/TableRequests";
+import {GetTableByNumber, setTimeAndStatus} from "../../urlMappings/TableRequests";
 
 function LoginForGuest() {
     let navigate = useNavigate();
@@ -21,9 +21,10 @@ function LoginForGuest() {
 
     async function login() {
         const status = await GetTableByNumber(password)
-
-        console.log("status = " + status)
+        const newDate = new Date()
+        const LocalTime = `${newDate.getHours()}:${newDate.getMinutes()}:${newDate.getSeconds()}`
         if(status !== 0) {
+            setTimeAndStatus(status, LocalTime)
             sessionStorage.setItem("tafelid", status)
             navigate("/home")
         }else{
