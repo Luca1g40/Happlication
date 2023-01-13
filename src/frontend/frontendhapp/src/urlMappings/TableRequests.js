@@ -120,7 +120,7 @@ export function KlantHeeftHulpNodig(tafelId){
 }
 
 export function setTimeAndStatus(tafelId, timeOfLogin){
-    axios.put(`http://localhost:8080/happ/table/${tafelId}`, {
+    axios.put(`http://localhost:8080/happ/table/tablestatus/${tafelId}`, {
         "timeOfLogin" : timeOfLogin
     })
         .then(res => {

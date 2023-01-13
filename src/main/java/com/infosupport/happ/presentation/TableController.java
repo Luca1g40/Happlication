@@ -29,7 +29,7 @@ public class TableController {
         return tableService.createTable(tableRequest.amountOfPeople, tableRequest.tableNr, tableRequest.tableStatus);
     }
 
-    @PutMapping("/table/{tableid}")
+    @PutMapping("/table/tablestatus/{tableid}")
     public void setTimeAndStatus(@PathVariable Long tableid, @RequestBody TableRequest tableRequest) {
         this.tableService.setTimeAndStatus(tableid, tableRequest.timeOfLogin);
     }

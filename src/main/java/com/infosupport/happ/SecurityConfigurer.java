@@ -26,28 +26,33 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 
     //All except customer
     public final static String OPERATION_PATH = "/happ/operation/**";
+    //Kitchen & Admin
+    public final static String ORDER_PATHS = "/happ/order/**";
+    public final static String OWN_ORDERS = "/happ/staff/**/myorders";
+    public final static String UNCLAIMED_ORDERS = "/happ/staff/**/orders";
 
-    //Ober
+    //Service & Admin
+    public final static String TABLES_NEED_HELP = "/happ/staff/**/tablethatneedhelp";
+
+    //Administration & Admin
     public final static String TABLE_PATH = "/happ/table/**";
-
-    //Administration
-    public final static String STAFF_PATH = "/happ/staff/**";
-    public final static String INGREDIENT_PATH = "/happ/ingredient/**";
-    public final static String INGREDIENTS_PATH = "/happ/ingredients";
+    public final static String PRODUCT_PATH = "/happ/product/**";
     public final static String AREA_PATH = "/happ/area/**";
     public final static String STOCK_PATH = "/happ/stock/**";
-    public final static String PRODUCT_PATH = "/happ/product/**";
+    public final static String INGREDIENT_PATH = "/happ/ingredient/**";
+    public final static String INGREDIENTS_PATH = "/happ/ingredients";
+    public final static String STAFF_PATH = "/happ/staff/**";
+    public final static String PRODUCTCATEGORY_PATH = "/happ/productcategory/**";
 
-    //Kitchen & bar
-    public final static String ORDER_PATH = "/happ/order/**";
-
-    //Customer
+    //Customer (PermitAll)
     public final static String FOOD_PATH_CUST = "/happ/products/foods";
     public final static String DRINKS_PATH_CUST = "/happ/products/drinks";
-    public final static String SHOPPINGCART_PATH_CUST = "/happ/table/**";
+    public final static String HULP_NEEDED = "/happ/table/**/helpNodig";
     public final static String GET_TABLE_NUMBER = "/happ/tablenumber/**";
-    public final static String GET_TIMEOFLOGIN = "/table/logintime/**";
-
+    public final static String GET_TIMEOFLOGIN = "/happ/table/logintime/**";
+    public final static String SET_TABLESTATUS = "/happ/table/tablestatus/**";
+    public final static String SHOPPINGCART = "/happ/table/**/shoppingcart/**";
+    public final static String PLACE_ORDER = "/happ/table/**/order";
 
     public SecurityConfigurer(JwtRequestFilter jwtRequestFilter, MyUserDetailsService myUserDetailsService) {
         this.jwtRequestFilter = jwtRequestFilter;
@@ -60,21 +65,16 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 
     }
 
-    //TODO foreach URL rolls allowed instead of example "/product/**"
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().configurationSource(corsConfigurationSource()).and().
                 csrf().disable()
                 .authorizeRequests().antMatchers("/authenticate").permitAll()
-                .antMatchers(FOOD_PATH_CUST, DRINKS_PATH_CUST, SHOPPINGCART_PATH_CUST, GET_TABLE_NUMBER, GET_TIMEOFLOGIN).permitAll()
-                .antMatchers(ORDER_PATH).hasAnyAuthority("KITCHEN_RIGHTS", "BAR_RIGHTS", "ADMIN_RIGHTS")
-                .antMatchers(PRODUCT_PATH).hasAnyAuthority("ADMINISTRATION_RIGHTS","ADMIN_RIGHTS")
-                .antMatchers(STOCK_PATH).hasAnyAuthority("ADMINISTRATION_RIGHTS","ADMIN_RIGHTS")
-                .antMatchers(AREA_PATH).hasAnyAuthority("ADMINISTRATION_RIGHTS","ADMIN_RIGHTS")
-                .antMatchers(INGREDIENTS_PATH).hasAnyAuthority("ADMINISTRATION_RIGHTS","ADMIN_RIGHTS")
-                .antMatchers(INGREDIENT_PATH).hasAnyAuthority("ADMINISTRATION_RIGHTS","ADMIN_RIGHTS")
-//                .antMatchers(TABLE_PATH).hasAnyAuthority("SERVICE_RIGHTS","ADMIN_RIGHTS")
-                .antMatchers(OPERATION_PATH, STAFF_PATH).hasAnyAuthority("SERVICE_RIGHTS","ADMINISTRATION_RIGHTS","KITCHEN_RIGHTS", "BAR_RIGHTS","ADMIN_RIGHTS")
+                .antMatchers(FOOD_PATH_CUST, DRINKS_PATH_CUST, SET_TABLESTATUS, GET_TABLE_NUMBER, GET_TIMEOFLOGIN, SHOPPINGCART, HULP_NEEDED, PLACE_ORDER).permitAll()
+                .antMatchers(STOCK_PATH, INGREDIENTS_PATH, INGREDIENT_PATH, AREA_PATH, STAFF_PATH, PRODUCTCATEGORY_PATH, PRODUCT_PATH, TABLE_PATH).hasAnyAuthority("ADMINISTRATION_RIGHTS","ADMIN_RIGHTS")
+                .antMatchers(TABLES_NEED_HELP).hasAnyAuthority("SERVICE_RIGHTS","ADMIN_RIGHTS")
+                .antMatchers(ORDER_PATHS, OWN_ORDERS, UNCLAIMED_ORDERS).hasAnyAuthority("KITCHEN_RIGHTS", "BAR_RIGHTS", "ADMIN_RIGHTS")
+                .antMatchers(OPERATION_PATH).hasAnyAuthority("SERVICE_RIGHTS","ADMINISTRATION_RIGHTS","KITCHEN_RIGHTS", "BAR_RIGHTS","ADMIN_RIGHTS")
                 .anyRequest().authenticated()
                 .and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
