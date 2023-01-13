@@ -77,7 +77,7 @@ function ProductDetailsPopup(props) {
                         <option value="Bar">Bar</option>
                         <option value="Keuken & bar">Keuken & bar</option>
                         <option value="Service">Service</option>
-                        <option value="Administration">Administratie</option>
+                        <option value="Administratie">Administratie</option>
                         <option value="Admin">Admin</option>
                     </select>
                     <p className="error-message" id="error">Voer een geldig voornaam in</p>
