@@ -9,11 +9,10 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public interface OrderRepository extends JpaRepository<Order,Long>{
+public interface OrderRepository extends JpaRepository<Order, Long> {
 
-    @Query(value = "SELECT * FROM kitchen_order where time_of_order BETWEEN concat('%', :firstDate,'%')  AND '2022-12-21' " ,nativeQuery = true)
+    @Query(value = "SELECT * FROM kitchen_order where time_of_order BETWEEN concat('%', :firstDate,'%')  AND '2022-12-21' ", nativeQuery = true)
     List<Order> getOrderByDate(@Param("firstDate") String firstDate);
-
 
 
 }

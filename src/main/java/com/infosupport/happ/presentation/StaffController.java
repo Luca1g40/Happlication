@@ -5,7 +5,6 @@ import com.infosupport.happ.application.StaffService;
 import com.infosupport.happ.application.dto.OrderData;
 import com.infosupport.happ.application.dto.SimpleStaffData;
 import com.infosupport.happ.application.dto.StaffData;
-import com.infosupport.happ.application.dto.StaffWithoutAreasData;
 import com.infosupport.happ.domain.Table;
 import com.infosupport.happ.domain.exceptions.InvalidValueException;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
@@ -59,7 +58,7 @@ public class StaffController {
                     staffRequest.password,
                     staffRequest.name,
                     staffRequest.rights);
-        }catch (InvalidValueException e){
+        } catch (InvalidValueException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
@@ -72,7 +71,7 @@ public class StaffController {
                     staffRequest.name,
                     staffRequest.rights
             );
-        }catch (InvalidValueException e){
+        } catch (InvalidValueException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
@@ -109,7 +108,7 @@ public class StaffController {
     }
 
     @GetMapping("/staff/{staffId}/orders")
-    public List<OrderData> getAllUnclaimedOrders(@PathVariable Long staffId){
+    public List<OrderData> getAllUnclaimedOrders(@PathVariable Long staffId) {
         try {
             return this.staffService.getAllUnclaimedOrders(staffId);
         } catch (ItemNotFound itemNotFound) {
@@ -121,6 +120,6 @@ public class StaffController {
 
     @GetMapping("/staff/findallstaff")
     public List<SimpleStaffData> getAllStaff() {
-            return this.staffService.getAllStaffInfo();
+        return this.staffService.getAllStaffInfo();
     }
 }

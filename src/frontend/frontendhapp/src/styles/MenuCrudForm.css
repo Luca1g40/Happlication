@@ -1,4 +1,4 @@
-.crud-menu-container{
+.crud-menu-container {
     position: relative;
     height: 750px;
     width: 1000px;
@@ -7,7 +7,7 @@
     box-shadow: rgba(0, 0, 0, 0.19) 0 10px 20px, rgba(0, 0, 0, 0.23) 0 6px 6px;
 }
 
-.left-column{
+.left-column {
     position: relative;
     display: inline-block;
     float: left;
@@ -17,13 +17,14 @@
     margin: 10px;
 }
 
-.right-column{
+.right-column {
     position: relative;
     display: inline-block;
     float: left;
     margin: 10px;
     height: 30px;
-    width: 23.5%;}
+    width: 23.5%;
+}
 
 .ingredient-dropdown {
     margin-left: 10px;
@@ -32,7 +33,7 @@
 
 }
 
-.add-ingredient-button{
+.add-ingredient-button {
     position: relative;
     display: inline-block;
     float: left;
@@ -43,13 +44,12 @@
 }
 
 
-
-.details-text{
+.details-text {
     width: 435px;
     height: 72px;
 }
 
-.crud-form{
+.crud-form {
     position: relative;
     margin: auto;
     width: 50%;
@@ -59,14 +59,14 @@
     height: 85%;
 }
 
-.crud-form-submit{
+.crud-form-submit {
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
 
 
-.remove-ingredient-button{
+.remove-ingredient-button {
     background-color: #e3a768;
     background-repeat: no-repeat;
     border-style: dashed;
@@ -78,42 +78,40 @@
     cursor: pointer;
     overflow: hidden;
     outline: none;
-    box-shadow:
-            rgb(0 0 0 / 19%)
-            0px 10px 20px,
-            rgb(0 0 0 / 23%)
-            0px 6px 6px;
+    box-shadow: rgb(0 0 0 / 19%) 0px 10px 20px,
+    rgb(0 0 0 / 23%) 0px 6px 6px;
 }
 
-.left-buttons{
+.left-buttons {
     position: absolute;
     bottom: 5%;
     left: 5%;
 }
 
-.edit-button, .cancel-button{
+.edit-button, .cancel-button {
     margin-right: 4px;
 
 }
 
-.cancel-button:disabled{
-    background:  #fff;
-    color: #ccc;
-    cursor: no-drop;
-}
-.edit-button:disabled{
-    background:  #fff;
+.cancel-button:disabled {
+    background: #fff;
     color: #ccc;
     cursor: no-drop;
 }
 
-.submit-button:disabled{
-    background:  #fff;
+.edit-button:disabled {
+    background: #fff;
     color: #ccc;
     cursor: no-drop;
 }
 
-.error-label{
+.submit-button:disabled {
+    background: #fff;
+    color: #ccc;
+    cursor: no-drop;
+}
+
+.error-label {
     position: absolute;
     bottom: 27%;
     margin-left: 10px;
@@ -121,10 +119,10 @@
     color: red;
 }
 
-.details-text{
+.details-text {
     resize: none;
 }
 
-.products-navigation{
+.products-navigation {
     margin: 5px;
 }

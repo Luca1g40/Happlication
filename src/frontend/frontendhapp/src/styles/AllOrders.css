@@ -89,7 +89,7 @@
     right: 0;
 }
 
-.buttons-navbar{
+.buttons-navbar {
     border: none;
     margin: 5px;
 }
@@ -113,9 +113,18 @@
     font-weight: bold;
 }
 
-.order-overview{
+.order-overview {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     align-items: center;
 }
 
+.search-table, #revenue-table {
+    width: 85%;
+    position: absolute;
+    right: 0;
+}
+
+.overview-request {
+    margin-left: 21%;
+}

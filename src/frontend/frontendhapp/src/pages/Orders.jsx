@@ -6,7 +6,7 @@ import UnclaimedOrdersComponent from "../components/orders/UnclaimedOrdersCompon
 export default function Orders() {
 
     return <>
-            <UnclaimedOrdersComponent rights={sessionStorage.getItem("rights")}/>
+        <UnclaimedOrdersComponent rights={sessionStorage.getItem("rights")}/>
     </>
 
 }

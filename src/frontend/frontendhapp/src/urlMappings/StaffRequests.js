@@ -36,11 +36,11 @@ export function DeleteStaff(staffIdForDelete) {
         })
 }
 
-export function CreateStaff(firstname, password, rights){
+export function CreateStaff(firstname, password, rights) {
     return axios.post(`http://localhost:8080/happ/staff`, {
-        "password" : password,
-        "name" : firstname,
-        "rights" : rights
+        "password": password,
+        "name": firstname,
+        "rights": rights
     }, configuration)
         .then(res => {
             console.log(res)

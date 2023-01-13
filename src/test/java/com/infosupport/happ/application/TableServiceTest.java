@@ -3,20 +3,17 @@ package com.infosupport.happ.application;
 import com.infosupport.happ.application.dto.TableData;
 import com.infosupport.happ.data.OrderRepository;
 import com.infosupport.happ.data.TableRepository;
-import com.infosupport.happ.domain.*;
+import com.infosupport.happ.domain.Product;
+import com.infosupport.happ.domain.ShoppingCart;
+import com.infosupport.happ.domain.Table;
+import com.infosupport.happ.domain.TableStatus;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
-import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
-
-import static com.infosupport.happ.domain.ProductCategory.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -36,7 +33,7 @@ public class TableServiceTest {
 
 
     @BeforeEach
-    void beforeEach(){
+    void beforeEach() {
         this.tableRepository = mock(TableRepository.class);
         this.productService = mock(ProductService.class);
         this.orderRepository = mock(OrderRepository.class);
@@ -53,7 +50,7 @@ public class TableServiceTest {
 
         when(productService.getProduct(anyLong())).thenReturn(productStarter);
 
-        tableService.addToShoppingCart( 1L, 1L, 3);
+        tableService.addToShoppingCart(1L, 1L, 3);
 
     }
 
@@ -70,7 +67,7 @@ public class TableServiceTest {
 //
 //    }
 
-//    @Test
+    //    @Test
 //    @DisplayName("products can be removed from the shopping cart")
 //    void removeProductsFromShoppingCart(){
 //
@@ -85,18 +82,19 @@ public class TableServiceTest {
 //    }
     @Test
     @DisplayName("products can be edited in the shopping cart")
-    void editProductsInShoppingCart(){
+    void editProductsInShoppingCart() {
 
 //        assertEquals(List.of(productStarter), tableService.getTable(1L).getShoppingCart().getProducts());
 
-        TableData tableData = tableService.editShoppingCart( 1L, List.of(productMain));
+        TableData tableData = tableService.editShoppingCart(1L, List.of(productMain));
 
         assertEquals(List.of(productMain), tableService.getTable(1L).getShoppingCart().getProducts());
         assertNotNull(tableData);
-        assertThrows(ItemNotFound.class, ()-> tableService.editShoppingCart(4L, List.of(productMain)));
+        assertThrows(ItemNotFound.class, () -> tableService.editShoppingCart(4L, List.of(productMain)));
 
     }
-//    @Test
+
+    //    @Test
 //    @DisplayName("Order can be placed")
 //    void placeOrder(){
 //        assertEquals(1, tableService.getTable(1L).getShoppingCart().getProducts().size());
@@ -117,15 +115,15 @@ public class TableServiceTest {
 //    }
     @Test
     @DisplayName("Table does not exist")
-    void tableUsedDoesNotExist(){
+    void tableUsedDoesNotExist() {
 
-        assertThrows(ItemNotFound.class, ()-> tableService.getTable(4L));
+        assertThrows(ItemNotFound.class, () -> tableService.getTable(4L));
 
     }
 
     @Test
     @DisplayName("Table does exist")
-    void tableUsedExists(){
+    void tableUsedExists() {
 
         assertEquals(this.table, tableService.getTable(1L));
 

@@ -1,6 +1,8 @@
 package com.infosupport.happ.application.dto;
 
-import com.infosupport.happ.domain.*;
+import com.infosupport.happ.domain.Ingredient;
+import com.infosupport.happ.domain.ProductDestination;
+import com.infosupport.happ.domain.ProductType;
 
 import java.util.List;
 
@@ -16,7 +18,7 @@ public class ProductData {
     public final ProductType productType;
     public final String imagePath;
 
-    public ProductData(Long id, String name, String productCategoryName, double price, List<Ingredient> ingredientList, String details, ProductDestination productDestination, ProductType productType,String imagePath) {
+    public ProductData(Long id, String name, String productCategoryName, double price, List<Ingredient> ingredientList, String details, ProductDestination productDestination, ProductType productType, String imagePath) {
         this.id = id;
         this.name = name;
         this.productCategoryName = productCategoryName;

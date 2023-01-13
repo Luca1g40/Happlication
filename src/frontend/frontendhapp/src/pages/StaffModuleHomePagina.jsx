@@ -11,7 +11,8 @@ export default function StaffModuleHomePagina() {
             <div className="administration-grid">
                 <Link className="button homeModule_bt_space" to="/">Home</Link>
                 <Link className="button homeModule_bt_space" to="/administration">Voorraad Beheer</Link>
-                <hr/><hr/>
+                <hr/>
+                <hr/>
                 <Link className={"button homeModule_bt_space"} to="/orders">Orders</Link>
             </div>
             <Logout/>

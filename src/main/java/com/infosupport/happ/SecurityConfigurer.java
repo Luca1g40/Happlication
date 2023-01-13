@@ -17,6 +17,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
+import java.util.List;
 
 @EnableWebSecurity
 public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
@@ -65,13 +66,13 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .authorizeRequests().antMatchers("/authenticate").permitAll()
                 .antMatchers(FOOD_PATH_CUST, DRINKS_PATH_CUST, SHOPPINGCART_PATH_CUST).permitAll()
                 .antMatchers(ORDER_PATH).hasAnyAuthority("KITCHEN_RIGHTS", "BAR_RIGHTS", "ADMIN_RIGHTS")
-                .antMatchers(PRODUCT_PATH).hasAnyAuthority("ADMINISTRATION_RIGHTS","ADMIN_RIGHTS")
-                .antMatchers(STOCK_PATH).hasAnyAuthority("ADMINISTRATION_RIGHTS","ADMIN_RIGHTS")
-                .antMatchers(AREA_PATH).hasAnyAuthority("ADMINISTRATION_RIGHTS","ADMIN_RIGHTS")
-                .antMatchers(INGREDIENTS_PATH).hasAnyAuthority("ADMINISTRATION_RIGHTS","ADMIN_RIGHTS")
-                .antMatchers(INGREDIENT_PATH).hasAnyAuthority("ADMINISTRATION_RIGHTS","ADMIN_RIGHTS")
+                .antMatchers(PRODUCT_PATH).hasAnyAuthority("ADMINISTRATION_RIGHTS", "ADMIN_RIGHTS")
+                .antMatchers(STOCK_PATH).hasAnyAuthority("ADMINISTRATION_RIGHTS", "ADMIN_RIGHTS")
+                .antMatchers(AREA_PATH).hasAnyAuthority("ADMINISTRATION_RIGHTS", "ADMIN_RIGHTS")
+                .antMatchers(INGREDIENTS_PATH).hasAnyAuthority("ADMINISTRATION_RIGHTS", "ADMIN_RIGHTS")
+                .antMatchers(INGREDIENT_PATH).hasAnyAuthority("ADMINISTRATION_RIGHTS", "ADMIN_RIGHTS")
 //                .antMatchers(TABLE_PATH).hasAnyAuthority("SERVICE_RIGHTS","ADMIN_RIGHTS")
-                .antMatchers(OPERATION_PATH, STAFF_PATH).hasAnyAuthority("SERVICE_RIGHTS","ADMINISTRATION_RIGHTS","KITCHEN_RIGHTS", "BAR_RIGHTS","ADMIN_RIGHTS")
+                .antMatchers(OPERATION_PATH, STAFF_PATH).hasAnyAuthority("SERVICE_RIGHTS", "ADMINISTRATION_RIGHTS", "KITCHEN_RIGHTS", "BAR_RIGHTS", "ADMIN_RIGHTS")
                 .anyRequest().authenticated()
                 .and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
@@ -81,10 +82,10 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
     @Bean
     protected CorsConfigurationSource corsConfigurationSource() {
         final CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
+        configuration.setAllowedOrigins(List.of("http://localhost:3000"));
         configuration.setAllowedMethods(Arrays.asList("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
         configuration.setAllowCredentials(true);
-        configuration.setAllowedHeaders(Arrays.asList("*"));
+        configuration.setAllowedHeaders(List.of("*"));
         configuration.setExposedHeaders(Arrays.asList("X-Auth-Token", "Authorization", "Access-Control-Allow-Origin",
                 "Access-Control-Allow-Credentials"));
         final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

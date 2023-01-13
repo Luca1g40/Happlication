@@ -1,21 +1,21 @@
 import React from 'react';
 
-import { ToastContainer, toast } from 'react-toastify';
+import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 
-function Notifications(){
+function Notifications() {
 
     let tafelId = 6;
 
     //TODO RUIM DEZE DING OP -> URL mappings
-    function tableHelp(){
+    function tableHelp() {
         axios.put(`http://localhost:8080/happ/table/${tafelId}/helpNodig`, {
-            "setHulpBool" : "true"
+            "setHulpBool": "true"
         })
             .then(res => {
                 console.log(res)
-                })
+            })
             .catch(err => {
                 console.log(err)
             })
@@ -25,8 +25,12 @@ function Notifications(){
 
     return (
         <>
-            <button  onClick={() => { tableHelp(); notify();}} className="button call-ober-knop">Call Ober!</button>
-            <ToastContainer />
+            <button onClick={() => {
+                tableHelp();
+                notify();
+            }} className="button call-ober-knop">Call Ober!
+            </button>
+            <ToastContainer/>
         </>
     );
 }

@@ -2,7 +2,6 @@ package com.infosupport.happ.domain;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,7 +69,7 @@ public class Order {
         products.add(product);
     }
 
-    public double getTotalPrice(){
+    public double getTotalPrice() {
         return products.stream().mapToDouble(Product::getPrice).sum();
     }
 

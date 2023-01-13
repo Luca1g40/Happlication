@@ -4,11 +4,9 @@ import com.infosupport.happ.application.dto.ProductCategoryData;
 import com.infosupport.happ.application.dto.ProductData;
 import com.infosupport.happ.application.dto.ProductSubCategoryData;
 import com.infosupport.happ.data.IngredientRepository;
-import com.infosupport.happ.data.ProductCategoryRepository;
 import com.infosupport.happ.data.ProductRepository;
 import com.infosupport.happ.domain.*;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
-import com.infosupport.happ.presentation.dto.ProductCategoryRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -29,8 +27,8 @@ public class ProductService {
         this.productSubCategoryService = productSubCategoryService;
     }
 
-    public ProductData createProduct(String name, String productCategoryName, double price, List<String> ingredients, String details, ProductDestination productDestination, ProductType productType,String imagePath) {
-        Product product = new Product(name, convertIngredientStringToIngredient(ingredients), productCategoryService.getProductCategoryByName(productCategoryName), price, details,productDestination, productType, imagePath);
+    public ProductData createProduct(String name, String productCategoryName, double price, List<String> ingredients, String details, ProductDestination productDestination, ProductType productType, String imagePath) {
+        Product product = new Product(name, convertIngredientStringToIngredient(ingredients), productCategoryService.getProductCategoryByName(productCategoryName), price, details, productDestination, productType, imagePath);
         productRepository.save(product);
         return createProductData(product);
     }
@@ -44,7 +42,7 @@ public class ProductService {
     }
 
 
-    public ProductData updateProduct(String name, String productCategoryName, double price, Long id, List<String> ingredients, String details,ProductType productType, String imagePath, ProductDestination productDestination) {
+    public ProductData updateProduct(String name, String productCategoryName, double price, Long id, List<String> ingredients, String details, ProductType productType, String imagePath, ProductDestination productDestination) {
         productExists(id);
         Product product = productRepository.getById(id);
 
@@ -85,10 +83,10 @@ public class ProductService {
                 product.getImagePath());
     }
 
-    public List<ProductData> createProductDataList(List<Product> products){
+    public List<ProductData> createProductDataList(List<Product> products) {
         List<ProductData> productDataList = new ArrayList<>();
-        for (Product product:products) {
-             productDataList.add(createProductData(product));
+        for (Product product : products) {
+            productDataList.add(createProductData(product));
         }
         return productDataList;
     }
@@ -99,20 +97,22 @@ public class ProductService {
         }
     }
 
-    private List<Ingredient> convertIngredientStringToIngredient(List<String> ingredientStringList){
+    private List<Ingredient> convertIngredientStringToIngredient(List<String> ingredientStringList) {
         List<Ingredient> ingredientList = new ArrayList<>();
-        for (String ingredient:ingredientStringList) {
+        for (String ingredient : ingredientStringList) {
             ingredientList.add(ingredientRepository.getIngredientByName(ingredient));
         }
         return ingredientList;
     }
-    public ProductCategoryData createProductCategoryData(ProductCategory productCategory){
+
+    public ProductCategoryData createProductCategoryData(ProductCategory productCategory) {
         return new ProductCategoryData(productCategory.getId(), productCategory.getName());
     }
 
-    public ProductSubCategoryData createProductSubCategoryData(ProductSubCategory productSubCategory){
+    public ProductSubCategoryData createProductSubCategoryData(ProductSubCategory productSubCategory) {
         return new ProductSubCategoryData(productSubCategory.getId(), productSubCategory.getName());
     }
+
     public List<Product> findAll() {
         return productRepository.findAll();
     }

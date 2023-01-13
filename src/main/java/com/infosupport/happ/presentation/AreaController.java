@@ -50,7 +50,7 @@ public class AreaController {
     public AreaData addTableToArea(@PathVariable("tableid") Long tableId, @RequestBody AreaRequest areaRequest) {
         try {
             return this.areaService.addTableToArea(tableId, areaRequest.id);
-        }catch (ItemNotFound e) {
+        } catch (ItemNotFound e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);

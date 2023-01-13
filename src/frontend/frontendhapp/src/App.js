@@ -57,9 +57,6 @@ function App() {
             <Route path="statistics" element={<OrdersStatistiekenPage/>}/>
 
 
-
-
-
         </Routes>
     )
 

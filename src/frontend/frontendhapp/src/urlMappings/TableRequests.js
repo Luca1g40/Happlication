@@ -3,7 +3,7 @@ import {configuration} from "./JwtHeader";
 
 
 export function AddProductToShoppingCart(tableId, productId, amount) {
-     axios.post(`http://localhost:8080/happ/table/${tableId}/shoppingcart`, {
+    axios.post(`http://localhost:8080/happ/table/${tableId}/shoppingcart`, {
         "id": productId,
         "amount": amount
     }, configuration)
@@ -14,6 +14,7 @@ export function AddProductToShoppingCart(tableId, productId, amount) {
             console.log(err)
         })
 }
+
 export function RemoveProductFromShoppingCart(tableId, productId) {
     return axios.post(`http://localhost:8080/happ/table/${tableId}/shoppingcart/remove/product`, {
         "id": productId
@@ -28,7 +29,7 @@ export function RemoveProductFromShoppingCart(tableId, productId) {
 }
 
 export function PlaceOrder(tableId) {
-     axios.post(`http://localhost:8080/happ/table/${tableId}/order`,{},configuration)
+    axios.post(`http://localhost:8080/happ/table/${tableId}/order`, {}, configuration)
         .then(res => {
             console.log(res)
         })
@@ -37,8 +38,8 @@ export function PlaceOrder(tableId) {
         })
 }
 
-export function GetShoppingCart(tableId){
-    return axios.get(`http://localhost:8080/happ/table/${tableId}/shoppingcart`,configuration)
+export function GetShoppingCart(tableId) {
+    return axios.get(`http://localhost:8080/happ/table/${tableId}/shoppingcart`, configuration)
         .then(res => {
             console.log(res)
             return res.data.productDataList;
@@ -48,8 +49,8 @@ export function GetShoppingCart(tableId){
         })
 }
 
-export function GetTableOrders(tableId){
-    return axios.get(`http://localhost:8080/happ/table/${tableId}/allorders`,configuration)
+export function GetTableOrders(tableId) {
+    return axios.get(`http://localhost:8080/happ/table/${tableId}/allorders`, configuration)
         .then(res => {
             console.log(res)
             return res.data;
@@ -59,10 +60,10 @@ export function GetTableOrders(tableId){
         })
 }
 
-export function RemoveAllProductOccurancesFromCart(tableId,productId){
-   return axios.post(`http://localhost:8080/happ/table/${tableId}/shoppingcart/remove/products`,{
-        "id":productId
-    },configuration)
+export function RemoveAllProductOccurancesFromCart(tableId, productId) {
+    return axios.post(`http://localhost:8080/happ/table/${tableId}/shoppingcart/remove/products`, {
+        "id": productId
+    }, configuration)
         .then(res => {
             console.log(res.data.shoppingCart.productDataList)
             return res.data.shoppingCart.productDataList;

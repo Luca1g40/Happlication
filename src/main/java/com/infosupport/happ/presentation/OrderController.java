@@ -3,7 +3,6 @@ package com.infosupport.happ.presentation;
 import com.infosupport.happ.application.OrderService;
 import com.infosupport.happ.application.dto.OrderData;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
-import com.infosupport.happ.presentation.dto.OrderRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -68,18 +67,18 @@ public class OrderController {
     }
 
     @GetMapping("/order/all")
-    private List<OrderData> getAllOrders(){
+    private List<OrderData> getAllOrders() {
         return this.orderService.getAllOrders();
     }
 
     @GetMapping("/order/bydate")
-    private List<OrderData> getOrdersByDate(@RequestParam("firstDate") String firstDate, @RequestParam("secondDate") String secondDate){
+    private List<OrderData> getOrdersByDate(@RequestParam("firstDate") String firstDate, @RequestParam("secondDate") String secondDate) {
 
         return this.orderService.getAllOrdersByDatePeriod(LocalDate.parse(firstDate), LocalDate.parse(secondDate));
     }
 
     @GetMapping("/orders/today")
-    private List<OrderData> getOrdersOfToday(){
+    private List<OrderData> getOrdersOfToday() {
         return this.orderService.getAllOrdersOfToday();
     }
 }

@@ -9,7 +9,9 @@ import com.infosupport.happ.security.util.JwtUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -30,7 +32,7 @@ public class LoginController {
     @PostMapping("/authenticate")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) {
         try {
-            if(authenticationRequest.password != null) {
+            if (authenticationRequest.password != null) {
                 Staff staff = staffService.getStaffByPassword(Integer.parseInt(authenticationRequest.password));
 
                 List<String> right = staff.getAuthorities()
@@ -40,7 +42,8 @@ public class LoginController {
 
                 final String jwt = jwtTokenUtil.generateToken(String.valueOf(staff.getPassword()), right);
                 return ResponseEntity.ok().body(new AuthenticationResponse(jwt, staff.getId()));
-            } throw new ItemNotFound("Staff");
+            }
+            throw new ItemNotFound("Staff");
         } catch (ItemNotFound e) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "User is not found");
         }

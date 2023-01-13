@@ -1,10 +1,6 @@
 package com.infosupport.happ.application;
 
-import com.infosupport.happ.application.dto.AreaWithoutStaffData;
-import com.infosupport.happ.application.dto.OrderData;
-import com.infosupport.happ.application.dto.SimpleStaffData;
-import com.infosupport.happ.application.dto.StaffData;
-import com.infosupport.happ.application.dto.StaffWithoutAreasData;
+import com.infosupport.happ.application.dto.*;
 import com.infosupport.happ.data.StaffRepository;
 import com.infosupport.happ.domain.*;
 import com.infosupport.happ.domain.exceptions.InvalidValueException;
@@ -21,7 +17,7 @@ public class StaffService {
     private final OrderService orderService;
     private final AreaService areaService;
 
-    public StaffService(StaffRepository staffRepository, OrderService orderService,  AreaService areaService) {
+    public StaffService(StaffRepository staffRepository, OrderService orderService, AreaService areaService) {
         this.staffRepository = staffRepository;
         this.orderService = orderService;
         this.areaService = areaService;
@@ -34,13 +30,13 @@ public class StaffService {
 
     public List<SimpleStaffData> getAllStaffInfo() {
         List<SimpleStaffData> simpleStaffData = new ArrayList<>();
-        for(Staff staff :staffRepository.findAll()){
+        for (Staff staff : staffRepository.findAll()) {
             simpleStaffData.add(createSimpleStaffData(staff));
         }
         return simpleStaffData;
     }
 
-    public StaffWithoutAreasData createStaffWithoutArea(Staff staff){
+    public StaffWithoutAreasData createStaffWithoutArea(Staff staff) {
         return new StaffWithoutAreasData(
                 staff.getId(),
                 staff.getName(),
@@ -66,7 +62,7 @@ public class StaffService {
     }
 
     public StaffData createStaff(int password, String name, List<Rights> rights) {
-        if(name.equals("") || password <= 0){
+        if (name.equals("") || password <= 0) {
             throw new InvalidValueException("name or password");
         }
         Staff staff = new Staff(password, name, rights);
@@ -98,15 +94,15 @@ public class StaffService {
         return orderService.convertToOrderDataList(claimedOrders);
     }
 
-    public List<OrderData> getAllUnclaimedOrders(Long staffId){
+    public List<OrderData> getAllUnclaimedOrders(Long staffId) {
         staffExists(staffId);
         List<Rights> rights = staffRepository.getById(staffId).getRights();
         List<OrderData> orderData = new ArrayList<>();
 
-        for (Order order: orderService.getAllUnclaimedOrders()) {
-            if (order instanceof KitchenOrder && rights.contains(Rights.KITCHEN_RIGHTS)){
+        for (Order order : orderService.getAllUnclaimedOrders()) {
+            if (order instanceof KitchenOrder && rights.contains(Rights.KITCHEN_RIGHTS)) {
                 orderData.add(orderService.createOrderData(order));
-            }else if (order instanceof BarOrder && rights.contains(Rights.BAR_RIGHTS)){
+            } else if (order instanceof BarOrder && rights.contains(Rights.BAR_RIGHTS)) {
                 orderData.add(orderService.createOrderData(order));
             }
         }
@@ -115,7 +111,7 @@ public class StaffService {
     }
 
     public StaffData updateStaff(int password, String name, List<Rights> rights) {
-        if(name.equals("")){
+        if (name.equals("")) {
             throw new InvalidValueException("name");
         }
         staffExistsByPassword(password);
@@ -141,7 +137,7 @@ public class StaffService {
                 staff.getRights());
     }
 
-    public SimpleStaffData createSimpleStaffData(Staff staff){
+    public SimpleStaffData createSimpleStaffData(Staff staff) {
         return new SimpleStaffData(
                 staff.getId(),
                 staff.getName(),

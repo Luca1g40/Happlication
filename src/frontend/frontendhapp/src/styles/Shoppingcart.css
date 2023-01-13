@@ -1,4 +1,4 @@
-.shopping-cart-grid{
+.shopping-cart-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     align-items: center;
@@ -6,13 +6,13 @@
     border-bottom: 1px solid #b9b9b9;
 }
 
-.submit-button{
+.submit-button {
     position: absolute;
     bottom: 1%;
     right: 1%;
 }
 
-.delete-button{
+.delete-button {
     text-align: center;
     background-clip: padding-box;
     background-color: #e3a768;
@@ -24,10 +24,7 @@
     font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
     min-width: 25px;
     min-height: 25px;
-    box-shadow:
-            rgb(0 0 0 / 19%)
-            0 10px 20px,
-            rgb(0 0 0 / 23%)
-            0 6px 6px;
+    box-shadow: rgb(0 0 0 / 19%) 0 10px 20px,
+    rgb(0 0 0 / 23%) 0 6px 6px;
 }
 

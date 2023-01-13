@@ -1,6 +1,5 @@
-import UnclaimedOrdersComponent from "../components/orders/UnclaimedOrdersComponent";
 import React from "react";
-import OrderStatistiekenOverview from "../components/administration/OrderStatistieken/OrderstatistiekenOverview";
+import OrderStatistiekenOverview from "../components/OrderStatistieken/OrderstatistiekenOverview";
 
 
 export default function OrdersStatistiekenPage() {

@@ -1,7 +1,5 @@
 package com.infosupport.happ.security.application;
 
-import com.infosupport.happ.application.StaffService;
-import com.infosupport.happ.domain.Staff;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

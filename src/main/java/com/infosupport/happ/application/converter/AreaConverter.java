@@ -1,6 +1,9 @@
 package com.infosupport.happ.application.converter;
 
-import com.infosupport.happ.application.dto.*;
+import com.infosupport.happ.application.dto.OrderData;
+import com.infosupport.happ.application.dto.ProductData;
+import com.infosupport.happ.application.dto.ShoppingCartData;
+import com.infosupport.happ.application.dto.TableData;
 import com.infosupport.happ.domain.*;
 import org.springframework.stereotype.Component;
 
@@ -41,7 +44,7 @@ public class AreaConverter {
     }
 
     public ProductData createProductData(Product product) {
-        return new ProductData(product.getId(),product.getName(), product.getProductCategory().getName(),product.getPrice(),product.getIngredients(),product.getDetails(),product.getProductDestination(),product.getProductType(), product.getImagePath());
+        return new ProductData(product.getId(), product.getName(), product.getProductCategory().getName(), product.getPrice(), product.getIngredients(), product.getDetails(), product.getProductDestination(), product.getProductType(), product.getImagePath());
 
     }
 

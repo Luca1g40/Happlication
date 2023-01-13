@@ -1,15 +1,13 @@
-import OrderItemList from "./OrderItemList";
 import React from "react";
 import getOccurrenceProducts from "../utils/Util";
-import OrderItem from "./OrderItem";
 
 
-export default function Receipt(props){
+export default function Receipt(props) {
 
     return (
         <div className={"grid-container"}>
             {
-                Array.from(getOccurrenceProducts(props.products).keys()).map((product, index)=>
+                Array.from(getOccurrenceProducts(props.products).keys()).map((product, index) =>
                     <div className={"grid-item"} onClick={(event) => {
 
                     }}>

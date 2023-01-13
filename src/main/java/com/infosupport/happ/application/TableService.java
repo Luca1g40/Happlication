@@ -1,8 +1,10 @@
 package com.infosupport.happ.application;
 
 
-import com.infosupport.happ.application.dto.*;
-import com.infosupport.happ.data.OrderRepository;
+import com.infosupport.happ.application.dto.OrderData;
+import com.infosupport.happ.application.dto.ProductData;
+import com.infosupport.happ.application.dto.ShoppingCartData;
+import com.infosupport.happ.application.dto.TableData;
 import com.infosupport.happ.data.TableRepository;
 import com.infosupport.happ.domain.*;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
@@ -76,7 +78,7 @@ public class TableService {
         return createTableData(table);
     }
 
-    public TableData removeAllOccurancesOfAProductFromShoppingcart(Long tableId,Long productId){
+    public TableData removeAllOccurancesOfAProductFromShoppingcart(Long tableId, Long productId) {
         tableExists(tableId);
         Table table = tableRepository.getById(tableId);
         table.removeAllOccurancesOfAProuctFromShoppingcart(productService.getProduct(productId));
@@ -92,7 +94,7 @@ public class TableService {
         return createTableData(table);
     }
 
-    public List<OrderData> getAllOrdersFromTable(Long id){
+    public List<OrderData> getAllOrdersFromTable(Long id) {
         Table table = tableRepository.getById(id);
         return convertToOrderDataList(table.getAllOrders());
     }
@@ -136,8 +138,9 @@ public class TableService {
 
         return productDataList;
     }
+
     public ProductData createProductData(Product product) {
-        return new ProductData(product.getId(),product.getName(),product.getProductCategory().getName(),product.getPrice(),product.getIngredients(),product.getDetails(),product.getProductDestination(),product.getProductType(),product.getImagePath());
+        return new ProductData(product.getId(), product.getName(), product.getProductCategory().getName(), product.getPrice(), product.getIngredients(), product.getDetails(), product.getProductDestination(), product.getProductType(), product.getImagePath());
     }
 
 
@@ -160,6 +163,7 @@ public class TableService {
 
         return ordersData;
     }
+
     public List<OrderData> convertToKitchenOrderDataList(List<KitchenOrder> orders) {
         List<OrderData> ordersData = new ArrayList<>();
 

@@ -3,12 +3,11 @@ import React, {useEffect, useState} from "react";
 import {GetTableOrders} from "../../urlMappings/TableRequests";
 import getOccurrenceProducts, {displayPrice} from "../utils/Util";
 import "../../styles/AllOrders.css";
-import Receipt from "./Receipt";
 import {Link} from "react-router-dom";
 
 
-export default function TableReceipt(props){
-    const [orders,setOrders] = useState([])
+export default function TableReceipt(props) {
+    const [orders, setOrders] = useState([])
     let price = 0;
 
     let params = useParams();
@@ -24,28 +23,29 @@ export default function TableReceipt(props){
     }, [])
 
 
-    function fillProductList(list){
-        let productsList =[]
+    function fillProductList(list) {
+        let productsList = []
         list.map(order => {
             order.products.map(product => {
-                 console.log(product.name)
-                 productsList.push(product)
+                console.log(product.name)
+                productsList.push(product)
             })
         })
         return productsList;
     }
 
-    return(
+    return (
         <>
-            <Link to="/" className="login-button button" >Home</Link>
+            <Link to="/" className="login-button button">Home</Link>
             <h1 className={"order-header"}>Bestellingen</h1>
-            { Array.from(getOccurrenceProducts(fillProductList(orders)).keys()).map((product, index) => {
+            {Array.from(getOccurrenceProducts(fillProductList(orders)).keys()).map((product, index) => {
                     price = price + (product.price * Array.from(getOccurrenceProducts(fillProductList(orders)).values())[index]);
 
                     return (
                         <>
                             <div className={"list-item"} id={"bestelling-item"}>
-                                <span className={"product-span"}>{Array.from(getOccurrenceProducts(fillProductList(orders)).values())[index]} {product.name}</span>
+                                <span
+                                    className={"product-span"}>{Array.from(getOccurrenceProducts(fillProductList(orders)).values())[index]} {product.name}</span>
                                 <span>€</span>
                                 <span className={"product-price"}> {displayPrice(product.price)}</span>
                             </div>
@@ -56,17 +56,14 @@ export default function TableReceipt(props){
             )}
 
             <div className={"list-item"} id={"total-price"}>
-                <span className={"product-span"} > Total </span>
+                <span className={"product-span"}> Total </span>
                 <span>€</span>
-                <span className={"product-price"} >{displayPrice(price)}</span>
+                <span className={"product-price"}>{displayPrice(price)}</span>
 
             </div>
             <button className={"button"}>Afrekenen</button>
         </>
     )
-
-
-
 
 
 }

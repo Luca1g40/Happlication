@@ -2,6 +2,7 @@ import axios from "axios";
 import {configuration} from "./JwtHeader";
 
 const staffId = sessionStorage.getItem("staffId");
+
 export function getPersonallyClaimedOrders() {
 
     return axios.get(`http://localhost:8080/happ/staff/${staffId}/myorders`, configuration)
@@ -71,7 +72,7 @@ export function getAllOrdersByDateRange(firstDate, secondDate) {
             firstDate: firstDate,
             secondDate: secondDate
         }
-    }).then(res =>{
+    }).then(res => {
         console.log(res.data)
         return res.data
     })

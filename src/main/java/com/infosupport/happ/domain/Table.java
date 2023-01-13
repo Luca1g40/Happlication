@@ -7,7 +7,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.infosupport.happ.domain.ProductDestination.*;
+import static com.infosupport.happ.domain.ProductDestination.BAR_PRODUCT;
 
 @Entity(name = "tafel")
 public class Table {
@@ -38,7 +38,8 @@ public class Table {
     public Table(LocalTime elapsedTimeSinceOrder, LocalTime timeLeftToOrder, int amountOfPeople, int tableNumber, TableStatus tableStatus, ShoppingCart shoppingCart, boolean hulpNodig) {
         if (tableNumber < 0) {
             throw new AttributeMustBeBiggerThanZero(getClass().getSimpleName(), "table number");
-        }else if(amountOfPeople < 0) throw new AttributeMustBeBiggerThanZero(getClass().getSimpleName(), "amount of people");
+        } else if (amountOfPeople < 0)
+            throw new AttributeMustBeBiggerThanZero(getClass().getSimpleName(), "amount of people");
 
 
         this.kitchenOrders = new ArrayList<>();
@@ -85,14 +86,14 @@ public class Table {
     }
 
     private void addToOrders(Order order) {
-        if (order instanceof KitchenOrder){
+        if (order instanceof KitchenOrder) {
             kitchenOrders.add((KitchenOrder) order);
-        }else if (order instanceof BarOrder){
+        } else if (order instanceof BarOrder) {
             barOrders.add((BarOrder) order);
         }
     }
 
-    public List<Order> getAllOrders(){
+    public List<Order> getAllOrders() {
         List<Order> orders = new ArrayList<>();
         barOrders.forEach(e -> orders.add(e));
 
@@ -114,7 +115,7 @@ public class Table {
         shoppingCart.removeFromShoppingCart(product);
     }
 
-    public void removeAllOccurancesOfAProuctFromShoppingcart(Product product){
+    public void removeAllOccurancesOfAProuctFromShoppingcart(Product product) {
         shoppingCart.removeEveryOccurrencesOfAProduct(product);
     }
 
@@ -136,22 +137,21 @@ public class Table {
         return shoppingCart;
     }
 
-    public void placeOrder(){
+    public void placeOrder() {
         Order barOrder = new BarOrder(this);
         Order kitchenOrder = new KitchenOrder(this);
 
 
-        for (Product product: shoppingCart.getProducts()) {
-             if (product.getProductDestination()==BAR_PRODUCT){
-                 barOrder.addToProducts(product);
-             }
-             else kitchenOrder.addToProducts(product);
+        for (Product product : shoppingCart.getProducts()) {
+            if (product.getProductDestination() == BAR_PRODUCT) {
+                barOrder.addToProducts(product);
+            } else kitchenOrder.addToProducts(product);
         }
 
-        if (!barOrder.getProducts().isEmpty()){
+        if (!barOrder.getProducts().isEmpty()) {
             this.addToOrders(barOrder);
         }
-        if (!kitchenOrder.getProducts().isEmpty()){
+        if (!kitchenOrder.getProducts().isEmpty()) {
             this.addToOrders(kitchenOrder);
         }
 

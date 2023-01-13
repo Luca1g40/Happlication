@@ -1,10 +1,7 @@
 package com.infosupport.happ.application;
 
-import com.infosupport.happ.application.dto.ProductCategoryData;
 import com.infosupport.happ.application.dto.ProductSubCategoryData;
 import com.infosupport.happ.data.ProductSubCategoryRepository;
-import com.infosupport.happ.domain.ProductCategory;
-import com.infosupport.happ.domain.ProductSubCategory;
 import com.infosupport.happ.domain.ProductSubCategory;
 import org.springframework.stereotype.Service;
 
@@ -19,31 +16,33 @@ public class ProductSubCategoryService {
         this.productSubCategoryRepository = productSubCategoryRepository;
     }
 
-    public ProductSubCategory getByName(String name){
+    public ProductSubCategory getByName(String name) {
         return productSubCategoryRepository.getProductSubCategoryByName(name);
     }
 
-    public List<ProductSubCategoryData> findAll(){
+    public List<ProductSubCategoryData> findAll() {
         return createProductDataList(productSubCategoryRepository.findAll());
     }
-    public ProductSubCategoryData getProductSubCategory(Long id){
+
+    public ProductSubCategoryData getProductSubCategory(Long id) {
         return createProductSubCategoryData(productSubCategoryRepository.getById(id));
     }
-    public List<ProductSubCategoryData> createProductDataList(List<ProductSubCategory> productSubCategories){
+
+    public List<ProductSubCategoryData> createProductDataList(List<ProductSubCategory> productSubCategories) {
         List<ProductSubCategoryData> productSubCategoryDataList = new ArrayList<>();
-        for (ProductSubCategory productSubCategory: productSubCategories) {
-            productSubCategoryDataList.add( createProductSubCategoryData(productSubCategory));
+        for (ProductSubCategory productSubCategory : productSubCategories) {
+            productSubCategoryDataList.add(createProductSubCategoryData(productSubCategory));
         }
         return productSubCategoryDataList;
     }
 
-    public ProductSubCategoryData createProductSubCategoryData(ProductSubCategory productSubCategory){
+    public ProductSubCategoryData createProductSubCategoryData(ProductSubCategory productSubCategory) {
         return new ProductSubCategoryData(productSubCategory.getId(), productSubCategory.getName());
     }
 
-    public ProductSubCategoryData createProductSubCategory(String name){
+    public ProductSubCategoryData createProductSubCategory(String name) {
         ProductSubCategory productCategory = productSubCategoryRepository.save(new ProductSubCategory(name));
-        return new ProductSubCategoryData(productCategory.getId(),productCategory.getName());
+        return new ProductSubCategoryData(productCategory.getId(), productCategory.getName());
     }
 
 //    public ProductCategoryData getProductCategory(Long id){

@@ -28,7 +28,7 @@ public class IngredientService {
     public IngredientData getIngredientById(Long id) {
         ingredientExists(id);
         Ingredient ingredient = ingredientRepository.getById(id);
-        return new IngredientData(ingredient.getId(),ingredient.getName(), ingredient.getAmount());
+        return new IngredientData(ingredient.getId(), ingredient.getName(), ingredient.getAmount());
     }
 
     public IngredientData increaseIngredientAmount(Long id, int amount) {
@@ -74,7 +74,7 @@ public class IngredientService {
         }
     }
 
-    public IngredientData createIngredientData(Ingredient ingredient){
-        return new IngredientData(ingredient.getId(),ingredient.getName(),ingredient.getAmount());
+    public IngredientData createIngredientData(Ingredient ingredient) {
+        return new IngredientData(ingredient.getId(), ingredient.getName(), ingredient.getAmount());
     }
 }

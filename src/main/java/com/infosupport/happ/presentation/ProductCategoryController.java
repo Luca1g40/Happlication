@@ -11,27 +11,29 @@ import java.util.List;
 @RequestMapping("/happ")
 public class ProductCategoryController {
 
-    private ProductCategoryService productCategoryService;
+    private final ProductCategoryService productCategoryService;
 
     public ProductCategoryController(ProductCategoryService productCategoryService) {
         this.productCategoryService = productCategoryService;
     }
 
     @GetMapping("productcategory/{id}")
-    public ProductCategoryData getProductCategory(@PathVariable Long id){
+    public ProductCategoryData getProductCategory(@PathVariable Long id) {
         return productCategoryService.getProductCategory(id);
     }
+
     @PutMapping("productcategory/{id}")
-    public ProductCategoryData updateProductCategory(@PathVariable Long id,@RequestBody ProductCategoryRequest productCategoryRequest){
-        return productCategoryService.updateProductCategory(id,productCategoryRequest.name);
+    public ProductCategoryData updateProductCategory(@PathVariable Long id, @RequestBody ProductCategoryRequest productCategoryRequest) {
+        return productCategoryService.updateProductCategory(id, productCategoryRequest.name);
     }
+
     @PostMapping("productcategory")
-    public ProductCategoryData createProductCategory(@RequestBody ProductCategoryRequest productCategoryRequest){
+    public ProductCategoryData createProductCategory(@RequestBody ProductCategoryRequest productCategoryRequest) {
         return productCategoryService.createProductCategory(productCategoryRequest.name);
     }
 
     @GetMapping("productcategory/all")
-    public List<ProductCategoryData> getAllProductCategory(){
+    public List<ProductCategoryData> getAllProductCategory() {
         return productCategoryService.findAll();
     }
 

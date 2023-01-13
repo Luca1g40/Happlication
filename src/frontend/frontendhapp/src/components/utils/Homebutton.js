@@ -1,15 +1,17 @@
 import {useNavigate} from "react-router-dom";
 import React from "react";
 
-function HomeNav(){
+function HomeNav() {
     let navigate = useNavigate();
 
-    function navHome(){
+    function navHome() {
         navigate("/administration");
     }
 
     return (
-        <button className="button login-button" onClick={() => {navHome()}}>Home</button>
+        <button className="button login-button" onClick={() => {
+            navHome()
+        }}>Home</button>
     );
 }
 

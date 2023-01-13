@@ -1,8 +1,8 @@
 import React from "react";
 
 
-export default function OverviewTable(props){
-    return(
+export default function OverviewTable(props) {
+    return (
         <span className={"product-tables"}>
             <table className="search-table">
                 <tbody key={"table-body"}>
@@ -15,26 +15,26 @@ export default function OverviewTable(props){
 
                 {props.items.map((item, i) => {
                     return <tbody key={"body" + i}>
-                        <tr key={item.id} onClick={() => props.handleClick(item.id)}>
-                            {Object.keys(item).map((itemKey,i) => {
-                                if (props.leaveOutList.indexOf(itemKey) === -1){
-                                    if (!(props.specialDisplays === undefined)){
-                                        if (Array.from(props.specialDisplays.keys()).indexOf(itemKey) === -1){
-                                            return <td key={item[itemKey] + i}>{item[itemKey]}</td>
-                                        }else{
-                                            const showCategory=props.specialDisplays.get(itemKey)
+                    <tr key={item.id} onClick={() => props.handleClick(item.id)}>
+                        {Object.keys(item).map((itemKey, i) => {
+                            if (props.leaveOutList.indexOf(itemKey) === -1) {
+                                if (!(props.specialDisplays === undefined)) {
+                                    if (Array.from(props.specialDisplays.keys()).indexOf(itemKey) === -1) {
+                                        return <td key={item[itemKey] + i}>{item[itemKey]}</td>
+                                    } else {
+                                        const showCategory = props.specialDisplays.get(itemKey)
 
-                                            return <td key={item[itemKey] + i}>{showCategory(item[itemKey])}</td>
+                                        return <td key={item[itemKey] + i}>{showCategory(item[itemKey])}</td>
 
-                                        }
-                                    }else{
-                                        return <td key={item[itemKey] + i}> {item[itemKey]}</td>
                                     }
-
+                                } else {
+                                    return <td key={item[itemKey] + i}> {item[itemKey]}</td>
                                 }
 
-                            })}
-                        </tr>
+                            }
+
+                        })}
+                    </tr>
                     </tbody>
                 })}
             </table>

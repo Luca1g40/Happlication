@@ -7,7 +7,6 @@ import "../styles/Menu.css"
 import "../styles/Home.css"
 
 
-
 export default function Foods() {
     return (
         <>

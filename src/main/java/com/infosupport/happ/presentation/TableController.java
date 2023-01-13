@@ -29,7 +29,7 @@ public class TableController {
 
     @PutMapping("/table/{id}/helpNodig")
     public TableData setBoolHelp(@PathVariable Long id, @RequestBody TableRequest tableRequest) {
-         return this.tableService.setBoolHulp(id, tableRequest.setHulpBool);
+        return this.tableService.setBoolHulp(id, tableRequest.setHulpBool);
     }
 
     @GetMapping("/table/{id}")
@@ -67,7 +67,7 @@ public class TableController {
 //    }
 
     @PostMapping("/table/{tableId}/shoppingcart/remove/products")
-    public TableData removeAllProductOccurancesFromCart(@PathVariable Long tableId, @RequestBody ProductRequest productRequest){
+    public TableData removeAllProductOccurancesFromCart(@PathVariable Long tableId, @RequestBody ProductRequest productRequest) {
         try {
             return tableService.removeAllOccurancesOfAProductFromShoppingcart(tableId, productRequest.id);
         } catch (ItemNotFound itemNotFound) {
@@ -78,7 +78,7 @@ public class TableController {
     }
 
     @PostMapping("/table/{tableId}/shoppingcart/remove/product")
-    public TableData removeProductFromShoppingcart(@PathVariable Long tableId,@RequestBody ProductRequest productRequest){
+    public TableData removeProductFromShoppingcart(@PathVariable Long tableId, @RequestBody ProductRequest productRequest) {
         try {
             return tableService.removeFromShoppingCart(tableId, productRequest.id);
         } catch (ItemNotFound itemNotFound) {

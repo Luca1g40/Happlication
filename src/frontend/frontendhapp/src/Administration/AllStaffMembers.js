@@ -25,42 +25,42 @@ function AllStaffMembers() {
             )
     }, [])
 
-    function showRights(rights){
-        let string=""
-        rights.map(right=> {
-            switch (right){
+    function showRights(rights) {
+        let string = ""
+        rights.map(right => {
+            switch (right) {
                 case "KITCHEN_RIGHTS":
-                    if (rights.indexOf(right) === 0){
+                    if (rights.indexOf(right) === 0) {
                         string += "Keuken recht"
-                    }else{
+                    } else {
                         string += ", Keuken recht"
                     }
                     break;
                 case "BAR_RIGHTS":
-                    if (rights.indexOf(right) === 0){
+                    if (rights.indexOf(right) === 0) {
                         string += "Bar recht"
-                    }else{
+                    } else {
                         string += ", Bar recht"
                     }
                     break;
                 case "SERVICE_RIGHTS":
-                    if (rights.indexOf(right) === 0){
+                    if (rights.indexOf(right) === 0) {
                         string += "Service recht"
-                    }else{
+                    } else {
                         string += ", Service recht"
                     }
                     break;
                 case "ADMIN_RIGHTS":
-                    if (rights.indexOf(right) === 0){
+                    if (rights.indexOf(right) === 0) {
                         string += "Admin recht"
-                    }else{
+                    } else {
                         string += ", Admin recht"
                     }
                     break;
                 case "ADMINISTRATION_RIGHTS":
-                    if (rights.indexOf(right) === 0){
+                    if (rights.indexOf(right) === 0) {
                         string += "Administratie recht"
-                    }else{
+                    } else {
                         string += ", Administratie recht"
                     }
                     break;
@@ -71,8 +71,8 @@ function AllStaffMembers() {
     }
 
     function handleClick(id) {
-        let member =members.filter(member=>{
-            return member.id===id;
+        let member = members.filter(member => {
+            return member.id === id;
         })
         setSelectedMember(member[0])
         setButtonPopup(true);
@@ -92,9 +92,11 @@ function AllStaffMembers() {
 
                 <OverviewTable tableHeads={["name", "Rights"]} items={members}
                                leaveOutList={["operations", "claimedOrders", "claimedAndFinishedOrders", "areas", "password", "id"]}
-                               specialDisplays={new Map([["rights", (rights)=>showRights(rights)]])} handleClick={(id)=>handleClick(id)}/>
+                               specialDisplays={new Map([["rights", (rights) => showRights(rights)]])}
+                               handleClick={(id) => handleClick(id)}/>
             </div>
-            <StaffMemberDetailsPopup trigger={buttonPopup} setTrigger={setButtonPopup} member={selectedMember} unselectMember={()=>setSelectedMember(null)}/>
+            <StaffMemberDetailsPopup trigger={buttonPopup} setTrigger={setButtonPopup} member={selectedMember}
+                                     unselectMember={() => setSelectedMember(null)}/>
 
 
             <Link className={"button createStaffLink"} to="/createStaff" on>Maak een nieuw staff-member aan</Link>
@@ -103,4 +105,5 @@ function AllStaffMembers() {
         </>
     )
 }
+
 export default AllStaffMembers

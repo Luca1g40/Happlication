@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {getMenuFoodItems} from "../../urlMappings/MenuRequests";
 import "../menu/SubCategory"
 import Menu from "./Menu";
@@ -9,8 +9,8 @@ function FoodMenu() {
 
     useEffect(() => {
         getMenuFoodItems()
-            .then(res =>  {
-                setProducts(res)
+            .then(res => {
+                    setProducts(res)
                 }
             )
             .catch(err =>
@@ -19,17 +19,21 @@ function FoodMenu() {
     }, [])
 
 
-    function getUniqueProductCategories(products){
-        let productCategories = products.map(product => {return product.productCategoryData.name})
+    function getUniqueProductCategories(products) {
+        let productCategories = products.map(product => {
+            return product.productCategoryData.name
+        })
         const uniqueProductCategories = productCategories.filter((x, i, a) => a.indexOf(x) === i)
-        let sortedUniqueProductCategories = uniqueProductCategories.map(category => {return category})
+        let sortedUniqueProductCategories = uniqueProductCategories.map(category => {
+            return category
+        })
         return sortedUniqueProductCategories.sort()
     }
 
     return (
         <>
             <div className={"scrollable-buttons"}> {
-               getUniqueProductCategories(products).map((category, i) => {
+                getUniqueProductCategories(products).map((category, i) => {
                     return <button key={i} className={"button menu-nav"}>{category}</button>
                 })
             }

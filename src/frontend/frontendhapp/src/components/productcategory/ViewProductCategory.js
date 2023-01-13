@@ -9,15 +9,15 @@ import HomeNav from "../utils/Homebutton";
 import MenuCategoryForm from "./MenuCategoryForm";
 
 
-export default function ViewProductCategory(){
+export default function ViewProductCategory() {
     const params = useParams();
-    const [category,setCategory] = useState()
+    const [category, setCategory] = useState()
     const [disabled, setDisabled] = useState(false)
-    const [foutMelding,setFoutMelding] = useState();
+    const [foutMelding, setFoutMelding] = useState();
 
 
     useEffect(() => {
-        if (!(params.id===undefined)){
+        if (!(params.id === undefined)) {
             getCategoryById(params.id)
                 .then(res => {
                     setCategory(res);
@@ -25,7 +25,7 @@ export default function ViewProductCategory(){
                     setDisabled(true);
                 })
         }
-    },[])
+    }, [])
 
     const handleChange = (event) => {
         const name = event.target.name;
@@ -38,10 +38,13 @@ export default function ViewProductCategory(){
         <>
             <h1>Create Menu category</h1>
             <div className={"home-button"}>
-                <Link to="/administration" className="button search-products-navigation" >Home</Link>
+                <Link to="/administration" className="button search-products-navigation">Home</Link>
             </div>
-            <MenuCategoryForm errorMeldingText={foutMelding} handleChange={event=>handleChange(event)}/>
-            <SubmitButton className={"button crud-form-submit"} setFoutMelding={foutMelding=>setFoutMelding(foutMelding)} disabled={disabled} setDisabled={disabled=>setDisabled(disabled)} action={Actions.CREATE_CATEGORY} buttonText={"Create category"} category={category}/>
+            <MenuCategoryForm errorMeldingText={foutMelding} handleChange={event => handleChange(event)}/>
+            <SubmitButton className={"button crud-form-submit"}
+                          setFoutMelding={foutMelding => setFoutMelding(foutMelding)} disabled={disabled}
+                          setDisabled={disabled => setDisabled(disabled)} action={Actions.CREATE_CATEGORY}
+                          buttonText={"Create category"} category={category}/>
             <Logout/>
             <HomeNav/>
         </>
@@ -49,17 +52,18 @@ export default function ViewProductCategory(){
         <>
             <h1>Edit Menu category</h1>
             <div className={"home-button"}>
-                <Link to="/administration" className="button search-products-navigation" >Home</Link>
+                <Link to="/administration" className="button search-products-navigation">Home</Link>
             </div>
-            <MenuCategoryForm errorMeldingText={foutMelding} disabled={disabled} category={category} handleChange={event=>handleChange(event)}/>
-            <SubmitButton setFoutMelding={foutMelding=>setFoutMelding(foutMelding)} disabled={disabled} setDisabled={disabled=>setDisabled(disabled)} action={Actions.UPDATE_CATEGORY} buttonText={"Update"}  category={category}/>
-            <button onClick={()=>setDisabled(false)} disabled={!disabled}>Edit</button>
-            <button onClick={()=>setDisabled(true)} disabled={disabled}>Cancel</button>
+            <MenuCategoryForm errorMeldingText={foutMelding} disabled={disabled} category={category}
+                              handleChange={event => handleChange(event)}/>
+            <SubmitButton setFoutMelding={foutMelding => setFoutMelding(foutMelding)} disabled={disabled}
+                          setDisabled={disabled => setDisabled(disabled)} action={Actions.UPDATE_CATEGORY}
+                          buttonText={"Update"} category={category}/>
+            <button onClick={() => setDisabled(false)} disabled={!disabled}>Edit</button>
+            <button onClick={() => setDisabled(true)} disabled={disabled}>Cancel</button>
             <Logout/>
             <HomeNav/>
         </>
-
-
 
 
     )

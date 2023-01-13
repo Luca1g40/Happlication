@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import OrderItemList from "./OrderItemList";
 
 export default function OrdersOverview(props) {
