@@ -4,10 +4,8 @@ import {Link, useNavigate} from 'react-router-dom';
 import "../../styles/SearchTable.css"
 import DropdownFilter from "./DropdownFilter";
 import OverviewTable from "./OverviewTable";
-import {showCategory} from "../utils/Util";
 import HomeNav from "../utils/Homebutton";
-import Logout from "../utils/Logout";
-import Drinks from "../../pages/Drinks";
+
 
 export default function SearchProduct(){
     const [allProducts,setAllProducts] = useState([])

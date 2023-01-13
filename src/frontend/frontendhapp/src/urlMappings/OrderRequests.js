@@ -49,3 +49,30 @@ export function getAllOrders() {
         })
 }
 
+export function getAllOrdersOfToday() {
+    return axios.get(`http://localhost:8080/happ/orders/today`, configuration)
+        .then(res => {
+            console.log(res.data)
+            return res.data
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+
+
+export function getAllOrdersByDateRange(firstDate, secondDate) {
+
+    return axios.get('http://localhost:8080/happ/order/bydate', {
+        headers: {
+            Authorization: sessionStorage.getItem("Authorization")
+        },
+        params: {
+            firstDate: firstDate,
+            secondDate: secondDate
+        }
+    }).then(res =>{
+        console.log(res.data)
+        return res.data
+    })
+}

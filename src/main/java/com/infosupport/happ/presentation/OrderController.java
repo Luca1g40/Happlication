@@ -73,9 +73,13 @@ public class OrderController {
     }
 
     @GetMapping("/order/bydate")
-    private List<OrderData> getOrdersByDate(@RequestBody OrderRequest orderRequest){
-        return
+    private List<OrderData> getOrdersByDate(@RequestParam("firstDate") String firstDate, @RequestParam("secondDate") String secondDate){
 
-            this.orderService.getAllOrdersByDatePeriod(orderRequest.firstDate,orderRequest.secondDate);
+        return this.orderService.getAllOrdersByDatePeriod(LocalDate.parse(firstDate), LocalDate.parse(secondDate));
+    }
+
+    @GetMapping("/orders/today")
+    private List<OrderData> getOrdersOfToday(){
+        return this.orderService.getAllOrdersOfToday();
     }
 }

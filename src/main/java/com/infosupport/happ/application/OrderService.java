@@ -96,8 +96,12 @@ public class OrderService {
 
     public List<OrderData> getAllOrdersByDatePeriod(LocalDate firstdate, LocalDate secondDate) {
         List<Order> orders = new ArrayList<>();
-        orders.addAll(kitchenOrderRepository.getOrderByDate(firstdate,secondDate));
+        orders.addAll(kitchenOrderRepository.getOrderByDate(firstdate.minusDays(1),secondDate.plusDays(1)));
         return convertToOrderDataList(orders);
+    }
+
+    public List<OrderData> getAllOrdersOfToday() {
+        return getAllOrdersByDatePeriod(LocalDate.now(),LocalDate.now());
     }
 
     public List<Order> getAllUnclaimedOrders() {
