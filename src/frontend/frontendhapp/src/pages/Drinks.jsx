@@ -11,7 +11,7 @@ export default function Drinks() {
     return (
         <>
             <div className="menu-container">
-                <Link className="button" to="/"> Terug </Link>
+                <Link className="button" to="/home"> Terug </Link>
                 <div className={"top-right-navigation"}>
                     <Link to="/shoppingcart" className="button">Shopping cart</Link>
                     <Link className="button" to="/Foods">Gerechten</Link>

@@ -23,11 +23,13 @@ import ViewProductCategory from "./components/productcategory/ViewProductCategor
 import Menu from "./components/menu/Menu";
 import Error403Page from "./pages/Error403Page";
 import SearchCategory from "./components/productcategory/SearchCategory";
+import LoginGast from "./pages/LoginGast"
 
 function App() {
     return (
         <Routes>
-            <Route path="/" element={<Home/>}/>
+            <Route path="/" element={<LoginGast/>}/>
+            <Route path="Home" element={<Home/>}/>
             <Route path="Drinks" element={<Drinks/>}/>
             <Route path="Foods" element={<Foods/>}/>
             <Route path="/menu/:type" element={<Menu/>}/>

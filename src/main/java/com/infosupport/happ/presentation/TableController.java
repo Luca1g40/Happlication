@@ -2,17 +2,16 @@ package com.infosupport.happ.presentation;
 
 import com.infosupport.happ.application.TableService;
 import com.infosupport.happ.application.dto.ShoppingCartData;
-import com.infosupport.happ.application.dto.SimpleStaffData;
 import com.infosupport.happ.application.dto.TableData;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import com.infosupport.happ.presentation.dto.ProductRequest;
-import com.infosupport.happ.presentation.dto.ShoppingCartRequest;
 import com.infosupport.happ.presentation.dto.TableRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalTime;
 import java.util.List;
 
 @RestController
@@ -30,10 +29,15 @@ public class TableController {
         return tableService.createTable(tableRequest.amountOfPeople, tableRequest.tableNr, tableRequest.tableStatus);
     }
 
+    @PutMapping("/table/{tableid}")
+    public void setTimeAndStatus(@PathVariable Long tableid, @RequestBody TableRequest tableRequest) {
+        this.tableService.setTimeAndStatus(tableid, tableRequest.timeOfLogin);
+    }
+
     @CrossOrigin
-    @PutMapping("/table/{id}/helpNodig")
-    public TableData setBoolHelp(@PathVariable Long id, @RequestBody TableRequest tableRequest) {
-         return this.tableService.setBoolHulp(id, tableRequest.setHulpBool);
+    @PutMapping("/table/{tableid}/helpNodig")
+    public TableData setBoolHelp(@PathVariable Long tableid, @RequestBody TableRequest tableRequest) {
+         return this.tableService.setBoolHulp(tableid, tableRequest.setHulpBool);
     }
 
     @CrossOrigin
@@ -41,6 +45,28 @@ public class TableController {
     public TableData getTable(@PathVariable Long id) {
         try {
             return tableService.createTableData(tableService.getTable(id));
+        } catch (ItemNotFound exception) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, exception.getMessage());
+        } catch (Exception exception) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
+        }
+    }
+
+    @GetMapping("/table/logintime/{id}")
+    public LocalTime getTimeOfLogin(@PathVariable Long id) {
+        try {
+            return tableService.getTimeOfLogin(id);
+        } catch (ItemNotFound exception) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, exception.getMessage());
+        } catch (Exception exception) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
+        }
+    }
+
+    @GetMapping("/tablenumber/{tablenumber}")
+    public Long getTableByNumber(@PathVariable int tablenumber) {
+        try {
+            return tableService.getTableNumberByNumber(tablenumber);
         } catch (ItemNotFound exception) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, exception.getMessage());
         } catch (Exception exception) {

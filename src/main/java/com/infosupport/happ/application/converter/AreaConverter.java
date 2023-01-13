@@ -16,7 +16,7 @@ public class AreaConverter {
                 table.getAmountOfPeople(),
                 table.getTableNumber(),
                 table.getElapsedTimeSinceOrder(),
-                table.getTimeLeftToOrder(),
+                table.getLoginTime(),
                 table.getTableStatus(),
                 new ShoppingCartData(table.getShoppingCart().getProducts()),
                 convertToKitchenOrderDataList(table.getKitchenOrders()),

@@ -48,6 +48,17 @@ export function GetShoppingCart(tableId){
         })
 }
 
+export function GetTableByNumber(tableNumber){
+    return axios.get(`http://localhost:8080/happ/tablenumber/${tableNumber}`,configuration)
+        .then(res => {
+            console.log(res)
+            return res.data;
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+
 export function RemoveAllProductOccurancesFromCart(tableId,productId){
    return axios.post(`http://localhost:8080/happ/table/${tableId}/shoppingcart/remove/products`,{
         "id":productId
@@ -105,5 +116,24 @@ export function KlantHeeftHulpNodig(tafelId){
         })
         .catch(err => {
             console.log(err)
+        })
+}
+
+export function setTimeAndStatus(tafelId, timeOfLogin){
+    axios.put(`http://localhost:8080/happ/table/${tafelId}`, {
+        "timeOfLogin" : timeOfLogin
+    })
+        .then(res => {
+            console.log(res)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+
+export function GetTimeOfLogin(tafelId){
+    return axios.get(`http://localhost:8080/happ/table/logintime/${tafelId}`)
+        .then(res => {
+            return res.data;
         })
 }
