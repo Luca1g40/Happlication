@@ -145,7 +145,8 @@ public class StaffService {
         return new SimpleStaffData(
                 staff.getId(),
                 staff.getName(),
-                staff.getRights()
+                staff.getRights(),
+                staff.getPassword()
         );
     }
 
