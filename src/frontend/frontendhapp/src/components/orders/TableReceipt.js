@@ -36,7 +36,7 @@ export default function TableReceipt(props) {
 
     return (
         <>
-            <Link to="/" className="login-button button">Home</Link>
+            <Link to="/home" className="login-button button">Home</Link>
             <h1 className={"order-header"}>Bestellingen</h1>
             {Array.from(getOccurrenceProducts(fillProductList(orders)).keys()).map((product, index) => {
                     price = price + (product.price * Array.from(getOccurrenceProducts(fillProductList(orders)).values())[index]);
