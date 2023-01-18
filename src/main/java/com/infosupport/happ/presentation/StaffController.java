@@ -5,6 +5,7 @@ import com.infosupport.happ.application.StaffService;
 import com.infosupport.happ.application.dto.OrderData;
 import com.infosupport.happ.application.dto.SimpleStaffData;
 import com.infosupport.happ.application.dto.StaffData;
+import com.infosupport.happ.domain.Rights;
 import com.infosupport.happ.domain.Table;
 import com.infosupport.happ.domain.exceptions.InvalidValueException;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
@@ -84,6 +85,17 @@ public class StaffController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         }
     }
+
+    @GetMapping("/staff/{staffId}/rights")
+    public List<Rights> getStaffRight(@PathVariable Long staffId) {
+        try {
+             return this.staffService.getStaffRight(staffId);
+        } catch (ItemNotFound e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+        }
+    }
+
+
 
     @DeleteMapping("/staff/{staffId}")
     public void deleteStaff(@PathVariable("staffId") Long staffId) {

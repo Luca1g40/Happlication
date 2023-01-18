@@ -53,6 +53,7 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
     public final static String SET_TABLESTATUS = "/happ/table/tablestatus/**";
     public final static String SHOPPINGCART = "/happ/table/**/shoppingcart/**";
     public final static String PLACE_ORDER = "/happ/table/**/order";
+    public final static String GET_RIGHTS = "/happ/staff/**/rights";
 
     public SecurityConfigurer(JwtRequestFilter jwtRequestFilter, MyUserDetailsService myUserDetailsService) {
         this.jwtRequestFilter = jwtRequestFilter;
@@ -70,7 +71,7 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
         http.cors().configurationSource(corsConfigurationSource()).and().
                 csrf().disable()
                 .authorizeRequests().antMatchers("/authenticate").permitAll()
-                .antMatchers(FOOD_PATH_CUST, DRINKS_PATH_CUST, SET_TABLESTATUS, GET_TABLE_NUMBER, GET_TIMEOFLOGIN, SHOPPINGCART, HULP_NEEDED, PLACE_ORDER).permitAll()
+                .antMatchers(FOOD_PATH_CUST, DRINKS_PATH_CUST, SET_TABLESTATUS, GET_TABLE_NUMBER, GET_TIMEOFLOGIN, SHOPPINGCART, HULP_NEEDED, PLACE_ORDER, GET_RIGHTS).permitAll()
                 .antMatchers(STOCK_PATH, INGREDIENTS_PATH, INGREDIENT_PATH, AREA_PATH, STAFF_PATH, PRODUCTCATEGORY_PATH, PRODUCT_PATH, TABLE_PATH).hasAnyAuthority("ADMINISTRATION_RIGHTS", "ADMIN_RIGHTS")
                 .antMatchers(TABLES_NEED_HELP).hasAnyAuthority("SERVICE_RIGHTS", "ADMIN_RIGHTS")
                 .antMatchers(ORDER_PATHS, OWN_ORDERS, UNCLAIMED_ORDERS).hasAnyAuthority("KITCHEN_RIGHTS", "BAR_RIGHTS", "ADMIN_RIGHTS")
