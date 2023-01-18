@@ -20,8 +20,6 @@ public class TableData {
 
 
 
-    public TableData(Long id,int amountOfPeople, int tableNumber, LocalTime elapsedTimeSinceOrder, LocalTime timeLeftToOrder,  TableStatus tableStatus, ShoppingCartData shoppingCartData, List<OrderData> kitchenOrders, List<OrderData> barOrders, boolean isHulpNodig) {
-
     public TableData(Long id, int amountOfPeople, int tableNumber, LocalTime elapsedTimeSinceOrder, LocalTime timeLeftToOrder,  TableStatus tableStatus, ShoppingCartData shoppingCartData, List<OrderData> kitchenOrders, List<OrderData> barOrders, boolean isHulpNodig) {
 
         this.id = id;

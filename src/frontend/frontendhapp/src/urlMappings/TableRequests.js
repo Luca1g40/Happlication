@@ -93,6 +93,8 @@ export function DeleteTable(tableIdForDelete) {
         .then(res => {
             console.log(res)
             return res.data
+        })
+}
 
 export function klantIsGeholpen(tafelId){
     axios.put(`http://localhost:8080/happ/table/${tafelId}/helpNodig`, {//todo->tafelId moet zelf opgehaald worden
@@ -160,10 +162,11 @@ export function setTimeAndStatus(tafelId, timeOfLogin){
         })
 }
 
-export function GetTimeOfLogin(tafelId){
+export function GetTimeOfLogin(tafelId) {
     return axios.get(`http://localhost:8080/happ/table/logintime/${tafelId}`)
         .then(res => {
             return res.data;
         })
 }
+
 

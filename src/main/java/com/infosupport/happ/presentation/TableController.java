@@ -85,18 +85,6 @@ public class TableController {
         }
     }
 
-//    @PutMapping("/table/{id}/shoppingcart")
-//    public TableData editShoppingCart(@PathVariable Long id, @RequestBody ShoppingCartRequest shoppingCartRequest) {
-//        try {
-//            return tableService.editShoppingCart(id, shoppingCartRequest.productList);
-//        } catch (ItemNotFound itemNotFound) {
-//            throw new ResponseStatusException(HttpStatus.NOT_FOUND, itemNotFound.getMessage());
-//        } catch (Exception exception) {
-//            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
-//
-//        }
-//    }
-
     @PostMapping("/table/{tableId}/shoppingcart/remove/products")
     public TableData removeAllProductOccurancesFromCart(@PathVariable Long tableId, @RequestBody ProductRequest productRequest){
         try {

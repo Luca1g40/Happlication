@@ -3,7 +3,7 @@ import "../../styles/AllStaffMembers.css"
 import React, {useEffect} from "react";
 import {DeleteTable, getAllTables} from "../../urlMappings/TableRequests";
 
-function tableDetailsPopup(props) {
+function TableDetailsPopup(props) {
     useEffect(() => {
         getAllTables()
             .then(res => {
@@ -44,4 +44,4 @@ function tableDetailsPopup(props) {
     ) : "";
 }
 
-export default tableDetailsPopup
+export default TableDetailsPopup

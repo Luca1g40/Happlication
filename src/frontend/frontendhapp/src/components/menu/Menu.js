@@ -80,7 +80,7 @@ export default function Menu (props){
     return (
         <>
             <div className={"navigation-buttons-menu space-around"}>
-            <Link className="button" to="/"> Terug </Link>
+            <Link className="button" to="/home"> Terug </Link>
                 <Link to="/shoppingcart" className="button">Shopping cart</Link>
                 { selectedProductType === "foods" ? (
                     <button className="button toDrinks" onClick={switchProductType}>Dranken</button>
