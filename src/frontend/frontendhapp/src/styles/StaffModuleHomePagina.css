@@ -13,7 +13,7 @@
     align-content: center;
     border-radius: 3px;
     text-align: center;
-
+    overflow-y: hidden;
     position: absolute;
     top: 50%;
     left: 50%;

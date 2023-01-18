@@ -8,13 +8,13 @@ export default function Home() {
     return <>
         <div className="home-container home-button-grid">
             <div>
-                <Link className="button navigation-buttons-menu space-around" to="menu/drinks">Dranken</Link>
+                <Link className="button navigation-buttons-menu space-around" to="/menu/drinks">Dranken</Link>
             </div>
             <div>
-                <Link className="button navigation-buttons-menu space-around" to="menu/foods">Gerechten</Link>
+                <Link className="button navigation-buttons-menu space-around" to="/menu/foods">Gerechten</Link>
             </div>
             <div>
-                <Link className="button navigation-buttons-menu space-around" to="allorders/208">Bestelling
+                <Link className="button navigation-buttons-menu space-around" to="/allorders">Bestelling
                     overzicht</Link>
             </div>
             <Notifications/>

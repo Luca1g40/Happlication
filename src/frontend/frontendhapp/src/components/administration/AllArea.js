@@ -42,6 +42,7 @@ function AllArea() {
                 {
                     allAreas.map((area) => {
                         return (
+                            <>
                             <div key={area.id}>
                                 <div>
                                     <OverviewTable tableHeads={["name"]} items={allAreas}

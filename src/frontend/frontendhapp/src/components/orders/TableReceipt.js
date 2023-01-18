@@ -12,7 +12,7 @@ export default function TableReceipt(props) {
 
     let params = useParams();
     useEffect(() => {
-        GetTableOrders(params.id)
+        GetTableOrders(sessionStorage.getItem("tafelid"))
             .then(res => {
                 console.log(res)
                 setOrders(res)
