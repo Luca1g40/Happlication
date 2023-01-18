@@ -3,6 +3,7 @@ import CreatingStaff from "../components/administration/CreatingStaff";
 import "../styles/AllStaffMembers.css"
 import Logout from "../components/utils/Logout"
 import HomeNav from "../components/utils/Homebutton"
+import {CheckRights} from "../components/utils/CheckRights";
 
 export default function CreateStaff() {
     return (
@@ -13,6 +14,7 @@ export default function CreateStaff() {
                 <Logout/>
                 <HomeNav/>
             </>
+            <CheckRights/>
         </>
     );
 }
