@@ -37,9 +37,18 @@ function AllStaffMembers() {
         let staffRights = members.map(member => {
             return member.rights
         })
-        const uniqueRightsEnum = staffRights.filter((x, i, a) => a.indexOf(x) === i)
-        uniqueRightsEnum.map(right => {
-            categoryOptions.push({value: right[0], label: showRight(right[0])})
+        let uniqueRights = []
+        staffRights.map(rights=>{
+            rights.map(right=>{
+                if (!(uniqueRights.includes(right))){
+                    uniqueRights.push(right)
+                }
+            })
+
+        })
+
+        uniqueRights.map(right => {
+            categoryOptions.push({value: right, label: showRight(right)})
         })
         return categoryOptions
     }
@@ -102,7 +111,6 @@ function AllStaffMembers() {
         let filterMembers = []
         if (value.trim().length > 0) {
             filterMembers = members.filter((member) => {
-                console.log(member.name.toLowerCase().includes(value.toLowerCase()))
                 return member.name.toLowerCase().includes(value.toLowerCase())
             })
         } else {
