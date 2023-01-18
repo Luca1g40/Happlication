@@ -1,4 +1,4 @@
-import React , {useState}from "react";
+import React, {useState} from "react";
 import Counter from "../utils/Counter";
 import {Actions} from "../submitData/Actions";
 import SubmitButton from "../submitData/SubmitButton";

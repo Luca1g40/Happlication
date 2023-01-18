@@ -20,9 +20,7 @@ public class OrderData {
         this.orderTime = getOrderTimeFormated(timeOfOrder);
         this.preperationStatus = preperationStatus;
         this.products = products;
-
         this.id = id;
-
     }
 
     public String getOrderTimeFormated(LocalDateTime timeOfOrder) {

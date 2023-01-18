@@ -1,6 +1,7 @@
 package com.infosupport.happ.presentation;
 
 import com.infosupport.happ.application.TableService;
+import com.infosupport.happ.application.dto.OrderData;
 import com.infosupport.happ.application.dto.ShoppingCartData;
 import com.infosupport.happ.application.dto.TableData;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
@@ -140,7 +141,16 @@ public class TableController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, itemNotFound.getMessage());
         }
     }
-
+    @GetMapping("/table/{id}/allorders")
+    public List<OrderData> getTableOrders(@PathVariable Long id) {
+        try {
+            return tableService.getAllOrdersFromTable(id);
+        } catch (ItemNotFound exception) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, exception.getMessage());
+        } catch (Exception exception) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
+        }
+    }
     @GetMapping("/table/findalltable")
     public List<TableData> getAllTable() {
         return this.tableService.getAllTables();

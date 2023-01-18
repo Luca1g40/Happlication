@@ -13,7 +13,9 @@
 .subcategory-div {
     margin-top: 20%;
 }
-
+.order-header {
+    padding: 20px;
+}
 .scrollable-buttons {
     overflow: hidden;
     overflow-x: scroll;
@@ -50,6 +52,16 @@
     cursor: pointer;
     list-style: none;
     display: flex;
+}
+
+#bestelling-item.list-item {
+    border-style: none;
+}
+
+#total-price.list-item {
+    border-top: 1px solid #e3a768;
+    border-bottom: none;
+    font-weight: bold;
 }
 
 ul {

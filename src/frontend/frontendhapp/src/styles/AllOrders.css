@@ -108,3 +108,23 @@
     border-radius: 5px;
 }
 
+.total-amount {
+    border-top: solid;
+    font-weight: bold;
+}
+
+.order-overview {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+}
+
+.search-table, #revenue-table {
+    width: 85%;
+    position: absolute;
+    right: 0;
+}
+
+.overview-request {
+    margin-left: 21%;
+}

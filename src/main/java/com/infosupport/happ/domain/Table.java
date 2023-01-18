@@ -101,6 +101,14 @@ public class Table {
         }
     }
 
+    public List<Order> getAllOrders() {
+        List<Order> orders = new ArrayList<>();
+        barOrders.forEach(e -> orders.add(e));
+
+        kitchenOrders.forEach(e -> orders.add(e));
+
+        return orders;
+    }
 
     public List<KitchenOrder> getKitchenOrders() {
         return kitchenOrders;

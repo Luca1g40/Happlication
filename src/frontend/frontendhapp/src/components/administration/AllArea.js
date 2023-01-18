@@ -3,6 +3,7 @@ import {getAllAreas} from "../../urlMappings/AreaRequests";
 import AreaItemDetailPopup from "./AreaItemDetailPopup";
 import OverviewTable from "../product/OverviewTable";
 import {Link} from "react-router-dom";
+
 // import "../../styles/AllArea.css"
 
 function AllArea() {
@@ -34,19 +35,19 @@ function AllArea() {
         setButtonPopup(true);
     }
 
-    return(
+    return (
         <>
             <div className="listDiv">
 
                 {
-                    allAreas.map((area) =>{
-                    return(
-                        <>
+                    allAreas.map((area) => {
+                        return (
+                            <>
                             <div key={area.id}>
                                 <div>
                                     <OverviewTable tableHeads={["name"]} items={allAreas}
                                                    leaveOutList={["staffWithoutAreasList", "tables", "id"]}
-                                                   handleClick={(id)=>handleClick(id)}/>
+                                                   handleClick={(id) => handleClick(id)}/>
                                 </div>
                                 <AreaItemDetailPopup trigger={buttonPopup} setTrigger={setButtonPopup} area={selectedArea} unselectArea={()=>setSelectedArea(null)}/>
                             </div>
@@ -60,4 +61,5 @@ function AllArea() {
         </>
     )
 }
+
 export default AllArea

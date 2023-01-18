@@ -73,9 +73,6 @@ export function RemoveAllProductOccurancesFromCart(tableId,productId){
 }
 
 export function getAllTables() {
-
-    return axios.get("http://localhost:8080/happ/table", configuration)
-
     return axios.get("http://localhost:8080/happ/table/findalltable", configuration)
 
         .then(res => {
@@ -166,6 +163,17 @@ export function GetTimeOfLogin(tafelId) {
     return axios.get(`http://localhost:8080/happ/table/logintime/${tafelId}`)
         .then(res => {
             return res.data;
+        })
+}
+
+export function GetTableOrders(tableId) {
+    return axios.get(`http://localhost:8080/happ/table/${tableId}/allorders`, configuration)
+        .then(res => {
+            console.log(res)
+            return res.data;
+        })
+        .catch(err => {
+            console.log(err)
         })
 }
 

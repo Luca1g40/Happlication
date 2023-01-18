@@ -3,7 +3,7 @@ import {configuration} from "./JwtHeader";
 
 export function createArea(name) {
     return axios.post(`http://localhost:8080/happ/area`, {
-        "name" : name
+        "name": name
     }, configuration)
         .then(res => {
             console.log(res)
@@ -36,7 +36,7 @@ export function getAllAreas() {
         });
 }
 
-export function deleteAreaItem(id){
+export function deleteAreaItem(id) {
     return axios.delete(`http://localhost:8080/happ/area/${id}`, configuration)
         .then(res => {
             console.log(res)

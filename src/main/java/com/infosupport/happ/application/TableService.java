@@ -38,6 +38,7 @@ public class TableService {
         tableExists(tableId);
         Table table = tableRepository.getById(tableId);
         table.setHulpNodig(hulpNodig);
+        tableRepository.save(table);
         return createTableData(table);
     }
 
@@ -74,7 +75,10 @@ public class TableService {
         return new ShoppingCartData(tableRepository.getById(tableId).getShoppingCart().getProducts());
     }
 
-
+    public List<OrderData> getAllOrdersFromTable(Long id) {
+        Table table = tableRepository.getById(id);
+        return convertToOrderDataList(table.getAllOrders());
+    }
     public TableData addToShoppingCart(Long tableId, Long productId, int amount) {
         tableExists(tableId);
         Table table = tableRepository.getById(tableId);
@@ -83,7 +87,15 @@ public class TableService {
         tableRepository.save(table);
         return createTableData(table);
     }
+    public List<OrderData> convertToOrderDataList(List<Order> orders) {
+        List<OrderData> ordersData = new ArrayList<>();
 
+        for (Order order : orders) {
+            ordersData.add(createOrderData(order));
+        }
+
+        return ordersData;
+    }
     public TableData removeFromShoppingCart(Long tableId, Long productId) {
         tableExists(tableId);
         Table table = tableRepository.getById(tableId);
@@ -192,5 +204,7 @@ public class TableService {
 
         return ordersData;
     }
+
+
 }
 

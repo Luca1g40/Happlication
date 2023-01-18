@@ -37,8 +37,8 @@ export function getAllCategories() {
 
 export function createCategory(name) {
     return axios.post(`http://localhost:8080/happ/productcategory`, {
-        "name":name
-    },configuration)
+        "name": name
+    }, configuration)
         .then(res => {
             console.log(res.data)
             return res.data
@@ -48,10 +48,10 @@ export function createCategory(name) {
         })
 }
 
-export function updateCategory(id,name) {
+export function updateCategory(id, name) {
     return axios.put(`http://localhost:8080/happ/productcategory/${id}`, {
-        "name":name
-    },configuration)
+        "name": name
+    }, configuration)
         .then(res => {
             console.log(res.data)
             return res.data
@@ -59,7 +59,7 @@ export function updateCategory(id,name) {
         .catch(err => {
             console.log(err)
         })
-        }
+}
 
 export function getMenuDrinkItems() {
     return axios.get("http://localhost:8080/happ/products/drinks", configuration)
@@ -73,7 +73,7 @@ export function getMenuDrinkItems() {
 }
 
 //TODO implenteren
-export function getAllIngredients(){
+export function getAllIngredients() {
     return axios.get("http://localhost:8080/happ/ingredients", configuration)
         .then(res => {
             console.log(res)
@@ -83,7 +83,8 @@ export function getAllIngredients(){
             console.log(err)
         })
 }
-export function getIngredient(id){
+
+export function getIngredient(id) {
     return axios.get(`http://localhost:8080/happ/ingredient/${id}`, configuration)
         .then(res => {
             console.log(res)
@@ -93,9 +94,10 @@ export function getIngredient(id){
             console.log(err)
         })
 }
-export function createIngredient(name){
-    return axios.post("http://localhost:8080/happ/ingredient",{
-        "name":name,
+
+export function createIngredient(name) {
+    return axios.post("http://localhost:8080/happ/ingredient", {
+        "name": name,
         "amount": 1
     }, configuration)
         .then(res => {
@@ -107,9 +109,9 @@ export function createIngredient(name){
         })
 }
 
-export function editIngredient(id,name){
-    return axios.put(`http://localhost:8080/happ/ingredient/${id}`,{
-        "name":name,
+export function editIngredient(id, name) {
+    return axios.put(`http://localhost:8080/happ/ingredient/${id}`, {
+        "name": name,
         "amount": 1
     }, configuration)
         .then(res => {
@@ -117,17 +119,18 @@ export function editIngredient(id,name){
             return res.data;
         })
         .catch(err => {
-        console.log(err)
-    })
+            console.log(err)
+        })
 }
 
-function saveImage(imageFile){
-    return  axios.post(`http://localhost:8080/happ/image`, {
-        imageFile:imageFile
-    },{
+function saveImage(imageFile) {
+    return axios.post(`http://localhost:8080/happ/image`, {
+        imageFile: imageFile
+    }, {
         headers: {
             "Content-Type": "multipart/form-data", Authorization: sessionStorage.getItem("Authorization")
-        }})
+        }
+    })
         .then(res => {
             console.log(res.data)
             // imagePath.concat(res.data)
@@ -138,7 +141,7 @@ function saveImage(imageFile){
         })
 }
 
-export async function createProduct(productName, productIngredients, productDestination, productCategory, details, price, productType, imageFile){
+export async function createProduct(productName, productIngredients, productDestination, productCategory, details, price, productType, imageFile) {
     console.log(productCategory)
     var fftesten = 0
 
@@ -150,14 +153,14 @@ export async function createProduct(productName, productIngredients, productDest
     console.log(imagePath)
 
     return axios.post(`http://localhost:8080/happ/product`, {
-        "name":productName,
-        "productCategoryName":productCategory,
+        "name": productName,
+        "productCategoryName": productCategory,
         "price": price,
-        "productType":productType,
+        "productType": productType,
         "ingredients": productIngredients,
-        "details":details,
-        "productDestination":productDestination,
-        "imagePath":imagePath
+        "details": details,
+        "productDestination": productDestination,
+        "imagePath": imagePath
     }, configuration)
         .then(res => {
             console.log(res.data)
@@ -169,7 +172,7 @@ export async function createProduct(productName, productIngredients, productDest
 }
 
 
-export function getAllProducts(){
+export function getAllProducts() {
     return axios.get(`http://localhost:8080/happ/product/findall`, configuration)
         .then(res => {
             console.log(res)
@@ -180,7 +183,7 @@ export function getAllProducts(){
         })
 }
 
-export function deleteProduct(id){
+export function deleteProduct(id) {
     return axios.delete(`http://localhost:8080/happ/product/${id}`, configuration)
         .then(res => {
             console.log(res)
@@ -191,7 +194,7 @@ export function deleteProduct(id){
         })
 }
 
-export function getProduct(id){
+export function getProduct(id) {
     return axios.get(`http://localhost:8080/happ/product/${id}`, configuration)
         .then(res => {
             return res.data;
@@ -202,9 +205,9 @@ export function getProduct(id){
 }
 
 export async function editProduct(id, name, destination, ingredienten, price, details, category, type, imageFile, imageChanged) {
-    console.log(id, name, destination, ingredienten, price, details, category, type, imageFile,imageChanged)
+    console.log(id, name, destination, ingredienten, price, details, category, type, imageFile, imageChanged)
     let imagePath = imageFile
-    if (imageChanged){
+    if (imageChanged) {
         await saveImage(imageFile).then(res => {
             imagePath = res
         })
@@ -221,7 +224,7 @@ export async function editProduct(id, name, destination, ingredienten, price, de
         "details": details,
         "productDestination": destination,
         "productType": type,
-        "imagePath":imagePath
+        "imagePath": imagePath
     }, configuration)
         .then(res => {
             return res.data;

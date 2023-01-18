@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export function loginRequest(password){
+export function loginRequest(password) {
     return axios.post(`http://localhost:8080/authenticate`, {
         "password": password
     })
@@ -16,13 +16,14 @@ export function loginRequest(password){
         })
 }
 
-export function getRoles(){
+export function getRoles() {
     const JWT = sessionStorage.getItem("Authorization")
     const id = sessionStorage.getItem("staffId")
    return axios.get(`http://localhost:8080/happ/staff/${id}/rights`,{
         headers: {
-        Authorization: JWT
-    }})
+            Authorization: JWT
+        }
+    })
         .then(res => {
             sessionStorage.setItem("rights", res.data)
             return res.data[0]

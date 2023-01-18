@@ -49,7 +49,7 @@ public final class ProductController {
 
         try {
             String path = System.getProperty("user.dir").concat("\\src\\frontend\\frontendhapp\\src\\images");
-            Files.copy(imageFile.getInputStream(), Paths.get(path + File.separator + imageFile.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
+            Files.copy(imageFile.getInputStream(), Paths.get(path+ File.separator+imageFile.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
             return imageFile.getOriginalFilename();
         } catch (Exception ex) {
             return "Image is not uploaded";

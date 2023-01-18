@@ -11,7 +11,7 @@ function ProductDetailsPopup(props) {
 
     useEffect(() => {
         console.log(props.product.imagePath)
-    },[])
+    }, [])
 
 
     function closePopUp() {
@@ -23,15 +23,17 @@ function ProductDetailsPopup(props) {
             <div className="popup-inner">
                 <div className={"gerecht-aantal"}>
                     <label className={"grid-item-1"}>{props.product.name} </label>
-                    <Counter initialValue={productAmount} updateCount={count => setProductAmount(count)} submitMode={false}/>
-                    <button className="close-btn button" onClick={closePopUp}> X </button>
+                    <Counter initialValue={productAmount} updateCount={count => setProductAmount(count)}
+                             submitMode={false}/>
+                    <button className="close-btn button" onClick={closePopUp}> X</button>
                 </div>
                 <div className={"description-wrapper"}>
                     <p className={"descriptive-text"}>{props.product.details}</p>
 
-                    {  props.product.imagePath.length > 5 ? (
+                    {props.product.imagePath.length > 5 ? (
                         <>
-                            <img className={"photo"}src={require(`../../images/${props.product.imagePath}`)} alt={"image not found"}/>
+                            <img className={"photo"} src={require(`../../images/${props.product.imagePath}`)}
+                                 alt={"image not found"}/>
                         </>
                     ) : ""
                     }
@@ -39,8 +41,10 @@ function ProductDetailsPopup(props) {
                 </div>
 
                 <div className={"add-to-cart-div"}>
-                <SubmitButton className={"button"} tableId={6} buttonText={"Add to Cart"} action={Actions.ADD_TO_SHOPPING_CART}
-                              productAmount={productAmount} productId={props.product.id} trigger={() =>closePopUp()}/>
+                    <SubmitButton className={"button"} tableId={208} buttonText={"Add to Cart"}
+                                  action={Actions.ADD_TO_SHOPPING_CART}
+                                  productAmount={productAmount} productId={props.product.id}
+                                  trigger={() => closePopUp()}/>
                 </div>
             </div>
         </div>
