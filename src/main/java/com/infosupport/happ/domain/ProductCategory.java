@@ -13,11 +13,12 @@ public class ProductCategory {
     private Long id;
     private String name;
 
-    public ProductCategory(String name){
+    public ProductCategory(String name) {
         this.name = name;
     }
 
-    public ProductCategory() {}
+    public ProductCategory() {
+    }
 
     public String getName() {
         return name;
@@ -31,7 +32,7 @@ public class ProductCategory {
         return id;
     }
 
-    public void updateCategory(String name){
+    public void updateCategory(String name) {
         setName(name);
     }
 }

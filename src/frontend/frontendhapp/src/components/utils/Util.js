@@ -1,19 +1,19 @@
 export default function getOccurrenceProducts(list) {
     let productOccurances = new Map();
 
-    list.map(product =>{
-        if (!isProductAlreadyInMap(productOccurances,product)){
-            productOccurances.set(product,getTargetAmountInList(product,list))
+    list.map(product => {
+        if (!isProductAlreadyInMap(productOccurances, product)) {
+            productOccurances.set(product, getTargetAmountInList(product, list))
         }
     })
     return productOccurances;
 }
 
 
-function getTargetAmountInList(target,list){
+function getTargetAmountInList(target, list) {
     let count = 0;
     list.map(product => {
-        if (productCompare(product,target)){
+        if (productCompare(product, target)) {
             count += 1;
         }
     })
@@ -21,22 +21,22 @@ function getTargetAmountInList(target,list){
 }
 
 
-function isProductAlreadyInMap(map,product){
+function isProductAlreadyInMap(map, product) {
     let productAlreadyInMap = false;
-    map.forEach(function(key, val){
-        if (productCompare(val,product)){
+    map.forEach(function (key, val) {
+        if (productCompare(val, product)) {
             productAlreadyInMap = true;
         }
     });
     return productAlreadyInMap;
 }
 
-function productCompare(obj1, obj2){
+function productCompare(obj1, obj2) {
     return obj1.name === obj2.name;
 }
 
-export function showCategory(category){
-    switch (category){
+export function showCategory(category) {
+    switch (category) {
         case "MAIN_COURSE":
             return "Hoofdgerechten";
         case "SIDE":
@@ -52,15 +52,15 @@ export function showCategory(category){
     }
 }
 
-export function generateObjectWithEmptyValues(){
+export function generateObjectWithEmptyValues() {
 
     let product = {
-        "name":"",
-        "productType":"DRINK",
-        "productCategoryName":"",
-        "price":0,
-        "details":"",
-        "productDestination":"BAR_PRODUCT"
+        "name": "",
+        "productType": "DRINK",
+        "productCategoryName": "",
+        "price": 0,
+        "details": "",
+        "productDestination": "BAR_PRODUCT"
     }
     return product
 }

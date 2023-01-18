@@ -7,14 +7,8 @@ import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import com.infosupport.happ.presentation.dto.ProductRequest;
 import com.infosupport.happ.presentation.dto.TableRequest;
 import org.springframework.http.HttpStatus;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-
-
-import java.util.List;
-
-
 
 import java.time.LocalTime;
 import java.util.List;
@@ -42,7 +36,7 @@ public class TableController {
     @CrossOrigin
     @PutMapping("/table/{tableid}/helpNodig")
     public TableData setBoolHelp(@PathVariable Long tableid, @RequestBody TableRequest tableRequest) {
-         return this.tableService.setBoolHulp(tableid, tableRequest.setHulpBool);
+        return this.tableService.setBoolHulp(tableid, tableRequest.setHulpBool);
     }
 
     @CrossOrigin
@@ -86,7 +80,7 @@ public class TableController {
     }
 
     @PostMapping("/table/{tableId}/shoppingcart/remove/products")
-    public TableData removeAllProductOccurancesFromCart(@PathVariable Long tableId, @RequestBody ProductRequest productRequest){
+    public TableData removeAllProductOccurancesFromCart(@PathVariable Long tableId, @RequestBody ProductRequest productRequest) {
         try {
             return tableService.removeAllOccurancesOfAProductFromShoppingcart(tableId, productRequest.id);
         } catch (ItemNotFound itemNotFound) {
@@ -97,7 +91,7 @@ public class TableController {
     }
 
     @PostMapping("/table/{tableId}/shoppingcart/remove/product")
-    public TableData removeProductFromShoppingcart(@PathVariable Long tableId,@RequestBody ProductRequest productRequest){
+    public TableData removeProductFromShoppingcart(@PathVariable Long tableId, @RequestBody ProductRequest productRequest) {
         try {
             return tableService.removeFromShoppingCart(tableId, productRequest.id);
         } catch (ItemNotFound itemNotFound) {
@@ -142,8 +136,7 @@ public class TableController {
     private void deleteTable(@PathVariable("tableid") Long tableid) {
         try {
             this.tableService.deleteTable(tableid);
-        }
-        catch (ItemNotFound itemNotFound) {
+        } catch (ItemNotFound itemNotFound) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, itemNotFound.getMessage());
         }
     }

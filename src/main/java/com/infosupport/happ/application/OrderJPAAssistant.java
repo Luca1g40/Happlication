@@ -27,9 +27,9 @@ public class OrderJPAAssistant implements OrderAssistant {
 
     @Override
     public Order getOrderById(Long orderId) {
-        if (!(entities.find(BarOrder.class, orderId) ==null)){
+        if (!(entities.find(BarOrder.class, orderId) == null)) {
             return entities.find(BarOrder.class, orderId);
-        }else{
+        } else {
             return entities.find(KitchenOrder.class, orderId);
         }
     }

@@ -45,7 +45,7 @@ function App() {
 
             <Route path="staffDashboard" element={<StaffDashboard/>}/>
             <Route path="createStaff" element={<CreateStaff/>}/>
-            <Route path="createTable" element={<CreateTable />}/>
+            <Route path="createTable" element={<CreateTable/>}/>
             <Route path="allStaffMembers" element={<AllStaffMembers/>}/>
             <Route path="allTables" element={<AllTables/>}/>
 

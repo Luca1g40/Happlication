@@ -5,7 +5,7 @@ public class ProductCategoryData {
     public String name;
 
 
-    public ProductCategoryData(Long id,String name) {
+    public ProductCategoryData(Long id, String name) {
         this.name = name;
         this.id = id;
     }

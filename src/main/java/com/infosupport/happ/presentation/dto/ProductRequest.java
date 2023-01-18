@@ -2,7 +2,6 @@ package com.infosupport.happ.presentation.dto;
 
 import com.infosupport.happ.domain.ProductDestination;
 import com.infosupport.happ.domain.ProductType;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 

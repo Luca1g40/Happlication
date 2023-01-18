@@ -27,9 +27,10 @@ public class ShoppingCart {
         this.products = products;
     }
 
-    public void removeEveryOccurrencesOfAProduct(Product product){
+    public void removeEveryOccurrencesOfAProduct(Product product) {
         products.removeAll(List.of(product));
     }
+
     public void removeFromShoppingCart(Product product) {
         products.remove(product);
     }

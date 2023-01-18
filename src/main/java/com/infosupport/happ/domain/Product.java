@@ -29,7 +29,7 @@ public class Product {
 
     private String imagePath;
 
-    public Product(String name, List<Ingredient> ingredients, ProductCategory productCategory, double price, String details, ProductDestination productDestination,ProductType productType,String imagePath) {
+    public Product(String name, List<Ingredient> ingredients, ProductCategory productCategory, double price, String details, ProductDestination productDestination, ProductType productType, String imagePath) {
         this.name = name;
         this.ingredients = ingredients;
         this.productCategory = productCategory;

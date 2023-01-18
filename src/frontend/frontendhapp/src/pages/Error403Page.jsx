@@ -1,7 +1,6 @@
 import React from "react";
 import "../styles/Errors.css"
-import {Link} from "react-router-dom";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 export default function Error403Page() {
     const navigate = useNavigate();

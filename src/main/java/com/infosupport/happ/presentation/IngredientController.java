@@ -25,7 +25,7 @@ public class IngredientController {
     }
 
     @GetMapping("/ingredients")
-    public List<IngredientData> getAllIngredients(){
+    public List<IngredientData> getAllIngredients() {
         return ingredientService.findAll();
     }
 

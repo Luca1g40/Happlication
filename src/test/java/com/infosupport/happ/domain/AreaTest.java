@@ -8,7 +8,7 @@ import java.time.LocalTime;
 import java.util.List;
 
 import static com.infosupport.happ.domain.TableStatus.OCCUPIED;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AreaTest {
     Area area = new Area("areaNaam");
@@ -17,7 +17,7 @@ public class AreaTest {
 
 
     @BeforeEach
-    void beforeEach(){
+    void beforeEach() {
         table = new Table(LocalTime.now(), LocalTime.now(), 5, 1, OCCUPIED, shoppingCart, false);
         shoppingCart = new ShoppingCart();
 

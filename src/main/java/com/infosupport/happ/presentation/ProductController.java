@@ -6,20 +6,15 @@ import com.infosupport.happ.domain.Product;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import com.infosupport.happ.presentation.dto.ProductRequest;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
-import java.util.Objects;
 
 @RestController
 @RequestMapping("/happ")
@@ -47,16 +42,17 @@ public final class ProductController {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
     @PostMapping(value = "/image")
     public String uploadImage(@RequestPart MultipartFile imageFile) {
 
 
         try {
             String path = System.getProperty("user.dir").concat("\\src\\frontend\\frontendhapp\\src\\images");
-            Files.copy(imageFile.getInputStream(), Paths.get(path+ File.separator+imageFile.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
+            Files.copy(imageFile.getInputStream(), Paths.get(path + File.separator + imageFile.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
             return imageFile.getOriginalFilename();
         } catch (Exception ex) {
-            return"Image is not uploaded";
+            return "Image is not uploaded";
         }
     }
 
@@ -72,12 +68,12 @@ public final class ProductController {
     }
 
     @GetMapping("/products/drinks")
-    private List<ProductData> getAllDrinks(){
+    private List<ProductData> getAllDrinks() {
         return productService.findAlDrink();
     }
 
     @GetMapping("/products/foods")
-    private List<ProductData> getAllFood(){
+    private List<ProductData> getAllFood() {
         return productService.findAllFood();
     }
 

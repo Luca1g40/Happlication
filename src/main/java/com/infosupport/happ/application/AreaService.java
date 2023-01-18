@@ -31,7 +31,7 @@ public class AreaService {
         this.areaConverter = areaConverter;
     }
 
-    public AreaData createArea(String name){
+    public AreaData createArea(String name) {
         Area area = new Area(name);
 
         this.areaRepository.save(area);
@@ -69,7 +69,7 @@ public class AreaService {
         this.areaRepository.deleteById(id);
     }
 
-    public AreaData addStaffToArea(Long staffId, Long areaId){
+    public AreaData addStaffToArea(Long staffId, Long areaId) {
         areaExists(areaId);
         Staff staff = staffRepository.getById(staffId);
         Area area = areaRepository.getById(areaId);
@@ -143,7 +143,7 @@ public class AreaService {
 
     public List<StaffWithoutAreasData> createStaffWithoutArea(Area area) {
         List<StaffWithoutAreasData> staffWithoutAreasList = new ArrayList<>();
-        if(area.getStaffList() != null) {
+        if (area.getStaffList() != null) {
             for (Staff staff : area.getStaffList()) {
                 staffWithoutAreasList.add(
                         new StaffWithoutAreasData(

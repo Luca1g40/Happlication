@@ -1,7 +1,7 @@
 import {useNavigate} from "react-router-dom";
 import React from "react";
 
-function Logout(){
+function Logout() {
     let navigate = useNavigate();
 
     function cleardata() {
@@ -10,7 +10,9 @@ function Logout(){
     }
 
     return (
-            <button className="button logout-button" onClick={() => {cleardata()}}>Log out</button>
+        <button className="button logout-button" onClick={() => {
+            cleardata()
+        }}>Log out</button>
     );
 }
 

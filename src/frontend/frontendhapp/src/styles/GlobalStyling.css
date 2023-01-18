@@ -35,22 +35,22 @@ h1 {
     user-select: none
 }
 
-.logout-button{
+.logout-button {
     position: absolute;
     top: 0;
     right: 0;
     margin: 5px;
 }
 
-.login-button{
+.login-button {
     position: absolute;
     top: 0;
     left: 0;
     margin: 5px;
 }
 
-.submit-button{
-    position:absolute;
+.submit-button {
+    position: absolute;
     bottom: 5%;
     right: 5%;
 }

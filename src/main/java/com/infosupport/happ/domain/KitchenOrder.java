@@ -1,7 +1,6 @@
 package com.infosupport.happ.domain;
 
-import javax.persistence.*;
-
+import javax.persistence.Entity;
 
 
 @Entity

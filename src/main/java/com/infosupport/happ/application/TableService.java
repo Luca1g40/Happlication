@@ -1,6 +1,9 @@
 package com.infosupport.happ.application;
 
-import com.infosupport.happ.application.dto.*;
+import com.infosupport.happ.application.dto.OrderData;
+import com.infosupport.happ.application.dto.ProductData;
+import com.infosupport.happ.application.dto.ShoppingCartData;
+import com.infosupport.happ.application.dto.TableData;
 import com.infosupport.happ.data.TableRepository;
 import com.infosupport.happ.domain.*;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
@@ -43,21 +46,21 @@ public class TableService {
         return tableRepository.getById(tableId);
     }
 
-    public Long getTableNumberByNumber(int tableNumber){
-        if(tableRepository.getTableByTableNumber(tableNumber) != null){
+    public Long getTableNumberByNumber(int tableNumber) {
+        if (tableRepository.getTableByTableNumber(tableNumber) != null) {
             Table table = tableRepository.getTableByTableNumber(tableNumber);
             return table.getId();
         }
         return 0L;
     }
 
-    public LocalTime getTimeOfLogin(Long tableId){
+    public LocalTime getTimeOfLogin(Long tableId) {
         tableExists(tableId);
         Table table = tableRepository.getById(tableId);
         return table.getLoginTime();
     }
 
-    public void setTimeAndStatus(Long tableId, LocalTime timeOfLogin){
+    public void setTimeAndStatus(Long tableId, LocalTime timeOfLogin) {
         tableExists(tableId);
         Table table = tableRepository.getById(tableId);
         table.setTableStatus(TableStatus.OCCUPIED);
@@ -98,7 +101,7 @@ public class TableService {
         return createTableData(table);
     }
 
-    public TableData removeAllOccurancesOfAProductFromShoppingcart(Long tableId,Long productId){
+    public TableData removeAllOccurancesOfAProductFromShoppingcart(Long tableId, Long productId) {
         tableExists(tableId);
         Table table = tableRepository.getById(tableId);
         table.removeAllOccurancesOfAProuctFromShoppingcart(productService.getProduct(productId));
@@ -165,8 +168,9 @@ public class TableService {
 
         return productDataList;
     }
+
     public ProductData createProductData(Product product) {
-        return new ProductData(product.getId(),product.getName(),product.getProductCategory().getName(),product.getPrice(),product.getIngredients(),product.getDetails(),product.getProductDestination(),product.getProductType(),product.getImagePath());
+        return new ProductData(product.getId(), product.getName(), product.getProductCategory().getName(), product.getPrice(), product.getIngredients(), product.getDetails(), product.getProductDestination(), product.getProductType(), product.getImagePath());
     }
 
     public List<OrderData> convertToBarOrderDataList(List<BarOrder> orders) {
@@ -178,6 +182,7 @@ public class TableService {
 
         return ordersData;
     }
+
     public List<OrderData> convertToKitchenOrderDataList(List<KitchenOrder> orders) {
         List<OrderData> ordersData = new ArrayList<>();
 

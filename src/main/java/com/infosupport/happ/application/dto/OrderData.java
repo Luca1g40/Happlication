@@ -1,7 +1,6 @@
 package com.infosupport.happ.application.dto;
 
 import com.infosupport.happ.domain.PreperationStatus;
-import com.infosupport.happ.domain.Product;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -15,7 +14,7 @@ public class OrderData {
 
     public final List<ProductData> products;
 
-    public OrderData(int tableNr, LocalDateTime timeOfOrder, PreperationStatus preperationStatus,List<ProductData> products ,Long id) {
+    public OrderData(int tableNr, LocalDateTime timeOfOrder, PreperationStatus preperationStatus, List<ProductData> products, Long id) {
         this.tableNr = tableNr;
         this.orderDate = getOrderDateFormated(timeOfOrder);
         this.orderTime = getOrderTimeFormated(timeOfOrder);

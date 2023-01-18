@@ -1,11 +1,9 @@
 package com.infosupport.happ.domain;
 
 import com.infosupport.happ.domain.exceptions.AttributeMustBeBiggerThanZero;
-import com.infosupport.happ.domain.exceptions.NotEnoughIngredientsException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.time.LocalTime;
 import java.util.ArrayList;

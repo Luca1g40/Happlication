@@ -14,5 +14,7 @@ public class AuthenticationResponse {
         return jwt;
     }
 
-    public long getStaffId() {return staffId;}
+    public long getStaffId() {
+        return staffId;
+    }
 }

@@ -7,7 +7,7 @@ export default function LoginGast() {
     return (
         <>
             <div className="foodContainer">
-            <LoginForGuest/>
+                <LoginForGuest/>
             </div>
         </>
     );

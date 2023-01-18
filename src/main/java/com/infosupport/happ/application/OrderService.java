@@ -1,18 +1,14 @@
 package com.infosupport.happ.application;
 
 import com.infosupport.happ.application.dto.OrderData;
-import com.infosupport.happ.application.dto.ProductCategoryData;
 import com.infosupport.happ.application.dto.ProductData;
-import com.infosupport.happ.application.dto.ProductSubCategoryData;
 import com.infosupport.happ.data.BarOrderRepository;
 import com.infosupport.happ.data.KitchenOrderRepository;
 import com.infosupport.happ.data.OrderAssistant;
-import com.infosupport.happ.data.OrderRepository;
 import com.infosupport.happ.domain.*;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +20,7 @@ public class OrderService {
 
     private final OrderAssistant orderAssistant;
     private final BarOrderRepository barOrderRepository;
-    private final KitchenOrderRepository kitchenOrderRepository ;
+    private final KitchenOrderRepository kitchenOrderRepository;
 
     public OrderService(OrderAssistant orderAssistant, BarOrderRepository barOrderRepository, KitchenOrderRepository kitchenOrderRepository) {
         this.orderAssistant = orderAssistant;
@@ -32,10 +28,10 @@ public class OrderService {
         this.kitchenOrderRepository = kitchenOrderRepository;
     }
 
-    public Order saveOrder(Order order){
-        if (order instanceof BarOrder){
+    public Order saveOrder(Order order) {
+        if (order instanceof BarOrder) {
             return barOrderRepository.save((BarOrder) order);
-        }else{
+        } else {
             return kitchenOrderRepository.save((KitchenOrder) order);
         }
     }
@@ -123,6 +119,7 @@ public class OrderService {
     public void deleteBarOrder(Long orderId) {
         barOrderRepository.deleteById(orderId);
     }
+
     public void deleteKitchenOrder(Long orderId) {
         kitchenOrderRepository.deleteById(orderId);
     }
@@ -145,8 +142,9 @@ public class OrderService {
 
         return productDataList;
     }
+
     public ProductData createProductData(Product product) {
-        return new ProductData(product.getId(),product.getName(),product.getProductCategory().getName(),product.getPrice(),product.getIngredients(),product.getDetails(),product.getProductDestination(),product.getProductType(), product.getImagePath());
+        return new ProductData(product.getId(), product.getName(), product.getProductCategory().getName(), product.getPrice(), product.getIngredients(), product.getDetails(), product.getProductDestination(), product.getProductType(), product.getImagePath());
     }
 
 

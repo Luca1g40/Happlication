@@ -53,7 +53,9 @@ public class Staff implements Serializable {
         return rights;
     }
 
-    public void setRights(List<Rights> rights) {this.rights = rights;}
+    public void setRights(List<Rights> rights) {
+        this.rights = rights;
+    }
 
     public Long getId() {
         return id;
@@ -63,7 +65,7 @@ public class Staff implements Serializable {
         return password;
     }
 
-    public void setPassword(int password){
+    public void setPassword(int password) {
         this.password = password;
     }
 
@@ -71,7 +73,7 @@ public class Staff implements Serializable {
         return name;
     }
 
-    public void setName(String name){
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -85,18 +87,18 @@ public class Staff implements Serializable {
     }
 
     public void addOrder(Order order) {
-        if (order instanceof KitchenOrder){
+        if (order instanceof KitchenOrder) {
             claimedKitchenOrders.add((KitchenOrder) order);
-        }else if (order instanceof BarOrder){
+        } else if (order instanceof BarOrder) {
             claimedBarOrders.add((BarOrder) order);
         }
     }
 
     public List<Order> getClaimedAndFinishedOrders() {
-       return getOrderBasedOnStatus(DONE);
+        return getOrderBasedOnStatus(DONE);
     }
 
-    private List<Order> getOrderBasedOnStatus(PreperationStatus preperationStatus){
+    private List<Order> getOrderBasedOnStatus(PreperationStatus preperationStatus) {
         List<Order> orders = new ArrayList<>();
 
         for (Order order : claimedKitchenOrders) {
@@ -115,7 +117,7 @@ public class Staff implements Serializable {
     }
 
     public List<Order> getClaimedOrders() {
-      return getOrderBasedOnStatus(CLAIMED);
+        return getOrderBasedOnStatus(CLAIMED);
     }
 
 

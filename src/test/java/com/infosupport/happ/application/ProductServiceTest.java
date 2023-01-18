@@ -1,22 +1,16 @@
 package com.infosupport.happ.application;
 
-import com.infosupport.happ.application.dto.ProductData;
 import com.infosupport.happ.data.IngredientRepository;
 import com.infosupport.happ.data.ProductRepository;
 import com.infosupport.happ.domain.Ingredient;
 import com.infosupport.happ.domain.Product;
-import com.infosupport.happ.domain.ProductDestination;
-import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 public class ProductServiceTest {

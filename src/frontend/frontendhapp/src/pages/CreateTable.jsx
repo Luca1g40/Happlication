@@ -5,13 +5,13 @@ import Logout from "../components/utils/Logout";
 import HomeNav from "../components/utils/Homebutton";
 
 export default function CreateTable() {
-    return(
+    return (
         <>
             <div>
                 <h1>Nieuw tafel aanmaken</h1>
-                <CreatingTable />
-                <Logout />
-                <HomeNav />
+                <CreatingTable/>
+                <Logout/>
+                <HomeNav/>
             </div>
         </>
     );

@@ -14,13 +14,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.infosupport.happ.domain.TableStatus.OCCUPIED;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class AreaServiceTest {
 
@@ -28,7 +29,7 @@ public class AreaServiceTest {
     private StaffRepository staffRepository;
 
     @BeforeEach
-    void beforeEach(){
+    void beforeEach() {
         AreaConverter areaConverter = new AreaConverter();
         AreaRepository areaRepository = mock(AreaRepository.class);
         this.staffRepository = mock(StaffRepository.class);
@@ -54,19 +55,19 @@ public class AreaServiceTest {
 
     @Test
     @DisplayName("Area can be created")
-    void createArea(){
+    void createArea() {
 
         AreaData areaData = areaService.createArea("Nieuw area");
 
         assertNotNull(areaData);
 
-        assertEquals( "Nieuw area", areaData.name);
+        assertEquals("Nieuw area", areaData.name);
 
     }
 
     @Test
     @DisplayName("Get the correct area")
-    void getArea(){
+    void getArea() {
 
         AreaData area = areaService.getArea(2L);
         assertEquals("Nieuwe area", area.name);
@@ -75,22 +76,22 @@ public class AreaServiceTest {
 
     @Test
     @DisplayName("Add staff to area")
-    void addStaff(){
+    void addStaff() {
 
         AreaData areaData = areaService.addStaffToArea(1L, 2L);
 
         assertEquals(1, areaData.staffWithoutAreasList.size());
-        assertThrows(ItemNotFound.class, ()-> areaService.addStaffToArea(1L, 4L));
+        assertThrows(ItemNotFound.class, () -> areaService.addStaffToArea(1L, 4L));
 
     }
 
     @Test
     @DisplayName("Add table to area")
-    void addTableToARea(){
+    void addTableToARea() {
         AreaData areaData = areaService.addTableToArea(3L, 2L);
 
         assertEquals(1, areaData.tables.size());
-        assertThrows(ItemNotFound.class, ()-> areaService.addTableToArea(3L, 4L));
+        assertThrows(ItemNotFound.class, () -> areaService.addTableToArea(3L, 4L));
     }
 
 
@@ -110,21 +111,21 @@ public class AreaServiceTest {
 
     @Test
     @DisplayName("delete staff of area")
-    void deleteAreaStaff(){
+    void deleteAreaStaff() {
 
         areaService.addStaffToArea(1L, 2L);
         AreaData areaData = areaService.deleteStaffFromArea(1L, 2L);
 
         assertEquals(0, areaData.staffWithoutAreasList.size());
-        assertThrows(ItemNotFound.class, ()-> areaService.deleteStaffFromArea(1L, 4L));
+        assertThrows(ItemNotFound.class, () -> areaService.deleteStaffFromArea(1L, 4L));
 
     }
 
     @Test
     @DisplayName("Area does not exist")
-    void areaDoesNotExist(){
+    void areaDoesNotExist() {
 
-        assertThrows(ItemNotFound.class, ()-> areaService.getArea(4L));
+        assertThrows(ItemNotFound.class, () -> areaService.getArea(4L));
 
     }
 
