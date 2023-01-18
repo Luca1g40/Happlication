@@ -1,11 +1,6 @@
 package com.infosupport.happ.application;
 
-
-import com.infosupport.happ.application.dto.OrderData;
-import com.infosupport.happ.application.dto.ProductData;
-import com.infosupport.happ.application.dto.ShoppingCartData;
-import com.infosupport.happ.application.dto.TableData;
-import com.infosupport.happ.data.OrderRepository;
+import com.infosupport.happ.application.dto.*;
 import com.infosupport.happ.data.TableRepository;
 import com.infosupport.happ.domain.*;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
@@ -37,7 +32,8 @@ public class TableService {
     }
 
     public TableData setBoolHulp(Long tableId, boolean hulpNodig) {
-        Table table = getTable(tableId);
+        tableExists(tableId);
+        Table table = tableRepository.getById(tableId);
         table.setHulpNodig(hulpNodig);
         return createTableData(table);
     }
@@ -47,12 +43,35 @@ public class TableService {
         return tableRepository.getById(tableId);
     }
 
+
     public List<TableData> getAllTables() {
         List<TableData> tableData = new ArrayList<>();
         for (Table table : tableRepository.findAll()){
             tableData.add(createTableData(table));
         }
         return tableData;
+
+    public Long getTableNumberByNumber(int tableNumber){
+        if(tableRepository.getTableByTableNumber(tableNumber) != null){
+            Table table = tableRepository.getTableByTableNumber(tableNumber);
+            return table.getId();
+        }
+        return 0L;
+    }
+
+    public LocalTime getTimeOfLogin(Long tableId){
+        tableExists(tableId);
+        Table table = tableRepository.getById(tableId);
+        return table.getLoginTime();
+    }
+
+    public void setTimeAndStatus(Long tableId, LocalTime timeOfLogin){
+        tableExists(tableId);
+        Table table = tableRepository.getById(tableId);
+        table.setTableStatus(TableStatus.OCCUPIED);
+        table.setLoginTime(timeOfLogin);
+        tableRepository.save(table);
+
     }
 
     public ShoppingCartData getTableShoppingCart(Long tableId) {
@@ -103,6 +122,14 @@ public class TableService {
         return createTableData(table);
     }
 
+    public List<TableData> getAllTables() {
+        List<TableData> tableData = new ArrayList<>();
+        for (Table table : tableRepository.findAll()) {
+            tableData.add(createTableData(table));
+        }
+        return tableData;
+    }
+
     private void tableExists(Long id) {
         if (!tableRepository.existsById(id)) {
             throw new ItemNotFound(Table.class.getSimpleName());
@@ -115,11 +142,16 @@ public class TableService {
     }
 
     public TableData createTableData(Table table) {
+
         return new TableData(table.getId(),
+
+        return new TableData(
+                table.getId(),
+
                 table.getAmountOfPeople(),
                 table.getTableNumber(),
                 table.getElapsedTimeSinceOrder(),
-                table.getTimeLeftToOrder(),
+                table.getLoginTime(),
                 table.getTableStatus(),
                 new ShoppingCartData(table.getShoppingCart().getProducts()),
                 convertToKitchenOrderDataList(table.getKitchenOrders()),
@@ -145,7 +177,7 @@ public class TableService {
         return productDataList;
     }
     public ProductData createProductData(Product product) {
-        return new ProductData(product.getId(),product.getName(),product.getProductCategory(),product.getPrice(),product.getIngredients(),product.getDetails(),product.getProductDestination());
+        return new ProductData(product.getId(),product.getName(),product.getProductCategory().getName(),product.getPrice(),product.getIngredients(),product.getDetails(),product.getProductDestination(),product.getProductType(),product.getImagePath());
     }
 
     public List<OrderData> convertToBarOrderDataList(List<BarOrder> orders) {
@@ -166,7 +198,5 @@ public class TableService {
 
         return ordersData;
     }
-
-
 }
 

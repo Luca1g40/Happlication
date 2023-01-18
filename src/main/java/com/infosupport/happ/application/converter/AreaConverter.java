@@ -1,9 +1,6 @@
 package com.infosupport.happ.application.converter;
 
-import com.infosupport.happ.application.dto.OrderData;
-import com.infosupport.happ.application.dto.ProductData;
-import com.infosupport.happ.application.dto.ShoppingCartData;
-import com.infosupport.happ.application.dto.TableData;
+import com.infosupport.happ.application.dto.*;
 import com.infosupport.happ.domain.*;
 import org.springframework.stereotype.Component;
 
@@ -14,11 +11,16 @@ import java.util.List;
 public class AreaConverter {
 
     public TableData createTableData(Table table) {
+
         return new TableData(table.getId(),
+
+        return new TableData(
+                table.getId(),
+
                 table.getAmountOfPeople(),
                 table.getTableNumber(),
                 table.getElapsedTimeSinceOrder(),
-                table.getTimeLeftToOrder(),
+                table.getLoginTime(),
                 table.getTableStatus(),
                 new ShoppingCartData(table.getShoppingCart().getProducts()),
                 convertToKitchenOrderDataList(table.getKitchenOrders()),
@@ -45,7 +47,8 @@ public class AreaConverter {
     }
 
     public ProductData createProductData(Product product) {
-        return new ProductData(product.getId(),product.getName(),product.getProductCategory(),product.getPrice(),product.getIngredients(),product.getDetails(),product.getProductDestination());
+        return new ProductData(product.getId(),product.getName(), product.getProductCategory().getName(),product.getPrice(),product.getIngredients(),product.getDetails(),product.getProductDestination(),product.getProductType(), product.getImagePath());
+
     }
 
     public List<OrderData> convertToBarOrderDataList(List<BarOrder> orders) {

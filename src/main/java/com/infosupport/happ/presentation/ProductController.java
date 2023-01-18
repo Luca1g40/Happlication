@@ -6,10 +6,20 @@ import com.infosupport.happ.domain.Product;
 import com.infosupport.happ.domain.exceptions.ItemNotFound;
 import com.infosupport.happ.presentation.dto.ProductRequest;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/happ")
@@ -26,13 +36,27 @@ public final class ProductController {
         try {
             return this.productService.createProduct(
                     productRequest.name,
-                    productRequest.productCategory,
+                    productRequest.productCategoryName,
                     productRequest.price,
                     productRequest.ingredients,
                     productRequest.details,
-                    productRequest.productDestination);
+                    productRequest.productDestination,
+                    productRequest.productType,
+                    productRequest.imagePath);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @PostMapping(value = "/image")
+    public String uploadImage(@RequestPart MultipartFile imageFile) {
+
+
+        try {
+            String path = System.getProperty("user.dir").concat("\\src\\frontend\\frontendhapp\\src\\images");
+            Files.copy(imageFile.getInputStream(), Paths.get(path+ File.separator+imageFile.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
+            return imageFile.getOriginalFilename();
+        } catch (Exception ex) {
+            return"Image is not uploaded";
         }
     }
 
@@ -47,19 +71,19 @@ public final class ProductController {
         }
     }
 
+    @GetMapping("/products/drinks")
+    private List<ProductData> getAllDrinks(){
+        return productService.findAlDrink();
+    }
+
+    @GetMapping("/products/foods")
+    private List<ProductData> getAllFood(){
+        return productService.findAllFood();
+    }
+
     @GetMapping("/product/findall")
     private List<Product> findAll() {
         return productService.findAll();
-    }
-
-    @GetMapping("/product/drinks")
-    private List<Product> findAllDrinks() {
-        return productService.findAllDrinks();
-    }
-
-    @GetMapping("/product/food")
-    private List<Product> findAllFood() {
-        return productService.findAllFood();
     }
 
     @PutMapping("/product/{productid}/prepstatus")
@@ -78,11 +102,14 @@ public final class ProductController {
         try {
             return this.productService.updateProduct(
                     productRequest.name,
-                    productRequest.productCategory,
+                    productRequest.productCategoryName,
                     productRequest.price,
                     productId,
                     productRequest.ingredients,
-                    productRequest.details
+                    productRequest.details,
+                    productRequest.productType,
+                    productRequest.imagePath,
+                    productRequest.productDestination
             );
         } catch (ItemNotFound e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());

@@ -23,7 +23,6 @@ export function RemoveProductFromShoppingCart(tableId, productId) {
             return res.data.shoppingCart.productDataList;
         })
         .catch(err => {
-            console.log(productId)
             console.log(err)
         })
 }
@@ -49,6 +48,17 @@ export function GetShoppingCart(tableId){
         })
 }
 
+export function GetTableByNumber(tableNumber){
+    return axios.get(`http://localhost:8080/happ/tablenumber/${tableNumber}`,configuration)
+        .then(res => {
+            console.log(res)
+            return res.data;
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+
 export function RemoveAllProductOccurancesFromCart(tableId,productId){
    return axios.post(`http://localhost:8080/happ/table/${tableId}/shoppingcart/remove/products`,{
         "id":productId
@@ -63,7 +73,11 @@ export function RemoveAllProductOccurancesFromCart(tableId,productId){
 }
 
 export function getAllTables() {
+
     return axios.get("http://localhost:8080/happ/table", configuration)
+
+    return axios.get("http://localhost:8080/happ/table/findalltable", configuration)
+
         .then(res => {
             console.log(res)
             return res.data
@@ -73,16 +87,26 @@ export function getAllTables() {
         })
 }
 
+
 export function DeleteTable(tableIdForDelete) {
     return axios.delete(`http://localhost:8080/happ/table/${tableIdForDelete}`, configuration)
         .then(res => {
             console.log(res)
             return res.data
+
+export function klantIsGeholpen(tafelId){
+    axios.put(`http://localhost:8080/happ/table/${tafelId}/helpNodig`, {//todo->tafelId moet zelf opgehaald worden
+        "setHulpBool" : "false"
+    })
+        .then(res => {
+            console.log(res)
+
         })
         .catch(err => {
             console.log(err)
         })
 }
+
 
 export function CreateTable(amountOfPeople, tableNr){
     return axios.post(`http://localhost:8080/happ/table`, {
@@ -99,3 +123,47 @@ export function CreateTable(amountOfPeople, tableNr){
             return err.response.status
         })
 }
+
+export function addTableToArea(tableId, areaId) {
+    return axios.post(`http://localhost:8080/happ/table/${tableId}/area`, {
+        "id": areaId
+    }, configuration)
+        .then(res => {
+            console.log(res);
+            return res.data;
+        })
+        .catch(err => {
+            console.log(err);
+        });
+}
+export function KlantHeeftHulpNodig(tafelId){
+    axios.put(`http://localhost:8080/happ/table/${tafelId}/helpNodig`, {
+        "setHulpBool" : "true"
+    })
+        .then(res => {
+            console.log(res)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+
+export function setTimeAndStatus(tafelId, timeOfLogin){
+    axios.put(`http://localhost:8080/happ/table/tablestatus/${tafelId}`, {
+        "timeOfLogin" : timeOfLogin
+    })
+        .then(res => {
+            console.log(res)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+
+export function GetTimeOfLogin(tafelId){
+    return axios.get(`http://localhost:8080/happ/table/logintime/${tafelId}`)
+        .then(res => {
+            return res.data;
+        })
+}
+

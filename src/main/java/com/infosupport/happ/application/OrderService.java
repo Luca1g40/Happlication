@@ -1,7 +1,9 @@
 package com.infosupport.happ.application;
 
 import com.infosupport.happ.application.dto.OrderData;
+import com.infosupport.happ.application.dto.ProductCategoryData;
 import com.infosupport.happ.application.dto.ProductData;
+import com.infosupport.happ.application.dto.ProductSubCategoryData;
 import com.infosupport.happ.data.BarOrderRepository;
 import com.infosupport.happ.data.KitchenOrderRepository;
 import com.infosupport.happ.data.OrderAssistant;
@@ -40,7 +42,6 @@ public class OrderService {
 
 
     public OrderData claimOrder(Long staffId, Long orderId) {
-        System.out.println("here");
 
         Staff staff = orderAssistant.getStaff(staffId);
 
@@ -81,7 +82,6 @@ public class OrderService {
     }
 
     public OrderData getKitchenOrder(Long orderId) {
-        orderExists(orderId);
         KitchenOrder order = kitchenOrderRepository.getById(orderId);
         return createOrderData(order);
     }
@@ -146,7 +146,7 @@ public class OrderService {
         return productDataList;
     }
     public ProductData createProductData(Product product) {
-        return new ProductData(product.getId(),product.getName(),product.getProductCategory(),product.getPrice(),product.getIngredients(),product.getDetails(),product.getProductDestination());
+        return new ProductData(product.getId(),product.getName(),product.getProductCategory().getName(),product.getPrice(),product.getIngredients(),product.getDetails(),product.getProductDestination(),product.getProductType(), product.getImagePath());
     }
 
 

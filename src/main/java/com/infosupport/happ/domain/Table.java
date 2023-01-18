@@ -24,7 +24,7 @@ public class Table {
     private List<BarOrder> barOrders;
 
     private LocalTime elapsedTimeSinceOrder;
-    private LocalTime timeLeftToOrder;
+    private LocalTime loginTime;
     private int amountOfPeople;
     @Column(unique = true)
     private int tableNumber;
@@ -35,7 +35,7 @@ public class Table {
     private boolean hulpNodig = false;
 
     //TODO GOOI ORDERS
-    public Table(LocalTime elapsedTimeSinceOrder, LocalTime timeLeftToOrder, int amountOfPeople, int tableNumber, TableStatus tableStatus, ShoppingCart shoppingCart, boolean hulpNodig) {
+    public Table(LocalTime elapsedTimeSinceOrder, LocalTime loginTime, int amountOfPeople, int tableNumber, TableStatus tableStatus, ShoppingCart shoppingCart, boolean hulpNodig) {
         if (tableNumber < 0) {
             throw new AttributeMustBeBiggerThanZero(getClass().getSimpleName(), "table number");
         }else if(amountOfPeople < 0) throw new AttributeMustBeBiggerThanZero(getClass().getSimpleName(), "amount of people");
@@ -45,7 +45,7 @@ public class Table {
         this.barOrders = new ArrayList<>();
 
         this.elapsedTimeSinceOrder = elapsedTimeSinceOrder;
-        this.timeLeftToOrder = timeLeftToOrder;
+        this.loginTime = loginTime;
         this.amountOfPeople = amountOfPeople;
         this.tableNumber = tableNumber;
         this.tableStatus = tableStatus;
@@ -64,6 +64,14 @@ public class Table {
         this.hulpNodig = hulpNodig;
     }
 
+    public void setTableStatus(TableStatus tableStatus) {
+        this.tableStatus = tableStatus;
+    }
+
+    public void setLoginTime(LocalTime loginTime) {
+        this.loginTime = loginTime;
+    }
+
     public int getAmountOfPeople() {
         return amountOfPeople;
     }
@@ -76,8 +84,8 @@ public class Table {
         return elapsedTimeSinceOrder;
     }
 
-    public LocalTime getTimeLeftToOrder() {
-        return timeLeftToOrder;
+    public LocalTime getLoginTime() {
+        return loginTime;
     }
 
     public TableStatus getTableStatus() {

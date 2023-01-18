@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
 @RestController
 @Transactional
 @RequestMapping("/happ")
@@ -92,6 +94,11 @@ public class AreaController {
     @PutMapping("/staff/{areaid}/area")
     public AreaData editStaffInArea(@PathVariable Long areaid, AreaRequest areaRequest) {
         return areaService.editStaffListInArea(areaid, areaRequest.staffIdList);
+    }
+
+    @GetMapping("/area/allareas")
+    public List<AreaData> getAllAreas() {
+        return this.areaService.getAllAreas();
     }
 
 

@@ -18,29 +18,16 @@
     border-radius: 10px;
     width: 100%;
     max-width: 640px;
-    background-color: #f8cfad;
+    background-color: #e9ecef;
     box-shadow:
             rgba(0, 0, 0, 0.19)
             0 10px 20px,
             rgba(0, 0, 0, 0.23)
             0 6px 6px;
-
-
 }
 
 .popup-inner .close-btn {
-    position: relative;
-    height: fit-content;
-    width: fit-content;
     justify-self: right;
-    align-self: normal;
-    margin: 5px;
-    padding: 5px;
-    background: none;
-    border-width: .5px;
-    border-color: #ebc295;
-    border-radius: 5px;
-
 }
 
 .close-btn:hover{
@@ -56,6 +43,10 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     align-items: center;
+}
+
+.grid-item-1{
+    align-self: center;
 }
 
 
@@ -75,5 +66,39 @@
     right: 25%;
     left: 50%;
     margin-left: -150px;
+}
 
+.delete-button-right{
+    position: absolute;
+    bottom: 2%;
+    right: 2%;
+}
+
+.update-button-left{
+    position: absolute;
+    bottom: 2%;
+    left: 2%;
+}
+
+.description-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.descriptive-text{
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.photo{
+    max-width: 40%;
+    height: auto;
+    margin: 2%;
 }

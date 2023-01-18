@@ -1,19 +1,19 @@
-#searchTable {
+.search-table {
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
 }
 
-#searchTable td, #searchTable th {
+.search-table td, .search-table th {
     border: 1px solid #ddd;
     padding: 8px;
 }
 
-#searchTable tr:nth-child(even){background-color: #f2f2f2;}
+.search-table tr:nth-child(even){background-color: #f2f2f2;}
 
-#searchTable tr:hover {background-color: #ddd; cursor:pointer;}
+.search-table tr:hover {background-color: #ddd; cursor:pointer;}
 
-#searchTable th {
+.search-table th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
@@ -21,16 +21,7 @@
     color: white;
 }
 
-.logoutSelect {
-    background-color: red !important;
-    width: 100px !important;
-}
-
 .select-options{
-    width: 15%;
-}
-
-.css-b62m3t-container{
     width: 15%;
 }
 
@@ -40,7 +31,7 @@
 }
 
 .select-filters{
-    width: 100%;
+    width: 97%;
     position: absolute;
     margin-left: 5px;
 
@@ -48,7 +39,13 @@
 
 .css-1s2u09g-control{
     margin-right: 5px;
+
 }
+
+.css-1s2u09g-control:focus{
+    margin-right: 5px;
+}
+
 
 .product-tables{
     width: 85%;
@@ -57,8 +54,8 @@
 }
 
 .search-bar{
-    margin: 5px;
-    width: 14.75%;
+    width: 100%;
+    margin-bottom: 5px;
     border-color: hsl(0, 0%, 80%);
     border-style: solid;
     border-width: 1px;

@@ -16,11 +16,17 @@ function CreatingStaff(){
 
         if(rights === "Keuken"){
             r = ["KITCHEN_RIGHTS"]
-        }else if(rights === "Bar"){
+        } else if(rights === "Bar"){
             r = ["BAR_RIGHTS"]
-        }else if(rights === "Keuken & bar"){
+        } else if(rights === "Keuken & bar"){
             r = ["KITCHEN_RIGHTS", "BAR_RIGHTS"]
-        }
+        } else if(rights === "Service"){
+            r = ["SERVICE_RIGHTS"]
+        } else if(rights === "Admin") {
+            r = ["ADMIN_RIGHTS"]
+        } else if(rights === "Administratie"){
+            r = ["ADMINISTRATION_RIGHTS"]
+    }
 
         const status = await CreateStaff(firstname, password, r)
 
@@ -36,22 +42,27 @@ function CreatingStaff(){
         setNum(event.target.value.slice(0, limit));
     };
 
-    return (
-           <form className={"list"}>
-               <h4>Voornaam</h4>
-               <input type="text" placeholder="Voer voornaam in" id="f"/><br/><br/>
-               <h4>Wachtwoord</h4>
-               <input type="number" onChange={handleNumChange} placeholder="Voer wachtwoord in" value={num} id="p"/><br/><br/>
-               <h4>Rechten</h4>
-               <select id="r" name="Rechten">
+    return (<>
+           <div className={"crud-form"}>
+               <p className={"left-column"}>Voornaam</p>
+               <input className={"right-column"} type="text" placeholder="Voornaam" id="f"/><br/><br/>
+               <p className={"left-column"}>Wachtwoord</p>
+               <input className={"right-column"} type="number" onChange={handleNumChange} placeholder="Wachtwoord" value={num} id="p"/><br/><br/>
+               <p className={"left-column"}>Rechten</p>
+               <select className={"right-column"} id="r" name="Rechten">
                    <option value="Keuken">Keuken</option>
                    <option value="Bar">Bar</option>
                    <option value="Keuken & bar">Keuken & bar</option>
-               </select><br/><br/>
-               <input type="button" value="Staff-member aanmaken"  onClick={() => {create()}} className={"button"}/>
+                   <option value="Service">Service</option>
+                   <option value="Administratie">Administratie</option>
+                   <option value="Admin">Admin</option>
+               </select>
                <ToastContainer />
-           </form>
-    )
+           </div>
+            <input className={"button create-staff-button"} type="button" value="Staff-member aanmaken" onClick={() => {create()}}/>
+        </>
+
+)
 }
 
 export default CreatingStaff

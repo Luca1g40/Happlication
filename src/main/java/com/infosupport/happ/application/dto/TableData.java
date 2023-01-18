@@ -19,7 +19,11 @@ public class TableData {
     public final boolean isHulpNodig;
 
 
+
     public TableData(Long id,int amountOfPeople, int tableNumber, LocalTime elapsedTimeSinceOrder, LocalTime timeLeftToOrder,  TableStatus tableStatus, ShoppingCartData shoppingCartData, List<OrderData> kitchenOrders, List<OrderData> barOrders, boolean isHulpNodig) {
+
+    public TableData(Long id, int amountOfPeople, int tableNumber, LocalTime elapsedTimeSinceOrder, LocalTime timeLeftToOrder,  TableStatus tableStatus, ShoppingCartData shoppingCartData, List<OrderData> kitchenOrders, List<OrderData> barOrders, boolean isHulpNodig) {
+
         this.id = id;
         this.amountOfPeople = amountOfPeople;
         this.tableNumber = tableNumber;

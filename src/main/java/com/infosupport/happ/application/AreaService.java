@@ -39,6 +39,14 @@ public class AreaService {
         return createAreaData(area);
     }
 
+    public List<AreaData> getAllAreas() {
+        List<AreaData> areaDataList = new ArrayList<>();
+        for (Area area : areaRepository.findAll()) {
+            areaDataList.add(createAreaData(area));
+        }
+        return areaDataList;
+    }
+
     public List<Table> getTablesThatNeedHelp(Long areaId) {
         List<Table> tableNeedHelp = new ArrayList<>();
         Area area = areaRepository.getById(areaId);
@@ -122,6 +130,7 @@ public class AreaService {
 
     public AreaData createAreaData(Area area) {
         return new AreaData(
+                area.getId(),
                 area.getName(),
                 area.getTables().stream().map(areaConverter::createTableData).collect(Collectors.toList()),
                 createStaffWithoutArea(area)
