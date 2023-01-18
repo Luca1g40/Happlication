@@ -11,8 +11,12 @@ import java.util.List;
 public class AreaConverter {
 
     public TableData createTableData(Table table) {
+
+        return new TableData(table.getId(),
+
         return new TableData(
                 table.getId(),
+
                 table.getAmountOfPeople(),
                 table.getTableNumber(),
                 table.getElapsedTimeSinceOrder(),

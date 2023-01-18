@@ -5,6 +5,19 @@ import {DeleteStaff, UpdateStaff} from "../../urlMappings/StaffRequests";
 
 function ProductDetailsPopup(props) {
 
+    useEffect(() => {
+        getAllStaffMembers()
+            .then(res => {
+                    console.log(res)
+                }
+            )
+            .catch(err =>
+                console.log(err)
+            )
+    }, [])
+
+
+
     function closePopUp() {
         props.unselectMember();
         props.setTrigger(false);

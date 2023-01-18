@@ -19,9 +19,18 @@ export default function AdministrationPage() {
                 <div/><hr/><hr/>
                 <Link className="button homeModule_bt_space" to="/createStaff">Create Staff</Link>
                 <Link className="button homeModule_bt_space" to="/allStaffMembers">Get All Staff</Link>
+
+                <hr/>
+                <Link className="button homeModule_bt_space" to="/createTable">Create Table</Link>
+                <Link className="button homeModule_bt_space" to="/allTables">Get All Tables</Link>
+                <Link to="/staffmodule" className="button login-button" >Home</Link>
+                <Logout/>
+
+
                 <hr/><hr/>
                 <Link className="button homeModule_bt_space" to="/createarea">Create Area</Link>
                 <Link className="button homeModule_bt_space" to="/areas">Get All Areas</Link>
+
             </div>
             <Link to="/staffmodule" className="button login-button" >Home</Link>
             <Logout/>

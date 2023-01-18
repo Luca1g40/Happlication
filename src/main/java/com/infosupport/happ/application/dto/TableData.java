@@ -6,6 +6,7 @@ import java.time.LocalTime;
 import java.util.List;
 
 public class TableData {
+
     public final Long id;
     public final int amountOfPeople;
     public final int tableNumber;
@@ -18,7 +19,11 @@ public class TableData {
     public final boolean isHulpNodig;
 
 
+
+    public TableData(Long id,int amountOfPeople, int tableNumber, LocalTime elapsedTimeSinceOrder, LocalTime timeLeftToOrder,  TableStatus tableStatus, ShoppingCartData shoppingCartData, List<OrderData> kitchenOrders, List<OrderData> barOrders, boolean isHulpNodig) {
+
     public TableData(Long id, int amountOfPeople, int tableNumber, LocalTime elapsedTimeSinceOrder, LocalTime timeLeftToOrder,  TableStatus tableStatus, ShoppingCartData shoppingCartData, List<OrderData> kitchenOrders, List<OrderData> barOrders, boolean isHulpNodig) {
+
         this.id = id;
         this.amountOfPeople = amountOfPeople;
         this.tableNumber = tableNumber;

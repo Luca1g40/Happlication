@@ -73,7 +73,11 @@ export function RemoveAllProductOccurancesFromCart(tableId,productId){
 }
 
 export function getAllTables() {
+
+    return axios.get("http://localhost:8080/happ/table", configuration)
+
     return axios.get("http://localhost:8080/happ/table/findalltable", configuration)
+
         .then(res => {
             console.log(res)
             return res.data
@@ -83,15 +87,40 @@ export function getAllTables() {
         })
 }
 
+
+export function DeleteTable(tableIdForDelete) {
+    return axios.delete(`http://localhost:8080/happ/table/${tableIdForDelete}`, configuration)
+        .then(res => {
+            console.log(res)
+            return res.data
+
 export function klantIsGeholpen(tafelId){
     axios.put(`http://localhost:8080/happ/table/${tafelId}/helpNodig`, {//todo->tafelId moet zelf opgehaald worden
         "setHulpBool" : "false"
     })
         .then(res => {
             console.log(res)
+
         })
         .catch(err => {
             console.log(err)
+        })
+}
+
+
+export function CreateTable(amountOfPeople, tableNr){
+    return axios.post(`http://localhost:8080/happ/table`, {
+        "amountOfPeople" : amountOfPeople,
+        "tableNr" : tableNr,
+    }, configuration)
+        .then(res => {
+            console.log(res)
+            return res.status
+        })
+        .catch(err => {
+            console.log(err)
+            console.log(err.return.status)
+            return err.response.status
         })
 }
 
@@ -137,3 +166,4 @@ export function GetTimeOfLogin(tafelId){
             return res.data;
         })
 }
+

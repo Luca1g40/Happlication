@@ -65,4 +65,14 @@ public class OrderController {
     private void deleteBarOrder(@PathVariable("orderid") Long orderId) {
         this.orderService.deleteBarOrder(orderId);
     }
+
+//    @PutMapping("/order/{orderid}")
+//    private void setOrderToDone(@PathVariable("orderid") long orderId) {
+//        this.orderService
+//    }
+
+
+
+
+
 }

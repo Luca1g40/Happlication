@@ -14,9 +14,13 @@ import SearchProduct from "./components/product/SearchProduct";
 import ViewIngredient from "./components/ingredient/ViewIngredient";
 import StaffDashboard from "./pages/StaffDashboard";
 import CreateStaff from "./pages/CreateStaff"
+import CreateTable from "./pages/CreateTable";
 import AllStaffMembers from "./components/administration/AllStaffMembers";
 import StaffModuleHomePagina from "./pages/StaffModuleHomePagina";
 import AdministrationPage from "./pages/AdministrationPage";
+
+import AllTables from "./components/administration/AllTables";
+
 import AllAreas from "./pages/AllAreas";
 import CreateArea from "./pages/CreateArea";
 import ViewProductCategory from "./components/productcategory/ViewProductCategory";
@@ -24,6 +28,7 @@ import Menu from "./components/menu/Menu";
 import Error403Page from "./pages/Error403Page";
 import SearchCategory from "./components/productcategory/SearchCategory";
 import LoginGast from "./pages/LoginGast"
+
 
 function App() {
     return (
@@ -37,9 +42,17 @@ function App() {
             <Route path="shoppingcart" element={<ShoppingCart/>}/>
             <Route path="login" element={<Staff/>}/>
             <Route path="claims" element={<PersonalModule/>}/>
+
+            <Route path="staffDashboard" element={<StaffDashboard/>}/>
+            <Route path="createStaff" element={<CreateStaff/>}/>
+            <Route path="createTable" element={<CreateTable />}/>
+            <Route path="allStaffMembers" element={<AllStaffMembers/>}/>
+            <Route path="allTables" element={<AllTables/>}/>
+
             <Route path="staffdashboard" element={<StaffDashboard/>}/>
             <Route path="createstaff" element={<CreateStaff/>}/>
             <Route path="allStaffmembers" element={<AllStaffMembers/>}/>
+
             <Route path="staffmodule" element={<StaffModuleHomePagina/>}/>
             <Route path="administration" element={<AdministrationPage/>}/>
             <Route path="productdetails/:id" element={<ViewProductForm/>}/>
