@@ -9,14 +9,14 @@ import HomeNav from "../utils/Homebutton"
 import {Link} from "react-router-dom";
 
 
-export default function ViewIngredient(){
+export default function ViewIngredient() {
     const params = useParams();
-    const [ingredient,setIngredient] = useState()
+    const [ingredient, setIngredient] = useState()
     const [disabled, setDisabled] = useState(false)
-    const [foutMelding,setFoutMelding] = useState();
+    const [foutMelding, setFoutMelding] = useState();
 
     useEffect(() => {
-        if (!(params.id === undefined)){
+        if (!(params.id === undefined)) {
             getIngredient(params.id)
                 .then(res => {
                     setIngredient(res);
@@ -26,7 +26,7 @@ export default function ViewIngredient(){
 
                 })
         }
-    },[])
+    }, [])
 
     const handleChange = (event) => {
         const name = event.target.name;
@@ -40,19 +40,25 @@ export default function ViewIngredient(){
         <>
             <h1>Create ingredient</h1>
             <div className={"home-button"}>
-                <Link to="/administration" className="button search-products-navigation" >Home</Link>
+                <Link to="/administration" className="button search-products-navigation">Home</Link>
             </div>
-            <IngredientForm errorMeldingText={foutMelding} handleChange={event=>handleChange(event)}/>
-            <SubmitButton className={"button crud-form-submit"} setFoutMelding={foutMelding=>setFoutMelding(foutMelding)} disabled={disabled} setDisabled={disabled=>setDisabled(disabled)} action={Actions.CREATE_INGREDIENT} buttonText={"Create ingredient"} ingredient={ingredient}/>
+            <IngredientForm errorMeldingText={foutMelding} handleChange={event => handleChange(event)}/>
+            <SubmitButton className={"button crud-form-submit"}
+                          setFoutMelding={foutMelding => setFoutMelding(foutMelding)} disabled={disabled}
+                          setDisabled={disabled => setDisabled(disabled)} action={Actions.CREATE_INGREDIENT}
+                          buttonText={"Create ingredient"} ingredient={ingredient}/>
             <Logout/>
             <HomeNav/>
         </>
-) : (
+    ) : (
         <>
-            <IngredientForm errorMeldingText={foutMelding} disabled={disabled} ingredient={ingredient} handleChange={event=>handleChange(event)}/>
-            <SubmitButton setFoutMelding={foutMelding=>setFoutMelding(foutMelding)} disabled={disabled} setDisabled={disabled=>setDisabled(disabled)} action={Actions.UPDATE_INGREDIENT} buttonText={"Update"}  ingredient={ingredient}/>
-            <button onClick={()=>setDisabled(false)} disabled={!disabled}>Edit</button>
-            <button onClick={()=>setDisabled(true)} disabled={disabled}>Cancel</button>
+            <IngredientForm errorMeldingText={foutMelding} disabled={disabled} ingredient={ingredient}
+                            handleChange={event => handleChange(event)}/>
+            <SubmitButton setFoutMelding={foutMelding => setFoutMelding(foutMelding)} disabled={disabled}
+                          setDisabled={disabled => setDisabled(disabled)} action={Actions.UPDATE_INGREDIENT}
+                          buttonText={"Update"} ingredient={ingredient}/>
+            <button onClick={() => setDisabled(false)} disabled={!disabled}>Edit</button>
+            <button onClick={() => setDisabled(true)} disabled={disabled}>Cancel</button>
         </>
 
 

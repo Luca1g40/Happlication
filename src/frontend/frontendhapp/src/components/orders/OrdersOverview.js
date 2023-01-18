@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import OrderItemList from "./OrderItemList";
 
 export default function OrdersOverview(props) {
@@ -39,7 +39,7 @@ export default function OrdersOverview(props) {
                             <OrderItemList staffRights={props.staffRights} order={order}/>
                         </div>
                         <div className={"order-time"}>
-                            <p className={"order-time-paragraph"}> {order.orderTime}  </p>
+                            <p className={"order-time-paragraph"}> {order.orderTime} </p>
                             <p className={"order-date-paragraph"}> {order.orderDate} </p>
                         </div>
                     </div>

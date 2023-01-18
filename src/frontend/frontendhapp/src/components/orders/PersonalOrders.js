@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import SingleOrder from "./SingleOrder";
 import {getPersonallyClaimedOrders} from "../../urlMappings/OrderRequests";
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 function OrdersDataFetching() {
     const [orders, setOrders] = useState([])
@@ -30,8 +30,8 @@ function OrdersDataFetching() {
             </div>
             <div className={"bottom-bar"}>
                 <div className={"claim-order-button"}>
-                    <button className={"buttons-navbar"} onClick={()=>navigate("/orders")}>All orders</button>
-                    <button className={"buttons-navbar"} onClick={()=>navigate("/staffmodule")}>Staff module</button>
+                    <button className={"buttons-navbar"} onClick={() => navigate("/orders")}>All orders</button>
+                    <button className={"buttons-navbar"} onClick={() => navigate("/staffmodule")}>Staff module</button>
 
                 </div>
                 <span>

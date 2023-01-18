@@ -27,6 +27,8 @@ import ViewProductCategory from "./components/productcategory/ViewProductCategor
 import Menu from "./components/menu/Menu";
 import Error403Page from "./pages/Error403Page";
 import SearchCategory from "./components/productcategory/SearchCategory";
+import TableReceipt from "./components/orders/TableReceipt";
+import OrdersStatistiekenPage from "./pages/OrdersStatistiekenPagina";
 import LoginGast from "./pages/LoginGast"
 
 
@@ -66,6 +68,10 @@ function App() {
             <Route path="categorydetails/:id" element={<ViewProductCategory/>}/>
             <Route path="error403" element={<Error403Page/>}/>
             <Route path="searchcategory" element={<SearchCategory/>}/>
+            <Route path="allorders/:id" element={<TableReceipt/>}/>
+            <Route path="statistics" element={<OrdersStatistiekenPage/>}/>
+
+
         </Routes>
     )
 

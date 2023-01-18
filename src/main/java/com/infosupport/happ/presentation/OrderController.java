@@ -7,6 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDate;
+import java.util.List;
+
 @RestController
 @RequestMapping("/happ")
 public class OrderController {
@@ -63,10 +66,19 @@ public class OrderController {
         this.orderService.deleteBarOrder(orderId);
     }
 
-//    @PutMapping("/order/{orderid}")
-//    private void setOrderToDone(@PathVariable("orderid") long orderId) {
-//        this.orderService
-//    }
+    @GetMapping("/order/all")
+    private List<OrderData> getAllOrders() {
+        return this.orderService.getAllOrders();
+    }
 
+    @GetMapping("/order/bydate")
+    private List<OrderData> getOrdersByDate(@RequestParam("firstDate") String firstDate, @RequestParam("secondDate") String secondDate) {
 
+        return this.orderService.getAllOrdersByDatePeriod(LocalDate.parse(firstDate), LocalDate.parse(secondDate));
+    }
+
+    @GetMapping("/orders/today")
+    private List<OrderData> getOrdersOfToday() {
+        return this.orderService.getAllOrdersOfToday();
+    }
 }

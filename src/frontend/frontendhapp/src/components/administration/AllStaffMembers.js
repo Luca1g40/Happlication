@@ -18,13 +18,13 @@ function AllStaffMembers() {
 
     useEffect(() => {
         handleChange()
-    },[optionSelected])
+    }, [optionSelected])
 
     useEffect(() => {
         getAllStaffMembers()
             .then(res => {
                     setMembers(res)
-                setFilteredMembers(res)
+                    setFilteredMembers(res)
                 }
             )
             .catch(err =>
@@ -32,18 +32,29 @@ function AllStaffMembers() {
             )
     }, [])
 
-    function getUniqueRights(members){
+    function getUniqueRights(members) {
         let categoryOptions = [];
-        let staffRights = members.map(member => {return member.rights})
-        const uniqueRightsEnum = staffRights.filter((x, i, a) => a.indexOf(x) === i)
-        uniqueRightsEnum.map(right => {
-            categoryOptions.push({value: right[0], label: showRight(right[0])})
+        let staffRights = members.map(member => {
+            return member.rights
+        })
+        let uniqueRights = []
+        staffRights.map(rights=>{
+            rights.map(right=>{
+                if (!(uniqueRights.includes(right))){
+                    uniqueRights.push(right)
+                }
+            })
+
+        })
+
+        uniqueRights.map(right => {
+            categoryOptions.push({value: right, label: showRight(right)})
         })
         return categoryOptions
     }
 
-    function showRight(right){
-        switch (right){
+    function showRight(right) {
+        switch (right) {
             case "KITCHEN_RIGHTS":
                 return "Kitchen right";
             case "BAR_RIGHTS":
@@ -110,20 +121,19 @@ function AllStaffMembers() {
         setButtonPopup(true);
     }
 
-    function handleChange (){
+    function handleChange() {
         const value = ref.current.value
         let filterMembers = []
-        if (value.trim().length > 0){
-            filterMembers = members.filter((member)=>{
-                console.log(member.name.toLowerCase().includes(value.toLowerCase()))
+        if (value.trim().length > 0) {
+            filterMembers = members.filter((member) => {
                 return member.name.toLowerCase().includes(value.toLowerCase())
             })
-        }else{
+        } else {
             filterMembers = members;
         }
 
 
-        if (!(optionSelected.value === undefined)){
+        if (!(optionSelected.value === undefined)) {
             filterMembers = filterMembers.filter(member => {
                 return member.rights.includes(optionSelected.value)
             })
@@ -133,28 +143,33 @@ function AllStaffMembers() {
     }
 
 
-
     return (
         <>
             <h1>Staff members</h1>
             <div className={"wrapper"}>
                 <div className={"filter-div"}>
                     <h2>Filters</h2>
-                    <input className={"search-bar"} ref={ref} placeholder={"Search"} name={"search"} onChange={handleChange}/>
-                    <DropdownFilter options={getUniqueRights(members)} setOptionSelected={(selected) => setOptionSelected(selected)} optionSelected={optionSelected}/>
+                    <input className={"search-bar"} ref={ref} placeholder={"Search"} name={"search"}
+                           onChange={handleChange}/>
+                    <DropdownFilter options={getUniqueRights(members)}
+                                    setOptionSelected={(selected) => setOptionSelected(selected)}
+                                    optionSelected={optionSelected}/>
                 </div>
                 <div className={"search-table"}>
                     <OverviewTable tableHeads={["name", "Rights"]} items={filteredMembers}
                                    leaveOutList={["operations", "claimedOrders", "claimedAndFinishedOrders", "areas", "password", "id"]}
-                                   specialDisplays={new Map([["rights", (rights) => showRights(rights)]])} handleClick={(id) => handleClick(id)}/>
+                                   specialDisplays={new Map([["rights", (rights) => showRights(rights)]])}
+                                   handleClick={(id) => handleClick(id)}/>
                 </div>
             </div>
 
             <Link className={"button createStaffLink"} to="/createStaff">Maak een nieuw staff-member aan</Link>
             <Logout/>
             <HomeNav/>
-            <StaffMemberDetailsPopup trigger={buttonPopup} setTrigger={setButtonPopup} member={selectedMember} unselectMember={() => setSelectedMember(null)}/>
+            <StaffMemberDetailsPopup trigger={buttonPopup} setTrigger={setButtonPopup} member={selectedMember}
+                                     unselectMember={() => setSelectedMember(null)}/>
         </>
     )
 }
+
 export default AllStaffMembers

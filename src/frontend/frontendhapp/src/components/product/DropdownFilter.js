@@ -1,8 +1,7 @@
 import React from "react";
-import { default as ReactSelect } from "react-select";
-import { components } from "react-select";
+import {components, default as ReactSelect} from "react-select";
 
-export default function DropdownFilter(props){
+export default function DropdownFilter(props) {
 
 
     const Option = (props) => {
@@ -12,7 +11,9 @@ export default function DropdownFilter(props){
                     <input
                         type="checkbox"
                         checked={props.isSelected}
-                        onChange={(change) => {console.log(change.target.name)}}
+                        onChange={(change) => {
+                            console.log(change.target.name)
+                        }}
                     />{" "}
                     <label>{props.label}</label>
                 </components.Option>
@@ -20,15 +21,15 @@ export default function DropdownFilter(props){
         );
     };
     const handleChange = (selected) => {
-        if (!(selected.value.localeCompare(props.optionSelected.value))){
+        if (!(selected.value.localeCompare(props.optionSelected.value))) {
             props.setOptionSelected([])
-        }else {
+        } else {
             props.setOptionSelected(selected);
         }
 
     };
 
-    return(
+    return (
         <ReactSelect
             style={"backgroundColor: 'white'"}
             options={props.options}
@@ -41,6 +42,6 @@ export default function DropdownFilter(props){
             allowSelectAll={true}
             value={props.optionSelected}
         />
-        )
+    )
 
 }

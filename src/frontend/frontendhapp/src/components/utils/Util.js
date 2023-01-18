@@ -6,7 +6,9 @@ export default function getOccurrenceProducts(list) {
             productOccurances.set(product, getTargetAmountInList(product, list))
         }
     })
+
     return productOccurances;
+
 }
 
 
@@ -63,6 +65,17 @@ export function generateObjectWithEmptyValues() {
         "productDestination": "BAR_PRODUCT"
     }
     return product
+}
+
+export function displayPrice(price) {
+    if (price.toString().includes(".")) {
+        if (price.toString().split(".")[1].length === 1) {
+            return price + "0";
+        }
+        return price;
+    } else {
+        return price + ".-";
+    }
 }
 
 
