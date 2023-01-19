@@ -12,9 +12,10 @@ function CreatingTable() {
         const number = document.getElementById("n").value;
         const amount = document.getElementById("a").value;
 
-        if (number === 200 && amount === 200) {
+        const status = await CreateTable(number, amount)
+        if (status === 200) {
             navigate("/AllTables");
-        } else if (number === 400 || amount === 400){
+        } else if (status === 400){
             toast(`Voer een geldig taffelnummer en aantal zitplaatsen in`);
         }
     }
