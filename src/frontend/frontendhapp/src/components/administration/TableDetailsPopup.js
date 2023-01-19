@@ -29,16 +29,16 @@ function TableDetailsPopup(props) {
     return (props.trigger) ? (
         <div className="popup">
             <div className="popup-inner">
-                <button className="close-btn close-memberpop" onClick={closePopUp}> X </button><br/>
+                <button className="close-btn close-memberpop" onClick={ () => closePopUp + window.location.reload()}> X </button><br/>
                 <form>
                     <h4 className={"member-text"}>Tafel Nummer</h4>
-                    <label className={"member-password"}></label><br/><br/>
+                    <label className={"member-password"}>{props.table.number}</label><br/><br/>
                     <h4 className={"member-text"}>Aantal mensen: </h4>
-                    <label className={"member-data"}></label><br/><br/>
+                    <label className={"member-data"}>{props.table.amount}</label><br/><br/>
                     <h4 className={"member-text"}>Tafel status</h4>
 
                 </form>
-                <button className={"delete-button"} onClick={() => deleteTable(props.table.id) + closePopUp()}>Verwijderen</button>
+                <button className={"delete-button"} onClick={() => deleteTable(props.table.id) + closePopUp() + window.location.reload()}>Verwijderen</button>
             </div>
         </div>
     ) : "";

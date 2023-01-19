@@ -18,7 +18,6 @@ import CreateTable from "./pages/CreateTable";
 import AllStaffMembers from "./components/administration/AllStaffMembers";
 import StaffModuleHomePagina from "./pages/StaffModuleHomePagina";
 import AdministrationPage from "./pages/AdministrationPage";
-
 import AllTables from "./components/administration/AllTables";
 
 import AllAreas from "./pages/AllAreas";

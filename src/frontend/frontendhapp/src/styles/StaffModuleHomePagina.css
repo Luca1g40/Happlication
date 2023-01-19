@@ -4,6 +4,10 @@
 
 }
 
+.middle {
+
+}
+
 .administration-grid {
     width: 35%;
     grid-template-columns: repeat(2, 1fr);
