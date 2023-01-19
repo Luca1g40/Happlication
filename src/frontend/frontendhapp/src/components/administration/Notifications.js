@@ -11,8 +11,19 @@ function Notifications(){
 
     return (
         <>
-            <button  onClick={() => { KlantHeeftHulpNodig(tableid); notify();}} className="button call-ober-knop">Call Ober!</button>
-            <ToastContainer />
+            <button  onClick={() => { KlantHeeftHulpNodig(tableid); notify();}} className="button-ober">Call Ober!</button>
+            <ToastContainer
+                position="top-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
         </>
     );
 }
