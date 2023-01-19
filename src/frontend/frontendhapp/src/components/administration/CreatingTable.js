@@ -12,20 +12,19 @@ function CreatingTable() {
         const number = document.getElementById("n").value;
         const amount = document.getElementById("a").value;
 
-        const status = await CreateTable(number, amount)
-        if (status === 200) {
+        if (number === 200 && amount === 200) {
             navigate("/AllTables");
-        } else if (status === 400){
+        } else if (number === 400 || amount === 400){
             toast(`Voer een geldig taffelnummer en aantal zitplaatsen in`);
         }
     }
 
     return (
         <form className={"list"}>
-            <h4>Tafel nummer</h4>
-            <input type="text" placeholder="Voer een tafel nummer in" id="n"/><br/><br/>
             <h4>Aantal personen</h4>
-            <input type="text" placeholder="voer het aantal personen in" id="a"/><br/><br/>
+            <input type="text" placeholder="voer het aantal personen in" id="n"/><br/><br/>
+            <h4>Tafel nummer</h4>
+            <input type="text" placeholder="Voer een tafel nummer in" id="a"/><br/><br/>
             <input type="button" value="Tafel aanmaken" onClick={() => {create()}} className={"button"}/>
             <ToastContainer />
         </form>
