@@ -28,6 +28,12 @@ public class StaffService {
         return staffRepository.getById(id);
     }
 
+    public List<Rights> getStaffRight(Long id) {
+        staffExists(id);
+        Staff staff = staffRepository.getById(id);
+        return staff.getRights();
+    }
+
     public List<SimpleStaffData> getAllStaffInfo() {
         List<SimpleStaffData> simpleStaffData = new ArrayList<>();
         for (Staff staff : staffRepository.findAll()) {
@@ -141,7 +147,8 @@ public class StaffService {
         return new SimpleStaffData(
                 staff.getId(),
                 staff.getName(),
-                staff.getRights()
+                staff.getRights(),
+                staff.getPassword()
         );
     }
 

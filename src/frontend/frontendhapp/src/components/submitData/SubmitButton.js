@@ -20,6 +20,7 @@ import {
 
 export default function SubmitButton(props) {
     let navigate = useNavigate();
+    const tableid = sessionStorage.getItem("tafelid")
 
     function validateProductObject(product, ingredientList, selectedImage) {
         //dit is bij niet genoeg input velden ingevuld
@@ -93,8 +94,8 @@ export default function SubmitButton(props) {
     function handleClick() {
         switch (props.action) {
             case Actions.PLACE_ORDER:
-                PlaceOrder(props.tableId);
-                if (!(props.emptyShoppingcart === undefined)) {
+                PlaceOrder(tableid);
+                if (!(props.emptyShoppingcart === undefined)){
                     props.emptyShoppingcart();
                 }
 
@@ -104,8 +105,8 @@ export default function SubmitButton(props) {
                 break;
 
             case Actions.ADD_TO_SHOPPING_CART:
-                AddProductToShoppingCart(props.tableId, props.productId, props.productAmount)
-                if (!(props.trigger === undefined)) {
+                AddProductToShoppingCart(tableid, props.productId, props.productAmount)
+                if (!(props.trigger === undefined)){
                     props.trigger();
                 }
 
@@ -116,7 +117,7 @@ export default function SubmitButton(props) {
                 console.log("added to shopping cart")
                 break;
             case Actions.REMOVE_FROM_SHOPPING_CART:
-                RemoveProductFromShoppingCart(props.tableId, props.productId);
+                RemoveProductFromShoppingCart(tableid,props.productId);
                 console.log("removed from shoppingcart")
                 if (!(props.updateCount === undefined)) {
                     console.log("in if")
@@ -125,7 +126,7 @@ export default function SubmitButton(props) {
 
                 break;
             case Actions.REMOVE_ALL_OCCURANCES_OF_A_PRODUCT:
-                RemoveAllProductOccurancesFromCart(props.tableId, props.productId)
+                RemoveAllProductOccurancesFromCart(tableid,props.productId)
                     .then(res => {
                         if (!(props.updateShoppingCart === undefined)) {
                             props.updateShoppingCart(res);
@@ -152,12 +153,12 @@ export default function SubmitButton(props) {
 
                 break;
             case Actions.UPDATE_PRODUCT:
-                console.log(props.ingredientList)
 
-                if (validateProductObjectByUpdate(props.product, props.ingredientList, props.selectedImage)) {
+
+                if (validateProductObjectByUpdate(props.product,props.ingredientList,props.selectedImage)){
                     let imageChanged = true;
                     let image = props.selectedImage
-                    if (image === undefined) {
+                    if (image === undefined){
                         console.log("undefined if")
                         image = props.product.imagePath
                         imageChanged = false

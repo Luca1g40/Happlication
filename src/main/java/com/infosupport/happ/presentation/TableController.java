@@ -11,7 +11,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalTime;
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/happ")
@@ -27,11 +29,24 @@ public class TableController {
         return tableService.createTable(tableRequest.amountOfPeople, tableRequest.tableNr, tableRequest.tableStatus);
     }
 
-    @PutMapping("/table/{id}/helpNodig")
-    public TableData setBoolHelp(@PathVariable Long id, @RequestBody TableRequest tableRequest) {
-        return this.tableService.setBoolHulp(id, tableRequest.setHulpBool);
+    @PutMapping("/table/tablestatus/{tableid}")
+    public void setTimeAndStatus(@PathVariable Long tableid, @RequestBody TableRequest tableRequest) {
+        this.tableService.setTimeAndStatus(tableid, tableRequest.timeOfLogin);
     }
 
+    @CrossOrigin
+    @PutMapping("/table/{tableid}/helpNodig")
+    public TableData setBoolHelp(@PathVariable Long tableid, @RequestBody TableRequest tableRequest) {
+        return this.tableService.setBoolHulp(tableid, tableRequest.setHulpBool);
+    }
+
+    @CrossOrigin
+    @GetMapping("/table")
+    public List<TableData> getAllTables() {
+        return this.tableService.getAllTables();
+    }
+
+    @CrossOrigin
     @GetMapping("/table/{id}")
     public TableData getTable(@PathVariable Long id) {
         try {
@@ -43,10 +58,10 @@ public class TableController {
         }
     }
 
-    @GetMapping("/table/{id}/allorders")
-    public List<OrderData> getTableOrders(@PathVariable Long id) {
+    @GetMapping("/table/logintime/{id}")
+    public LocalTime getTimeOfLogin(@PathVariable Long id) {
         try {
-            return tableService.getAllOrdersFromTable(id);
+            return tableService.getTimeOfLogin(id);
         } catch (ItemNotFound exception) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, exception.getMessage());
         } catch (Exception exception) {
@@ -54,17 +69,16 @@ public class TableController {
         }
     }
 
-//    @PutMapping("/table/{id}/shoppingcart")
-//    public TableData editShoppingCart(@PathVariable Long id, @RequestBody ShoppingCartRequest shoppingCartRequest) {
-//        try {
-//            return tableService.editShoppingCart(id, shoppingCartRequest.productList);
-//        } catch (ItemNotFound itemNotFound) {
-//            throw new ResponseStatusException(HttpStatus.NOT_FOUND, itemNotFound.getMessage());
-//        } catch (Exception exception) {
-//            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
-//
-//        }
-//    }
+    @GetMapping("/tablenumber/{tablenumber}")
+    public Long getTableByNumber(@PathVariable int tablenumber) {
+        try {
+            return tableService.getTableNumberByNumber(tablenumber);
+        } catch (ItemNotFound exception) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, exception.getMessage());
+        } catch (Exception exception) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
+        }
+    }
 
     @PostMapping("/table/{tableId}/shoppingcart/remove/products")
     public TableData removeAllProductOccurancesFromCart(@PathVariable Long tableId, @RequestBody ProductRequest productRequest) {
@@ -120,7 +134,25 @@ public class TableController {
     }
 
     @DeleteMapping("/table/{tableid}")
-    private void deleteTable(@PathVariable("tableid") Long tableId) {
-        this.tableService.deleteTable(tableId);
+    private void deleteTable(@PathVariable("tableid") Long tableid) {
+        try {
+            this.tableService.deleteTable(tableid);
+        } catch (ItemNotFound itemNotFound) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, itemNotFound.getMessage());
+        }
+    }
+    @GetMapping("/table/{id}/allorders")
+    public List<OrderData> getTableOrders(@PathVariable Long id) {
+        try {
+            return tableService.getAllOrdersFromTable(id);
+        } catch (ItemNotFound exception) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, exception.getMessage());
+        } catch (Exception exception) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
+        }
+    }
+    @GetMapping("/table/findalltable")
+    public List<TableData> getAllTable() {
+        return this.tableService.getAllTables();
     }
 }

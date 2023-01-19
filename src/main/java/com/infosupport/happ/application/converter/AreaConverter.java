@@ -14,10 +14,13 @@ import java.util.List;
 public class AreaConverter {
 
     public TableData createTableData(Table table) {
-        return new TableData(table.getAmountOfPeople(),
+        return new TableData(
+                table.getId(),
+
+                table.getAmountOfPeople(),
                 table.getTableNumber(),
                 table.getElapsedTimeSinceOrder(),
-                table.getTimeLeftToOrder(),
+                table.getLoginTime(),
                 table.getTableStatus(),
                 new ShoppingCartData(table.getShoppingCart().getProducts()),
                 convertToKitchenOrderDataList(table.getKitchenOrders()),

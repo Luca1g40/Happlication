@@ -2,6 +2,7 @@ import React from "react";
 import "../styles/StaffModuleHomePagina.css"
 import {Link} from "react-router-dom";
 import Logout from "../components/utils/Logout"
+import {CheckRights} from "../components/utils/CheckRights"
 
 export default function AdministrationPage() {
     return (
@@ -9,8 +10,6 @@ export default function AdministrationPage() {
             <h1>Administration</h1>
             <div className="administration-grid">
                 <Link className="button homeModule_bt_space" to="/createproduct">Create Product</Link>
-                <Link className="button homeModule_bt_space" to="">Delete Product</Link>
-                <Link className="button homeModule_bt_space" to="">Update Product</Link>
                 <Link className="button homeModule_bt_space" to="/searchproduct">Get All Products</Link>
                 <hr/>
                 <hr/>
@@ -36,6 +35,7 @@ export default function AdministrationPage() {
             </div>
             <Link to="/staffmodule" className="button login-button">Home</Link>
             <Logout/>
+            <CheckRights/>
         </>
     );
 }

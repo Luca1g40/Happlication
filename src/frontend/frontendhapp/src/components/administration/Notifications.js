@@ -1,34 +1,18 @@
 import React from 'react';
 
-import {toast, ToastContainer} from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import axios from "axios";
+import {KlantHeeftHulpNodig} from "../../urlMappings/TableRequests";
 
-function Notifications() {
-
-    let tafelId = 6;
-
-    function tableHelp() {
-        axios.put(`http://localhost:8080/happ/table/${tafelId}/helpNodig`, {
-            "setHulpBool": "true"
-        })
-            .then(res => {
-                console.log(res)
-            })
-            .catch(err => {
-                console.log(err)
-            })
-    }
+function Notifications(){
+    const tableid = sessionStorage.getItem("tafelid")
 
     const notify = () => toast(`U wordt zo snel mogelijk geholpen door een van onze Obers!`);
 
     return (
         <>
-            <button onClick={ () => { tableHelp(); notify(); } } className={"button"}>
-
-                Call Ober!
-            </button>
-            <ToastContainer/>
+            <button  onClick={() => { KlantHeeftHulpNodig(tableid); notify();}} className="button call-ober-knop">Call Ober!</button>
+            <ToastContainer />
         </>
     );
 }

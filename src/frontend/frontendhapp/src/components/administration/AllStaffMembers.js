@@ -37,9 +37,18 @@ function AllStaffMembers() {
         let staffRights = members.map(member => {
             return member.rights
         })
-        const uniqueRightsEnum = staffRights.filter((x, i, a) => a.indexOf(x) === i)
-        uniqueRightsEnum.map(right => {
-            categoryOptions.push({value: right[0], label: showRight(right[0])})
+        let uniqueRights = []
+        staffRights.map(rights=>{
+            rights.map(right=>{
+                if (!(uniqueRights.includes(right))){
+                    uniqueRights.push(right)
+                }
+            })
+
+        })
+
+        uniqueRights.map(right => {
+            categoryOptions.push({value: right, label: showRight(right)})
         })
         return categoryOptions
     }
@@ -60,31 +69,46 @@ function AllStaffMembers() {
     }
 
     function showRights(rights) {
-        let string = ""
-        rights.map(right => {
-            if (rights.indexOf(right) === 0) {
-                string += showRight(right)
-            } else {
-                string += `, ${showRight(right)}`
+        let string=""
+        rights.map(right=> {
+            switch (right){
+                case "KITCHEN_RIGHTS":
+                    if (rights.indexOf(right) === 0){
+                        string += "Keuken recht"
+                    }else{
+                        string += ", Keuken recht"
+                    }
+                    break;
+                case "BAR_RIGHTS":
+                    if (rights.indexOf(right) === 0){
+                        string += "Bar recht"
+                    }else{
+                        string += ", Bar recht"
+                    }
+                    break;
+                case "SERVICE_RIGHTS":
+                    if (rights.indexOf(right) === 0){
+                        string += "Service recht"
+                    }else{
+                        string += ", Service recht"
+                    }
+                    break;
+                case "ADMIN_RIGHTS":
+                    if (rights.indexOf(right) === 0){
+                        string += "Admin recht"
+                    }else{
+                        string += ", Admin recht"
+                    }
+                    break;
+                case "ADMINISTRATION_RIGHTS":
+                    if (rights.indexOf(right) === 0){
+                        string += "Administratie recht"
+                    }else{
+                        string += ", Administratie recht"
+                    }
+                    break;
             }
 
-
-            // switch (right) {
-            //     case "KITCHEN_RIGHTS":
-            //         if (rights.indexOf(right) === 0) {
-            //             string += "kitchen rights"
-            //         }else{
-            //             string += ", kitchen rights"
-            //         }
-            //         break;
-            //     case "BAR_RIGHTS":
-            //         if (rights.indexOf(right) === 0) {
-            //             string += "bar rights"
-            //         }else{
-            //             string += ", bar rights"
-            //         }
-            //         break;
-            // }
         })
         return string;
     }
@@ -102,7 +126,6 @@ function AllStaffMembers() {
         let filterMembers = []
         if (value.trim().length > 0) {
             filterMembers = members.filter((member) => {
-                console.log(member.name.toLowerCase().includes(value.toLowerCase()))
                 return member.name.toLowerCase().includes(value.toLowerCase())
             })
         } else {

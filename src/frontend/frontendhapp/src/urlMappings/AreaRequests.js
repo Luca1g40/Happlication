@@ -48,7 +48,9 @@ export function deleteAreaItem(id) {
 }
 
 export function addStaffToArea(staffId, areaId) {
-    return axios.post(`http://localhost:8080/happ/staff/${staffId}/area`, configuration)
+    return axios.post(`http://localhost:8080/happ/staff/${staffId}/area`, {
+        "id": areaId
+    }, configuration)
         .then(res => {
             console.log(res);
             return res.data;

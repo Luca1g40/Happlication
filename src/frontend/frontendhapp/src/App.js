@@ -14,9 +14,13 @@ import SearchProduct from "./components/product/SearchProduct";
 import ViewIngredient from "./components/ingredient/ViewIngredient";
 import StaffDashboard from "./pages/StaffDashboard";
 import CreateStaff from "./pages/CreateStaff"
+import CreateTable from "./pages/CreateTable";
 import AllStaffMembers from "./components/administration/AllStaffMembers";
 import StaffModuleHomePagina from "./pages/StaffModuleHomePagina";
 import AdministrationPage from "./pages/AdministrationPage";
+
+import AllTables from "./components/administration/AllTables";
+
 import AllAreas from "./pages/AllAreas";
 import CreateArea from "./pages/CreateArea";
 import ViewProductCategory from "./components/productcategory/ViewProductCategory";
@@ -25,11 +29,14 @@ import Error403Page from "./pages/Error403Page";
 import SearchCategory from "./components/productcategory/SearchCategory";
 import TableReceipt from "./components/orders/TableReceipt";
 import OrdersStatistiekenPage from "./pages/OrdersStatistiekenPagina";
+import LoginGast from "./pages/LoginGast"
+
 
 function App() {
     return (
         <Routes>
-            <Route path="/" element={<Home/>}/>
+            <Route path="/" element={<LoginGast/>}/>
+            <Route path="Home" element={<Home/>}/>
             <Route path="Drinks" element={<Drinks/>}/>
             <Route path="Foods" element={<Foods/>}/>
             <Route path="/menu/:type" element={<Menu/>}/>
@@ -37,9 +44,17 @@ function App() {
             <Route path="shoppingcart" element={<ShoppingCart/>}/>
             <Route path="login" element={<Staff/>}/>
             <Route path="claims" element={<PersonalModule/>}/>
+
+            <Route path="staffDashboard" element={<StaffDashboard/>}/>
+            <Route path="createStaff" element={<CreateStaff/>}/>
+            <Route path="createTable" element={<CreateTable/>}/>
+            <Route path="allStaffMembers" element={<AllStaffMembers/>}/>
+            <Route path="allTables" element={<AllTables/>}/>
+
             <Route path="staffdashboard" element={<StaffDashboard/>}/>
             <Route path="createstaff" element={<CreateStaff/>}/>
             <Route path="allStaffmembers" element={<AllStaffMembers/>}/>
+
             <Route path="staffmodule" element={<StaffModuleHomePagina/>}/>
             <Route path="administration" element={<AdministrationPage/>}/>
             <Route path="productdetails/:id" element={<ViewProductForm/>}/>
@@ -53,7 +68,7 @@ function App() {
             <Route path="categorydetails/:id" element={<ViewProductCategory/>}/>
             <Route path="error403" element={<Error403Page/>}/>
             <Route path="searchcategory" element={<SearchCategory/>}/>
-            <Route path="allorders/:id" element={<TableReceipt/>}/>
+            <Route path="allorders/" element={<TableReceipt/>}/>
             <Route path="statistics" element={<OrdersStatistiekenPage/>}/>
 
 

@@ -7,7 +7,7 @@ export default function Error403Page() {
 
     return (
         <>
-            <div className="container2">
+            <div className="container403">
                 <div className={"error-title"}>403</div>
                 <div className={"error-subtitle"}>Ho! Jammer...</div>
                 <div>De pagina die u probeert te bereiken heeft beperkte toegang.</div>

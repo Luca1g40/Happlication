@@ -3,6 +3,7 @@ import "../styles/AllStaffMembers.css"
 import Logout from "../components/utils/Logout"
 import HomeNav from "../components/utils/Homebutton"
 import CreatingArea from "../components/administration/CreatingArea";
+import {CheckRights} from "../components/utils/CheckRights";
 
 export default function CreateArea() {
     return (
@@ -13,6 +14,7 @@ export default function CreateArea() {
                 <Logout/>
                 <HomeNav/>
             </div>
+            <CheckRights/>
         </>
     );
 }

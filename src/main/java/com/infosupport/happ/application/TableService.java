@@ -1,6 +1,5 @@
 package com.infosupport.happ.application;
 
-
 import com.infosupport.happ.application.dto.OrderData;
 import com.infosupport.happ.application.dto.ProductData;
 import com.infosupport.happ.application.dto.ShoppingCartData;
@@ -36,8 +35,10 @@ public class TableService {
     }
 
     public TableData setBoolHulp(Long tableId, boolean hulpNodig) {
-        Table table = getTable(tableId);
+        tableExists(tableId);
+        Table table = tableRepository.getById(tableId);
         table.setHulpNodig(hulpNodig);
+        tableRepository.save(table);
         return createTableData(table);
     }
 
@@ -46,12 +47,38 @@ public class TableService {
         return tableRepository.getById(tableId);
     }
 
+    public Long getTableNumberByNumber(int tableNumber) {
+        if (tableRepository.getTableByTableNumber(tableNumber) != null) {
+            Table table = tableRepository.getTableByTableNumber(tableNumber);
+            return table.getId();
+        }
+        return 0L;
+    }
+
+    public LocalTime getTimeOfLogin(Long tableId) {
+        tableExists(tableId);
+        Table table = tableRepository.getById(tableId);
+        return table.getLoginTime();
+    }
+
+    public void setTimeAndStatus(Long tableId, LocalTime timeOfLogin) {
+        tableExists(tableId);
+        Table table = tableRepository.getById(tableId);
+        table.setTableStatus(TableStatus.OCCUPIED);
+        table.setLoginTime(timeOfLogin);
+        tableRepository.save(table);
+
+    }
+
     public ShoppingCartData getTableShoppingCart(Long tableId) {
         tableExists(tableId);
         return new ShoppingCartData(tableRepository.getById(tableId).getShoppingCart().getProducts());
     }
 
-
+    public List<OrderData> getAllOrdersFromTable(Long id) {
+        Table table = tableRepository.getById(id);
+        return convertToOrderDataList(table.getAllOrders());
+    }
     public TableData addToShoppingCart(Long tableId, Long productId, int amount) {
         tableExists(tableId);
         Table table = tableRepository.getById(tableId);
@@ -60,7 +87,15 @@ public class TableService {
         tableRepository.save(table);
         return createTableData(table);
     }
+    public List<OrderData> convertToOrderDataList(List<Order> orders) {
+        List<OrderData> ordersData = new ArrayList<>();
 
+        for (Order order : orders) {
+            ordersData.add(createOrderData(order));
+        }
+
+        return ordersData;
+    }
     public TableData removeFromShoppingCart(Long tableId, Long productId) {
         tableExists(tableId);
         Table table = tableRepository.getById(tableId);
@@ -94,9 +129,12 @@ public class TableService {
         return createTableData(table);
     }
 
-    public List<OrderData> getAllOrdersFromTable(Long id) {
-        Table table = tableRepository.getById(id);
-        return convertToOrderDataList(table.getAllOrders());
+    public List<TableData> getAllTables() {
+        List<TableData> tableData = new ArrayList<>();
+        for (Table table : tableRepository.findAll()) {
+            tableData.add(createTableData(table));
+        }
+        return tableData;
     }
 
     private void tableExists(Long id) {
@@ -106,14 +144,18 @@ public class TableService {
     }
 
     public void deleteTable(Long id) {
+        tableExists(id);
         tableRepository.deleteById(id);
     }
 
     public TableData createTableData(Table table) {
-        return new TableData(table.getAmountOfPeople(),
+        return new TableData(
+                table.getId(),
+
+                table.getAmountOfPeople(),
                 table.getTableNumber(),
                 table.getElapsedTimeSinceOrder(),
-                table.getTimeLeftToOrder(),
+                table.getLoginTime(),
                 table.getTableStatus(),
                 new ShoppingCartData(table.getShoppingCart().getProducts()),
                 convertToKitchenOrderDataList(table.getKitchenOrders()),
@@ -141,17 +183,6 @@ public class TableService {
 
     public ProductData createProductData(Product product) {
         return new ProductData(product.getId(), product.getName(), product.getProductCategory().getName(), product.getPrice(), product.getIngredients(), product.getDetails(), product.getProductDestination(), product.getProductType(), product.getImagePath());
-    }
-
-
-    public List<OrderData> convertToOrderDataList(List<Order> orders) {
-        List<OrderData> ordersData = new ArrayList<>();
-
-        for (Order order : orders) {
-            ordersData.add(createOrderData(order));
-        }
-
-        return ordersData;
     }
 
     public List<OrderData> convertToBarOrderDataList(List<BarOrder> orders) {

@@ -45,15 +45,13 @@ export default function Menu(props) {
     function showProductBasedOnCategory(category) {
         console.log(category)
         return products.filter(product => {
-                console.log(product)
                 return product.productCategoryName === category;
             }
         )
     }
 
-    //TODO altijd bij foods beginnen? dan kan de ding gewoon mer de state werken
-    function switchProductType() {
-        if (selectedProductType === "foods") {
+    function switchProductType(){
+        if (selectedProductType === "foods"){
             setSelectedProductType("drinks")
             navigate("/menu/drinks")
         } else {
@@ -84,7 +82,7 @@ export default function Menu(props) {
     return (
         <>
             <div className={"navigation-buttons-menu space-around"}>
-                <Link className="button" to="/"> Terug </Link>
+                <Link className="button" to="/home"> Terug </Link>
                 <Link to="/shoppingcart" className="button">Shopping cart</Link>
                 {selectedProductType === "foods" ? (
                     <button className="button toDrinks" onClick={switchProductType}>Dranken</button>

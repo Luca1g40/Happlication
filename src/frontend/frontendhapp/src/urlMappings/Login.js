@@ -19,16 +19,14 @@ export function loginRequest(password) {
 export function getRoles() {
     const JWT = sessionStorage.getItem("Authorization")
     const id = sessionStorage.getItem("staffId")
-    return axios.get(`http://localhost:8080/happ/staff/${id}`, {
+   return axios.get(`http://localhost:8080/happ/staff/${id}/rights`,{
         headers: {
             Authorization: JWT
         }
     })
         .then(res => {
-            console.log("wait")
-            console.log(res)
-            sessionStorage.setItem("rights", res.data.rights)
-            return res.data.rights
+            sessionStorage.setItem("rights", res.data)
+            return res.data[0]
         })
         .catch(err => console.log(err))
 }

@@ -46,11 +46,10 @@ public final class ProductController {
     @PostMapping(value = "/image")
     public String uploadImage(@RequestPart MultipartFile imageFile) {
 
-        Product product = new Product();
+
         try {
             String path = System.getProperty("user.dir").concat("\\src\\frontend\\frontendhapp\\src\\images");
-            Files.copy(imageFile.getInputStream(), Paths.get(path + File.separator + imageFile.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
-            product.setImagePath(imageFile.getOriginalFilename());
+            Files.copy(imageFile.getInputStream(), Paths.get(path+ File.separator+imageFile.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
             return imageFile.getOriginalFilename();
         } catch (Exception ex) {
             return "Image is not uploaded";
