@@ -5,19 +5,20 @@ import "../styles/Home.css"
 import "../styles/GlobalStyling.css"
 
 export default function Home() {
-    return <>
+    return <div className={"home-background"}>
         <div className="home-container home-button-grid">
-            <div>
-                <Link className="button navigation-buttons-menu space-around" to="menu/drinks">Dranken</Link>
+            <Link className="button navigation-buttons-menu space-around" to="menu/drinks">Dranken</Link>
+            <hr></hr>
+            <Link className="button navigation-buttons-menu space-around" to="menu/foods">Gerechten</Link>
+            <hr></hr>
+            <Link className="button navigation-buttons-menu space-around" to="allorders/208">Bestelling
+                overzicht</Link>
+            <hr></hr>
+            <div className="button navigation-buttons-menu space-around">
+                <Notifications/>
             </div>
-            <div>
-                <Link className="button navigation-buttons-menu space-around" to="menu/foods">Gerechten</Link>
-            </div>
-            <div>
-                <Link className="button navigation-buttons-menu space-around" to="allorders/208">Bestelling
-                    overzicht</Link>
-            </div>
-            <Notifications/>
+            <hr></hr>
+
         </div>
-    </>
+    </div>
 }

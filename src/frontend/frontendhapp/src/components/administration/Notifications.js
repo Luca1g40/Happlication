@@ -8,7 +8,6 @@ function Notifications() {
 
     let tafelId = 6;
 
-    //TODO RUIM DEZE DING OP -> URL mappings
     function tableHelp() {
         axios.put(`http://localhost:8080/happ/table/${tafelId}/helpNodig`, {
             "setHulpBool": "true"
@@ -25,10 +24,9 @@ function Notifications() {
 
     return (
         <>
-            <button onClick={() => {
-                tableHelp();
-                notify();
-            }} className="button call-ober-knop">Call Ober!
+            <button onClick={ () => { tableHelp(); notify(); } } className={"button"}>
+
+                Call Ober!
             </button>
             <ToastContainer/>
         </>
