@@ -21,3 +21,9 @@
     transform: translate(-50%, -50%)
 }
 
+.home-button-staff{
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 5px;
+}

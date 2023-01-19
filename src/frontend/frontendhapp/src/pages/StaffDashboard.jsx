@@ -9,7 +9,7 @@ export default function StaffDashboard() {
         <>
             <div className="staffContainer">
                 <h1>Staff Dashboard</h1>
-                <Link className="button homeModule_bt_space" to="/staffmodule">Home</Link>
+                <Link className="home-button-staff button" to="/staffmodule">Home</Link>
 
                 <FetchTablesSetTrue/>
                 <Logout/>
