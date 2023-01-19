@@ -11,14 +11,14 @@ export default function Home() {
             <hr></hr>
             <Link className="button navigation-buttons-menu space-around" to="menu/foods">Gerechten</Link>
             <hr></hr>
-            <Link className="button navigation-buttons-menu space-around" to="allorders/208">Bestelling
+            <Link className="button navigation-buttons-menu space-around" to="allorders">Bestelling
                 overzicht</Link>
             <hr></hr>
-            <div className="button navigation-buttons-menu space-around">
-                <Notifications/>
-            </div>
-            <hr></hr>
-
         </div>
+
+
+            <Notifications/>
+
+
     </div>
 }
