@@ -72,9 +72,13 @@ public class OrderController {
     }
 
     @GetMapping("/order/bydate")
-    private List<OrderData> getOrdersByDate(@RequestParam("firstDate") String firstDate, @RequestParam("secondDate") String secondDate) {
-
+    private List<OrderData> getOrdersByDateRange(@RequestParam("firstDate") String firstDate, @RequestParam("secondDate") String secondDate) {
         return this.orderService.getAllOrdersByDatePeriod(LocalDate.parse(firstDate), LocalDate.parse(secondDate));
+    }
+
+    @GetMapping("/order/bydate/exact")
+    private List<OrderData> getOrdersByDateExact(@RequestParam("date") String date) {
+        return this.orderService.gelAllOrdersByExactDate(LocalDate.parse(date));
     }
 
     @GetMapping("/orders/today")

@@ -92,7 +92,17 @@ public class OrderService {
 
     public List<OrderData> getAllOrdersByDatePeriod(LocalDate firstdate, LocalDate secondDate) {
         List<Order> orders = new ArrayList<>();
+        orders.addAll(barOrderRepository.getOrderByDate(firstdate.minusDays(1), secondDate.plusDays(1)));
+
         orders.addAll(kitchenOrderRepository.getOrderByDate(firstdate.minusDays(1), secondDate.plusDays(1)));
+
+        return convertToOrderDataList(orders);
+    }
+
+    public List<OrderData> gelAllOrdersByExactDate(LocalDate localDate){
+        List<Order> orders = new ArrayList<>();
+        orders.addAll(kitchenOrderRepository.getOrderByDate(localDate.minusDays(1), localDate.plusDays(1)));
+        orders.addAll(barOrderRepository.getOrderByDate(localDate.minusDays(1), localDate.plusDays(1)));
         return convertToOrderDataList(orders);
     }
 

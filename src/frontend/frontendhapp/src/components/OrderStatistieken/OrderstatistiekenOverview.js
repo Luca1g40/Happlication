@@ -1,17 +1,19 @@
 import React, {useEffect, useState} from "react";
-import {getAllOrdersByDateRange, getAllOrdersOfToday} from "../../urlMappings/OrderRequests";
+import {getAllOrdersByDateExact, getAllOrdersByDateRange, getAllOrdersOfToday} from "../../urlMappings/OrderRequests";
 import DatePicker from "react-multi-date-picker";
 import getOccurrenceProducts, {displayPrice} from "../utils/Util";
 import "../../styles/AllOrders.css"
 import "../../styles/SearchTable.css"
 import HomeNav from "../utils/Homebutton";
+import DropdownFilter from "../product/DropdownFilter";
 
 
 export default function OrderStatistiekenOverview(props) {
-    let allOrders = []
-    const [filteredOrders, setFilteredOrders] = useState([])
-    const [values, setValues] = useState()
+    let allOrders = [];
+    const [filteredOrders, setFilteredOrders] = useState([]);
+    const [values, setValues] = useState();
     let price = 0;
+    const [datepickerMode,setDatepickerMode] = useState(" exact");
 
     let today = new Date();
     let dd = String(today.getDate()).padStart(2, '0');
@@ -35,8 +37,13 @@ export default function OrderStatistiekenOverview(props) {
 
     function dateChanged(value) {
         setValues(value);
-        console.log(values[0].format("YYYY-MM-DD"), values[1].format("YYYY-MM-DD"))
+        console.log(value)
+        // console.log(values[0].format("YYYY-MM-DD"), values[1].format("YYYY-MM-DD"))
     }
+
+    useEffect(() => {
+
+    }, [datepickerMode])
 
     function fillProductList(list) {
         let productsList = []
@@ -50,8 +57,19 @@ export default function OrderStatistiekenOverview(props) {
 
 
     function filter() {
-        getAllOrdersByDateRange(values[0].format("YYYY-MM-DD"), values[1].format("YYYY-MM-DD"))
-            .then(res => setFilteredOrders(res))
+        if (values.length === 1){
+            getAllOrdersByDateExact(values[0].format("YYYY-MM-DD"))
+                .then(res=> setFilteredOrders(res))
+        }else if (values.length === 2){
+            getAllOrdersByDateRange(values[0].format("YYYY-MM-DD"), values[1].format("YYYY-MM-DD"))
+                .then(res => setFilteredOrders(res))
+        }
+    }
+
+    function testff(selected){
+        console.log(selected)
+        setDatepickerMode(selected.value)
+        console.log(selected.value === " exact")
     }
 
     return (
@@ -60,8 +78,18 @@ export default function OrderStatistiekenOverview(props) {
             <div className={"wrapper"}>
                 <div className={"filter-div"}>
                     <h2>Filter</h2>
-                    Datum: <DatePicker onChange={value => dateChanged(value)} range placeholder={today}
-                                       className={"datepicker"}/>
+                    {/*<DropdownFilter options={[{value: " exact", label: "exact"},{value: " range", label: "range"}]}*/}
+                    {/*                setOptionSelected={(selected) => testff(selected)}*/}
+                    {/*                optionSelected={datepickerMode}/>*/}
+                    {/*{datepickerMode === " exact" ? (*/}
+                    {/*    <DatePicker onChange={value => dateChanged(value)} placeholder={today}*/}
+                    {/*                       className={"datepicker"}/>*/}
+                    {/*) : (*/}
+                    {/*    <DatePicker onChange={value => dateChanged(value)} range placeholder={today}*/}
+                    {/*    className={"datepicker"}/>)}*/}
+                    <DatePicker onChange={value => dateChanged(value)} range placeholder={today}
+                                className={"datepicker"}/>
+
                     <div className={"overview-request"}>
                         <button className={"button"} onClick={() => filter()}>Overzicht opvragen</button>
                     </div>

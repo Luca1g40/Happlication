@@ -7,11 +7,11 @@ import "../styles/GlobalStyling.css"
 export default function Home() {
     return <div className={"home-background"}>
         <div className="home-container home-button-grid">
-            <Link className="button navigation-buttons-menu space-around" to="menu/drinks">Dranken</Link>
+            <Link className="button navigation-buttons-menu space-around" to="/menu/drinks">Dranken</Link>
             <hr></hr>
-            <Link className="button navigation-buttons-menu space-around" to="menu/foods">Gerechten</Link>
+            <Link className="button navigation-buttons-menu space-around" to="/menu/foods">Gerechten</Link>
             <hr></hr>
-            <Link className="button navigation-buttons-menu space-around" to="allorders">Bestelling
+            <Link className="button navigation-buttons-menu space-around" to="/allorders">Bestelling
                 overzicht</Link>
             <hr></hr>
         </div>

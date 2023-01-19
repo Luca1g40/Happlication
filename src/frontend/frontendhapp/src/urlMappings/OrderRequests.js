@@ -77,3 +77,18 @@ export function getAllOrdersByDateRange(firstDate, secondDate) {
         return res.data
     })
 }
+
+
+export function getAllOrdersByDateExact(date) {
+        return axios.get('http://localhost:8080/happ/order/bydate/exact', {
+            headers: {
+                Authorization: sessionStorage.getItem("Authorization")
+            },
+            params: {
+                date: date
+            }
+        }).then(res => {
+            console.log(res.data)
+            return res.data
+        })
+    }
