@@ -97,7 +97,7 @@ export default function OrderStatistiekenOverview(props) {
                     <tr className={"total-amount"}>
                         <td>Totaal omzet</td>
                         <td/>
-                        <td>€ {displayPrice(price)}</td>
+                        <td>€ {displayPrice(price.toFixed(2))}</td>
                     </tr>
                 </table>
             </div>
