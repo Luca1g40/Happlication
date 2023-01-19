@@ -30,7 +30,6 @@ function FetchTablesSetTrue() {
                 <div key={tafel.id} className={"grid-item-notification-card"} >
                     <div>Tafel Nummer : {tafel.tableNumber}</div>
                     <div>Aantal Gasten : {tafel.amountOfPeople}</div>
-                    <div>Tijd over om te bestellen: {tafel.timeLeftToOrder} minuten</div>
                     <button onClick={() => { klantIsGeholpen(tafel.id); refreshPage();}} className="button help-button">Klant is Geholpen</button>
                 </div>
                 )
