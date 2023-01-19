@@ -88,7 +88,7 @@ export default function OrderStatistiekenOverview(props) {
                                     <tr>
                                         <td>{product.name}</td>
                                         <td>{Array.from(getOccurrenceProducts(fillProductList(filteredOrders)).values())[index]} </td>
-                                        <td>€ {displayPrice(Array.from(getOccurrenceProducts(fillProductList(filteredOrders)).values())[index] * product.price)}</td>
+                                        <td>€ {displayPrice((Array.from(getOccurrenceProducts(fillProductList(filteredOrders)).values())[index] * product.price).toFixed(2))}</td>
                                     </tr>
                                 )
                             }
