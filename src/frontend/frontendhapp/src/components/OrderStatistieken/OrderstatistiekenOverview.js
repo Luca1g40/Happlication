@@ -5,7 +5,6 @@ import getOccurrenceProducts, {displayPrice} from "../utils/Util";
 import "../../styles/AllOrders.css"
 import "../../styles/SearchTable.css"
 import HomeNav from "../utils/Homebutton";
-import DropdownFilter from "../product/DropdownFilter";
 
 
 export default function OrderStatistiekenOverview(props) {
@@ -13,7 +12,6 @@ export default function OrderStatistiekenOverview(props) {
     const [filteredOrders, setFilteredOrders] = useState([]);
     const [values, setValues] = useState();
     let price = 0;
-    const [datepickerMode,setDatepickerMode] = useState(" exact");
 
     let today = new Date();
     let dd = String(today.getDate()).padStart(2, '0');
@@ -37,13 +35,7 @@ export default function OrderStatistiekenOverview(props) {
 
     function dateChanged(value) {
         setValues(value);
-        console.log(value)
-        // console.log(values[0].format("YYYY-MM-DD"), values[1].format("YYYY-MM-DD"))
     }
-
-    useEffect(() => {
-
-    }, [datepickerMode])
 
     function fillProductList(list) {
         let productsList = []
@@ -66,28 +58,13 @@ export default function OrderStatistiekenOverview(props) {
         }
     }
 
-    function testff(selected){
-        console.log(selected)
-        setDatepickerMode(selected.value)
-        console.log(selected.value === " exact")
-    }
-
     return (
         <>
             <h1>Bestelling overzicht</h1>
             <div className={"wrapper"}>
                 <div className={"filter-div"}>
                     <h2>Filter</h2>
-                    {/*<DropdownFilter options={[{value: " exact", label: "exact"},{value: " range", label: "range"}]}*/}
-                    {/*                setOptionSelected={(selected) => testff(selected)}*/}
-                    {/*                optionSelected={datepickerMode}/>*/}
-                    {/*{datepickerMode === " exact" ? (*/}
-                    {/*    <DatePicker onChange={value => dateChanged(value)} placeholder={today}*/}
-                    {/*                       className={"datepicker"}/>*/}
-                    {/*) : (*/}
-                    {/*    <DatePicker onChange={value => dateChanged(value)} range placeholder={today}*/}
-                    {/*    className={"datepicker"}/>)}*/}
-                    <DatePicker onChange={value => dateChanged(value)} range placeholder={today}
+                   Datum : <DatePicker onChange={value => dateChanged(value)} range placeholder={today}
                                 className={"datepicker"}/>
 
                     <div className={"overview-request"}>
